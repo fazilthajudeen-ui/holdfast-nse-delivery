@@ -6,7 +6,7 @@ Method (D-006):
  1. NSE corporate-action records give the expected price factor f (split 10->2: f = 0.2).
     A record is APPLIED only when the observed opening gap g = open_T / close_(T-1) on the ex-date
     (or the next 2 trading days) is within +/-20% of f ("confirmed"). Unconfirmed records are logged.
- 2. Demerger / scheme records: applied with f = g when g < 0.90 (the price really dropped); else logged.
+ 2. Demerger / scheme records: applied with f = g when g < 0.97 (the price really dropped); else logged.
  3. Gap-only: an opening gap < 0.6 or > 1.6 with no NSE record within 5 trading days is snapped to a
     standard ratio within 3% (gap_snap); otherwise logged as unexplained and NOT adjusted.
     If > 5% of stocks gap on one day it is a missing session, not corporate actions.
@@ -27,29 +27,48 @@ GAP_LO, GAP_HI = 0.6, 1.6
 SNAP_TOL = 0.03
 STANDARD = [1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 10, 1 / 20, 2 / 5, 2 / 3, 3 / 5, 2.0, 5.0, 10.0]
 MASS_SHARE = 0.05
+DEMERGER_MAX_GAP = 0.97      # with an NSE demerger record, an opening drop > 3% is the demerger (D-006)
 PRICE_COLS = ["open", "high", "low", "close", "last", "prev_close"]
 QTY_COLS = ["volume", "deliv_qty"]
 
 
+def _year_files(name: str):
+    return sorted((PIT / name).glob("year=*/part.parquet"))
+
+
+def _symbol_dtype(name: str) -> pd.CategoricalDtype:
+    syms = set()
+    for p in _year_files(name):
+        syms |= set(pd.read_parquet(p, columns=["symbol"])["symbol"].astype(str).unique())
+    return pd.CategoricalDtype(sorted(syms))
+
+
 def gap_table() -> pd.DataFrame:
-    g = read("equity_raw", columns=["date", "symbol", "open", "close"])
-    g["symbol"] = g["symbol"].astype(str)
+    """Memory-light: one global categorical symbol dtype (no millions of Python strings)."""
+    cat = _symbol_dtype("equity_raw")
+    parts = []
+    for p in _year_files("equity_raw"):
+        e = pd.read_parquet(p, columns=["date", "symbol", "open", "close"])
+        e["symbol"] = e["symbol"].astype(str).astype(cat)
+        parts.append(e)
+    g = pd.concat(parts, ignore_index=True)
+    del parts
     g = g.sort_values(["symbol", "date"]).reset_index(drop=True)
-    g["prev_close_own"] = g.groupby("symbol")["close"].shift(1)
+    g["prev_close_own"] = g.groupby("symbol", observed=True)["close"].shift(1)
     o = g["open"].where(g["open"] > 0, g["close"])
     g["gap"] = o / g["prev_close_own"]
     g["gap_close"] = g["close"] / g["prev_close_own"]
-    g["row"] = g.groupby("symbol").cumcount()
+    g["row"] = g.groupby("symbol", observed=True).cumcount().astype("int32")
     return g
 
 
 def detect_actions(g: pd.DataFrame, ca: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Returns (applied actions [symbol, adj_date, factor, method, ...], log of everything)."""
-    by_sym = {s: df for s, df in g.groupby("symbol", sort=False)}
+    grp_idx = g.groupby("symbol", observed=True).indices        # symbol -> row positions (no copies)
     applied, logrows = [], []
-    ca = ca[ca["symbol"].isin(by_sym)].copy()
+    ca = ca[ca["symbol"].isin(set(grp_idx))].copy()
     for (sym, ex), grp in ca.groupby(["symbol", "ex_date"]):
-        s = by_sym[sym]
+        s = g.iloc[grp_idx[sym]]
         idx = s.index[s["date"] >= ex]
         if len(idx) == 0:
             logrows.append({"symbol": sym, "ex_date": ex, "status": "no_trading_after_ex", "subject": grp["subject"].iloc[0]})
@@ -80,7 +99,7 @@ def detect_actions(g: pd.DataFrame, ca: pd.DataFrame) -> tuple[pd.DataFrame, pd.
                     break
         if not done and (grp["kind"] == "demerger").any():
             gv = cands.iloc[0]["gap"]
-            if np.isfinite(gv) and gv < 0.90:
+            if np.isfinite(gv) and gv < DEMERGER_MAX_GAP:
                 applied.append({"symbol": sym, "adj_date": cands.iloc[0]["date"], "factor": float(gv),
                                 "method": "demerger_gap", "kind": "demerger", "gap": float(gv),
                                 "ex_date": ex, "subject": grp["subject"].iloc[0]})
@@ -93,6 +112,7 @@ def detect_actions(g: pd.DataFrame, ca: pd.DataFrame) -> tuple[pd.DataFrame, pd.
     app = pd.DataFrame(applied)
     # ---- gap-only detection
     big = g[(g["gap"] < GAP_LO) | (g["gap"] > GAP_HI)].copy()
+    big["symbol"] = big["symbol"].astype(str)
     if len(app):
         near_any = big.merge(app[["symbol", "adj_date"]], on="symbol", how="left")
         near_any = near_any[(near_any["adj_date"] - near_any["date"]).abs() <= pd.Timedelta(days=8)]
@@ -192,11 +212,18 @@ def main():
     fo["symbol"] = fo["symbol"].astype("category")
     fo.to_parquet(PIT / "fo_stock_adj.parquet", index=False)
     # ---- QC: remaining extreme daily moves after adjustment (EQ chain)
-    e = read("equity_adj", columns=["date", "symbol", "close"])
-    e["symbol"] = e["symbol"].astype(str)
-    e = e.sort_values(["symbol", "date"])
-    e["ret"] = e.groupby("symbol")["close"].pct_change()
-    ext = e[e["ret"].abs() > 0.30].sort_values("ret")
+    ext_parts, last = [], {}
+    for p_ in sorted((PIT / "equity_adj").glob("year=*/part.parquet")):
+        e = pd.read_parquet(p_, columns=["date", "symbol", "close"])
+        e["symbol"] = e["symbol"].astype(str)
+        e = e.sort_values(["symbol", "date"])
+        prev = e.groupby("symbol")["close"].shift(1)
+        first = prev.isna()
+        prev[first] = e.loc[first, "symbol"].map(last)
+        last.update(e.groupby("symbol")["close"].last().to_dict())
+        e["ret"] = e["close"] / prev - 1
+        ext_parts.append(e[e["ret"].abs() > 0.30])
+    ext = pd.concat(ext_parts).sort_values("ret")
     qc = {"actions_applied": len(actions),
           "methods": actions["method"].value_counts().to_dict() if len(actions) else {},
           "not_applied": alog["status"].value_counts().to_dict() if len(alog) else {},

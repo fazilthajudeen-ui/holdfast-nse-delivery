@@ -44,7 +44,7 @@ MTO is kept only when MTO's traded quantity equals the bhavcopy volume.
 **D-006 · Corporate actions: NSE records confirmed by the price gap** (10 Oct 2026)
 NSE corporate-action records give the expected factor (split 10→2 = 0.2; bonus a:b = b/(a+b)); a record
 is applied only when the opening gap open_T/close_(T−1) on the ex-date (or the next 2 trading days)
-is within ±20% of it. Demerger/scheme records: applied with the observed gap when it is < 0.90.
+is within ±20% of it. Demerger/scheme records: applied with the observed gap when it is < 0.97 (e.g. Reliance → Jio Financial, Jul 2023, removed ~9% — a 0.90 cut-off would miss it).
 Gaps < 0.6 or > 1.6 without any record within 5 trading days: snapped to a standard ratio within 3%,
 otherwise logged and NOT adjusted (genuine crashes stay crashes). If > 5% of stocks gap on one day it
 is a missed session, not corporate actions. Bonuses of preference shares / NCRPS / debentures are
