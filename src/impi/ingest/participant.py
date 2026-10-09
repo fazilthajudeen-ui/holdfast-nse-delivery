@@ -43,7 +43,11 @@ def file_date(content: bytes) -> dt.date | None:
 
 def parse(content: bytes, date: dt.date) -> pd.DataFrame:
     lines = _text(content).splitlines()
-    df = pd.read_csv(io.StringIO("\n".join(lines[1:])), dtype=str)
+    body = "\n".join(lines[1:])
+    if len(lines) > 1 and "Client Type" not in lines[1]:
+        # some early files omit the header row; NSE's column order is fixed
+        body = ",".join(["Client Type"] + list(COLS)) + "\n" + body
+    df = pd.read_csv(io.StringIO(body), dtype=str)
     df.columns = [str(c).strip() for c in df.columns]
     df = df.loc[:, [c for c in df.columns if c and not c.startswith("Unnamed")]]
     df["Client Type"] = df["Client Type"].str.strip()

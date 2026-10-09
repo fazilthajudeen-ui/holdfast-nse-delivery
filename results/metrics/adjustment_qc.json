@@ -1,0 +1,93 @@
+{
+  "actions_applied": 219,
+  "methods": {
+    "nse_confirmed_gap": 148,
+    "gap_snap": 49,
+    "demerger_gap": 22
+  },
+  "not_applied": {
+    "mass_gap_day_not_adjusted": 2417,
+    "no_trading_near_ex": 812,
+    "unexplained_gap_not_adjusted": 74,
+    "unconfirmed": 28,
+    "no_trading_after_ex": 12
+  },
+  "remaining_abs_moves_gt_30pct": 3470,
+  "examples_remaining": [
+    {
+      "date": "2019-09-25",
+      "symbol": "VIVIDHA",
+      "ret": "-0.9997405124878366"
+    },
+    {
+      "date": "2019-09-25",
+      "symbol": "PRAKASHSTL",
+      "ret": "-0.9979287489643744"
+    },
+    {
+      "date": "2019-09-30",
+      "symbol": "RAINBOWPAP",
+      "ret": "-0.9958012596221134"
+    },
+    {
+      "date": "2019-09-25",
+      "symbol": "ZICOM",
+      "ret": "-0.9945054945054945"
+    },
+    {
+      "date": "2019-09-25",
+      "symbol": "SRSLTD",
+      "ret": "-0.9944237918215614"
+    },
+    {
+      "date": "2024-07-04",
+      "symbol": "FSC",
+      "ret": "-0.99397378203874"
+    },
+    {
+      "date": "2019-09-25",
+      "symbol": "ARCOTECH",
+      "ret": "-0.9939316963025684"
+    },
+    {
+      "date": "2019-09-25",
+      "symbol": "CASTEXTECH",
+      "ret": "-0.9938733832539143"
+    },
+    {
+      "date": "2024-07-04",
+      "symbol": "FLFL",
+      "ret": "-0.9933246538051841"
+    },
+    {
+      "date": "2024-07-08",
+      "symbol": "FRETAIL",
+      "ret": "-0.9925632911392405"
+    },
+    {
+      "date": "2019-09-25",
+      "symbol": "KSK",
+      "ret": "-0.9923130677847659"
+    },
+    {
+      "date": "2019-09-25",
+      "symbol": "DIAPOWER",
+      "ret": "-0.9918187539332913"
+    },
+    {
+      "date": "2019-09-25",
+      "symbol": "RCOM",
+      "ret": "-0.991421568627451"
+    },
+    {
+      "date": "2019-09-25",
+      "symbol": "GLOBOFFS",
+      "ret": "-0.9911074628907586"
+    },
+    {
+      "date": "2019-09-25",
+      "symbol": "VIDEOIND",
+      "ret": "-0.9906861223222602"
+    }
+  ]
+}

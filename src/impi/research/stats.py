@@ -39,7 +39,8 @@ def month_block_bootstrap(df: pd.DataFrame, stat_fn, n: int, rng: np.random.Gene
     vals = np.array(vals)
     if len(vals) < 10:
         return {"estimate": est, "ci_low": np.nan, "ci_high": np.nan, "p": np.nan, "n_boot": len(vals)}
-    p = 2 * min((vals <= 0).mean(), (vals >= 0).mean())
+    k = min((vals <= 0).sum(), (vals >= 0).sum())
+    p = 2 * (k + 1) / (len(vals) + 1)                      # never exactly 0 (Davison & Hinkley)
     return {"estimate": est, "ci_low": float(np.quantile(vals, 0.025)), "ci_high": float(np.quantile(vals, 0.975)),
             "p": float(min(1.0, p)), "n_boot": len(vals)}
 

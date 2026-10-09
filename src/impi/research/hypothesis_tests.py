@@ -17,10 +17,30 @@ import warnings
 import numpy as np
 import pandas as pd
 import statsmodels.formula.api as smf
-import statsmodels.api as sm
+from statsmodels.genmod import families as sm_families
+
+import functools
 
 from impi.common import config
 from impi.research.stats import month_block_bootstrap, two_proportion_z
+
+MIN_N = 30          # each compared group needs >= 30 events, otherwise "insufficient data" (no p-value)
+
+
+def min_n_guard(fn):
+    @functools.wraps(fn)
+    def wrapper(*a, **k):
+        r = fn(*a, **k)
+        n1, n2 = r.get("n1", 0) or 0, r.get("n2", 0) or 0
+        if min(n1, n2) < MIN_N:
+            r["p_unguarded"] = r.get("p")
+            r["p"] = np.nan
+            r["label"] = f"insufficient data (n<{MIN_N})"
+            r["direction_ok"] = None
+        else:
+            r["label"] = "ok"
+        return r
+    return wrapper
 
 
 def _rate_diff(exposed_col: str):
@@ -61,7 +81,7 @@ def _logit(formula: str, d: pd.DataFrame) -> dict:
         try:
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
-                m = smf.glm(f, data=dd, family=sm.families.Binomial()).fit(
+                m = smf.glm(f, data=dd, family=sm_families.Binomial()).fit(
                     cov_type="cluster", cov_kwds={"groups": pd.factorize(dd.loc[:, "month"])[0]})
             keep = [k for k in m.params.index if not k.startswith("C(")]
             return {"formula": f, "n": int(m.nobs),
@@ -72,6 +92,7 @@ def _logit(formula: str, d: pd.DataFrame) -> dict:
     return {"formula": formula, "error": err}
 
 
+@min_n_guard
 def test_h1(ev: pd.DataFrame, cuts: list[float], n_boot: int, rng) -> dict:
     d = ev[ev["deliv_z20_prev"].notna() & ev["label_10"].notna()].copy()
     d["exposed"] = d["deliv_z20_prev"] > 0
@@ -89,6 +110,7 @@ def test_h1(ev: pd.DataFrame, cuts: list[float], n_boot: int, rng) -> dict:
             "bootstrap": boot, "logit": lg, "n": int(len(d))}
 
 
+@min_n_guard
 def test_h2(ev: pd.DataFrame, cuts: list[float], n_boot: int, rng) -> dict:
     d = ev[ev["ret_20"].notna() & ev["oi_chg20"].notna() & ev["label_10"].notna()].copy()
     d["exposed"] = (d["ret_20"] > 0) & (d["oi_chg20"] < 0)
@@ -112,6 +134,7 @@ def regime_flag(ev: pd.DataFrame, which: str = "both") -> pd.Series:
     return {"both": fii_sell & dii_buy, "fii_only": fii_sell, "dii_only": dii_buy}[which]
 
 
+@min_n_guard
 def test_h3(ev: pd.DataFrame, n_boot: int, rng, which: str = "both") -> dict:
     d = ev[ev["fii_flow20"].notna() & ev["dii_flow20"].notna() & ev["mfe_10"].notna() & ev["mae_10"].notna()].copy()
     d["exposed"] = regime_flag(d, which)

@@ -92,7 +92,7 @@ def test_backtest_single_trade_accounting():
     sig = pd.DataFrame({"date": [cal[0]], "symbol": ["A"], "entry_date": [cal[1]], "exit_date": [cal[4]],
                         "entry_px": [100.0], "exit_px": [110.0], "liq_bucket": ["large"], "family": ["x"]})
     closes = {"A": pd.Series([100, 100, 104, 106, 110, 110, 110, 110, 110, 110.0], index=cal)}
-    ret, tr = run_backtest(sig, closes, cal.to_numpy(), seed=1, max_positions=20, capital=1_000_000)
+    ret, tr = run_backtest(sig, closes, cal.to_numpy(), seed=1, max_positions=20, capital=1_000_000, cash_yield=0.0)
     assert len(tr) == 1
     notional = 1_000_000 / 20
     gross = notional * (110 * (1 - 5e-4)) / (100 * (1 + 5e-4))

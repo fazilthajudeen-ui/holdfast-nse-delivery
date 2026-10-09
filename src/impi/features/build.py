@@ -194,6 +194,12 @@ def main():
             entry = np.where(t_idx + 1 < n, o[np.minimum(t_idx + 1, n - 1)], np.nan)
             entry_date = np.where(t_idx + 1 < n, dates[np.minimum(t_idx + 1, n - 1)], np.datetime64("NaT"))
             out["entry_date"] = entry_date
+            out["entry_px"] = entry
+            ph = tb["primary_horizon"]
+            ek = out[f"exitk_{ph}"]
+            xi = t_idx + np.nan_to_num(ek, nan=0).astype(int)
+            out[f"exit_date_{ph}"] = np.where(np.isfinite(ek) & (xi < n), dates[np.minimum(xi, n - 1)], np.datetime64("NaT"))
+            out[f"exit_px_{ph}"] = entry * (1 + out[f"ret_tb_{ph}"])
             for hz in lcfg["forward_returns"]:
                 j = t_idx + hz
                 okj = j < n
@@ -222,6 +228,7 @@ def main():
                 "label_10": lab["label_10"], "ret_tb_10": lab["ret_tb_10"], "exitk_10": lab["exitk_10"],
                 "label_20": lab["label_20"], "label_60": lab["label_60"],
                 "fwd_10": lab["fwd_10"], "fwd_ex_10": lab["fwd_ex_10"], "entry_date": lab["entry_date"],
+                "entry_px": lab["entry_px"], "exit_date_10": lab["exit_date_10"], "exit_px_10": lab["exit_px_10"],
                 "label_end": lab["label_end"]}).astype({"eligible": bool}))
         # ---- events
         for family, tidx in fam.items():
@@ -274,7 +281,8 @@ def main():
     base.to_parquet(OUT / "base.parquet", index=False)
     summary = {
         "symbols_processed": stats["symbols"], "raw_triggers": {k: v for k, v in stats.items() if k != "symbols"},
-        "events_by_family_tier": events.groupby(["family", "tier1"]).size().rename(lambda x: str(x)).to_dict(),
+        "events_by_family_tier": {f"{a}|tier1={b}": int(v) for (a, b), v in
+                                  events.groupby(["family", "tier1"]).size().items()},
         "events_eligible_tier1": events[events["tier1"] & events["eligible"]].groupby("family").size().to_dict(),
         "base_rows": len(base), "base_eligible": int(base["eligible"].sum()),
         "seconds": round(time.time() - t0, 1)}

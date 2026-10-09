@@ -19,10 +19,15 @@ from impi.common import config
 
 
 def run_backtest(signals: pd.DataFrame, closes: dict[str, pd.Series], calendar: np.ndarray,
-                 seed: int, max_positions: int | None = None, capital: float | None = None) -> tuple[pd.Series, pd.DataFrame]:
+                 seed: int, max_positions: int | None = None, capital: float | None = None,
+                 cash_yield: float | None = None) -> tuple[pd.Series, pd.DataFrame]:
+    """Idle cash earns `cash_yield` (default: the risk-free rate in costs.yaml, a liquid-fund
+    assumption - D-022), so a strategy that is mostly in cash is not penalised in its Sharpe ratio."""
     cc = config()["costs"]
     max_pos = int(max_positions or cc["max_positions"])
     cash = float(capital or cc["initial_capital"])
+    cy = float(cc["risk_free_annual"] if cash_yield is None else cash_yield)
+    cash_daily = (1 + cy) ** (1 / 252) - 1
     if signals.empty:
         return pd.Series(dtype=float), pd.DataFrame()
     s = signals.dropna(subset=["entry_date", "exit_date", "entry_px", "exit_px"]).copy()
@@ -41,6 +46,8 @@ def run_backtest(signals: pd.DataFrame, closes: dict[str, pd.Series], calendar: 
     last_close: dict[str, float] = {}
     prev_equity = cash
     for d in days:
+        if cash > 0:
+            cash *= 1 + cash_daily
         # entries at today's open
         for _, sig in by_entry.get(d, pd.DataFrame()).iterrows():
             if len(open_pos) >= max_pos:

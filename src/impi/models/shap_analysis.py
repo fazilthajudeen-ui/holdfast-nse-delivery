@@ -33,7 +33,7 @@ def interaction_ranking(model, X: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     pairs = pd.DataFrame(rows).sort_values("mean_abs_interaction", ascending=False).reset_index(drop=True)
     pairs["rank"] = np.arange(1, len(pairs) + 1)
     pairs["percentile"] = 1 - (pairs["rank"] - 1) / len(pairs)
-    q75 = pairs["mean_abs_interaction"].quantile(0.75)
+    top_n = int(np.ceil(len(pairs) / 4))                  # top quartile BY RANK (many pairs tie at exactly 0)
     verdict = {}
     for a, b in KEY_PAIRS:
         hit = pairs[((pairs.f1 == a) & (pairs.f2 == b)) | ((pairs.f1 == b) & (pairs.f2 == a))]
@@ -43,7 +43,8 @@ def interaction_ranking(model, X: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
         r = hit.iloc[0]
         verdict[f"{a}|{b}"] = {"present": True, "rank": int(r["rank"]), "of": len(pairs),
                                "percentile": float(r["percentile"]),
-                               "top_quartile": bool(r["mean_abs_interaction"] >= q75)}
+                               "mean_abs_interaction": float(r["mean_abs_interaction"]),
+                               "top_quartile": bool(r["rank"] <= top_n and r["mean_abs_interaction"] > 0)}
     return pairs, verdict
 
 

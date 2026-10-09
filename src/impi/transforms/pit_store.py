@@ -88,8 +88,16 @@ def read(name: str, columns: list[str] | None = None, start=None, end=None, as_o
             files = [f for f in files if int(f.parent.name[5:]) >= pd.Timestamp(start).year]
         if end is not None:
             files = [f for f in files if int(f.parent.name[5:]) <= pd.Timestamp(end).year]
-        filt = [("symbol", "in", list(symbols))] if symbols is not None else None
-        df = pd.concat([pd.read_parquet(f, columns=columns, filters=filt) for f in files], ignore_index=True)
+        # (pyarrow.dataset - needed for read filters - is blocked by Windows Application Control here,
+        #  so filter each yearly file in pandas instead)
+        want = set(map(str, symbols)) if symbols is not None else None
+        parts = []
+        for f in files:
+            part = pd.read_parquet(f, columns=columns)
+            if want is not None:
+                part = part[part["symbol"].astype(str).isin(want)]
+            parts.append(part)
+        df = pd.concat(parts, ignore_index=True)
     if start is not None and "date" in df:
         df = df[df["date"] >= pd.Timestamp(start)]
     if end is not None and "date" in df:

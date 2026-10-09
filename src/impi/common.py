@@ -5,6 +5,7 @@ import csv
 import datetime as dt
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from functools import lru_cache
@@ -14,11 +15,13 @@ import numpy as np
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]          # .../impi
-CONFIG_DIR = ROOT / "config"
+CONFIG_DIR = Path(os.environ["IMPI_CONFIG_DIR"]) if os.environ.get("IMPI_CONFIG_DIR") else ROOT / "config"
 DATA = ROOT / "data"
 RAW = DATA / "raw"
-PROCESSED = DATA / "processed"
-RESULTS = ROOT / "results"
+PROCESSED = Path(os.environ["IMPI_PROCESSED_DIR"]) if os.environ.get("IMPI_PROCESSED_DIR") else DATA / "processed"
+RESULTS = Path(os.environ["IMPI_RESULTS_DIR"]) if os.environ.get("IMPI_RESULTS_DIR") else ROOT / "results"
+# Sandbox (synthetic rehearsal) mode: only allowed when BOTH outputs are redirected away from the real ones
+SANDBOX = bool(os.environ.get("IMPI_SANDBOX")) and RESULTS != ROOT / "results" and PROCESSED != DATA / "processed"
 METRICS = RESULTS / "metrics"
 FIGURES = RESULTS / "figures"
 RESULTS_LOG = RESULTS / "results_log.csv"
@@ -98,10 +101,22 @@ def log_result(phase: str, experiment: str, variant: str, split: str, n: int, me
         })
 
 
+def _clean_keys(o):
+    if isinstance(o, dict):
+        return {(k if isinstance(k, (str, int, float, bool)) and not isinstance(k, np.generic) or k is None
+                 else str(k.item() if isinstance(k, np.generic) else k)): _clean_keys(v) for k, v in o.items()}
+    if isinstance(o, (list, tuple)):
+        return [_clean_keys(v) for v in o]
+    return o
+
+
 def save_json(obj, path: Path) -> None:
+    """Atomic write (temp file + rename) so a failure never leaves a half-written result."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(obj, f, indent=2, default=_json_default)
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(_clean_keys(obj), f, indent=2, default=_json_default)
+    os.replace(tmp, path)
 
 
 def _json_default(o):
