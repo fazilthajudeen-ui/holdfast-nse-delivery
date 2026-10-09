@@ -189,6 +189,7 @@ def _run(raw: bytes, attempts: list, attempt: dict):
     vr = pd.DataFrame(rets)
     bench = bench.reindex(vr.index)
     out["benchmark_nifty500_test"] = portfolio_metrics(bench.dropna(), float(config()["costs"]["risk_free_annual"]))
+    vr.assign(nifty500=bench).to_parquet(METRICS / "variant_returns_test.parquet")
     out["backtests"] = bts
     out["spa"] = spa_tests(bench, vr, int(config()["models"]["spa"]["reps"]), int(config()["models"]["spa"]["block_size"]), seed(603))
     log_df = pd.read_csv(RESULTS_LOG)
