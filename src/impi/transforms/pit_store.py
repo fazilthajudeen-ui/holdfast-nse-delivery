@@ -145,6 +145,17 @@ def build_equity(changes: pd.DataFrame) -> dict:
             breadth.append({"date": pd.Timestamp(d), "advances": int((chg > 0).sum()),
                             "declines": int((chg < 0).sum()), "n": int(chg.notna().sum())})
             df = df[df["series"].isin(chain)].drop(columns=["isin"])
+            # D-040: NSE's DELIV_PER must agree with DELIV_QTY / volume (rounding is 0.005 pt). Inconsistent
+            # rows are blanked; if most of a day is inconsistent (e.g. 2026-09-11) the whole day is blanked.
+            calc = df["deliv_qty"] / df["volume"] * 100
+            bad = calc.notna() & df["deliv_pct"].notna() & ((calc - df["deliv_pct"]).abs() > 0.5)
+            iseq = df["series"].isin(keep)
+            if bad[iseq].mean() > 0.5:
+                df.loc[:, ["deliv_qty", "deliv_pct"]] = np.nan
+                qc.setdefault("delivery_blanked_days", []).append(d.isoformat())
+            elif bad.any():
+                df.loc[bad, ["deliv_qty", "deliv_pct"]] = np.nan
+                qc["delivery_blanked_rows"] = qc.get("delivery_blanked_rows", 0) + int(bad.sum())
             if df.loc[df["series"].isin(keep), "deliv_qty"].isna().mean() > 0.5:
                 qc["missing_delivery_days"].append(d.isoformat())
             frames.append(df)

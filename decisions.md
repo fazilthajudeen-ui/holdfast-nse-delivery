@@ -191,3 +191,11 @@ effect on results; security settings were not changed.
 **D-038 · Sandbox rehearsal** — the full pipeline was rehearsed end-to-end on synthetic data
 (`tests/integration/make_synthetic.py`) with outputs redirected away from `results/`; the sandbox switch
 works only when both output folders are redirected, so it can never write real results.
+
+**D-040 · Internally inconsistent delivery records are treated as missing** (10 Oct 2026, verified)
+NSE's `sec_bhavdata_full` for 11 Sep 2026 publishes DELIV_PER values that disagree with
+DELIV_QTY / TTL_TRD_QNTY for 98% of stocks (median 57.3% vs 48.6%; the previous day agrees exactly), and
+a few rows of the 21 Oct 2025 Muhurat session do the same. Which field is wrong cannot be known, so:
+a row whose two delivery figures differ by more than 0.5 percentage point is blanked, and a day where
+more than half of EQ rows are inconsistent has all its delivery blanked. Counts are in the PIT build
+report. (The Delivery Lens project reads the same file and is affected on that date.)

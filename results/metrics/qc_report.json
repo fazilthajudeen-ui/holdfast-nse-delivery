@@ -1,0 +1,257 @@
+{
+  "generated": "2026-10-10T03:08:38",
+  "calendar": {
+    "candidate_dates": 3343,
+    "trading_days": 957,
+    "holidays": 41,
+    "unresolved_weekdays": [
+      "2016-08-25",
+      "2016-08-26",
+      "2016-08-29",
+      "2016-08-30",
+      "2016-08-31",
+      "2016-09-01",
+      "2016-09-02",
+      "2016-09-05",
+      "2016-09-06",
+      "2016-09-07",
+      "2016-09-08",
+      "2016-09-09",
+      "2016-09-12",
+      "2016-09-13",
+      "2016-09-14",
+      "2016-09-15",
+      "2016-09-16",
+      "2016-09-19",
+      "2016-09-20",
+      "2016-09-21",
+      "2016-09-22",
+      "2016-09-23",
+      "2016-09-26",
+      "2016-09-27",
+      "2016-09-28",
+      "2016-09-29",
+      "2016-09-30",
+      "2016-10-03",
+      "2016-10-04",
+      "2016-10-05",
+      "2016-10-06",
+      "2016-10-07",
+      "2016-10-10",
+      "2016-10-11",
+      "2016-10-12",
+      "2016-10-13",
+      "2016-10-14",
+      "2016-10-17",
+      "2016-10-18",
+      "2016-10-19",
+      "2016-10-20",
+      "2016-10-21",
+      "2016-10-24",
+      "2016-10-25",
+      "2016-10-26",
+      "2016-10-27",
+      "2016-10-28",
+      "2016-10-31",
+      "2016-11-01",
+      "2016-11-02"
+    ],
+    "n_unresolved": 2336,
+    "first": "2014-01-01",
+    "last": "2026-10-09",
+    "trading_days_per_year": {
+      "2014": 243,
+      "2015": 247,
+      "2016": 160,
+      "2019": 5,
+      "2024": 4,
+      "2025": 107,
+      "2026": 191
+    }
+  },
+  "missing_by_dataset": {
+    "ban": 11,
+    "cm_legacy": 41,
+    "index_close": 11,
+    "participant_oi": 2,
+    "sec_bhav": 4
+  },
+  "stale_files_rejected": 3,
+  "rows": {
+    "equity_rows": 1163620,
+    "eq_rows_per_day_median": 2117.0,
+    "days_with_<70pct_rows": {},
+    "duplicates_symbol_date": 0
+  },
+  "sanity": {
+    "deliv_pct_outside_0_100": 0,
+    "high_lt_low": 0,
+    "close_outside_high_low": 0,
+    "nonpositive_close": 0,
+    "negative_volume": 0,
+    "deliv_qty_gt_volume": 0,
+    "deliv_pct_vs_qty_mismatch_gt_0.05pt": 2757,
+    "deliv_pct_checked": 1055173
+  },
+  "delivery_coverage_by_year": {
+    "2014": 1.0,
+    "2015": 1.0,
+    "2019": 1.0,
+    "2024": 1.0,
+    "2025": 1.0,
+    "2026": 1.0
+  },
+  "source_by_year": {
+    "2014": {
+      "cm_legacy+mto": 323812
+    },
+    "2015": {
+      "cm_legacy+mto": 4331
+    },
+    "2019": {
+      "cm_legacy+mto": 5986,
+      "sec_bhav": 1484
+    },
+    "2024": {
+      "sec_bhav": 7634
+    },
+    "2025": {
+      "sec_bhav": 240183
+    },
+    "2026": {
+      "sec_bhav": 471744
+    }
+  },
+  "missed_session_suspects": {
+    "2014-03-24": 0.379,
+    "2019-09-25": 0.994,
+    "2024-07-04": 0.995,
+    "2025-07-28": 0.973
+  },
+  "legacy_vs_sec_overlap": [
+    {
+      "date": "2019-10-01",
+      "matched": 1942,
+      "sec_rows": 1942,
+      "legacy_rows": 1950,
+      "close_mismatch": 0,
+      "volume_mismatch": 0,
+      "deliv_qty_mismatch": 0
+    },
+    {
+      "date": "2020-03-16",
+      "status": "files missing"
+    },
+    {
+      "date": "2020-06-01",
+      "status": "files missing"
+    },
+    {
+      "date": "2020-12-01",
+      "status": "files missing"
+    },
+    {
+      "date": "2021-06-01",
+      "status": "files missing"
+    },
+    {
+      "date": "2021-12-01",
+      "status": "files missing"
+    },
+    {
+      "date": "2022-06-01",
+      "status": "files missing"
+    },
+    {
+      "date": "2022-12-01",
+      "status": "files missing"
+    },
+    {
+      "date": "2023-06-01",
+      "status": "files missing"
+    },
+    {
+      "date": "2023-12-01",
+      "status": "files missing"
+    },
+    {
+      "date": "2024-03-01",
+      "status": "files missing"
+    },
+    {
+      "date": "2024-07-01",
+      "status": "files missing"
+    }
+  ],
+  "fo_legacy_vs_udiff": [
+    {
+      "date": "2024-07-01",
+      "status": "files missing"
+    },
+    {
+      "date": "2024-07-02",
+      "status": "files missing"
+    },
+    {
+      "date": "2024-07-03",
+      "status": "files missing"
+    },
+    {
+      "date": "2024-07-04",
+      "underlyings": 181,
+      "fut_oi_mismatch": 0,
+      "call_oi_mismatch": 0
+    },
+    {
+      "date": "2024-07-05",
+      "underlyings": 181,
+      "fut_oi_mismatch": 0,
+      "call_oi_mismatch": 0
+    }
+  ],
+  "fo": {
+    "rows": 37648,
+    "underlyings_per_day_by_year": {
+      "2014": 136.0,
+      "2015": 145.0,
+      "2019": 149.0,
+      "2024": 181.0,
+      "2026": 213.0
+    },
+    "negative_oi": 0,
+    "zero_fut_oi_rows": 0,
+    "trading_days_without_fo": 686
+  },
+  "participant_oi": {
+    "days": 252,
+    "total_long_ne_short": 0,
+    "sum_of_participants_ne_total": 1
+  },
+  "ban": {
+    "days_with_file": 650,
+    "rows": 409,
+    "max_per_day": 8
+  },
+  "index": {
+    "india_vix": 3160,
+    "nifty200": 547,
+    "nifty50": 547,
+    "nifty500": 547,
+    "vix_first": "2014-01-01"
+  },
+  "pit_build": {
+    "reference": {
+      "symbol_changes": 1056,
+      "corp_actions": 1059,
+      "corp_action_kinds": {
+        "bonus": 458,
+        "split": 424,
+        "demerger": 159,
+        "bonus+split": 16,
+        "consolidation": 2
+      },
+      "results_dates": 94211,
+      "sector_labels": 755
+    }
+  }
+}
