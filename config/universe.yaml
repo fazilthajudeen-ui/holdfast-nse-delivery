@@ -1,0 +1,16 @@
+# Two-tier universe (spec section 2). Everything is point-in-time.
+series_keep: [EQ]                 # tradable series for features/events
+series_chain: [EQ, BE, BZ]        # kept only to stitch prices when a stock hops series (delivery blanked)
+tier1:
+  definition: fo_underlying       # stock has stock-futures contracts in that day's F&O bhavcopy (G2)
+tier2:
+  min_median_turnover_rs: 50000000   # Rs 5 crore median daily turnover over the previous 60 days
+  turnover_window: 60
+exclusions:
+  min_raw_price: 20               # on the UNADJUSTED close at T (adjusted prices would leak future splits)
+  min_listing_days: 30            # trading days since the symbol first appears (data start = listed earlier)
+  earnings_window_days: 3         # trading days either side of a results board meeting (G1-safe, D-012)
+  exclude_ban_t_and_t1: true      # F&O ban on T or T+1 (T+1 list is published on T evening)
+  asm_gsm: unavailable            # D-009: no point-in-time ASM/GSM history is published
+liquidity_buckets:                # PIT terciles of 60-day median turnover within Tier 1 (D-007)
+  window: 60

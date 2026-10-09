@@ -1,0 +1,13 @@
+# Chronological splits (spec section 9, G3/G4). The test set is evaluated exactly once (P6).
+train: [2015-06-01, 2020-12-31]
+validation: [2021-01-01, 2022-12-31]
+test: [2023-01-01, 2026-10-09]
+purge: label_end                  # an event is dropped from a split if its label window crosses the boundary
+cv_folds: 5
+cv_embargo_days: 10               # >= primary label horizon; secondary horizons purge by their own length
+pilot_window_start: 2025-07-28    # D-011: Delivery Lens already explored this period -> report with/without
+subperiods:
+  "2015-2019": [2015-06-01, 2019-12-31]
+  "2021-2022": [2021-01-01, 2022-12-31]
+  "2023+": [2023-01-01, 2026-10-09]
+covid_exclusion: [2020-03-01, 2020-05-31]

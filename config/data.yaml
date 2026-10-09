@@ -1,0 +1,64 @@
+# IMPI data configuration. Every number the pipeline uses lives in config/*.yaml.
+start: 2014-01-01          # 252-day warm-up before the 2015-06-01 training start
+end: 2026-10-09            # FROZEN data end date (D-010). The test set must not grow after P0.
+timezone: Asia/Kolkata
+
+download:
+  min_interval_seconds: 1.0    # >= 1 s between requests to NSE (polite)
+  retries: 4
+  backoff_seconds: 3           # exponential: 3, 6, 12, 24
+  timeout_seconds: 40
+  max_consecutive_blocks: 5    # stop the run if NSE blocks us repeatedly
+  home: https://www.nseindia.com
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+
+# Official NSE archive URLs. Placeholders: {dd} {mm} {yyyy} {MON} (JUN) {ddmmyyyy} {yyyymmdd}
+sources:
+  sec_bhav:        # full bhavcopy + delivery, available from 2019-09-30 (probe 10 Oct 2026)
+    url: https://nsearchives.nseindia.com/products/content/sec_bhavdata_full_{ddmmyyyy}.csv
+    first_date: 2019-09-25
+  cm_legacy:       # old equity bhavcopy (prices, volume, value, trades, ISIN); used with MTO before sec_bhav
+    url: https://nsearchives.nseindia.com/content/historical/EQUITIES/{yyyy}/{MON}/cm{dd}{MON}{yyyy}bhav.csv.zip
+  mto:             # security-wise delivery position (delivery qty) before sec_bhav
+    url: https://nsearchives.nseindia.com/archives/equities/mto/MTO_{ddmmyyyy}.DAT
+  fo_legacy:       # old F&O bhavcopy, last published 2024-07-05
+    url: https://nsearchives.nseindia.com/content/historical/DERIVATIVES/{yyyy}/{MON}/fo{dd}{MON}{yyyy}bhav.csv.zip
+    last_date: 2024-07-05
+  fo_udiff:        # UDiFF common-format F&O bhavcopy, used from 2024-07-08
+    url: https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_{yyyymmdd}_F_0000.csv.zip
+    first_date: 2024-07-08
+  participant_oi:  # participant-wise OI (contracts) - MARKET-WIDE totals only (D-001)
+    url: https://nsearchives.nseindia.com/content/nsccl/fao_participant_oi_{ddmmyyyy}.csv
+  ban:             # F&O securities in ban for the trade date in the file name
+    url: https://nsearchives.nseindia.com/archives/fo/sec_ban/fo_secban_{ddmmyyyy}.csv
+  index_close:     # all NSE indices incl. Nifty 50/200/500 and India VIX
+    url: https://nsearchives.nseindia.com/content/indices/ind_close_all_{ddmmyyyy}.csv
+  corp_actions_api: https://www.nseindia.com/api/corporates-corporateActions?index=equities&from_date={from}&to_date={to}
+  board_meetings_api: https://www.nseindia.com/api/corporate-board-meetings?index=equities&from_date={from}&to_date={to}
+  vix_history_api: https://www.nseindia.com/api/historicalOR/vixhistory?from={from}&to={to}   # VIX is absent from 2014 index files
+  symbol_change: https://nsearchives.nseindia.com/content/equities/symbolchange.csv
+  sector_lists:    # current industry labels (D-008: no point-in-time sector history is published)
+    - https://nsearchives.nseindia.com/content/indices/ind_niftytotalmarket_list.csv
+    - https://nsearchives.nseindia.com/content/indices/ind_nifty500list.csv
+
+# Weekend sessions (Budget days, Muhurat trading, NSE special live sessions). Weekdays are tried automatically.
+# QC also flags any date where most stocks' PREV_CLOSE does not match our previous close (missed session).
+special_sessions: [2016-10-30, 2019-10-27, 2020-02-01, 2020-11-14, 2023-11-12,
+                   2024-01-20, 2024-03-02, 2024-05-18, 2025-02-01, 2026-02-01]
+
+# Dates where BOTH the legacy (cm + MTO) and the sec_bhav files are downloaded to prove they agree (P0 QC).
+overlap_check_dates: [2019-10-01, 2020-03-16, 2020-06-01, 2020-12-01, 2021-06-01, 2021-12-01,
+                      2022-06-01, 2022-12-01, 2023-06-01, 2023-12-01, 2024-03-01, 2024-07-01]
+# Dates where BOTH F&O formats are downloaded to prove units agree across the 2024 format switch.
+fo_overlap_check_dates: [2024-07-01, 2024-07-02, 2024-07-03, 2024-07-04, 2024-07-05]
+
+# Re-use files the Delivery Lens project already downloaded (same official URLs; dates re-validated).
+reuse_cache:
+  sec_bhav: ../data/raw
+  index_close: ../data/raw/index
+
+index_names:     # NSE renamed indices over time ("CNX ..." -> "Nifty ...")
+  nifty50:  ["Nifty 50", "CNX Nifty", "S&P CNX Nifty"]
+  nifty200: ["Nifty 200", "CNX 200"]
+  nifty500: ["Nifty 500", "CNX 500", "S&P CNX 500"]
+  india_vix: ["India VIX"]
