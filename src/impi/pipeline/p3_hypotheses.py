@@ -9,10 +9,10 @@ import numpy as np
 import pandas as pd
 
 from impi.common import METRICS, config, log, log_result, rng, save_json, seed
-from impi.pipeline.common_phase import assert_preregistered, tier1
+from impi.pipeline.common_phase import assert_preregistered, tier1, tier12
 from impi.pipeline.p2_events import assert_frozen, load_events
 from impi.research.event_study import event_table
-from impi.research.hypothesis_tests import amihud_buckets, run_family
+from impi.research.hypothesis_tests import amihud_buckets, run_family, test_h1
 from impi.validation.multiple_testing import benjamini_hochberg
 
 SPLITS = ["train", "validation"]
@@ -39,7 +39,9 @@ def main():
         d = d.copy()
         d["h1_group"] = np.where(d["deliv_z20_prev"] > 0, "delivery_expansion", "no_expansion")
         studies[f"{fam}_by_delivery"] = event_table(d[d["deliv_z20_prev"].notna()], "h1_group", rng(301)).to_dict("records")
-    out = {"registered": reg, "splits": SPLITS, "family_size": len(tests), "fdr_q": q, "tests": tests,
+    # pre-registered power rule (secondary, outside the BH family): H1 on STRICT events of Tier 1 OR Tier 2
+    widened = test_h1(tier12(ev, "strict", SPLITS), cuts, int(config()["models"]["bootstrap"]["n"]), rng(302))
+    out = {"power_rule_H1_strict_tier1_or_2": widened, "registered": reg, "splits": SPLITS, "family_size": len(tests), "fdr_q": q, "tests": tests,
            "event_studies": studies,
            "n_events": {k: int(len(v)) for k, v in fams.items()}}
     save_json(out, METRICS / "p3_hypotheses.json")

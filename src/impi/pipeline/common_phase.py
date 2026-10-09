@@ -36,3 +36,9 @@ def tier1(ev: pd.DataFrame, family: str, splits: list[str]) -> pd.DataFrame:
 def tier2_only(ev: pd.DataFrame, family: str, splits: list[str]) -> pd.DataFrame:
     return ev[(ev["family"] == family) & ev["tier2"] & ~ev["tier1"] & ev["eligible"] & ev["split"].isin(splits)
               & ev["label_10"].notna()].copy()
+
+
+def tier12(ev: pd.DataFrame, family: str, splits: list[str]) -> pd.DataFrame:
+    """Power-rule widening: Tier 1 OR Tier 2 (all liquid EQ stocks), eligible, labelled."""
+    return ev[(ev["family"] == family) & (ev["tier1"] | ev["tier2"]) & ev["eligible"] & ev["split"].isin(splits)
+              & ev["label_10"].notna()].copy()

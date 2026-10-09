@@ -88,6 +88,16 @@ def summarise() -> dict:
                                  "H1_mde_pp": round(100 * mde_two_proportions(p, int(e.sum()), int((~e).sum())), 2),
                                  "H2_mde_pp": round(100 * mde_two_proportions(p, int(dv.sum()), int((~dv).sum())), 2),
                                  "H4_mde_auc": round(mde_auc_paired(0.55, npos, len(gg) - npos), 4)}
+    w = ev[(ev["family"] == "strict") & (ev["tier1"] | ev["tier2"]) & ev["eligible"] & ev["label_10"].notna()]
+    for sp in ["trainval", "test"]:
+        gg = w[w["split"].isin(["train", "validation"])] if sp == "trainval" else w[w["split"] == "test"]
+        if len(gg) >= 10:
+            e = gg["deliv_z20_prev"] > 0
+            pw[f"strict_tier1or2_{sp}"] = {"n": len(gg), "base_rate": round(float(gg["label_10"].mean()), 4),
+                                           "H1_mde_pp": round(100 * mde_two_proportions(float(gg["label_10"].mean()),
+                                                                                        int(e.sum()), int((~e).sum())), 2)}
+        else:
+            pw[f"strict_tier1or2_{sp}"] = {"n": len(gg)}
     out["power"] = pw
     st = pw.get("strict_test", {})
     out["power_rule"] = ("Pre-registered rule: if the STRICT Tier-1 test set cannot detect a 10-pp H1 difference "

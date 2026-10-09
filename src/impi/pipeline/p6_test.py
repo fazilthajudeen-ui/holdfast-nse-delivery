@@ -23,7 +23,7 @@ from impi.backtest.metrics import deflated_sharpe, portfolio_metrics, spa_tests
 from impi.common import METRICS, RESULTS, RESULTS_LOG, config, config_hash, git_commit, log, log_result, rng, save_json, seed
 from impi.models import ml
 from impi.models.calibration import brier, reliability
-from impi.pipeline.common_phase import assert_preregistered, tier1, tier2_only
+from impi.pipeline.common_phase import assert_preregistered, tier1, tier12, tier2_only
 from impi.pipeline.ladder import backtest_variant, ladder, load_closes
 from impi.pipeline.p2_events import assert_frozen, load_events
 from impi.pipeline.p4_composite import MODELS
@@ -217,6 +217,7 @@ def _run(raw: bytes, attempts: list, attempt: dict):
         if len(d) > 30:
             t2[fam] = test_h1(d, cuts, n_boot, rng(605))
     out["tier2_replication_H1"] = t2
+    out["power_rule_H1_strict_tier1_or_2"] = test_h1(tier12(ev, "strict", ["test"]), cuts, n_boot, rng(607))
     # FII and DII never only pooled (spec section 12): H3 with each side alone (secondary, outside the BH family)
     out["h3_fii_vs_dii"] = {f"{fam}_{w}": test_h3(d, n_boot, rng(606), which=w)
                             for fam, d in [("STRICT", b2), ("BROAD", br)] for w in ["fii_only", "dii_only"]}
