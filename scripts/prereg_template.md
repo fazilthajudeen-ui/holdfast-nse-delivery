@@ -41,8 +41,15 @@ Class rates (share of successes): {CLASS_RATES}
 Power (80%, two-sided α = 0.05): {POWER_TABLE}
 
 Pre-registered power rule: if the STRICT Tier-1 test set cannot detect a 10-percentage-point H1
-difference, H1 is additionally tested on Tier-2 STRICT events as a secondary analysis. Standards are
-never lowered. Triggered at registration: **{POWER_TRIGGERED}**.
+difference, H1 is additionally tested on STRICT events of Tier 1 OR Tier 2 (all liquid stocks) as a
+secondary analysis. Standards are never lowered. Triggered at registration: **{POWER_TRIGGERED}**.
+
+**Statement on STRICT power (decisions.md D-041).** The spec's VCP definition is rare in Indian F&O
+stocks (far below the spec's expected 2,000–5,000 events, for every reasonable pivot rule). The STRICT
+definition is kept exactly and all STRICT tests are run and reported, but groups with fewer than 30
+events receive no p-value. The **BROAD** family is therefore expected to carry the inferential weight
+for H1–H3, and H4 is evaluated on BROAD events as the spec intends. This statement is made before any
+hypothesis test or outcome comparison was run.
 
 ## 3. Hypotheses (directional) and tests
 
