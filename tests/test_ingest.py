@@ -129,3 +129,12 @@ def test_symbol_change_chain_and_conflict():
                        "date": pd.to_datetime(["2016-06-01", "2020-01-01", "2019-01-01"])})
     out, log = CA.apply_symbol_changes(df, ch)
     assert list(out.symbol) == ["C", "C", "C", "Z"]
+
+
+def test_participant_file_without_header_row():
+    po = (b'"Participant wise Open Interest (no. of contracts) in Equity Derivatives as on February 24, 2014",,,,,,,,,,,,,,\n'
+          b"Client,164528,209021,642990,217739,481786,745687,686388,883452,218869,118370,134204,84901,2372230,2215705\n"
+          b"TOTAL,471850,471850,1,1,1,1,1,1,1,1,1,1,5127997,5127997\n")
+    assert participant.file_date(po) == dt.date(2014, 2, 24)
+    p = participant.parse(po, dt.date(2014, 2, 24)).set_index("participant")
+    assert p.loc["Client", "fut_idx_long"] == 164528 and p.loc["TOTAL", "total_short"] == 5127997
