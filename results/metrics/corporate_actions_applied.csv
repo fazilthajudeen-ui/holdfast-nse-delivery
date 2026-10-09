@@ -1,26 +1,46 @@
 symbol,adj_date,factor,method,kind,gap,ex_date,subject
+3PLAND,2016-02-11,0.9551282051282052,demerger_gap,demerger,0.9551282051282052,2016-02-11, Scheme Of Arrangement & Reconstruction
 AARON,2025-08-25,0.5,nse_confirmed_gap,bonus,0.5348837209302325,2025-08-25,Bonus 1:1
+AARTIDRUGS,2015-03-24,0.5,nse_confirmed_gap,bonus,0.4645968282331919,2015-03-24,Bonus 1:1
 AARTIIND,2019-09-27,0.5,nse_confirmed_gap,bonus,0.5234262898496475,2019-09-27, Bonus 1:1
 AASTHA,2026-09-28,0.5,nse_confirmed_gap,bonus,0.5092134213421342,2026-09-28,Bonus 1:1
 ABINFRA,2025-10-17,0.1,nse_confirmed_gap,split,0.09946154627654169,2025-10-17,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+ABIRLANUVO,2016-01-20,0.481227760160732,demerger_gap,demerger,0.481227760160732,2016-01-20, Scheme Of Arrangement
+ADANIENT,2015-06-03,0.8999999999999999,demerger_gap,demerger,0.8999999999999999,2015-06-03,Scheme Of Arrangement
 ADANIPOWER,2025-09-22,0.2,nse_confirmed_gap,split,0.20890893712996897,2025-09-22,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+AEGISLOG,2015-09-16,0.1,nse_confirmed_gap,split,0.10305671495212375,2015-09-16, Face Value Split From Rs 10 To Rs 1
 AGIIL,2025-10-10,0.2,nse_confirmed_gap,split,0.2080154204481568,2025-10-10,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
 AIIL,2026-01-13,0.2,nse_confirmed_gap,bonus,0.209804427806106,2026-01-13,Bonus 4:1
+AJANTPHARM,2015-03-20,0.4,nse_confirmed_gap,split,0.4104654006031461,2015-03-20,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share
 AJMERA,2026-01-14,0.2,nse_confirmed_gap,split,0.2009779682435031,2026-01-14,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+ALANKIT,2015-09-23,0.2,nse_confirmed_gap,split,0.19699459967128435,2015-09-23, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 ALKYLAMINE,2014-09-08,0.5,nse_confirmed_gap,split,0.5030933442110272,2014-09-08,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+ALLCARGO,2015-12-30,0.5,nse_confirmed_gap,bonus,0.5024711696869852,2015-12-30, Bonus 1:1
 ALLCARGO,2025-11-12,0.31296132270445826,demerger_gap,demerger,0.31296132270445826,2025-11-12,Demerger
+AMJLAND,2016-02-11,0.748792270531401,demerger_gap,demerger,0.748792270531401,2016-02-11, Scheme Of Arrangement & Reconstruction
 ANANDRATHI,2026-06-03,0.5,nse_confirmed_gap,bonus,0.5028677987172604,2026-06-03,Bonus 1:1
 ANGELONE,2026-02-26,0.1,nse_confirmed_gap,split,0.10080726133579661,2026-02-26,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+ANTGRAPHIC,2015-03-26,0.5,gap_snap,unlisted,0.5,2015-03-26,
+APCOTEXIND,2015-09-23,0.5,nse_confirmed_gap,bonus,0.48261685584055763,2015-09-23, Bonus 1:1
 AQYLON,2026-03-05,0.1,nse_confirmed_gap,split,0.100544230237063,2026-03-05,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+ASAHISONG,2015-02-02,0.8628078030060762,demerger_gap,demerger,0.8628078030060762,2015-02-02,Demerger
 ASTRAL,2014-09-25,0.5,nse_confirmed_gap,split,0.502719742860675,2014-09-25,Face Value Split From Rs 2/- Per Share To Re 1/- Per Share
 ATULAUTO,2014-09-12,0.5,nse_confirmed_gap,split,0.5091936886569761,2014-09-12,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+AUROPHARMA,2015-07-20,0.5,nse_confirmed_gap,bonus,0.503760638648809,2015-07-20,Bonus 1:1
 AURUS,2014-09-29,0.6666666666666666,nse_confirmed_gap,bonus,0.7310924369747899,2014-09-29,Bonus 1:2
+AVANTIFEED,2015-11-26,0.2,nse_confirmed_gap,split,0.20140337568746444,2015-11-26, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 AVROIND,2026-05-05,0.1,nse_confirmed_gap,split,0.0995279307631786,2026-05-05,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
 AXISBANK,2014-07-28,0.2,nse_confirmed_gap,split,0.20317260480926602,2014-07-28,Face Value Split From Rs 10/- To Rs 2/- Per Share
 AXITA,2026-02-13,0.9090909090909091,nse_confirmed_gap,bonus,0.9441340782122906,2026-02-13,Bonus 1:10
+BAJFINANCE,2016-09-08,0.1,nse_confirmed_gap,bonus+split,0.10127882176366813,2016-09-08, Bonus 1:1/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+BANKBARODA,2015-01-22,0.2,nse_confirmed_gap,split,0.20250022165085557,2015-01-22,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 BANKNIFTY1,2026-02-27,0.1,gap_snap,unlisted,0.10055857081823504,2026-02-27,
+BATAINDIA,2015-10-07,0.5,nse_confirmed_gap,split,0.5012056963465125,2015-10-07, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
 BECTORFOOD,2025-12-12,0.2,nse_confirmed_gap,split,0.20064107456307714,2025-12-12,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+BEL,2015-09-14,0.3333333333333333,nse_confirmed_gap,bonus,0.34398695840748994,2015-09-14, Bonus 2:1
 BEML,2025-11-03,0.5,nse_confirmed_gap,split,0.49729533160598205,2025-11-03,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+BERGEPAINT,2015-01-08,0.5,nse_confirmed_gap,split,0.5140562248995983,2015-01-08,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+BERGEPAINT,2016-07-15,0.7142857142857143,nse_confirmed_gap,bonus,0.7174323473882945,2016-07-15, Bonus 2:5
 BHAGYANGR,2026-10-08,0.08579914200857991,demerger_gap,demerger,0.08579914200857991,2026-10-08,Demerger
 BHARATRAS,2025-12-12,0.25,gap_snap,unlisted,0.25747474747474747,2025-12-12,
 BIRLACOT,2014-03-12,2.0,gap_snap,unlisted,2.0,2014-03-12,
@@ -30,6 +50,108 @@ BIRLACOT,2014-03-26,0.5,gap_snap,unlisted,0.5,2014-03-26,
 BIRLACOT,2014-03-28,0.5,gap_snap,unlisted,0.5,2014-03-28,
 BIRLACOT,2014-03-31,2.0,gap_snap,unlisted,2.0,2014-03-31,
 BIRLACOT,2014-05-14,0.5,gap_snap,unlisted,0.5,2014-05-14,
+BIRLACOT,2015-01-29,0.5,gap_snap,unlisted,0.5,2015-01-29,
+BIRLACOT,2015-02-05,0.5,gap_snap,unlisted,0.5,2015-02-05,
+BIRLACOT,2015-02-06,0.5,gap_snap,unlisted,0.5,2015-02-06,
+BIRLACOT,2015-02-10,2.0,gap_snap,unlisted,2.0,2015-02-10,
+BIRLACOT,2015-02-19,2.0,gap_snap,unlisted,2.0,2015-02-19,
+BIRLACOT,2015-03-02,2.0,gap_snap,unlisted,2.0,2015-03-02,
+BIRLACOT,2015-03-11,0.5,gap_snap,unlisted,0.5,2015-03-11,
+BIRLACOT,2015-03-12,2.0,gap_snap,unlisted,2.0,2015-03-12,
+BIRLACOT,2015-03-16,2.0,gap_snap,unlisted,2.0,2015-03-16,
+BIRLACOT,2015-03-17,0.5,gap_snap,unlisted,0.5,2015-03-17,
+BIRLACOT,2015-03-20,2.0,gap_snap,unlisted,2.0,2015-03-20,
+BIRLACOT,2015-03-23,0.5,gap_snap,unlisted,0.5,2015-03-23,
+BIRLACOT,2015-03-24,2.0,gap_snap,unlisted,2.0,2015-03-24,
+BIRLACOT,2015-03-26,2.0,gap_snap,unlisted,2.0,2015-03-26,
+BIRLACOT,2015-03-27,2.0,gap_snap,unlisted,2.0,2015-03-27,
+BIRLACOT,2015-03-30,2.0,gap_snap,unlisted,2.0,2015-03-30,
+BIRLACOT,2015-04-01,0.5,gap_snap,unlisted,0.5,2015-04-01,
+BIRLACOT,2015-06-16,0.5,gap_snap,unlisted,0.5,2015-06-16,
+BIRLACOT,2015-06-22,2.0,gap_snap,unlisted,2.0,2015-06-22,
+BIRLACOT,2015-06-25,2.0,gap_snap,unlisted,2.0,2015-06-25,
+BIRLACOT,2015-07-06,0.5,gap_snap,unlisted,0.5,2015-07-06,
+BIRLACOT,2015-07-07,2.0,gap_snap,unlisted,2.0,2015-07-07,
+BIRLACOT,2015-07-10,0.5,gap_snap,unlisted,0.5,2015-07-10,
+BIRLACOT,2015-07-13,2.0,gap_snap,unlisted,2.0,2015-07-13,
+BIRLACOT,2015-07-15,2.0,gap_snap,unlisted,2.0,2015-07-15,
+BIRLACOT,2015-07-21,2.0,gap_snap,unlisted,2.0,2015-07-21,
+BIRLACOT,2015-07-22,2.0,gap_snap,unlisted,2.0,2015-07-22,
+BIRLACOT,2015-07-27,0.5,gap_snap,unlisted,0.5,2015-07-27,
+BIRLACOT,2015-07-28,2.0,gap_snap,unlisted,2.0,2015-07-28,
+BIRLACOT,2015-07-30,2.0,gap_snap,unlisted,2.0,2015-07-30,
+BIRLACOT,2015-07-31,0.5,gap_snap,unlisted,0.5,2015-07-31,
+BIRLACOT,2015-08-03,2.0,gap_snap,unlisted,2.0,2015-08-03,
+BIRLACOT,2015-08-04,2.0,gap_snap,unlisted,2.0,2015-08-04,
+BIRLACOT,2015-08-05,0.5,gap_snap,unlisted,0.5,2015-08-05,
+BIRLACOT,2015-08-07,2.0,gap_snap,unlisted,2.0,2015-08-07,
+BIRLACOT,2015-08-11,2.0,gap_snap,unlisted,2.0,2015-08-11,
+BIRLACOT,2015-08-14,0.5,gap_snap,unlisted,0.5,2015-08-14,
+BIRLACOT,2015-08-17,0.5,gap_snap,unlisted,0.5,2015-08-17,
+BIRLACOT,2015-08-21,2.0,gap_snap,unlisted,2.0,2015-08-21,
+BIRLACOT,2015-08-26,2.0,gap_snap,unlisted,2.0,2015-08-26,
+BIRLACOT,2015-11-04,2.0,gap_snap,unlisted,2.0,2015-11-04,
+BIRLACOT,2015-11-16,0.5,gap_snap,unlisted,0.5,2015-11-16,
+BIRLACOT,2015-11-18,2.0,gap_snap,unlisted,2.0,2015-11-18,
+BIRLACOT,2015-11-23,0.5,gap_snap,unlisted,0.5,2015-11-23,
+BIRLACOT,2015-11-24,2.0,gap_snap,unlisted,2.0,2015-11-24,
+BIRLACOT,2015-11-30,2.0,gap_snap,unlisted,2.0,2015-11-30,
+BIRLACOT,2015-12-01,2.0,gap_snap,unlisted,2.0,2015-12-01,
+BIRLACOT,2015-12-07,2.0,gap_snap,unlisted,2.0,2015-12-07,
+BIRLACOT,2015-12-31,2.0,gap_snap,unlisted,2.0,2015-12-31,
+BIRLACOT,2016-01-01,2.0,gap_snap,unlisted,2.0,2016-01-01,
+BIRLACOT,2016-01-11,2.0,gap_snap,unlisted,2.0,2016-01-11,
+BIRLACOT,2016-01-12,2.0,gap_snap,unlisted,2.0,2016-01-12,
+BIRLACOT,2016-05-09,0.5,gap_snap,unlisted,0.5,2016-05-09,
+BIRLACOT,2016-05-11,0.5,gap_snap,unlisted,0.5,2016-05-11,
+BIRLACOT,2016-05-12,2.0,gap_snap,unlisted,2.0,2016-05-12,
+BIRLACOT,2016-05-18,2.0,gap_snap,unlisted,2.0,2016-05-18,
+BIRLACOT,2016-05-19,0.5,gap_snap,unlisted,0.5,2016-05-19,
+BIRLACOT,2016-05-20,2.0,gap_snap,unlisted,2.0,2016-05-20,
+BIRLACOT,2016-05-25,2.0,gap_snap,unlisted,2.0,2016-05-25,
+BIRLACOT,2016-05-31,2.0,gap_snap,unlisted,2.0,2016-05-31,
+BIRLACOT,2016-06-02,2.0,gap_snap,unlisted,2.0,2016-06-02,
+BIRLACOT,2016-06-06,2.0,gap_snap,unlisted,2.0,2016-06-06,
+BIRLACOT,2016-06-09,2.0,gap_snap,unlisted,2.0,2016-06-09,
+BIRLACOT,2016-06-14,2.0,gap_snap,unlisted,2.0,2016-06-14,
+BIRLACOT,2016-06-16,0.5,gap_snap,unlisted,0.5,2016-06-16,
+BIRLACOT,2016-06-17,0.5,gap_snap,unlisted,0.5,2016-06-17,
+BIRLACOT,2016-06-21,0.5,gap_snap,unlisted,0.5,2016-06-21,
+BIRLACOT,2016-06-22,2.0,gap_snap,unlisted,2.0,2016-06-22,
+BIRLACOT,2016-06-24,2.0,gap_snap,unlisted,2.0,2016-06-24,
+BIRLACOT,2016-06-29,0.5,gap_snap,unlisted,0.5,2016-06-29,
+BIRLACOT,2016-07-01,2.0,gap_snap,unlisted,2.0,2016-07-01,
+BIRLACOT,2016-07-05,0.5,gap_snap,unlisted,0.5,2016-07-05,
+BIRLACOT,2016-07-13,2.0,gap_snap,unlisted,2.0,2016-07-13,
+BIRLACOT,2016-07-14,2.0,gap_snap,unlisted,2.0,2016-07-14,
+BIRLACOT,2016-07-15,2.0,gap_snap,unlisted,2.0,2016-07-15,
+BIRLACOT,2016-07-25,2.0,gap_snap,unlisted,2.0,2016-07-25,
+BIRLACOT,2016-07-27,2.0,gap_snap,unlisted,2.0,2016-07-27,
+BIRLACOT,2016-07-28,0.5,gap_snap,unlisted,0.5,2016-07-28,
+BIRLACOT,2016-07-29,0.5,gap_snap,unlisted,0.5,2016-07-29,
+BIRLACOT,2016-08-01,0.5,gap_snap,unlisted,0.5,2016-08-01,
+BIRLACOT,2016-08-08,2.0,gap_snap,unlisted,2.0,2016-08-08,
+BIRLACOT,2016-08-09,2.0,gap_snap,unlisted,2.0,2016-08-09,
+BIRLACOT,2016-08-10,2.0,gap_snap,unlisted,2.0,2016-08-10,
+BIRLACOT,2016-08-16,0.5,gap_snap,unlisted,0.5,2016-08-16,
+BIRLACOT,2016-08-17,0.5,gap_snap,unlisted,0.5,2016-08-17,
+BIRLACOT,2016-08-18,0.5,gap_snap,unlisted,0.5,2016-08-18,
+BIRLACOT,2016-08-19,0.5,gap_snap,unlisted,0.5,2016-08-19,
+BIRLACOT,2016-08-22,0.5,gap_snap,unlisted,0.5,2016-08-22,
+BIRLACOT,2016-08-26,0.5,gap_snap,unlisted,0.5,2016-08-26,
+BIRLACOT,2016-09-01,2.0,gap_snap,unlisted,2.0,2016-09-01,
+BIRLACOT,2016-09-02,2.0,gap_snap,unlisted,2.0,2016-09-02,
+BIRLACOT,2016-09-16,2.0,gap_snap,unlisted,2.0,2016-09-16,
+BIRLACOT,2016-09-19,0.5,gap_snap,unlisted,0.5,2016-09-19,
+BIRLACOT,2016-09-21,2.0,gap_snap,unlisted,2.0,2016-09-21,
+BIRLACOT,2016-09-22,2.0,gap_snap,unlisted,2.0,2016-09-22,
+BIRLACOT,2016-09-26,0.5,gap_snap,unlisted,0.5,2016-09-26,
+BIRLACOT,2016-09-27,0.5,gap_snap,unlisted,0.5,2016-09-27,
+BIRLACOT,2016-09-28,0.5,gap_snap,unlisted,0.5,2016-09-28,
+BIRLACOT,2016-10-03,0.5,gap_snap,unlisted,0.5,2016-10-03,
+BIRLACOT,2016-10-05,0.5,gap_snap,unlisted,0.5,2016-10-05,
+BIRLACOT,2016-10-06,0.5,gap_snap,unlisted,0.5,2016-10-06,
+BIRLACOT,2016-10-07,0.5,gap_snap,unlisted,0.5,2016-10-07,
 BIRLAPOWER,2014-08-07,0.5,gap_snap,unlisted,0.5,2014-08-07,
 BIRLAPOWER,2014-08-11,0.5,gap_snap,unlisted,0.5,2014-08-11,
 BIRLAPOWER,2014-08-12,2.0,gap_snap,unlisted,2.0,2014-08-12,
@@ -39,65 +161,116 @@ BIRLAPOWER,2014-09-15,0.5,gap_snap,unlisted,0.5,2014-09-15,
 BIRLAPOWER,2014-09-22,0.5,gap_snap,unlisted,0.5,2014-09-22,
 BIRLAPOWER,2014-12-01,0.5,gap_snap,unlisted,0.5,2014-12-01,
 BIRLAPOWER,2014-12-08,0.5,gap_snap,unlisted,0.5,2014-12-08,
+BIRLAPOWER,2015-02-16,2.0,gap_snap,unlisted,2.0,2015-02-16,
+BIRLAPOWER,2015-03-02,0.5,gap_snap,unlisted,0.5,2015-03-02,
+BIRLAPOWER,2015-03-09,0.5,gap_snap,unlisted,0.5,2015-03-09,
+BIRLAPOWER,2015-03-16,0.5,gap_snap,unlisted,0.5,2015-03-16,
 BLSE,2026-10-06,0.5,nse_confirmed_gap,split,0.5129249569168103,2026-10-06,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+BPCL,2016-07-13,0.5,nse_confirmed_gap,bonus,0.49966534291196285,2016-07-13, Bonus 1:1
 BRIGADE,2026-06-17,0.75,nse_confirmed_gap,bonus,0.7770912877473101,2026-06-17,Bonus 1:3
 BSLIMITED,2014-01-21,0.1,nse_confirmed_gap,split,0.10191082802547771,2014-01-21,Face Value Split From Rs 10/- To Re 1/-
 BUILDPRO,2026-10-08,0.2,nse_confirmed_gap,split,0.19946236559139785,2026-10-08,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 CAMS,2025-12-05,0.2,nse_confirmed_gap,split,0.2000151641519448,2025-12-05,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+CEMPRO,2015-08-21,0.1,nse_confirmed_gap,split,0.10025675510453601,2015-08-21, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+CGPOWER,2016-03-15,0.34127495170637473,demerger_gap,demerger,0.34127495170637473,2016-03-15, Scheme Of Arrangement
+CMAHENDRA,2015-06-18,0.5,nse_confirmed_gap,bonus,0.5142857142857143,2015-06-18,Bonus 1:1
+COLPAL,2015-09-23,0.5,nse_confirmed_gap,bonus,0.48957765490745786,2015-09-23, Bonus 1:1
 COMPINFO,2024-07-08,0.3333333333333333,gap_snap,unlisted,0.3342995169082126,2024-07-08,
 CONS,2026-02-27,0.1,gap_snap,unlisted,0.10103109928488276,2026-02-27,
 CORDELIA,2026-08-25,0.1,nse_confirmed_gap,split,0.09773859716366425,2026-08-25,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+CORPBANK,2015-01-22,0.2,nse_confirmed_gap,split,0.20265224668469164,2015-01-22,Face Valus Split (Sub-Division) - From Rs 10/- Per To Rs 2/- Per Share
 CUB,2026-06-12,0.75,nse_confirmed_gap,bonus,0.7686915887850467,2026-06-12,Bonus 1:3
 CUPID,2026-03-09,0.2,nse_confirmed_gap,bonus,0.20387866732968674,2026-03-09,Bonus 4:1
+CURATECH,2019-09-26,0.25,gap_snap,unlisted,0.25,2019-09-26,
 DBEIL,2026-06-19,0.1,nse_confirmed_gap,split,0.10284634200578163,2026-06-19,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
 DBREALTY,2025-07-28,0.8516194053781667,demerger_gap,demerger,0.8516194053781667,2025-07-18,Demerger
 DCMSRIND,2025-12-26,0.2962360594795539,demerger_gap,demerger,0.2962360594795539,2025-12-26,Demerger
 DEEPAKNTR,2014-06-20,0.1,nse_confirmed_gap,bonus+split,0.10831721470019343,2014-06-20,Bonus 1 : 1 / Face Value Split From Rs 10/- Each To Rs 2/- Each
 DEVIT,2025-08-21,0.4,nse_confirmed_gap,split,0.39999999999999997,2025-08-21,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share
+DHFL,2015-09-09,0.5,nse_confirmed_gap,bonus,0.5173290203327172,2015-09-09, Bonus 1:1
+DISHMAN,2016-05-02,0.5,nse_confirmed_gap,bonus,0.504127358490566,2016-05-02, Bonus 1:1
+DIVISLAB,2015-09-23,0.5,nse_confirmed_gap,bonus,0.5010185143271015,2015-09-23, Bonus 1:1
 DVL,2014-09-18,0.88724584103512,demerger_gap,demerger,0.88724584103512,2014-09-18,Scheme Of Arrangement
 E2E,2026-06-05,0.1,nse_confirmed_gap,split,0.10499350890207713,2026-06-05,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+ECLERX,2015-12-17,0.75,nse_confirmed_gap,bonus,0.8481172334201132,2015-12-17, Bonus 1:3
 ECLERX,2026-03-13,0.5,nse_confirmed_gap,bonus,0.49847706072720344,2026-03-13,Bonus 1:1
+FARMAXIND,2016-09-29,0.5,gap_snap,unlisted,0.5,2016-09-29,
+FARMAXIND,2016-09-30,0.5,gap_snap,unlisted,0.5,2016-09-30,
+FARMAXIND,2016-10-03,0.5,gap_snap,unlisted,0.5,2016-10-03,
+FARMAXIND,2016-10-04,2.0,gap_snap,unlisted,2.0,2016-10-04,
+FCL,2015-02-12,0.5,nse_confirmed_gap,bonus,0.5512773047019622,2015-02-12,Bonus 1:1
+FCL,2015-06-11,0.2,nse_confirmed_gap,split,0.20717919728660258,2015-06-11,Face Valus Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 FCL,2025-10-31,0.1,gap_snap,unlisted,0.10277554304102977,2025-10-31,
+FEDERALBNK,2015-07-08,0.5,nse_confirmed_gap,bonus,0.494148244473342,2015-07-08,Bonus 1:1
+FEL,2016-05-11,0.13240648791790796,demerger_gap,demerger,0.13240648791790796,2016-05-11, Scheme Of Arrangement
+FELDVR,2016-05-11,0.10942824687618324,demerger_gap,demerger,0.10942824687618324,2016-05-11, Scheme Of Arrangement
 FISCHER,2025-09-12,0.1,nse_confirmed_gap,split,0.10056507151686386,2025-09-12,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+GANESHHOU,2016-07-14,0.6666666666666666,nse_confirmed_gap,bonus,0.6975571927103529,2016-07-14, Bonus 1:2
 GANGOTRI,2024-07-08,2.0,gap_snap,unlisted,2.046153846153846,2024-07-08,
 GEEKAYWIRE,2025-10-30,0.5,nse_confirmed_gap,split,0.508130081300813,2025-10-30,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
 GENUSPOWER,2014-01-09,0.8324022346368716,demerger_gap,demerger,0.8324022346368716,2014-01-09,Scheme Of Arrangement
 GMBREW,2014-05-16,0.8,nse_confirmed_gap,bonus,0.8580858085808581,2014-05-16,Dividend Rs 2.50/- Per Share / Bonus 1 : 4
+GMBREW,2016-05-30,0.8,nse_confirmed_gap,bonus,0.8570222347312131,2016-05-30, Bonus 1:4
 GODFRYPHLP,2014-11-28,0.2,nse_confirmed_gap,split,0.20107084963895666,2014-11-28,Face Value Split From Rs 10/- Per Share To Rs 2/- Per Share
 GODFRYPHLP,2025-09-16,0.3333333333333333,nse_confirmed_gap,bonus,0.3422621957180565,2025-09-16,Bonus 2:1
 GODREJIND,2015-01-05,0.9992006394884093,nse_confirmed_gap,bonus,0.9981390627643376,2015-01-05,Bonus 1 : 1250
+GOKUL,2015-09-16,0.9637681159420289,demerger_gap,demerger,0.9637681159420289,2015-09-16, Annual General Meeting/Scheme Of Arrangement
 GOKULAGRO,2025-10-14,0.5,nse_confirmed_gap,split,0.5008412061602174,2025-10-14,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
 GOLDADD,2026-08-28,0.1,gap_snap,unlisted,0.10118969799973854,2026-08-28,
 GOLDIAM,2026-07-10,0.75,nse_confirmed_gap,bonus,0.7645659928656362,2026-07-10,Bonus 1:3
 GOODLUCK,2026-08-21,0.3333333333333333,nse_confirmed_gap,bonus,0.3426427678199249,2026-08-21,Bonus 2:1
+GRANULES,2015-03-23,0.1,nse_confirmed_gap,split,0.1015880429705745,2015-03-23,Face Value Split Rs 10 To Rs 1
+GRASIM,2016-10-06,0.2,nse_confirmed_gap,split,0.20147763780644767,2016-10-06, Face Value Split From Rs 10 To Re 2
 GREENPLY,2014-11-26,0.8549914329515735,demerger_gap,demerger,0.8549914329515735,2014-11-26,Scheme Of Demerger
+GREENPLY,2016-01-06,0.2,nse_confirmed_gap,split,0.20167470185232172,2016-01-06, Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+GRINDWELL,2016-07-14,0.5,nse_confirmed_gap,bonus,0.4972040041422161,2016-07-14, Bonus 1:1
 GRMOVER,2025-12-24,0.3333333333333333,nse_confirmed_gap,bonus,0.3533775096429631,2025-12-24,Bonus 2:1
 GROWWSLVR,2026-02-06,0.1,gap_snap,unlisted,0.0989323550022672,2026-02-06,
 GRUH,2014-06-09,0.5,nse_confirmed_gap,bonus,0.5201065584168464,2014-06-09,Bonus Issue 1 : 1
 GUJENERGY,2026-07-02,0.8529411764705882,demerger_gap,demerger,0.8529411764705882,2026-07-02,Demerger
 HARDWYN,2026-07-28,0.7142857142857143,nse_confirmed_gap,bonus,0.762026940346376,2026-07-28,Bonus 2:5
+HATHWAY,2015-01-06,0.2,nse_confirmed_gap,split,0.1999712271615595,2015-01-06,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+HATSUN,2016-07-13,0.7142857142857143,nse_confirmed_gap,bonus,0.7316574698548948,2016-07-13, Bonus 2:5
 HAVELLS,2014-08-26,0.2,nse_confirmed_gap,split,0.20178470938178308,2014-08-26,Face Value Split From Rs 5/- Per Share To Re 1/- Per Share
+HCLTECH,2015-03-19,0.5,nse_confirmed_gap,bonus,0.49338416685355463,2015-03-19,Bonus 1 : 1
 HDFCAMC,2025-11-26,0.5,nse_confirmed_gap,bonus,0.5025765951466317,2025-11-26,Bonus 1:1
 HDFCBANK,2025-08-26,0.5,nse_confirmed_gap,bonus,0.4987016954330228,2025-08-26,Bonus 1:1
 HEALTHADD,2026-07-03,0.1,gap_snap,unlisted,0.10157113047747637,2026-07-03,
 HEGAM,2026-09-07,0.3570202540336423,demerger_gap,demerger,0.3570202540336423,2026-09-07,Demerger
+HIKAL,2015-02-27,0.2,nse_confirmed_gap,split,0.202608936996947,2015-02-27,Face Value Split (Sub-Division): From Rs 10/- Per Share To Rs 2/- Per Share
+HINDPETRO,2016-09-14,0.3333333333333333,nse_confirmed_gap,bonus,0.3366951448218379,2016-09-14, Bonus 2:1
 HIRECT,2026-03-27,0.5,nse_confirmed_gap,bonus,0.49748110831234255,2026-03-27,Bonus 1:1
 ICICIBANK,2014-12-04,0.2,nse_confirmed_gap,split,0.20205116771640377,2014-12-04,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+ICICIGOLD,2016-06-09,0.1,gap_snap,unlisted,0.1022270901788974,2016-06-09,
+IDFC,2015-10-01,0.4902516838000709,demerger_gap,demerger,0.4902516838000709,2015-10-01, Demerger
 INDIAGLYCO,2025-08-12,0.5,nse_confirmed_gap,split,0.4998625240582898,2025-08-12,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
 INDIAGLYCO,2026-09-02,0.20239273185211837,demerger_gap,demerger,0.20239273185211837,2026-09-02,Demerger
 INDO-RE2,2025-12-02,0.6,gap_snap,unlisted,0.5974025974025974,2025-12-02,
 INDO-RE2,2025-12-03,0.6,gap_snap,unlisted,0.5978260869565217,2025-12-03,
+INDTERRAIN,2015-12-21,0.2,nse_confirmed_gap,split,0.2015983872129023,2015-12-21, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 INFOBEAN,2026-02-27,0.25,nse_confirmed_gap,bonus,0.2521255313828457,2026-02-27,Bonus 3:1
 INFODRIVE,2014-12-24,0.1,nse_confirmed_gap,split,0.108843537414966,2014-12-24,Face Value Split (Sub Division) - From Rs 10/- Per Share To Re 1/- Per Share
 INFY,2014-12-02,0.5,nse_confirmed_gap,bonus,0.4977068174764646,2014-12-02,Bonus 1:1
+INFY,2015-06-15,0.5,nse_confirmed_gap,bonus,0.494645705172021,2015-06-15,Annual General Meeting/ Dividend - Rs 29.50/- Per Share And Bonus 1:1
+INSECTICID,2015-04-16,0.6666666666666666,nse_confirmed_gap,bonus,0.653906568154052,2015-04-16,Bonus 1:2
 IRB,2026-03-30,0.5,nse_confirmed_gap,bonus,0.5023210359149768,2026-03-30,Bonus 1:1
+ITC,2016-07-01,0.6666666666666666,nse_confirmed_gap,bonus,0.6604234527687297,2016-07-01, Bonus 1:2
 IVZINNIFTY,2026-07-31,0.1,gap_snap,unlisted,0.09922806664968006,2026-07-31,
 J&KBANK,2014-09-04,0.1,nse_confirmed_gap,split,0.10128826005760769,2014-09-04,Face Value Split - From Rs 10/- Per Share To Re 1/- Per Share
 JAINSTUDIO,2019-09-26,0.3333333333333333,gap_snap,unlisted,0.3392857142857143,2019-09-26,
+JAMNAAUTO,2015-12-03,0.5,nse_confirmed_gap,split,0.5065985525755641,2015-12-03, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
 JBMA,2014-10-08,0.25,nse_confirmed_gap,bonus+split,0.2625036137612026,2014-10-08,Bonus 1:1 And Face Value Split Rs.10/- To Rs.5/- Per Share
+JINDALPHOT,2016-05-12,0.5567928730512249,demerger_gap,demerger,0.5567928730512249,2016-05-12, Scheme Of Arrangement
+JINDALSAW,2016-08-25,0.9305019305019306,demerger_gap,demerger,0.9305019305019306,2016-08-25, Scheme Of Arrangement
+JKIL,2015-12-10,0.5,nse_confirmed_gap,split,0.4955535944606612,2015-12-10, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
 JKTYRE,2014-12-18,0.2,nse_confirmed_gap,split,0.20428836738139458,2014-12-18,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 JLHL,2026-07-24,0.2,nse_confirmed_gap,split,0.19936487773896475,2026-07-24,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 JMTAUTOLTD,2014-07-30,0.2857142857142857,nse_confirmed_gap,bonus,0.3000203748981255,2014-07-30,Bonus 5:2
+JMTAUTOLTD,2015-06-25,0.2,nse_confirmed_gap,split,0.21283899759697905,2015-06-25,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+JMTAUTOLTD,2016-09-21,0.5,nse_confirmed_gap,split,0.512273212379936,2016-09-21, Face Value Split From Rs 2 To Re 1
+JSL,2015-11-19,0.37267080745341613,demerger_gap,demerger,0.37267080745341613,2015-11-19, Composite Scheme Of Arrangement
+KAJARIACER,2016-10-04,0.5,nse_confirmed_gap,split,0.5006971506202853,2016-10-04, Face Value Split From Rs 2 To Re 1
+KANSAINER,2015-03-26,0.1,nse_confirmed_gap,split,0.09819514556393057,2015-03-26,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
 KAPSTON,2026-03-06,0.6666666666666666,nse_confirmed_gap,bonus,0.6916498993963782,2026-03-06,Bonus 1:2
 KARURVYSYA,2025-08-26,0.8333333333333334,nse_confirmed_gap,bonus,0.8711877249479067,2025-08-26,Bonus 1:5
 KELLTONTEC,2025-07-28,0.2,nse_confirmed_gap,split,0.21914322069843065,2025-07-25,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
@@ -105,39 +278,61 @@ KILITCH,2026-03-24,0.5,nse_confirmed_gap,bonus,0.4846938775510204,2026-03-24,Bon
 KIRLPNU,2026-08-18,0.5,nse_confirmed_gap,split,0.5010754089812944,2026-08-18,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
 KMEW,2025-12-22,0.5,nse_confirmed_gap,split,0.49304875061244485,2025-12-22,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
 KMSUGAR,2026-10-01,0.8046318289786224,demerger_gap,demerger,0.8046318289786224,2026-10-01,Demerger
+KOTAKBANK,2015-07-08,0.5,nse_confirmed_gap,bonus,0.49372194163860833,2015-07-08,Bonus 1: 1
 KOTAKBANK,2026-01-14,0.2,nse_confirmed_gap,split,0.1997561661821251,2026-01-14,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
 KOTHARIPRO,2014-03-28,0.3333333333333333,nse_confirmed_gap,bonus,0.34994042299672323,2014-03-28,Bonus 2 : 1
+KOTHARIPRO,2016-01-05,0.6666666666666666,nse_confirmed_gap,bonus,0.6615081598199213,2016-01-05, Bonus 1:2
 KOTYARK,2026-06-24,0.09090909090909091,nse_confirmed_gap,bonus,0.09541648303217276,2026-06-24,Bonus 10:1
 KRISHANA,2026-07-03,0.2,nse_confirmed_gap,split,0.20322354590049055,2026-07-03,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 KSCL,2014-01-27,0.2,nse_confirmed_gap,split,0.20108922306994087,2014-01-27,Face Value Split From Rs 10/- To Rs 2/-
-KSE,2026-08-17,0.3333333333333333,gap_snap,unlisted,0.33053648614289344,2026-08-17,
+KSERASERA,2015-03-30,0.1,nse_confirmed_gap,split,0.10294117647058823,2015-03-30,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+KTIL,2016-08-11,0.4807692307692308,nse_confirmed_gap,bonus+split,0.49300055258795356,2016-08-11, Bonus 1:25/ Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
 LALPATHLAB,2025-12-19,0.5,nse_confirmed_gap,bonus,0.49455899198167236,2025-12-19,Bonus 1:1
+LAMBODHARA,2015-10-15,0.5,nse_confirmed_gap,split,0.49341387089731464,2015-10-15, Face Value Split From Rs 10 To Rs 5
 LAOPALA,2014-09-24,0.2,nse_confirmed_gap,split,0.20474406991260924,2014-09-24,Sub-Division From Rs 10/- Per Share To Rs 2/- Per Share
 LEMERITE,2026-05-29,0.2,nse_confirmed_gap,split,0.19001248439450685,2026-05-29,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 LGBBROSLTD,2014-07-04,0.5,nse_confirmed_gap,bonus,0.5209807886754297,2014-07-04,Annual General Meeting / Final Dividend - Rs 7/- Per Share / Bonus 1 : 1
 LGHL,2025-10-10,0.4166666666666667,nse_confirmed_gap,bonus,0.4371403275785746,2025-10-10,Bonus 7:5
 LICI,2026-05-29,0.5,nse_confirmed_gap,bonus,0.503132530120482,2026-05-29,Bonus 1:1
+LUXIND,2016-06-06,0.2,nse_confirmed_gap,split,0.20494851258581237,2016-06-06, Face Value Split From Rs 10 To Rs 2
+MAITHANALL,2015-07-15,0.5,nse_confirmed_gap,bonus,0.5172863666014351,2015-07-15,Bonus 1:1
 MANAKSIA,2014-12-04,0.3592814371257485,demerger_gap,demerger,0.3592814371257485,2014-12-04,Scheme Of Arrangement
+MANDHANA,2016-09-22,0.36900369003690037,demerger_gap,demerger,0.36900369003690037,2016-09-22, Scheme Of Demerger
 MANINFRA,2014-08-28,0.2,nse_confirmed_gap,split,0.20224019912881147,2014-08-28,Annual General Meeting / Dividend - Rs 1.35/- Per Share / Face Value Split - From Rs 10/- Per Share To Rs 2/- Per Share
+MARICO,2015-12-22,0.5,nse_confirmed_gap,bonus,0.48596112311015116,2015-12-22, Bonus 1:1
+MASTEK,2015-06-12,0.3424266636228741,demerger_gap,demerger,0.3424266636228741,2015-06-12,Scheme Of Arrangement
 MAYURUNIQ,2014-03-28,0.5,nse_confirmed_gap,bonus,0.5212464589235127,2014-03-28,Bonus 1 : 1
 MBAPL,2026-07-03,0.2,nse_confirmed_gap,split,0.1994042694026146,2026-07-03,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+MBLINFRA,2015-07-28,0.5,nse_confirmed_gap,bonus,0.5104735081851787,2015-07-28,Bonus 1:1
 MCX,2026-01-02,0.2,nse_confirmed_gap,split,0.20293020293020292,2026-01-02,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+MENONBE,2015-04-09,0.2,nse_confirmed_gap,split,0.21030183727034119,2015-04-09,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+MENONBE,2016-08-30,0.8333333333333334,nse_confirmed_gap,bonus,0.926019124308002,2016-08-30, Bonus 1:5
 METROPOLIS,2026-03-20,0.25,nse_confirmed_gap,bonus,0.25770369558065576,2026-03-20,Bonus 3:1
+MFSL,2016-01-27,0.7039864291772688,demerger_gap,demerger,0.7039864291772688,2016-01-27, Scheme Of Arrangement
 MIDQ50ADD,2026-07-03,0.1,gap_snap,unlisted,0.10052824710673817,2026-07-03,
 MINDACORP,2015-01-05,0.1,nse_confirmed_gap,bonus+split,0.10496570644718793,2015-01-05,Bonus 1:1 / Face Value Split From Rs 10/- Per Share To Rs 2/- Per Share
 MINDTREE,2014-06-03,0.5,nse_confirmed_gap,bonus,0.5083076114796086,2014-06-03,Bonus 1 : 1
+MINDTREE,2016-03-09,0.5,nse_confirmed_gap,bonus,0.4785462540821936,2016-03-09, Bonus 1:1
+MOHITIND,2016-03-30,0.7163934426229509,demerger_gap,demerger,0.7163934426229509,2016-03-30, Scheme Of Arrangement In The Nature Of Demerger
+MOHOTAIND,2015-03-16,0.8571428571428571,nse_confirmed_gap,bonus,1.0189197436679889,2015-03-16,Bonus 1:6
 MOLDTECH,2026-10-09,0.5,nse_confirmed_gap,bonus,0.5048821147892356,2026-10-09,Bonus 1:1
+MOLDTKPAC,2016-02-17,0.5,nse_confirmed_gap,split,0.5430616971994103,2016-02-17, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
 MOLDTKPAC,2026-10-09,0.5,nse_confirmed_gap,bonus,0.5036804171139395,2026-10-09,Bonus 1:1
 MONEYBOXX,2025-12-15,0.5,nse_confirmed_gap,bonus,0.5131240349974268,2025-12-15,Bonus 1:1
+MOTHERSON,2015-07-23,0.6666666666666666,nse_confirmed_gap,bonus,0.6804281345565749,2015-07-23,Annual General Meeting / Dividend - Rs 3/- Per Share / Bonus - 1:2
 MSUMI,2025-07-28,0.6666666666666666,nse_confirmed_gap,bonus,0.557245575221239,2025-07-18,Bonus 1:2
 MVL,2019-09-26,0.5,gap_snap,unlisted,0.5,2019-09-26,
 MVL,2019-09-30,2.0,gap_snap,unlisted,2.0,2019-09-30,
 MWL,2026-07-10,0.1,nse_confirmed_gap,split,0.0976367319378798,2026-07-10,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
 NARMADA,2026-07-31,0.5,nse_confirmed_gap,split,0.5523625310859354,2026-07-31,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+NATCOPHARM,2015-11-26,0.2,nse_confirmed_gap,split,0.19590087644458232,2015-11-26, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+NAVA,2016-09-01,0.5,nse_confirmed_gap,bonus,0.5027230833682447,2016-09-01, Bonus 1:1
+NBCC,2016-06-02,0.2,nse_confirmed_gap,split,0.20133986086060293,2016-06-02, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 NESTLEIND,2025-08-08,0.5,nse_confirmed_gap,bonus,0.5021032847041976,2025-08-08,Bonus 1:1
 NEUEON,2024-07-08,10.0,gap_snap,unlisted,9.8,2024-07-08,
 NEUEON,2025-12-23,2.0,gap_snap,unlisted,1.9658703071672352,2025-12-23,
 NITINFIRE,2014-11-13,0.75,nse_confirmed_gap,bonus,0.8228980322003578,2014-11-13,Bonus 1:3
+NTPC,2015-03-20,0.9292407108239096,demerger_gap,demerger,0.9292407108239096,2015-03-20,Scheme Of Arrangement - Bonus Debentures 1:1
 NUVAMA,2025-12-26,0.2,nse_confirmed_gap,split,0.19960604070912671,2025-12-26,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 OCCL,2024-07-04,0.22015241320914478,demerger_gap,demerger,0.22015241320914478,2024-07-01,Demerger
 ORIENTTECH,2026-01-05,0.9090909090909091,nse_confirmed_gap,bonus,1.036639857015192,2026-01-05,Bonus 1:10
@@ -145,76 +340,252 @@ PANAMAPET,2014-09-19,0.2,nse_confirmed_gap,split,0.20581509310682783,2014-09-19,
 PASHUPATI,2026-04-17,0.1,nse_confirmed_gap,split,0.09957184108334163,2026-04-17,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
 PATANJALI,2025-09-11,0.3333333333333333,nse_confirmed_gap,bonus,0.3344617092119867,2025-09-11,Bonus 2:1
 PAVNAIND,2025-09-01,0.1,nse_confirmed_gap,split,0.10128267182962246,2025-09-01,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+PERSISTENT,2015-03-10,0.5,nse_confirmed_gap,bonus,0.48521725145415073,2015-03-10,Bonus 1 : 1
+PFC,2016-08-26,0.5,nse_confirmed_gap,bonus,0.5003143994969608,2016-08-26, Bonus 1:1
 PGIL,2014-06-02,0.7074025405168637,demerger_gap,demerger,0.7074025405168637,2014-05-30,Scheme Of Arrangement
 PGIL,2026-09-11,0.5,nse_confirmed_gap,bonus,0.5048772283888328,2026-09-11,Bonus 1:1
 PIDILITIND,2025-09-23,0.5,nse_confirmed_gap,bonus,0.5049374588545096,2025-09-23,Bonus 1:1
+PILITA,2016-08-24,0.25,nse_confirmed_gap,split,0.2607003891050584,2016-08-24, Face Value Split (Sub-Division) - From Rs 4/- Per Share To Re 1/- Per Share
+PINCON,2016-06-23,0.5,nse_confirmed_gap,bonus,0.5391720834758809,2016-06-23, Bonus 1:1
+PITTIENG,2015-04-16,0.5,nse_confirmed_gap,split,0.5098187311178247,2015-04-16,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
 PNB,2014-12-18,0.2,nse_confirmed_gap,split,0.20533124625938035,2014-12-18,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+PNCINFRA,2016-08-12,0.2,nse_confirmed_gap,split,0.19633855133987793,2016-08-12, Face Value Split From Rs 10 To Rs 2
 POCL,2026-07-21,0.4,nse_confirmed_gap,split,0.4066200599229562,2026-07-21,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share
 POLARIS,2014-10-09,0.8064516129032258,demerger_gap,demerger,0.8064516129032258,2014-10-09,Scheme Of Arrangement Cum Demerger
+POLYMED,2015-02-02,0.5,nse_confirmed_gap,split,0.5016263824250613,2015-02-02,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+PRAKASHSTL,2016-03-03,0.1,nse_confirmed_gap,split,0.11568123393316196,2016-03-03, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
 PRAXIS-RE2,2025-08-08,0.6,gap_snap,unlisted,0.5897435897435898,2025-08-08,
+PRECWIRE,2016-03-21,0.5,nse_confirmed_gap,split,0.49747899159663866,2016-03-21, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
 PSUBANK,2026-07-10,0.1,gap_snap,unlisted,0.10206016408386509,2026-07-10,
 QNIFTY,2026-02-13,0.1,gap_snap,unlisted,0.10091317571993584,2026-02-13,
 RAJTV,2014-03-25,0.25,nse_confirmed_gap,bonus+split,0.2770469101609832,2014-03-25,Bonus 1:1 / Face Value Split From Rs.10/- To Rs.5/-
+RAJVIR,2019-09-30,0.4,gap_snap,unlisted,0.39930151338766,2019-09-30,
+RAMASTEEL,2016-03-14,0.1,nse_confirmed_gap,bonus+split,0.10321692757612248,2016-03-14, Bonus 4:1/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
 RAMRAT,2025-12-26,0.5,nse_confirmed_gap,bonus,0.5021156558533145,2025-12-26,Bonus 1:1
+RECLTD,2016-09-28,0.5,nse_confirmed_gap,bonus,0.4937563971340839,2016-09-28, Bonus 1:1
+RELAXO,2015-07-01,0.5,nse_confirmed_gap,bonus,0.5050269869827495,2015-07-01,Bonus 1:1
 REMSONSIND,2024-07-05,0.2,nse_confirmed_gap,split,0.1995340167753961,2024-07-05,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 RMDRIP,2025-09-26,0.1,nse_confirmed_gap,split,0.0996590611067401,2025-09-26,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
 RMDRIP,2026-04-10,0.5833333333333334,nse_confirmed_gap,bonus,0.6048780487804878,2026-04-10,Bonus 5:7
 ROLEXRINGS,2025-10-17,0.1,nse_confirmed_gap,split,0.10030143180105501,2025-10-17,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+RSSOFTWARE,2015-01-21,0.5,nse_confirmed_gap,split,0.5086580086580086,2015-01-21,Interim Dividend - Rs 1.50/- Per Share / Face Value Split - From Rs 10/- Per Share To Rs 5/- Per Share (Purpose Revised)
 RSYSTEMS,2014-02-26,0.1,nse_confirmed_gap,split,0.10137292464878672,2014-02-26,Face Value Split From Rs 10/- To Re 1/- Per Share
+RUBYMILLS,2015-10-21,0.5,nse_confirmed_gap,bonus,0.5025007981270618,2015-10-21, Bonus 1:1
+SAMPANN,2019-09-26,0.4,gap_snap,unlisted,0.3941605839416059,2019-09-26,
 SANCO,2024-07-08,0.5,gap_snap,unlisted,0.5016949152542374,2024-07-08,
 SANDUMA,2025-09-22,0.3333333333333333,nse_confirmed_gap,bonus,0.3407949790794979,2025-09-22,Bonus 2:1
-SAYAJIHOTL,2026-04-22,2.0,gap_snap,unlisted,1.9653323802716225,2026-04-22,
+SARLAPOLY,2015-10-29,0.1,nse_confirmed_gap,split,0.10376896720509056,2015-10-29, Face Value Split From Rs 10 To Re 1 (Record Date Revised)
+SAYAJIHOTL,2026-04-22,2.0,gap_snap,unlisted,1.982335976928623,2026-04-22,
 SBIN,2014-11-20,0.1,nse_confirmed_gap,split,0.10127125923380863,2014-11-20,Face Value Split Rs.10/- To Re.1/- Per Share
+SECURKLOUD,2016-10-10,0.375,nse_confirmed_gap,bonus+split,0.38650475026805975,2016-10-10, Bonus 1:3/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+SEJAL,2019-09-30,0.3333333333333333,gap_snap,unlisted,0.3431372549019608,2019-09-30,
+SHAH,2016-10-13,0.1,nse_confirmed_gap,split,0.10184804928131418,2016-10-13, Face Value Split From Rs 10 To Re 1
 SHANKARA,2025-09-24,0.2574457344775366,demerger_gap,demerger,0.2574457344775366,2025-09-24,Demerger
 SHARONBIO,2014-02-20,0.1,nse_confirmed_gap,bonus+split,0.1028286997693335,2014-02-20,Bonus 1:1 / Face Value Split From 10/- To Face Value 2/-
+SHILPAMED,2015-11-06,0.5,nse_confirmed_gap,split,0.5254810742228802,2015-11-06, Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
 SHILPAMED,2025-10-03,0.5,nse_confirmed_gap,bonus,0.5136436597110754,2025-10-03,Bonus 1:1
 SHILPI,2014-09-16,0.5,nse_confirmed_gap,bonus,0.5175370226032736,2014-09-16,Bonus 1:1
 SHIVAMAUTO,2014-10-30,0.2,nse_confirmed_gap,split,0.20320699708454812,2014-10-30,Face Value Split From Rs.10/- To Rs.2/-
+SHIVAMAUTO,2015-10-08,0.5,nse_confirmed_gap,bonus,0.5238095238095238,2015-10-08, Bonus 1: 1
 SHRENUJ,2014-07-15,0.5,nse_confirmed_gap,bonus,0.5244667503136763,2014-07-15,Annual General Meeting / Dividend - Re 0.60/- Per Share / Bonus 1 : 1
 SIGMA,2025-10-06,0.1,nse_confirmed_gap,split,0.10036377203619065,2025-10-06,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+SIGNET,2015-08-17,0.1,nse_confirmed_gap,split,0.10306700013163089,2015-08-17, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 1/- Per Share
 SIKKO,2025-11-27,0.1,nse_confirmed_gap,split,0.10051153190343712,2025-11-27,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
 SIKKO,2025-12-08,0.5,nse_confirmed_gap,bonus,0.5244565217391305,2025-12-08,Bonus 1:1
 SILVERTUC,2026-03-06,0.1,gap_snap,unlisted,0.10245932090051267,2026-03-06,
 SKFINDIA,2025-10-15,0.4592284961265075,demerger_gap,demerger,0.4592284961265075,2025-10-15,Demerger
 SKMEGGPROD,2026-01-12,0.5,nse_confirmed_gap,split,0.4958581601511408,2026-01-12,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
 SMCGLOBAL,2025-11-14,0.5,nse_confirmed_gap,bonus,0.5177320490367776,2025-11-14,Bonus 1:1
+SMSPHARMA,2015-12-17,0.1,nse_confirmed_gap,split,0.10236665126546537,2015-12-17, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+SOLARINDS,2016-07-13,0.2,gap_snap,unlisted,0.2017992482592889,2016-07-13,
 SOUISPAT,2014-09-22,0.1,nse_confirmed_gap,split,0.09433962264150944,2014-09-22,Annual General Meeting And Face Value Split From Rs.10/- To Re.1/-
+SRSLTD,2015-06-25,0.5,nse_confirmed_gap,bonus,0.5432595573440644,2015-06-25,Bonus 1:1
 STEELCAS,2025-08-29,0.2,nse_confirmed_gap,split,0.19726152441807393,2025-08-29,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
 SUDARSCHEM,2014-09-30,0.1,nse_confirmed_gap,bonus+split,0.10376019865200427,2014-09-30,Bonus 1 : 1 / Face Value Split From Rs 10/- To Rs 2/- Per Share
 SUMEETINDS,2025-10-03,0.2,nse_confirmed_gap,split,0.2099834528405957,2025-10-03,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 SURANASOL,2014-11-25,0.5,nse_confirmed_gap,split,0.5334448160535117,2014-11-25,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
 SURANAT&P,2014-11-25,0.2,nse_confirmed_gap,split,0.21437578814627994,2014-11-25,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
 SWANCORP,2014-02-03,0.5,nse_confirmed_gap,split,0.5104570100697134,2014-02-03,Face Value Split From Rs 2/- To Re 1/-
+SYMPHONY,2016-09-14,0.5,nse_confirmed_gap,bonus,0.5123118720082798,2016-09-14, Bonus 1:1
 TAALTECH,2026-09-22,0.2,nse_confirmed_gap,split,0.20351380674062924,2026-09-22,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
-TATACOMM,2019-09-25,0.8528940745824753,demerger_gap,demerger,0.8528940745824753,2019-09-17, Demerger
+TATACOFFEE,2015-01-23,0.1,nse_confirmed_gap,split,0.10150263707831625,2015-01-23,Face Value Split (Sub-Division): From Rs 10/- Per Share To Re 1/- Per Share
+TATACOMM,2019-09-25,0.5724815724815725,demerger_gap,demerger,0.5724815724815725,2019-09-17, Demerger
 TATAINVEST,2025-10-14,0.1,nse_confirmed_gap,split,0.10501914936504737,2025-10-14,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
 TCC,2026-09-04,0.2,nse_confirmed_gap,split,0.20301977437481233,2026-09-04,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+TCI,2016-08-26,0.5434782608695652,demerger_gap,demerger,0.5434782608695652,2016-08-26, Scheme Of Arrangement
 TDPOWERSYS,2026-08-24,0.5,nse_confirmed_gap,split,0.5049517852488924,2026-08-24,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+TECHM,2015-03-19,0.25,nse_confirmed_gap,bonus+split,0.2481699696482771,2015-03-19,Bonus 1:1 / Face Value Split - From Rs 10/- Per Share To Rs 5/- Per Share
+TECHNO,2016-09-06,0.5,nse_confirmed_gap,bonus,0.5235340109460517,2016-09-06, Bonus 1:1
 TEMBO,2026-08-05,0.1,nse_confirmed_gap,split,0.10397979622049988,2026-08-05,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
 TFCILTD,2025-09-19,0.2,nse_confirmed_gap,split,0.19997251236943375,2025-09-19,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 THEBYKE,2014-10-09,0.5,nse_confirmed_gap,bonus,0.5740652346857598,2014-10-09,Bonus 1:1
 THYROCARE,2025-11-28,0.3333333333333333,nse_confirmed_gap,bonus,0.3457392719137686,2025-11-28,Bonus 2:1
 TIMETECHNO,2025-09-23,0.5,nse_confirmed_gap,bonus,0.5148597739640016,2025-09-23,Bonus 1:1
+TITAGARH,2015-04-23,0.2,nse_confirmed_gap,split,0.2020835097823325,2015-04-23,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
 TMPV,2025-10-14,0.6053726825576996,demerger_gap,demerger,0.6053726825576996,2025-10-14,Demerger
+TRENT,2016-09-12,0.1,nse_confirmed_gap,split,0.09553053565336062,2016-09-12, Face Value Split From Rs 10 To Re 1
 TRENT,2026-06-04,0.6666666666666666,nse_confirmed_gap,bonus,0.6646937241638481,2026-06-04,Bonus 1:2
 TRIVENI,2026-07-22,0.6149522799575822,demerger_gap,demerger,0.6149522799575822,2026-07-22,Demerger
 UEL,2025-10-13,0.3333333333333333,nse_confirmed_gap,bonus,0.31681701898478526,2025-10-10,Bonus 2:1
+UNIVAFOODS,2019-09-26,0.2,gap_snap,unlisted,0.20353982300884954,2019-09-26,
 UNIVASTU,2025-10-13,0.3333333333333333,nse_confirmed_gap,bonus,0.34324942791762014,2025-10-13,Bonus 2:1
+UNOMINDA,2016-09-12,0.2,nse_confirmed_gap,split,0.19485427003581637,2016-09-12, Face Value Split From Rs 10 To Rs 2
 UVSL,2019-09-26,0.5,gap_snap,unlisted,0.5,2019-09-26,
 UVSL,2019-09-27,0.5,gap_snap,unlisted,0.5,2019-09-27,
 V2RETAIL,2026-03-25,0.1,nse_confirmed_gap,split,0.10118306351183064,2026-03-25,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
 VEDL,2026-04-30,0.37422440537745605,demerger_gap,demerger,0.37422440537745605,2026-04-30,Demerger
+VEEDOL,2016-03-16,0.25,nse_confirmed_gap,bonus+split,0.24880878533596004,2016-03-16, Bonus 1:1/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share 
+VENKEYS,2015-12-21,0.6666666666666666,nse_confirmed_gap,bonus,0.6489972790486749,2015-12-21, Bonus 1:2
 VERANDA,2026-10-06,0.13348373754465126,demerger_gap,demerger,0.13348373754465126,2026-10-06,Demerger
 VGL,2026-03-02,0.5,nse_confirmed_gap,split,0.5361854945741276,2026-03-02,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
-VIJSHAN,2019-09-30,0.2,gap_snap,unlisted,0.19665271966527198,2019-09-30,
+VGUARD,2016-08-30,0.1,nse_confirmed_gap,split,0.10070770613345316,2016-08-30, Face Value Split From Rs 10 To Re 1
 VIKASECO,2014-03-27,0.1,nse_confirmed_gap,split,0.10376344086021505,2014-03-27,Face Value Split From Rs 10/- To Re 1/-
 VIKASECO,2014-11-13,0.4,nse_confirmed_gap,bonus,0.4277108433734939,2014-11-13,Bonus 3 : 2
+VISESHINFO,2015-03-31,2.0,gap_snap,unlisted,2.0,2015-03-31,
+VISESHINFO,2015-07-20,0.5,gap_snap,unlisted,0.5,2015-07-20,
+VISESHINFO,2015-07-21,0.5,gap_snap,unlisted,0.5,2015-07-21,
+VISESHINFO,2015-07-22,0.5,gap_snap,unlisted,0.5,2015-07-22,
+VISESHINFO,2015-07-28,0.5,gap_snap,unlisted,0.5,2015-07-28,
+VISESHINFO,2015-07-30,0.5,gap_snap,unlisted,0.5,2015-07-30,
+VISESHINFO,2015-08-19,0.5,gap_snap,unlisted,0.5,2015-08-19,
+VISESHINFO,2015-08-20,0.5,gap_snap,unlisted,0.5,2015-08-20,
+VISESHINFO,2015-08-21,2.0,gap_snap,unlisted,2.0,2015-08-21,
+VISESHINFO,2015-08-24,0.5,gap_snap,unlisted,0.5,2015-08-24,
+VISESHINFO,2015-08-31,2.0,gap_snap,unlisted,2.0,2015-08-31,
+VISESHINFO,2015-09-01,0.5,gap_snap,unlisted,0.5,2015-09-01,
+VISESHINFO,2015-09-03,0.5,gap_snap,unlisted,0.5,2015-09-03,
+VISESHINFO,2015-09-07,0.5,gap_snap,unlisted,0.5,2015-09-07,
+VISESHINFO,2015-09-08,2.0,gap_snap,unlisted,2.0,2015-09-08,
+VISESHINFO,2015-09-09,0.5,gap_snap,unlisted,0.5,2015-09-09,
+VISESHINFO,2015-09-10,2.0,gap_snap,unlisted,2.0,2015-09-10,
+VISESHINFO,2015-09-11,0.5,gap_snap,unlisted,0.5,2015-09-11,
+VISESHINFO,2015-09-14,2.0,gap_snap,unlisted,2.0,2015-09-14,
+VISESHINFO,2015-09-15,2.0,gap_snap,unlisted,2.0,2015-09-15,
+VISESHINFO,2015-09-29,2.0,gap_snap,unlisted,2.0,2015-09-29,
+VISESHINFO,2015-10-01,2.0,gap_snap,unlisted,2.0,2015-10-01,
+VISESHINFO,2015-10-06,0.5,gap_snap,unlisted,0.5,2015-10-06,
+VISESHINFO,2015-10-08,2.0,gap_snap,unlisted,2.0,2015-10-08,
+VISESHINFO,2015-10-15,0.5,gap_snap,unlisted,0.5,2015-10-15,
+VISESHINFO,2015-10-16,2.0,gap_snap,unlisted,2.0,2015-10-16,
+VISESHINFO,2015-10-29,0.5,gap_snap,unlisted,0.5,2015-10-29,
+VISESHINFO,2015-11-06,0.5,gap_snap,unlisted,0.5,2015-11-06,
+VISESHINFO,2015-11-09,2.0,gap_snap,unlisted,2.0,2015-11-09,
+VISESHINFO,2015-11-13,2.0,gap_snap,unlisted,2.0,2015-11-13,
+VISESHINFO,2015-11-17,0.5,gap_snap,unlisted,0.5,2015-11-17,
+VISESHINFO,2015-11-20,0.5,gap_snap,unlisted,0.5,2015-11-20,
+VISESHINFO,2015-11-26,0.5,gap_snap,unlisted,0.5,2015-11-26,
+VISESHINFO,2015-12-01,0.5,gap_snap,unlisted,0.5,2015-12-01,
+VISESHINFO,2015-12-03,0.5,gap_snap,unlisted,0.5,2015-12-03,
+VISESHINFO,2015-12-08,0.5,gap_snap,unlisted,0.5,2015-12-08,
+VISESHINFO,2015-12-16,0.5,gap_snap,unlisted,0.5,2015-12-16,
+VISESHINFO,2015-12-23,2.0,gap_snap,unlisted,2.0,2015-12-23,
+VISESHINFO,2016-02-19,2.0,gap_snap,unlisted,2.0,2016-02-19,
+VISESHINFO,2016-02-23,2.0,gap_snap,unlisted,2.0,2016-02-23,
+VISESHINFO,2016-03-02,0.5,gap_snap,unlisted,0.5,2016-03-02,
+VISESHINFO,2016-03-04,2.0,gap_snap,unlisted,2.0,2016-03-04,
+VISESHINFO,2016-03-08,0.5,gap_snap,unlisted,0.5,2016-03-08,
+VISESHINFO,2016-03-11,2.0,gap_snap,unlisted,2.0,2016-03-11,
+VISESHINFO,2016-03-16,0.5,gap_snap,unlisted,0.5,2016-03-16,
+VISESHINFO,2016-03-17,0.5,gap_snap,unlisted,0.5,2016-03-17,
+VISESHINFO,2016-03-21,0.5,gap_snap,unlisted,0.5,2016-03-21,
+VISESHINFO,2016-03-28,2.0,gap_snap,unlisted,2.0,2016-03-28,
+VISESHINFO,2016-03-31,0.5,gap_snap,unlisted,0.5,2016-03-31,
+VISESHINFO,2016-04-04,0.5,gap_snap,unlisted,0.5,2016-04-04,
+VISESHINFO,2016-04-05,2.0,gap_snap,unlisted,2.0,2016-04-05,
+VISESHINFO,2016-04-07,2.0,gap_snap,unlisted,2.0,2016-04-07,
+VISESHINFO,2016-04-11,0.5,gap_snap,unlisted,0.5,2016-04-11,
+VISESHINFO,2016-04-13,0.5,gap_snap,unlisted,0.5,2016-04-13,
+VISESHINFO,2016-04-18,0.5,gap_snap,unlisted,0.5,2016-04-18,
+VISESHINFO,2016-04-21,2.0,gap_snap,unlisted,2.0,2016-04-21,
+VISESHINFO,2016-04-22,0.5,gap_snap,unlisted,0.5,2016-04-22,
+VISESHINFO,2016-04-27,2.0,gap_snap,unlisted,2.0,2016-04-27,
+VISESHINFO,2016-05-03,0.5,gap_snap,unlisted,0.5,2016-05-03,
+VISESHINFO,2016-05-09,0.5,gap_snap,unlisted,0.5,2016-05-09,
+VISESHINFO,2016-05-10,0.5,gap_snap,unlisted,0.5,2016-05-10,
+VISESHINFO,2016-05-11,2.0,gap_snap,unlisted,2.0,2016-05-11,
+VISESHINFO,2016-05-17,2.0,gap_snap,unlisted,2.0,2016-05-17,
+VISESHINFO,2016-05-18,2.0,gap_snap,unlisted,2.0,2016-05-18,
+VISESHINFO,2016-05-19,0.5,gap_snap,unlisted,0.5,2016-05-19,
+VISESHINFO,2016-05-24,0.5,gap_snap,unlisted,0.5,2016-05-24,
+VISESHINFO,2016-05-25,0.5,gap_snap,unlisted,0.5,2016-05-25,
+VISESHINFO,2016-05-26,0.5,gap_snap,unlisted,0.5,2016-05-26,
+VISESHINFO,2016-05-27,0.5,gap_snap,unlisted,0.5,2016-05-27,
+VISESHINFO,2016-06-08,2.0,gap_snap,unlisted,2.0,2016-06-08,
+VISESHINFO,2016-06-09,0.5,gap_snap,unlisted,0.5,2016-06-09,
+VISESHINFO,2016-06-10,2.0,gap_snap,unlisted,2.0,2016-06-10,
+VISESHINFO,2016-06-14,2.0,gap_snap,unlisted,2.0,2016-06-14,
+VISESHINFO,2016-06-27,0.5,gap_snap,unlisted,0.5,2016-06-27,
+VISESHINFO,2016-06-29,0.5,gap_snap,unlisted,0.5,2016-06-29,
+VISESHINFO,2016-06-30,2.0,gap_snap,unlisted,2.0,2016-06-30,
+VISESHINFO,2016-07-01,2.0,gap_snap,unlisted,2.0,2016-07-01,
+VISESHINFO,2016-07-04,0.5,gap_snap,unlisted,0.5,2016-07-04,
+VISESHINFO,2016-08-19,2.0,gap_snap,unlisted,2.0,2016-08-19,
+VISESHINFO,2016-08-24,0.5,gap_snap,unlisted,0.5,2016-08-24,
+VISESHINFO,2016-08-30,0.5,gap_snap,unlisted,0.5,2016-08-30,
+VISESHINFO,2016-08-31,0.5,gap_snap,unlisted,0.5,2016-08-31,
+VISESHINFO,2016-09-02,0.5,gap_snap,unlisted,0.5,2016-09-02,
+VISESHINFO,2016-09-06,0.5,gap_snap,unlisted,0.5,2016-09-06,
+VISESHINFO,2016-09-07,0.5,gap_snap,unlisted,0.5,2016-09-07,
+VISESHINFO,2016-09-09,0.5,gap_snap,unlisted,0.5,2016-09-09,
+VISESHINFO,2016-09-12,0.5,gap_snap,unlisted,0.5,2016-09-12,
+VISESHINFO,2016-09-15,2.0,gap_snap,unlisted,2.0,2016-09-15,
+VISESHINFO,2016-09-20,0.5,gap_snap,unlisted,0.5,2016-09-20,
 VISESHINFO,2019-09-26,0.5,gap_snap,unlisted,0.5,2019-09-26,
 VISESHINFO,2019-09-27,0.5,gap_snap,unlisted,0.5,2019-09-27,
 VISESHINFO,2019-09-30,0.5,gap_snap,unlisted,0.5,2019-09-30,
 VISESHINFO,2019-10-01,2.0,gap_snap,unlisted,2.0,2019-10-01,
+VIVIDHA,2015-05-28,0.09090909090909091,nse_confirmed_gap,bonus,0.09709038781914688,2015-05-28,Bonus 10:1
+VIVIDHA,2016-03-30,0.75,nse_confirmed_gap,bonus,0.7842565597667639,2016-03-30, Bonus 1:3
+VIVIMEDLAB,2016-04-06,0.2,nse_confirmed_gap,split,0.20126991733556965,2016-04-06, Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+VKSPL,2015-07-31,0.5,gap_snap,unlisted,0.5,2015-07-31,
+VKSPL,2015-09-09,0.5,gap_snap,unlisted,0.5,2015-09-09,
+VKSPL,2015-11-27,0.5,gap_snap,unlisted,0.5,2015-11-27,
+VKSPL,2015-11-30,2.0,gap_snap,unlisted,2.0,2015-11-30,
+VKSPL,2015-12-03,0.5,gap_snap,unlisted,0.5,2015-12-03,
+VKSPL,2016-02-26,0.5,gap_snap,unlisted,0.5,2016-02-26,
+VKSPL,2016-03-01,2.0,gap_snap,unlisted,2.0,2016-03-01,
+VKSPL,2016-03-29,0.5,gap_snap,unlisted,0.5,2016-03-29,
+VKSPL,2016-03-31,2.0,gap_snap,unlisted,2.0,2016-03-31,
+VKSPL,2016-04-04,0.5,gap_snap,unlisted,0.5,2016-04-04,
+VKSPL,2016-04-06,2.0,gap_snap,unlisted,2.0,2016-04-06,
+VKSPL,2016-04-20,0.5,gap_snap,unlisted,0.5,2016-04-20,
+VKSPL,2016-04-25,2.0,gap_snap,unlisted,2.0,2016-04-25,
+VKSPL,2016-05-02,2.0,gap_snap,unlisted,2.0,2016-05-02,
+VKSPL,2016-05-18,2.0,gap_snap,unlisted,2.0,2016-05-18,
+VKSPL,2016-05-31,2.0,gap_snap,unlisted,2.0,2016-05-31,
+VKSPL,2016-06-23,0.5,gap_snap,unlisted,0.5,2016-06-23,
+VKSPL,2016-06-30,2.0,gap_snap,unlisted,2.0,2016-06-30,
+VKSPL,2016-07-07,0.5,gap_snap,unlisted,0.5,2016-07-07,
+VKSPL,2016-07-14,0.5,gap_snap,unlisted,0.5,2016-07-14,
+VKSPL,2016-08-12,0.5,gap_snap,unlisted,0.5,2016-08-12,
+VKSPL,2016-08-18,0.5,gap_snap,unlisted,0.5,2016-08-18,
+VKSPL,2016-08-23,0.5,gap_snap,unlisted,0.5,2016-08-23,
+VKSPL,2016-08-25,2.0,gap_snap,unlisted,2.0,2016-08-25,
+VKSPL,2016-08-26,0.5,gap_snap,unlisted,0.5,2016-08-26,
+VKSPL,2016-08-30,0.5,gap_snap,unlisted,0.5,2016-08-30,
+VKSPL,2016-08-31,0.5,gap_snap,unlisted,0.5,2016-08-31,
+VKSPL,2016-09-01,0.5,gap_snap,unlisted,0.5,2016-09-01,
+VKSPL,2016-09-02,0.5,gap_snap,unlisted,0.5,2016-09-02,
+VKSPL,2016-09-08,0.5,gap_snap,unlisted,0.5,2016-09-08,
+VKSPL,2016-09-09,0.5,gap_snap,unlisted,0.5,2016-09-09,
+VKSPL,2016-09-12,0.5,gap_snap,unlisted,0.5,2016-09-12,
+VKSPL,2016-09-14,2.0,gap_snap,unlisted,2.0,2016-09-14,
+VKSPL,2016-09-16,0.5,gap_snap,unlisted,0.5,2016-09-16,
+VKSPL,2016-09-19,0.5,gap_snap,unlisted,0.5,2016-09-19,
+VKSPL,2016-09-20,0.5,gap_snap,unlisted,0.5,2016-09-20,
+VKSPL,2016-09-21,0.5,gap_snap,unlisted,0.5,2016-09-21,
+VKSPL,2016-09-22,0.5,gap_snap,unlisted,0.5,2016-09-22,
+VKSPL,2016-09-26,0.5,gap_snap,unlisted,0.5,2016-09-26,
+VKSPL,2016-09-28,0.5,gap_snap,unlisted,0.5,2016-09-28,
+VKSPL,2016-09-29,0.5,gap_snap,unlisted,0.5,2016-09-29,
+VKSPL,2016-09-30,0.5,gap_snap,unlisted,0.5,2016-09-30,
+VKSPL,2016-10-03,0.5,gap_snap,unlisted,0.5,2016-10-03,
+VKSPL,2016-10-06,2.0,gap_snap,unlisted,2.0,2016-10-06,
 VRLLOG,2025-08-14,0.5,nse_confirmed_gap,bonus,0.5021070563973818,2025-08-14,Bonus 1:1
-VTMLTD,2026-08-17,2.0,gap_snap,unlisted,1.9421487603305785,2026-08-17,
+VTMLTD,2026-08-17,2.0,gap_snap,unlisted,1.9957537154989384,2026-08-17,
+WABAG,2015-03-26,0.5,nse_confirmed_gap,bonus,0.4899828940883129,2015-03-26,Bonus 1 : 1
 WEBELSOLAR,2025-11-14,0.1,nse_confirmed_gap,split,0.09979302188054406,2025-11-14,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+WELSPUNLIV,2016-03-21,0.1,nse_confirmed_gap,split,0.10003192508247312,2016-03-21, Interim Div - Rs 6/- Per Share + Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share 
 ZFCVINDIA,2026-06-24,0.16666666666666666,nse_confirmed_gap,bonus,0.17493472584856398,2026-06-24,Bonus 5:1
+ZYDUSLIFE,2015-10-06,0.2,nse_confirmed_gap,split,0.20108591197386125,2015-10-06, Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
 ZYDUSWELL,2025-09-18,0.2,nse_confirmed_gap,split,0.2024280505779226,2025-09-18,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share

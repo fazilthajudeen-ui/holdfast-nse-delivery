@@ -1,43 +1,33 @@
 {
-  "actions_applied": 219,
+  "actions_applied": 590,
   "methods": {
-    "nse_confirmed_gap": 148,
-    "gap_snap": 49,
-    "demerger_gap": 22
+    "gap_snap": 298,
+    "nse_confirmed_gap": 251,
+    "demerger_gap": 41
   },
   "not_applied": {
-    "mass_gap_day_not_adjusted": 2417,
-    "no_trading_near_ex": 812,
-    "unexplained_gap_not_adjusted": 74,
-    "unconfirmed": 28,
-    "no_trading_after_ex": 12
+    "mass_gap_day_not_adjusted": 2453,
+    "no_trading_near_ex": 693,
+    "unexplained_gap_not_adjusted": 77,
+    "unconfirmed": 33,
+    "no_trading_after_ex": 6
   },
-  "remaining_abs_moves_gt_30pct": 3470,
+  "remaining_abs_moves_gt_30pct": 4229,
   "examples_remaining": [
     {
       "date": "2019-09-25",
-      "symbol": "VIVIDHA",
-      "ret": "-0.9997405124878366"
+      "symbol": "VIJIFIN",
+      "ret": "-0.9967245332459875"
     },
     {
       "date": "2019-09-25",
-      "symbol": "PRAKASHSTL",
-      "ret": "-0.9979287489643744"
+      "symbol": "TVVISION",
+      "ret": "-0.9947997919916797"
     },
     {
       "date": "2019-09-30",
-      "symbol": "RAINBOWPAP",
-      "ret": "-0.9958012596221134"
-    },
-    {
-      "date": "2019-09-25",
-      "symbol": "ZICOM",
-      "ret": "-0.9945054945054945"
-    },
-    {
-      "date": "2019-09-25",
-      "symbol": "SRSLTD",
-      "ret": "-0.9944237918215614"
+      "symbol": "AIFL",
+      "ret": "-0.9941373534338358"
     },
     {
       "date": "2024-07-04",
@@ -46,18 +36,18 @@
     },
     {
       "date": "2019-09-25",
-      "symbol": "ARCOTECH",
-      "ret": "-0.9939316963025684"
-    },
-    {
-      "date": "2019-09-25",
-      "symbol": "CASTEXTECH",
-      "ret": "-0.9938733832539143"
+      "symbol": "ORTEL",
+      "ret": "-0.9936177359758146"
     },
     {
       "date": "2024-07-04",
       "symbol": "FLFL",
       "ret": "-0.9933246538051841"
+    },
+    {
+      "date": "2019-09-25",
+      "symbol": "ARCOTECH",
+      "ret": "-0.9932517263025737"
     },
     {
       "date": "2024-07-08",
@@ -66,28 +56,38 @@
     },
     {
       "date": "2019-09-25",
-      "symbol": "KSK",
-      "ret": "-0.9923130677847659"
+      "symbol": "SABTN",
+      "ret": "-0.99067055393586"
+    },
+    {
+      "date": "2026-03-06",
+      "symbol": "LICMFGOLD",
+      "ret": "-0.9900567984557486"
+    },
+    {
+      "date": "2026-04-30",
+      "symbol": "IVZINGOLD",
+      "ret": "-0.9898106462123375"
     },
     {
       "date": "2019-09-25",
-      "symbol": "DIAPOWER",
-      "ret": "-0.9918187539332913"
+      "symbol": "KWALITY",
+      "ret": "-0.9889845094664371"
+    },
+    {
+      "date": "2024-07-04",
+      "symbol": "DHARAN",
+      "ret": "-0.9885044323706034"
     },
     {
       "date": "2019-09-25",
-      "symbol": "RCOM",
-      "ret": "-0.991421568627451"
+      "symbol": "MANPASAND",
+      "ret": "-0.987849675049449"
     },
     {
-      "date": "2019-09-25",
-      "symbol": "GLOBOFFS",
-      "ret": "-0.9911074628907586"
-    },
-    {
-      "date": "2019-09-25",
-      "symbol": "VIDEOIND",
-      "ret": "-0.9906861223222602"
+      "date": "2019-09-30",
+      "symbol": "LEEL",
+      "ret": "-0.9865370231862378"
     }
   ]
 }

@@ -83,7 +83,7 @@ def vcp_grid(ev: pd.DataFrame, cuts) -> list[dict]:
         data[s] = (g, delivery_features(g, fcfg)["deliv_z20_prev"].to_numpy(), v / v.shift(1).rolling(20, min_periods=15).mean())
     rows = []
     cooldown = config()["labels"]["events"]["strict"]["cooldown_days"]
-    for k in [2, 3]:
+    for k in [2, 3, 5]:
         dets = {s: VCPDetector(g.high, g.low, g.close, g.volume, {**fcfg["vcp"], "fractal_k": k}) for s, (g, _, _) in data.items()}
         for depth in [0.4, 0.5, 0.6]:
             for vm in [1.25, 1.5, 2.0]:

@@ -199,3 +199,14 @@ a few rows of the 21 Oct 2025 Muhurat session do the same. Which field is wrong 
 a row whose two delivery figures differ by more than 0.5 percentage point is blanked, and a day where
 more than half of EQ rows are inconsistent has all its delivery blanked. Counts are in the PIT build
 report. (The Delivery Lens project reads the same file and is affected on that date.)
+
+**D-041 · The spec's VCP is rare; it is NOT loosened** (10 Oct 2026, counts only — no outcomes looked at)
+Early count on contiguous data (Tier-1 STRICT triggers, Jan 2015 – Jul 2016, before exclusions): spec
+k=2 → 9; k=3 → 22; k=5 → 51; a causal 5% zigzag pivot → 24. Scaled to 11 years that is ~65–370, far
+below the spec's expected 2,000–5,000 — for every reasonable pivot rule, so the rarity comes from the
+pattern conditions themselves (2–4 contractions, strictly declining depth AND volume), not from noisy
+pivots. Following the spec ("if insufficient, widen to Tier 2, don't lower standards"): the STRICT
+definition is kept exactly; the pre-registered power rule adds Tier-2 STRICT; STRICT results are
+reported in full but are expected to be underpowered, so the BROAD family (compression breakouts)
+carries the inferential weight. This was written into the pre-registration before any test was run.
+The P7 grid (k = 2/3/5 × depth × volume × base length) reports how counts move with the parameters.
