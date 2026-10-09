@@ -19,17 +19,21 @@ class Fetcher:
         self.backoff = float(c["backoff_seconds"])
         self.timeout = float(c["timeout_seconds"])
         self.home = c["home"]
-        self.session = requests.Session()
-        self.session.headers.update({
-            "User-Agent": c["user_agent"],
-            "Accept": "text/html,application/xhtml+xml,application/xml,application/json;q=0.9,*/*;q=0.8",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Referer": "https://www.nseindia.com/",
-        })
+        self.user_agent = c["user_agent"]
+        self._new_session()
         self._last = 0.0
         self.consecutive_blocks = 0
         self.n_requests = 0
         self.warm_up()
+
+    def _new_session(self):
+        self.session = requests.Session()
+        self.session.headers.update({
+            "User-Agent": self.user_agent,
+            "Accept": "text/html,application/xhtml+xml,application/xml,application/json;q=0.9,*/*;q=0.8",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Referer": "https://www.nseindia.com/",
+        })
 
     def _wait(self):
         gap = time.monotonic() - self._last
@@ -76,6 +80,12 @@ class Fetcher:
                 log(f"  {detail} for {url.rsplit('/', 1)[-1][:80]}; retry {attempt + 1} in {wait:.0f}s")
                 time.sleep(wait)
                 if status == "blocked":
+                    self.warm_up()
+                elif detail and "HTTP" not in detail:
+                    # connection-level failure: the pooled keep-alive connection can go stale after
+                    # thousands of requests -> start a fresh session (seen 10 Oct 2026, ~7,000 requests in)
+                    self.session.close()
+                    self._new_session()
                     self.warm_up()
         if status == "blocked":
             self.consecutive_blocks += 1
