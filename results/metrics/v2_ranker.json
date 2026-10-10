@@ -1,0 +1,62 @@
+{
+  "results": [
+    {
+      "target": "label_xs10",
+      "feature_set": "v1_raw",
+      "model": "ranker_r1",
+      "fold_auc": [
+        0.5088,
+        0.5016,
+        0.5027,
+        0.5095,
+        0.5294
+      ],
+      "mean_auc": 0.510399638954149,
+      "oof_daily_ic": 0.018120294172880073
+    },
+    {
+      "target": "label_xs10",
+      "feature_set": "v1_raw",
+      "model": "ranker_r2",
+      "fold_auc": [
+        0.5195,
+        0.516,
+        0.5064,
+        0.5093,
+        0.5312
+      ],
+      "mean_auc": 0.5165016000469665,
+      "oof_daily_ic": 0.03036903051337979
+    },
+    {
+      "target": "label_xs10",
+      "feature_set": "v1v2_raw",
+      "model": "ranker_r1",
+      "fold_auc": [
+        0.5093,
+        0.5117,
+        0.5157,
+        0.509,
+        0.4979
+      ],
+      "mean_auc": 0.5087378866682057,
+      "oof_daily_ic": 0.01583053843096023
+    },
+    {
+      "target": "label_xs10",
+      "feature_set": "v1v2_raw",
+      "model": "ranker_r2",
+      "fold_auc": [
+        0.5061,
+        0.5128,
+        0.5134,
+        0.5052,
+        0.5002
+      ],
+      "mean_auc": 0.5075402562857706,
+      "oof_daily_ic": 0.013481856255677327
+    }
+  ],
+  "current_xs_model_cv_auc": 0.5252505061011222,
+  "adopted": false
+}

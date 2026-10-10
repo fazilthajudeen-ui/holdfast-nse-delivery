@@ -42,7 +42,15 @@ def config() -> dict:
     if lag.exists():
         with open(lag, encoding="utf-8") as f:
             out["release_lag"] = yaml.safe_load(f)
+    # LIVE mode only (impi.live): extend the data end to today. Research runs keep the frozen end date;
+    # live outputs go to a separate processed/results folder, so frozen research results are untouched.
+    if os.environ.get("IMPI_DATA_END") and SANDBOX_OR_LIVE():
+        out["data"]["end"] = dt.date.fromisoformat(os.environ["IMPI_DATA_END"])
     return out
+
+
+def SANDBOX_OR_LIVE() -> bool:
+    return PROCESSED != DATA / "processed" and RESULTS != ROOT / "results"
 
 
 def config_hash() -> str:

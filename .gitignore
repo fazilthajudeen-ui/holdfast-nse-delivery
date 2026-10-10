@@ -7,3 +7,4 @@ data/processed/
 results/test_lock.json.bak
 *.log
 *.egg-info/
+data/live/

@@ -24,7 +24,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from impi.common import PROCESSED, RAW, config, log, save_json
+from impi.common import DATA, PROCESSED, RAW, config, log, save_json
 from impi.ingest import corp_actions as CA
 from impi.ingest import indices, nse_bhav, nse_fo, participant, surveillance
 from impi.ingest.download import raw_path
@@ -111,16 +111,23 @@ def read(name: str, columns: list[str] | None = None, start=None, end=None, as_o
 
 # ------------------------------------------------------------------ equity
 def _equity_for_date(d: dt.date) -> pd.DataFrame | None:
+    """Parsed equity rows for one day, cached by raw file (a pure function of the raw files)."""
     sec = raw_path("sec_bhav", d)
+    srcs = [sec] if sec.exists() else [raw_path("cm_legacy", d), raw_path("mto", d)]
+    if not srcs[0].exists():
+        return None
+    cache = EQ_CACHE / f"{d.isoformat()}.parquet"
+    newest = max(p.stat().st_mtime for p in srcs if p.exists())
+    if cache.exists() and cache.stat().st_mtime >= newest:
+        return pd.read_parquet(cache)
     if sec.exists():
         df = nse_bhav.parse_sec(sec.read_bytes())
     else:
-        cm = raw_path("cm_legacy", d)
-        if not cm.exists():
-            return None
-        mto = raw_path("mto", d)
+        cm, mto = srcs
         df = nse_bhav.merge_legacy(nse_bhav.parse_cm(cm.read_bytes()),
                                    nse_bhav.parse_mto(mto.read_bytes()) if mto.exists() else None)
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    df.to_parquet(cache, index=False)
     return df
 
 
@@ -190,7 +197,9 @@ def build_equity(changes: pd.DataFrame) -> dict:
 
 
 # ------------------------------------------------------------------ F&O
-FO_CACHE = PROCESSED / "cache" / "fo_agg"
+# shared by research and live runs: a pure function of one raw file
+FO_CACHE = DATA / "processed" / "cache" / "fo_agg"
+EQ_CACHE = DATA / "processed" / "cache" / "equity_day"
 
 
 def _fo_for_date(d: dt.date) -> pd.DataFrame | None:

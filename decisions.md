@@ -234,3 +234,30 @@ re-frozen before the pre-registration commit (15103f1); no test had been run.
 Pre-registration commit 15103f1 (08:54 IST); one test-set run, lock commit ea49def (09:23–09:29 IST).
 No pre-registered hypothesis was supported; H4 was a significant loss for the ML challenger. Results
 are reported in full in `results/summary.md` and the paper draft.
+
+## After the pre-registered study (post-hoc development and live system)
+
+**D-044 · Model v2 is post-hoc and labelled as such** (10 Oct 2026)
+After the one-time v1 test, the user asked to maximise model performance. A new model (v2) was developed
+on train + validation ONLY: every Tier-1 stock-day (285k training rows instead of 2,102 BROAD events),
+17 extra features (momentum, 52-week distance, realised-volatility term structure, short-window delivery,
+turnover shock, intraday location), cross-sectional rank transforms, three targets (triple-barrier success,
+beating the day's median F&O stock, volatility expansion) and XGBoost / logistic / probability-average
+ensembles, chosen by walk-forward CV (yearly folds 2018–2022, purged, 15-day embargo). A learning-to-rank
+model was also tried on the same folds and adopted only if it beat the chosen model's CV AUC. All variants
+are logged (`results_log.csv`, phase "V2-posthoc"). The 2023+ numbers for v2 are POST-HOC because that
+period had already been used once; this is stated wherever they are shown. Note: the v2 training run
+printed its post-hoc test AUCs before the ranker comparison was finished; the ranker decision used CV only.
+
+**D-045 · Live mode and the forward track record** (10 Oct 2026)
+`python -m impi.live` (run nightly by scripts/run_daily.bat after Delivery Lens) rebuilds IMPI into
+`data/live/` with the data end extended to today; the research folders (`data/processed`, `results/`) are
+never written in live mode (the end-date override only works when both outputs are redirected). The frozen
+v2 models score every F&O stock; predictions are appended to `data/track/predictions.csv` BEFORE outcomes
+exist and scored in `data/track/summary.json` once 10 trading days have passed — the only truly
+out-of-sample evaluation left. Symbol-change and sector lists are not auto-refreshed (the research reads
+those exact files); refresh them manually if a stock is renamed after 10 Oct 2026.
+
+**D-046 · Calibrated probabilities are step functions** — isotonic calibration of a weak model maps many
+stocks to the same probability (e.g. breakout success 25.9%). The terminal and scanner therefore also show
+each model's within-day percentile, so the ordering stays visible while the honest probability is kept.

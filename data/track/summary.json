@@ -1,0 +1,17 @@
+{
+  "first_logged": "2026-10-09",
+  "days_logged": 1,
+  "predictions": 213,
+  "label_10": {
+    "matured": 0,
+    "days": 0
+  },
+  "label_xs10": {
+    "matured": 0,
+    "days": 0
+  },
+  "vol_exp": {
+    "matured": 0,
+    "days": 0
+  }
+}

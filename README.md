@@ -75,3 +75,18 @@ Then commit `pre_registered_hypotheses.md` and continue:
 
 The first download is about 17,000 polite requests (~5 hours); files are cached and the downloader
 resumes where it stopped.
+
+## After the study: model v2, live mode and the terminal
+
+* **Model v2 (post-hoc):** `python -m impi.v2.panel` then `python -m impi.v2.train` (and `python -m impi.v2.ranker`).
+  Developed on 2015–2022 only with walk-forward CV; 2023+ numbers are post-hoc (see `decisions.md` D-044).
+* **Live mode:** `python -m impi.live` rebuilds into `data/live/`, scores every F&O stock with the frozen v2
+  models, exports files for the web app and appends the forward track record (`data/track/`). It runs every
+  weekday evening from `../scripts/run_daily.bat` (Task Scheduler "NSE Delivery Update", 19:30).
+* **Terminal:** from the project root, `python -m app.server` → http://localhost:8000
+  - `/terminal` — every stock's chart; the new **IMPI model** panel (probabilities vs base rates, percentile,
+    delivery/compression/positioning snapshot, top drivers) and IMPI breakout markers (toggle "IMPI")
+  - `/scanner` — all F&O stocks today, sortable, filter by breakout type and sector
+  - `/market` — FII/DII/Pro/Client futures positioning, Nifty 500, India VIX, regime tiles
+  - `/research` — pre-registered results, v2 model quality, live track record, figures
+  - Ask Lens assistant: "IMPI model view", "Today's breakouts", "Market positioning", "Does the IMPI model work?"

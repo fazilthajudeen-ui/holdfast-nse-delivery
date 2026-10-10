@@ -41,6 +41,7 @@ EXT = {"sec_bhav": "csv", "cm_legacy": "zip", "mto": "DAT", "fo_legacy": "zip", 
 META = RAW / "_meta"
 NO_DATA = META / "no_data.csv"
 DL_LOG = META / "download_log.csv"
+RECENT_DAYS = 3                 # dates this close to today are never recorded as "no data"
 
 
 def url_for(name: str, d: dt.date) -> str:
@@ -79,6 +80,10 @@ class Downloader:
         return self.f
 
     def mark_no_data(self, iso: str, name: str, reason: str) -> None:
+        # files for the last few days may simply not be published yet (the nightly run starts ~19:30):
+        # never remember them as missing, so the next run retries them
+        if (dt.date.today() - dt.date.fromisoformat(iso)).days <= RECENT_DAYS:
+            return
         if (iso, name) not in self.no_data:
             self.no_data.add((iso, name))
             _append(NO_DATA, [iso, name, reason])
@@ -219,6 +224,8 @@ def download_reference(dl: Downloader, start: dt.date, end: dt.date) -> None:
     for name, url in [("symbolchange.csv", c["symbol_change"])] + \
             [(u.rsplit("/", 1)[-1], u) for u in c["sector_lists"]]:
         p = ref / name
+        # never refreshed automatically: the research reads these exact files (reproducibility). Live mode
+        # therefore applies symbol changes / sector labels as of 10 Oct 2026 until a manual refresh.
         if p.exists():
             continue
         status, content = f.get(url)

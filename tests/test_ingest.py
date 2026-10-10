@@ -139,3 +139,16 @@ def test_participant_file_without_header_row():
     assert participant.file_date(po) == dt.date(2014, 2, 24)
     p = participant.parse(po, dt.date(2014, 2, 24)).set_index("participant")
     assert p.loc["Client", "fut_idx_long"] == 164528 and p.loc["TOTAL", "total_short"] == 5127997
+
+
+def test_recent_missing_files_are_not_remembered(tmp_path, monkeypatch):
+    import datetime as dt
+    from impi.ingest import download as D
+    monkeypatch.setattr(D, "NO_DATA", tmp_path / "no_data.csv")
+    dl = D.Downloader()
+    dl.no_data = set()
+    today = dt.date.today().isoformat()
+    old = (dt.date.today() - dt.timedelta(days=30)).isoformat()
+    dl.mark_no_data(today, "fo_udiff", "404/html")
+    dl.mark_no_data(old, "fo_udiff", "404/html")
+    assert (today, "fo_udiff") not in dl.no_data and (old, "fo_udiff") in dl.no_data
