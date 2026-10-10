@@ -9,6 +9,20 @@ Research tool only — **not investment advice**.
 
 Team 23 · Hindustan Institute of Technology & Science · B.Tech CSE (AIML) · Supervisor Dr. Jeyavim Sherin RC
 
+## Results at a glance (data 2014-01-01 → 2026-10-09; test set 2023+, evaluated once)
+
+| | Finding |
+|---|---|
+| Data | 3,161 trading days from official NSE files; pre-2019 delivery rebuilt from legacy bhavcopy + MTO, matching `sec_bhavdata_full` exactly on 12 overlap dates; 1,442 split/bonus/demerger adjustments |
+| Events | 4,876 compression breakouts (BROAD), 11,327 twenty-day breakouts, only 82 VCP (STRICT) events in Tier 1 |
+| H1 delivery | no effect (test 24.8% vs 24.9%, p = 0.99) |
+| H2 divergence | −2.8 pts in the predicted direction, not significant (q = 0.29) |
+| H3 FII/DII regime | no effect |
+| H4 ML vs rule | **loss**: XGBoost AUC 0.460 vs composite 0.526 (DeLong q = 0.024); walk-forward 0.502 |
+| Economics | breakout strategies lose after costs; SPA p = 0.77, Reality Check p = 0.89 vs Nifty 500 |
+
+Full tables: `results/summary.md` · paper draft: `paper/IMPI_paper_draft.md` · every decision: `decisions.md`.
+
 ## What is in here
 
 | Path | Contents |

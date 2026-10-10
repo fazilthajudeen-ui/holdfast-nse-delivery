@@ -223,3 +223,14 @@ five on F&O stocks verified genuine, e.g. Bajaj Finance 2025-06-16, JSW Steel 20
 demergers); 622 logged and not adjusted. Remaining |daily move| > 30% on F&O stock-days: 55, all
 checked to be genuine events (Yes Bank 2020, DHFL, Jet Airways, Vodafone Idea, Infibeam 2018, PSU-bank
 recapitalisation rally 2017-10-25, PolicyBazaar 2026-09-24).
+
+**D-042 · Regime features computed per index series** (10 Oct 2026, before registration)
+On the 14 days NSE's `ind_close_all` file is missing, the VIX history API still adds a row, so a joint
+pivot left gaps in the Nifty series and voided every 200-day window for 200 rows (30% of events lost
+`nifty_above_200`). Each index series is now computed on its own dates and re-indexed. Fixed and
+re-frozen before the pre-registration commit (15103f1); no test had been run.
+
+**D-043 · Outcome record** (10 Oct 2026)
+Pre-registration commit 15103f1 (08:54 IST); one test-set run, lock commit ea49def (09:23–09:29 IST).
+No pre-registered hypothesis was supported; H4 was a significant loss for the ML challenger. Results
+are reported in full in `results/summary.md` and the paper draft.

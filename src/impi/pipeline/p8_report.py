@@ -55,7 +55,7 @@ def fig_ladders(p6):
             ax.text(v + 0.005, i, txt, va="center", fontsize=7.5, color=INK2)
         ax.set_title(title)
         ax.set_xlabel("Triple-barrier success rate, 10 days (test set)")
-        ax.set_xlim(0, max(vals + [0.01]) * 1.45)
+        ax.set_xlim(0, max(vals + [0.01]) * 1.75)
     fig.tight_layout()
     fig.savefig(FIGURES / "fig1_benchmark_ladders_test.png")
     plt.close(fig)
@@ -174,6 +174,7 @@ def fig_vcp_grid(p7):
     piv = g.pivot_table(index="k_depth", columns="vol_base", values="n", aggfunc="first")
     fig, ax = plt.subplots(figsize=(8, 3.2))
     im = ax.imshow(piv.to_numpy(), cmap="Blues", aspect="auto")
+    ax.grid(False)
     ax.set_xticks(range(piv.shape[1]), piv.columns, rotation=45, ha="right", fontsize=7)
     ax.set_yticks(range(piv.shape[0]), piv.index, fontsize=7)
     for i in range(piv.shape[0]):
@@ -182,7 +183,9 @@ def fig_vcp_grid(p7):
             ax.text(j, i, f"{int(v)}", ha="center", va="center", fontsize=6.5,
                     color="white" if v > np.nanmax(piv.to_numpy()) * 0.6 else INK)
     fig.colorbar(im, ax=ax, label="STRICT events (train+validation)")
-    ax.set_title("VCP parameter grid: event counts (k = fractal bars, d = max depth, v = volume x, b = base days)")
+    ax.set_title("VCP parameter grid: STRICT event counts (train + validation)")
+    ax.set_xlabel("v = volume multiple, b = base length (days)")
+    ax.set_ylabel("k = fractal bars, d = max depth")
     fig.tight_layout()
     fig.savefig(FIGURES / "fig7_vcp_grid_counts.png")
     plt.close(fig)
