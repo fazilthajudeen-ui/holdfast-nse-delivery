@@ -14,13 +14,16 @@ def regime_features(index: pd.DataFrame, breadth: pd.DataFrame, mkt: pd.DataFram
     c = cfg["regime"]
     px = index.pivot_table(index="date", columns="index", values="close").sort_index()
     out = pd.DataFrame(index=px.index)
-    n50 = px["nifty50"]
+    # each series on its OWN dates: a day missing from one index file must not void a 200-day window
+    n50 = px["nifty50"].dropna()
     sma_f = n50.rolling(c["sma_fast"], min_periods=c["sma_fast"]).mean()
     sma_s = n50.rolling(c["sma_slow"], min_periods=c["sma_slow"]).mean()
-    out["nifty_above_200"] = (n50 > sma_s).astype(float).where(sma_s.notna())
-    out["nifty_trend_50_200"] = sma_f / sma_s - 1
-    out["vix_pct252"] = px["india_vix"].rolling(c["vix_pct_window"], min_periods=c["vix_pct_window"] // 2).rank(pct=True) * 100
-    out["nifty500_ret20"] = px["nifty500"] / px["nifty500"].shift(20) - 1
+    out["nifty_above_200"] = (n50 > sma_s).astype(float).where(sma_s.notna()).reindex(out.index)
+    out["nifty_trend_50_200"] = (sma_f / sma_s - 1).reindex(out.index)
+    vix = px["india_vix"].dropna()
+    out["vix_pct252"] = (vix.rolling(c["vix_pct_window"], min_periods=c["vix_pct_window"] // 2).rank(pct=True) * 100).reindex(out.index)
+    n500 = px["nifty500"].dropna()
+    out["nifty500_ret20"] = (n500 / n500.shift(20) - 1).reindex(out.index)
     b = breadth.set_index("date").sort_index()
     ad = (b["advances"] - b["declines"]) / b["n"].where(b["n"] > 0)
     out["breadth10"] = ad.rolling(c["breadth_window"], min_periods=c["breadth_window"]).mean().reindex(out.index)

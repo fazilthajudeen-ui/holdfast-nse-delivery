@@ -1,0 +1,119 @@
+{
+  "features_v1": 80,
+  "missing_feature_columns": [],
+  "tier1_eligible_counts": {
+    "all": {
+      "test": 4273,
+      "train": 5075,
+      "validation": 1979,
+      "nan": 282
+    },
+    "broad": {
+      "test": 1796,
+      "train": 2102,
+      "validation": 978,
+      "nan": 131
+    },
+    "strict": {
+      "test": 29,
+      "train": 38,
+      "validation": 15,
+      "nan": 1
+    }
+  },
+  "tier1_all_counts": {
+    "all": 14837,
+    "broad": 6115,
+    "strict": 112
+  },
+  "tier2_only_eligible_counts": {
+    "broad": 6864,
+    "strict": 229
+  },
+  "exclusions_tier1": {
+    "excl_ban": 331,
+    "excl_earnings": 2937,
+    "excl_price": 179,
+    "excl_listing": 0,
+    "excl_history": 1162
+  },
+  "class_balance": {
+    "all": {
+      "label_10": 0.249,
+      "label_20": 0.3039,
+      "label_60": 0.3128,
+      "vol_exp": 0.1723,
+      "labels_incomplete_10": 5
+    },
+    "broad": {
+      "label_10": 0.2616,
+      "label_20": 0.3118,
+      "label_60": 0.3206,
+      "vol_exp": 0.1907,
+      "labels_incomplete_10": 4
+    },
+    "strict": {
+      "label_10": 0.241,
+      "label_20": 0.3253,
+      "label_60": 0.3494,
+      "vol_exp": 0.2651,
+      "labels_incomplete_10": 0
+    }
+  },
+  "power": {
+    "all_trainval": {
+      "n": 7054,
+      "base_rate": 0.2491,
+      "H1_mde_pp": 2.91,
+      "H2_mde_pp": 2.89,
+      "H4_mde_auc": 0.0225
+    },
+    "all_test": {
+      "n": 4273,
+      "base_rate": 0.2488,
+      "H1_mde_pp": 3.76,
+      "H2_mde_pp": 3.71,
+      "H4_mde_auc": 0.0289
+    },
+    "broad_trainval": {
+      "n": 3080,
+      "base_rate": 0.2679,
+      "H1_mde_pp": 4.49,
+      "H2_mde_pp": 4.47,
+      "H4_mde_auc": 0.0332
+    },
+    "broad_test": {
+      "n": 1796,
+      "base_rate": 0.2483,
+      "H1_mde_pp": 6.26,
+      "H2_mde_pp": 5.71,
+      "H4_mde_auc": 0.0446
+    },
+    "strict_trainval": {
+      "n": 53,
+      "base_rate": 0.2453,
+      "H1_mde_pp": 33.6,
+      "H2_mde_pp": 33.41,
+      "H4_mde_auc": 0.2633
+    },
+    "strict_test": {
+      "n": 29,
+      "base_rate": 0.2414,
+      "H1_mde_pp": 52.02,
+      "H2_mde_pp": 44.55,
+      "H4_mde_auc": 0.3607
+    },
+    "strict_tier1or2_trainval": {
+      "n": 160,
+      "base_rate": 0.2313,
+      "H1_mde_pp": 18.82
+    },
+    "strict_tier1or2_test": {
+      "n": 144,
+      "base_rate": 0.2639,
+      "H1_mde_pp": 21.72
+    }
+  },
+  "power_rule": "Pre-registered rule: if the STRICT Tier-1 test set cannot detect a 10-pp H1 difference (H1_mde_pp > 10), H1 is additionally tested on Tier-2 STRICT events (secondary); standards are never lowered.",
+  "power_rule_triggered": true
+}
