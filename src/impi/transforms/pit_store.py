@@ -268,8 +268,9 @@ def build_small(changes: pd.DataFrame) -> dict:
     ban, _ = CA.apply_symbol_changes(ban, changes)
     # ban list for trade date D is published the previous trading day evening
     prev = {dates[i]: dates[i - 1] for i in range(1, len(dates))}
-    ban["available_at"] = [pd.Timestamp(prev.get(x.date(), x.date())) + release_offset("ban_list") + pd.Timedelta(days=1)
-                           for x in ban["date"]]
+    # first data day has no previous trading day in the data: use the previous calendar evening
+    ban["available_at"] = [pd.Timestamp(prev.get(x.date(), x.date() - dt.timedelta(days=1))) + release_offset("ban_list")
+                           + pd.Timedelta(days=1) for x in ban["date"]]
     ban.to_parquet(PIT / "ban.parquet", index=False)
     idx = pd.concat(idx, ignore_index=True)
     vix_files = idx[idx["index"] == "india_vix"][["date", "close"]]
