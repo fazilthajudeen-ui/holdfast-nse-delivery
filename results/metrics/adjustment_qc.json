@@ -1,63 +1,29 @@
 {
-  "actions_applied": 590,
+  "actions_applied": 1442,
   "methods": {
-    "gap_snap": 298,
-    "nse_confirmed_gap": 251,
-    "demerger_gap": 41
+    "nse_confirmed_gap": 840,
+    "gap_snap": 468,
+    "demerger_gap": 132,
+    "demerger_gap_close": 1,
+    "nse_confirmed_gap_close": 1
   },
   "not_applied": {
-    "mass_gap_day_not_adjusted": 2453,
-    "no_trading_near_ex": 693,
-    "unexplained_gap_not_adjusted": 77,
-    "unconfirmed": 33,
-    "no_trading_after_ex": 6
+    "unexplained_gap_not_adjusted": 558,
+    "unconfirmed": 55,
+    "no_trading_near_ex": 6,
+    "no_trading_after_ex": 3
   },
-  "remaining_abs_moves_gt_30pct": 4229,
+  "remaining_abs_moves_gt_30pct": 2898,
   "examples_remaining": [
     {
-      "date": "2019-09-25",
-      "symbol": "VIJIFIN",
-      "ret": "-0.9967245332459875"
+      "date": "2021-02-17",
+      "symbol": "HDFCGOLD",
+      "ret": "-0.9901461574728901"
     },
     {
-      "date": "2019-09-25",
-      "symbol": "TVVISION",
-      "ret": "-0.9947997919916797"
-    },
-    {
-      "date": "2019-09-30",
-      "symbol": "AIFL",
-      "ret": "-0.9941373534338358"
-    },
-    {
-      "date": "2024-07-04",
-      "symbol": "FSC",
-      "ret": "-0.99397378203874"
-    },
-    {
-      "date": "2019-09-25",
-      "symbol": "ORTEL",
-      "ret": "-0.9936177359758146"
-    },
-    {
-      "date": "2024-07-04",
-      "symbol": "FLFL",
-      "ret": "-0.9933246538051841"
-    },
-    {
-      "date": "2019-09-25",
-      "symbol": "ARCOTECH",
-      "ret": "-0.9932517263025737"
-    },
-    {
-      "date": "2024-07-08",
-      "symbol": "FRETAIL",
-      "ret": "-0.9925632911392405"
-    },
-    {
-      "date": "2019-09-25",
-      "symbol": "SABTN",
-      "ret": "-0.99067055393586"
+      "date": "2022-01-06",
+      "symbol": "SETFGOLD",
+      "ret": "-0.9900585687625442"
     },
     {
       "date": "2026-03-06",
@@ -65,29 +31,64 @@
       "ret": "-0.9900567984557486"
     },
     {
+      "date": "2019-12-19",
+      "symbol": "GOLDBEES",
+      "ret": "-0.9900136921062032"
+    },
+    {
+      "date": "2021-03-25",
+      "symbol": "GOLDBETA",
+      "ret": "-0.989992082735415"
+    },
+    {
+      "date": "2021-11-25",
+      "symbol": "BSLGOLDETF",
+      "ret": "-0.9899624021247974"
+    },
+    {
       "date": "2026-04-30",
       "symbol": "IVZINGOLD",
       "ret": "-0.9898106462123375"
     },
     {
-      "date": "2019-09-25",
-      "symbol": "KWALITY",
-      "ret": "-0.9889845094664371"
+      "date": "2020-07-23",
+      "symbol": "GOLDAXIS",
+      "ret": "-0.9880126399670262"
     },
     {
-      "date": "2024-07-04",
-      "symbol": "DHARAN",
-      "ret": "-0.9885044323706034"
+      "date": "2020-12-23",
+      "symbol": "AURUM",
+      "ret": "-0.9876223811697864"
     },
     {
-      "date": "2019-09-25",
-      "symbol": "MANPASAND",
-      "ret": "-0.987849675049449"
+      "date": "2021-12-16",
+      "symbol": "QGOLDHALF",
+      "ret": "-0.979757085020243"
     },
     {
-      "date": "2019-09-30",
-      "symbol": "LEEL",
-      "ret": "-0.9865370231862378"
+      "date": "2023-09-15",
+      "symbol": "SARVESHWAR",
+      "ret": "-0.9662418188081295"
+    },
+    {
+      "date": "2023-02-24",
+      "symbol": "VINNY",
+      "ret": "-0.9543822913550704"
+    },
+    {
+      "date": "2024-04-04",
+      "symbol": "CUPID",
+      "ret": "-0.9475099219050058"
+    },
+    {
+      "date": "2024-07-05",
+      "symbol": "VERTOZ",
+      "ret": "-0.9474872541879097"
+    },
+    {
+      "date": "2022-02-22",
+      "symbol": "SBC",
+      "ret": "-0.9474576271186441"
     }
   ]
 }

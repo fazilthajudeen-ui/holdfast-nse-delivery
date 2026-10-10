@@ -147,11 +147,14 @@ def build_equity(changes: pd.DataFrame) -> dict:
             df = df[df["series"].isin(chain)].drop(columns=["isin"])
             # D-040: NSE's DELIV_PER must agree with DELIV_QTY / volume (rounding is 0.005 pt). Inconsistent
             # rows are blanked; if most of a day is inconsistent (e.g. 2026-09-11) the whole day is blanked.
+            for c_ in ["deliv_qty", "deliv_pct", "volume", "turnover_rs", "trades"]:
+                df[c_] = df[c_].astype("float64")           # pandas 3 will not put NaN into int columns
             calc = df["deliv_qty"] / df["volume"] * 100
             bad = calc.notna() & df["deliv_pct"].notna() & ((calc - df["deliv_pct"]).abs() > 0.5)
             iseq = df["series"].isin(keep)
             if bad[iseq].mean() > 0.5:
-                df.loc[:, ["deliv_qty", "deliv_pct"]] = np.nan
+                df["deliv_qty"] = np.nan
+                df["deliv_pct"] = np.nan
                 qc.setdefault("delivery_blanked_days", []).append(d.isoformat())
             elif bad.any():
                 df.loc[bad, ["deliv_qty", "deliv_pct"]] = np.nan

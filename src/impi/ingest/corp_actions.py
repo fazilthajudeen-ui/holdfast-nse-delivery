@@ -18,7 +18,7 @@ REF = RAW / "reference"
 _BONUS = re.compile(r"bonus[^0-9]{0,20}(\d+(?:\.\d+)?)\s*:\s*(\d+(?:\.\d+)?)", re.I)
 # bonus of preference shares / NCRPS / debentures does not change the equity share count
 _NON_EQUITY_BONUS = re.compile(r"preference|ncrps|\bncd|debenture|redeemable|warrant", re.I)
-_FV_KEYWORD = re.compile(r"split|sub-?division|consolidat", re.I)
+_FV_KEYWORD = re.compile(r"spli?t|sub-?division|consolidat|\bfv\b|face\s*val", re.I)   # incl. "Fv Splt Frm Rs 10 To Rs 2"
 _FV = re.compile(r"(\d+(?:\.\d+)?)\D{0,30}?\bto\b\D{0,25}?(\d+(?:\.\d+)?)", re.I)
 _DEMERGER = re.compile(r"demerger|spin.?off|scheme of arrangement|capital reduction", re.I)
 

@@ -137,6 +137,8 @@ def merge_legacy(cm: pd.DataFrame, mto: pd.DataFrame | None) -> pd.DataFrame:
     else:
         m = mto.drop_duplicates(["symbol", "series"])
         out = out.merge(m, on=["symbol", "series"], how="left")
+        for c in ["deliv_qty", "deliv_pct", "mto_volume"]:
+            out[c] = out[c].astype("float64")
         bad = out["mto_volume"].notna() & (out["mto_volume"] != out["volume"])
         out.loc[bad, ["deliv_qty", "deliv_pct"]] = np.nan
         out = out.drop(columns=["mto_volume"])

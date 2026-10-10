@@ -111,6 +111,7 @@ def test_corporate_action_subjects():
         "Consolidation Of Equity Shares From Re 1 Per Share To Rs 10 Per Share": ("consolidation", 10.0),
         "Annual General Meeting/Dividend - Rs 10 Per Share/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share": ("split", 0.1),
         "Scheme Of Demerger": ("demerger", None),
+        " Fv Splt Frm Rs 10 To Rs 2": ("split", 0.2),
         "Bonus Preference Shares 21:1": (None, None),
         "Dividend - Rs 5 Per Share": (None, None),
     }

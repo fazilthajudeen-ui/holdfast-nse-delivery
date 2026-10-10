@@ -7,8 +7,9 @@ Method (D-006):
     A record is APPLIED only when the observed opening gap g = open_T / close_(T-1) on the ex-date
     (or the next 2 trading days) is within +/-20% of f ("confirmed"). Unconfirmed records are logged.
  2. Demerger / scheme records: applied with f = g when g < 0.97 (the price really dropped); else logged.
- 3. Gap-only: an opening gap < 0.6 or > 1.6 with no NSE record within 5 trading days is snapped to a
-    standard ratio within 3% (gap_snap); otherwise logged as unexplained and NOT adjusted.
+ 3. Gap-only: an opening gap < 0.6 with no NSE record within 5 trading days, on a day following a normal
+    trading day, is snapped to a standard split/bonus ratio within 3% (gap_snap); everything else
+    (incl. unexplained upward jumps and gaps after suspensions) is logged and NOT adjusted.
     If > 5% of stocks gap on one day it is a missing session, not corporate actions.
  Prices before the adjustment date are multiplied by the product of later factors; quantities
  (volume, delivery qty, F&O OI in shares) are divided by it. Ratios (delivery %, basis, PCR) are
@@ -59,6 +60,12 @@ def gap_table() -> pd.DataFrame:
     g["gap"] = o / g["prev_close_own"]
     g["gap_close"] = g["close"] / g["prev_close_own"]
     g["row"] = g.groupby("symbol", observed=True).cumcount().astype("int32")
+    # did the stock also trade on the previous MARKET day? (False after a suspension / relisting)
+    cal = np.sort(g["date"].unique())
+    pos = np.searchsorted(cal, g["date"].to_numpy())
+    prev_pos = g.groupby("symbol", observed=True)["date"].shift(1)
+    pp = np.searchsorted(cal, prev_pos.fillna(g["date"]).to_numpy())
+    g["consec"] = (pos - pp == 1) & prev_pos.notna().to_numpy()
     return g
 
 
@@ -98,10 +105,15 @@ def detect_actions(g: pd.DataFrame, ca: pd.DataFrame) -> tuple[pd.DataFrame, pd.
                 if done:
                     break
         if not done and (grp["kind"] == "demerger").any():
-            gv = cands.iloc[0]["gap"]
+            gv, gc = cands.iloc[0]["gap"], cands.iloc[0]["gap_close"]
+            method = "demerger_gap"
+            # old bhavcopies sometimes print a stale pre-open band price as the ex-date OPEN (ADANIENT
+            # 2015-06-03: open = 0.90 x previous close, close = 0.17 x) -> use close-to-close then
+            if np.isfinite(gc) and np.isfinite(gv) and gc < 0.8 * gv:
+                gv, method = gc, "demerger_gap_close"
             if np.isfinite(gv) and gv < DEMERGER_MAX_GAP:
                 applied.append({"symbol": sym, "adj_date": cands.iloc[0]["date"], "factor": float(gv),
-                                "method": "demerger_gap", "kind": "demerger", "gap": float(gv),
+                                "method": method, "kind": "demerger", "gap": float(gv),
                                 "ex_date": ex, "subject": grp["subject"].iloc[0]})
                 done = True
         if not done:
@@ -129,7 +141,10 @@ def detect_actions(g: pd.DataFrame, ca: pd.DataFrame) -> tuple[pd.DataFrame, pd.
         ratios = np.array(STANDARD)
         err = np.abs(r["gap"] / ratios - 1)
         k = int(err.argmin())
-        if err[k] < SNAP_TOL:
+        consec = bool(r["consec"]) if "consec" in r else True
+        # only downward ratios (splits/bonuses) and only without a trading gap: an unexplained overnight
+        # doubling, or a jump after a suspension, is treated as a real price move (D-006)
+        if err[k] < SNAP_TOL and ratios[k] < 1 and consec:
             applied.append({"symbol": r["symbol"], "adj_date": r["date"], "factor": float(ratios[k]),
                             "method": "gap_snap", "kind": "unlisted", "gap": float(r["gap"]),
                             "ex_date": r["date"], "subject": ""})

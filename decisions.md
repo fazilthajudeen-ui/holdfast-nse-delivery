@@ -210,3 +210,16 @@ definition is kept exactly; the pre-registered power rule adds Tier-2 STRICT; ST
 reported in full but are expected to be underpowered, so the BROAD family (compression breakouts)
 carries the inferential weight. This was written into the pre-registration before any test was run.
 The P7 grid (k = 2/3/5 × depth × volume × base length) reports how counts move with the parameters.
+
+**D-006 (refined on the full data, 10 Oct 2026)** — (a) gap-only snaps are applied only for DOWNWARD
+standard ratios (splits/bonuses) and only when the stock also traded on the previous market day: 367
+unexplained overnight "doublings" were illiquid stocks reopening after suspensions, not consolidations
+(NSE lists only 2 consolidations in 12 years), so they are left as real moves; (b) for demerger records,
+when the close-to-close ratio is far below the open gap (< 0.8×), the ex-date OPEN in old bhavcopies is a
+stale pre-open band price and the close-to-close ratio is used (ADANIENT 2015-06-03: open 0.90×, close
+0.17×); (c) abbreviated NSE subjects such as "Fv Splt Frm Rs 10 To Rs 2" are parsed (ICIL 2016-11-11).
+Final: 1,442 adjustments (840 NSE-confirmed, 468 gap-snapped splits/bonuses missing from NSE's API — all
+five on F&O stocks verified genuine, e.g. Bajaj Finance 2025-06-16, JSW Steel 2017-01-04 —, 133
+demergers); 622 logged and not adjusted. Remaining |daily move| > 30% on F&O stock-days: 55, all
+checked to be genuine events (Yes Bank 2020, DHFL, Jet Airways, Vodafone Idea, Infibeam 2018, PSU-bank
+recapitalisation rally 2017-10-25, PolicyBazaar 2026-09-24).
