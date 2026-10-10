@@ -187,7 +187,11 @@ def build_equity(changes: pd.DataFrame) -> dict:
 
 
 # ------------------------------------------------------------------ F&O
+FO_CACHE = PROCESSED / "cache" / "fo_agg"
+
+
 def _fo_for_date(d: dt.date) -> pd.DataFrame | None:
+    """Per-day F&O aggregate, cached by raw file (a pure function of that one raw file)."""
     last_legacy = config()["data"]["sources"]["fo_legacy"]["last_date"]
     order = [("fo_legacy", nse_fo.parse_legacy), ("fo_udiff", nse_fo.parse_udiff)]
     if d > last_legacy:
@@ -195,10 +199,24 @@ def _fo_for_date(d: dt.date) -> pd.DataFrame | None:
     for name, parser in order:
         p = raw_path(name, d)
         if p.exists():
+            cache = FO_CACHE / f"{name}_{d.isoformat()}.parquet"
+            if cache.exists() and cache.stat().st_mtime >= p.stat().st_mtime:
+                return pd.read_parquet(cache)
             agg = nse_fo.aggregate_stock(parser(p.read_bytes()))
             agg["source"] = name
+            cache.parent.mkdir(parents=True, exist_ok=True)
+            agg.to_parquet(cache, index=False)
             return agg
     return None
+
+
+def warm_fo_cache(workers: int = 2) -> int:
+    """Pre-compute per-day F&O aggregates for every F&O file already downloaded."""
+    dates = sorted({dt.date.fromisoformat(p.stem.rsplit("_", 1)[1])
+                    for name in ("fo_legacy", "fo_udiff") for p in (RAW / name).glob("*/*.zip")})
+    with ProcessPoolExecutor(max_workers=workers) as ex:
+        n = sum(1 for r in ex.map(_fo_for_date, dates, chunksize=16) if r is not None)
+    return n
 
 
 def build_fo(changes: pd.DataFrame, workers: int = 3) -> dict:
