@@ -271,3 +271,14 @@ IVs on the overlap days. 20-day targets added because the Delivery Lens pilot's 
 was at 20 days. Protocol, candidate grid, adoption rule and forward tests F1-F5 are fixed in
 `pre_registered_v3.md`, committed before any v3 model was trained. 2023+ results are post-hoc; the live
 track record (`data/track/predictions_v3.csv`) is the only confirmatory evidence.
+
+**D-048 · v3 results and deployment** (11 Oct 2026)
+Frozen v3 models (sha256 662c977e...), CV 2018-22 -> post-hoc 2023+ AUC: vol_exp 0.753 -> 0.765 (v2 0.742 -> 0.743);
+label_xs10 0.533 -> 0.529 (v2 0.525 -> 0.524); label_10 0.550 -> 0.524 (v2 0.538 -> 0.505; unstable by year 0.46-0.59,
+calibrated Brier no better than the base rate); label_xs20 0.534 -> 0.528; label_20 0.542 -> 0.499 (no skill; the terminal
+labels it "no edge in 2023+ test"). The pre-registered adoption rule selected v3 for vol_exp, label_xs10 and label_10.
+Top-decile minus average, after 0.45% costs: -0.23% per 10 days (xs10), -0.09% per 20 days (xs20): still not tradable.
+Run notes: a first training run stopped on +/-inf ratio features (now NaN); a reporting crash after the freeze was
+completed from the same frozen pickle (hash checked). Windows Application Control began blocking one unused sklearn
+binary on 11 Oct 2026; `impi._sklearn_compat` registers a placeholder for it (v2 models reproduce exactly).
+The live run now logs v3 predictions to data/track/predictions_v3.csv; v2 keeps logging unchanged.
