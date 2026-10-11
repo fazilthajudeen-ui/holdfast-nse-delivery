@@ -261,3 +261,13 @@ those exact files); refresh them manually if a stock is renamed after 10 Oct 202
 **D-046 · Calibrated probabilities are step functions** — isotonic calibration of a weak model maps many
 stocks to the same probability (e.g. breakout success 25.9%). The terminal and scanner therefore also show
 each model's within-day percentile, so the ordering stays visible while the honest probability is kept.
+
+**D-047 · v3: option-implied volatility and 20-day targets** (11 Oct 2026)
+Requested by the team to improve model performance. The F&O bhavcopy already holds every stock option's
+close and traded contracts, so implied volatility needs no new data source. Black-76 with the same-expiry
+future as the forward; only traded contracts (untraded ones carry stale closes); 30-day constant-maturity
+ATM IV, wings, term structure and option-volume ratios (`src/impi/v3/`). Legacy and UDiFF give identical
+IVs on the overlap days. 20-day targets added because the Delivery Lens pilot's only significant effect
+was at 20 days. Protocol, candidate grid, adoption rule and forward tests F1-F5 are fixed in
+`pre_registered_v3.md`, committed before any v3 model was trained. 2023+ results are post-hoc; the live
+track record (`data/track/predictions_v3.csv`) is the only confirmatory evidence.
