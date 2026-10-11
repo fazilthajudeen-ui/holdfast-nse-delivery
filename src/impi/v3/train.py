@@ -186,8 +186,8 @@ def posthoc_test(p, models):
         r["auc_by_year"] = {int(k): round(float(roc_auc_score(g["_y"], g["_s"])), 4) for k, g in yr if g["_y"].nunique() == 2}
         if t in FWD:
             h = int(FWD[t].split("_")[1])
-            dd = d.assign(_s=raw).rename(columns={FWD[t]: "_f"})
-            r["daily_ic"] = daily_ic(dd.rename(columns={"_f": "fwd_10"}), raw)
+            dd = d[["date", FWD[t]]].assign(_s=raw).rename(columns={FWD[t]: "_f"})
+            r["daily_ic"] = daily_ic(dd.rename(columns={"_f": "fwd_10"}), raw)   # daily_ic reads column "fwd_10"
             dd["_rk"] = dd.groupby("date")["_s"].rank(pct=True)
             spread = (dd[dd["_rk"] >= 0.9].groupby("date")["_f"].mean() - dd.groupby("date")["_f"].mean()).dropna()
             nonover = spread.iloc[::h]
@@ -201,7 +201,41 @@ def posthoc_test(p, models):
     return out
 
 
+def resume_posthoc(expected_sha: str) -> None:
+    """Crash recovery (11 Oct 2026): the run froze the models, then failed while scoring 2023+. Re-score the SAME
+    frozen pickle (sha256 checked) and rebuild the CV summary from that run's rows in results_log.csv."""
+    from impi.common import RESULTS_LOG
+    raw = V3_FILE.read_bytes()
+    sha = hashlib.sha256(raw).hexdigest()
+    if not sha.startswith(expected_sha):
+        raise SystemExit(f"frozen model hash {sha[:16]} != expected {expected_sha}")
+    models = pickle.loads(raw)
+    lg = pd.read_csv(RESULTS_LOG)
+    lg = lg[(lg["phase"] == "V3-posthoc") & lg["experiment"].str.startswith("cv_")]
+    dev = {}
+    for t in TARGETS:
+        rows = lg[lg["experiment"] == f"cv_{t}"].drop_duplicates("variant", keep="last")   # last = the completed run
+        res = [json.loads(x) for x in rows["details"]]
+        chosen = max(res, key=lambda r: r["mean_auc"])
+        no_opt = max((r for r in res if r["feature_set"] in ("v1_raw", "v1v2_raw")), key=lambda r: r["mean_auc"])
+        assert chosen["feature_set"] == models[t]["feature_set"] and chosen["model"] == models[t]["kind"], t
+        dev[t] = {"results": res, "chosen": chosen, "best_without_options": no_opt}
+    adopt = adoption(dev)
+    p = load_panel()
+    test = posthoc_test(p, models)
+    out = {"protocol": "IMPI v3 (pre_registered_v3.md): option-implied features + 20-day targets",
+           "cv": {t: d["results"] for t, d in dev.items()}, "chosen": {t: d["chosen"] for t, d in dev.items()},
+           "best_without_options": {t: d["best_without_options"] for t, d in dev.items()},
+           "adoption": adopt, "posthoc_test": test, "model_sha256": sha,
+           "note": "post-hoc scoring completed from the frozen pickle after a reporting crash (label_xs20 daily IC)"}
+    save_json(out, METRICS / "v3_models.json")
+    log("v3 post-hoc completed from frozen models")
+
+
 def main():
+    import sys
+    if len(sys.argv) > 2 and sys.argv[1] == "--resume-posthoc":
+        return resume_posthoc(sys.argv[2])
     t0 = time.time()
     p = load_panel()
     log(f"panel loaded: {p.shape}")

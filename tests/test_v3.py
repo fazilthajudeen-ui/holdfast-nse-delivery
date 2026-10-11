@@ -75,3 +75,21 @@ def test_option_features_no_look_ahead():
         part = option_features(h.iloc[:cut].copy())
         pd.testing.assert_frame_equal(part.reset_index(drop=True), full.iloc[:cut].reset_index(drop=True),
                                       check_exact=False, rtol=1e-9, atol=1e-12)
+
+
+def test_forward_tests_detect_skill_and_its_absence():
+    from impi.live import forward_tests
+    r = np.random.default_rng(5)
+    rows = []
+    for d in pd.bdate_range("2026-10-12", periods=40):
+        n = 150
+        y = r.random(n) < 0.3
+        good = y + r.normal(0, 0.8, n)                       # informative score
+        noise = r.normal(0, 1, n)                            # pure noise
+        rows.append(pd.DataFrame({"date": d, "symbol": [f"S{i}" for i in range(n)], "vol_exp": y.astype(float),
+                                  "raw3_vol_exp": good, "raw2_vol_exp": noise, "label_xs20": y.astype(float),
+                                  "raw3_label_xs20": noise, "label_20": np.nan, "label_xs10": np.nan}))
+    t = forward_tests(pd.concat(rows, ignore_index=True))
+    assert t["F1"]["supported"] and t["F2"]["supported"]     # skilled v3 beats noisy v2, and beats 0.5
+    assert not t["F3"]["supported"]                          # noise score has no skill
+    assert "F4" not in t and "F5" not in t                   # nothing matured -> not evaluated

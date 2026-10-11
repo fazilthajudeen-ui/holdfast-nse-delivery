@@ -119,15 +119,21 @@ def day_features(c: pd.DataFrame) -> pd.DataFrame:
     o["T"] = np.maximum(o["dte"], 0.5) / 365.0
     o["iv"] = implied_vol(o["close"].to_numpy(), o["F"].to_numpy(), o["strike"].to_numpy(), o["T"].to_numpy(),
                           (o["opt"] == "CE").to_numpy())
-    o = o.dropna(subset=["iv"])
+    o = o.dropna(subset=["iv"]).sort_values(["symbol", "expiry"], kind="stable")
+    syms_o = o["symbol"].to_numpy()
+    exp_o, dte_o = o["expiry"].to_numpy(), o["dte"].to_numpy()
+    k_o, iv_o = o["k"].to_numpy(), o["iv"].to_numpy()
+    starts = np.flatnonzero(np.r_[True, syms_o[1:] != syms_o[:-1]]) if len(o) else np.array([], int)
+    ends = np.r_[starts[1:], len(o)]
     rows = []
-    for sym, g in o.groupby("symbol", sort=False):
-        exps = sorted(g["expiry"].unique())
-        per = {}
-        for e in exps[:3]:
-            ge = g[g["expiry"] == e]
-            per[e] = (int(ge["dte"].iloc[0]), _atm(ge["k"].to_numpy(), ge["iv"].to_numpy()))
-        usable = [(e, dte, iv) for e, (dte, iv) in per.items() if dte >= 3 and np.isfinite(iv)]
+    for a, b in zip(starts, ends):
+        sym = syms_o[a]
+        ex = exp_o[a:b]
+        e0 = np.flatnonzero(np.r_[True, ex[1:] != ex[:-1]])
+        e1 = np.r_[e0[1:], b - a]
+        per = [(ex[c0], int(dte_o[a + c0]), _atm(k_o[a + c0:a + c1], iv_o[a + c0:a + c1]))
+               for c0, c1 in list(zip(e0, e1))[:3]]
+        usable = [(e, dte, iv) for e, dte, iv in per if dte >= 3 and np.isfinite(iv)]
         near = usable[0] if usable else (None, np.nan, np.nan)
         nxt = usable[1] if len(usable) > 1 else (None, np.nan, np.nan)
         iv30 = np.nan
@@ -141,12 +147,13 @@ def day_features(c: pd.DataFrame) -> pd.DataFrame:
         elif np.isfinite(near[2]):
             iv30 = near[2]
         main = near[0] if (near[0] is not None and near[1] >= 7) else (nxt[0] if nxt[0] is not None else near[0])
-        gm = g[g["expiry"] == main] if main is not None else g.iloc[:0]
-        pw = gm.loc[(gm["k"] >= -0.15) & (gm["k"] <= -0.05), "iv"]
-        cw = gm.loc[(gm["k"] >= 0.05) & (gm["k"] <= 0.15), "iv"]
+        sel = (ex == main) if main is not None else np.zeros(b - a, bool)
+        km, ivm = k_o[a:b][sel], iv_o[a:b][sel]
+        pw = ivm[(km >= -0.15) & (km <= -0.05)]
+        cw = ivm[(km >= 0.05) & (km <= 0.15)]
         rows.append({"symbol": sym, "iv_near": near[2], "iv_next": nxt[2], "iv30": iv30, "dte_near": near[1],
                      "dte_next": nxt[1], "iv_put_wing": pw.mean() if len(pw) else np.nan,
-                     "iv_call_wing": cw.mean() if len(cw) else np.nan, "n_iv_main": int(len(gm))})
+                     "iv_call_wing": cw.mean() if len(cw) else np.nan, "n_iv_main": int(sel.sum())})
     out = pd.DataFrame(rows, columns=[c_ for c_ in OUT_COLS if c_ not in ("date", "call_contracts", "put_contracts", "fut_contracts")])
     syms = pd.Index(sorted(set(fut["symbol"]) | set(out["symbol"])), name="symbol")
     out = out.set_index("symbol").reindex(syms)

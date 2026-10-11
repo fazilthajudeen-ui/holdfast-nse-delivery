@@ -87,7 +87,8 @@ def build(out_path=None) -> pd.DataFrame:
     med = p[p["eligible"]].groupby("date")["fwd_20"].median()
     p["label_xs20"] = np.where(p["fwd_20"].notna(), (p["fwd_20"] > p["date"].map(med)).astype(float), np.nan)
     for c in OPT + ["fwd_20", "label_20", "label_xs20"]:
-        p[c] = p[c].astype("float32")
+        # ratios/z-scores with a zero denominator (e.g. rv20 = 0 for a halted stock) are undefined -> missing
+        p[c] = p[c].replace([np.inf, -np.inf], np.nan).astype("float32")
     p.to_parquet(out_path or PANEL_V3, index=False)
     cov = {c: round(float(p.loc[p["eligible"], c].notna().mean()), 3) for c in OPT}
     log(f"panel_v3: {p.shape} in {time.time() - t0:.0f}s; option-feature coverage (eligible rows): {cov}")
