@@ -59,6 +59,7 @@ def rebuild(end: dt.date, download: bool) -> None:
     if RESEARCH_MODELS_V3.exists():
         _run("impi.v3.options", env)
         _run("impi.v3.panel", env)
+        _run("impi.v4.signals", env)
 
 
 # ---------------------------------------------------------------- scoring + export (in-process, live env)
@@ -127,6 +128,7 @@ def export() -> dict:
             "oi_chg5", "oi_chg20", "oi_cot", "long_buildup", "short_covering", "short_buildup", "long_unwinding",
             "basis_ann", "log_pcr_oi", "ret_1", "ret_5", "ret_20", "ret_60", "dist_52w_high", "rv20", "rv20_pct252",
             "turnover_z20", "iv30", "iv_rv", "iv_term", "iv_skew", "iv_pct252", "iv_chg5", "log_pcr_vol"]
+    v4_rows, v4_market, track_v4 = v4_exports(as_of, hist_from)
     rows = []
     for r in today.itertuples(index=False):
         d = r._asdict()
@@ -137,6 +139,7 @@ def export() -> dict:
                "xs20_pct": d.get("xs20_pct"), "breakout20_pct": d.get("breakout20_pct"),
                "events": today_ev.get(d["symbol"], []), "explain": expl.get(d["symbol"], {})}
         row.update({k: d.get(k) for k in keep})
+        row["v4"] = v4_rows.get(d["symbol"])
         rows.append(row)
     APP.mkdir(parents=True, exist_ok=True)
     hist = recent[["date", "symbol"] + [c for c in ["p_label_10", "p_label_xs10", "p_vol_exp", "xs_pct", "p_label_xs20",
@@ -165,11 +168,126 @@ def export() -> dict:
     research = research_summary(shown)
     meta = {"as_of": as_of.strftime("%Y-%m-%d"), "generated": dt.datetime.now().isoformat(timespec="seconds"),
             "n_stocks": int(len(today)), "events_today": {f: int(sum(f in v for v in today_ev.values())) for f in ["all", "broad", "strict"]},
-            "models": research.get("models", {}), "disclaimer": DISCLAIMER, "track": track, "track_v3": track_v3}
+            "models": research.get("models", {}), "disclaimer": DISCLAIMER, "track": track, "track_v3": track_v3,
+            "track_v4": track_v4, "v4_market": v4_market}
     save_json(meta, APP / "meta.json")
     save_json(research, APP / "research.json")
     print(f"[{dt.datetime.now():%H:%M:%S}] export: as of {meta['as_of']}, {len(today)} stocks, events {meta['events_today']}", flush=True)
     return meta
+
+
+RESEARCH_END = "2026-10-09"           # v4 forward record starts on the first trading day after this
+V4_MIN = {"D1": ("dates", 60), "D2": ("dates", 60), "H2p": ("events", 1000), "V1": ("groups", 30), "C1": ("days", 750)}
+
+
+def v4_exports(as_of, hist_from):
+    """v4 (pre_registered_v4.md): today's signal values per stock, chart markers, market C1 state, forward log."""
+    import numpy as np
+    import pandas as pd
+
+    from impi.common import PROCESSED
+    f_sig = PROCESSED / "features" / "signals_v4.parquet"
+    f_mk = PROCESSED / "features" / "market_v4.parquet"
+    if not f_sig.exists() or not f_mk.exists():
+        return {}, None, None
+    sig = pd.read_parquet(f_sig)
+    sig = sig[sig["date"] >= hist_from - pd.Timedelta(days=800)].copy()
+    g = sig.groupby("date")
+    sig["sds_pct"] = g["sds"].rank(pct=True) * 100            # display only: within-day rank among F&O stocks
+    sig["d1_pct"] = g["deliv_z20"].rank(pct=True) * 100
+    tod = sig[sig["date"] == as_of]
+    rows = {}
+    for r in tod.itertuples(index=False):
+        sp = r.sds_pct
+        rows[r.symbol] = {
+            "deliv_z20": None if pd.isna(r.deliv_z20) else round(float(r.deliv_z20), 3),
+            "move_pct": None if pd.isna(r.d1_pct) else round(float(r.d1_pct), 1),
+            "move_watch": bool(pd.notna(r.deliv_z20) and r.deliv_z20 >= 2),
+            "sds": None if pd.isna(r.sds) else round(float(r.sds), 3),
+            "sds_pct": None if pd.isna(sp) else round(float(sp), 1),
+            "flow": None if pd.isna(sp) else ("accumulation" if sp >= 90 else "distribution" if sp <= 10 else "neutral"),
+            "breakout_today": bool(r.b1_event), "divergent_breakout": bool(r.h2_exposed),
+            "loose_vcp_today": bool(r.v1_event), "loose_vcp_high_delivery": bool(r.v1_exposed)}
+    # chart markers: the FIRST day a stock enters each display state (keeps the chart readable)
+    sig = sig.sort_values(["symbol", "date"])
+    prev = sig.groupby("symbol")[["sds_pct", "deliv_z20"]].shift(1)
+    mk = []
+    for kind, now, before in [("acc", sig["sds_pct"] >= 90, prev["sds_pct"] >= 90),
+                              ("dist", sig["sds_pct"] <= 10, prev["sds_pct"] <= 10),
+                              ("move", sig["deliv_z20"] >= 2, prev["deliv_z20"] >= 2)]:
+        hit = sig[now.fillna(False) & ~before.fillna(False)]
+        mk.append(hit[["date", "symbol"]].assign(kind=kind))
+    mk.append(sig[sig["v1_event"]][["date", "symbol"]].assign(kind="lvcp"))
+    mk.append(sig[sig["h2_exposed"]][["date", "symbol"]].assign(kind="div"))
+    markers = pd.concat(mk, ignore_index=True)
+    markers.to_parquet(APP / "v4_markers.parquet", index=False)
+    mkt = pd.read_parquet(f_mk)
+    last = mkt[mkt["date"] <= as_of].iloc[-1] if (mkt["date"] <= as_of).any() else None
+    market = None if last is None else {"date": str(pd.Timestamp(last["date"]).date()),
+                                        "fii_fut_stk_cot": None if pd.isna(last["fii_fut_stk_cot"]) else float(last["fii_fut_stk_cot"]),
+                                        "c1_on": bool(last["c1_on"])}
+    track = update_track_v4(as_of, sig, mkt)
+    return rows, market, track
+
+
+def update_track_v4(as_of, sig, mkt) -> dict:
+    """Forward record (pre_registered_v4.md, Evaluation 2): log signals BEFORE outcomes exist (only dates after the
+    research data end), then evaluate each hypothesis once its pre-set minimum sample has matured."""
+    import pandas as pd
+
+    from impi.v4.stats import c1_test, family, ic_test, rate_test
+    TRACK.mkdir(parents=True, exist_ok=True)
+    f_s, f_m = TRACK / "predictions_v4.csv", TRACK / "predictions_v4_market.csv"
+    log_s = pd.read_csv(f_s, parse_dates=["date"]) if f_s.exists() else pd.DataFrame()
+    log_m = pd.read_csv(f_m, parse_dates=["date"]) if f_m.exists() else pd.DataFrame()
+    now = dt.datetime.now().isoformat(timespec="seconds")
+    if as_of > pd.Timestamp(RESEARCH_END):
+        if log_s.empty or not (log_s["date"] == as_of).any():
+            new = sig[sig["date"] == as_of][["date", "symbol", "eligible", "deliv_z20", "sds", "b1_event", "h2_exposed",
+                                             "v1_event", "v1_exposed"]].assign(logged_at=now)
+            log_s = pd.concat([log_s, new], ignore_index=True)
+            log_s.to_csv(f_s, index=False)
+        if log_m.empty or not (log_m["date"] == as_of).any():
+            new = mkt[mkt["date"] == as_of][["date", "fii_fut_stk_cot", "c1_on"]].assign(logged_at=now)
+            log_m = pd.concat([log_m, new], ignore_index=True)
+            log_m.to_csv(f_m, index=False)
+    out = {"starts_after": RESEARCH_END, "first_logged": None if log_s.empty else str(log_s["date"].min().date()),
+           "days_logged": 0 if log_s.empty else int(log_s["date"].nunique()), "predictions": int(len(log_s)), "tests": {}}
+    if log_s.empty:
+        (TRACK / "summary_v4.json").write_text(json.dumps(out, indent=2, default=str), encoding="utf-8")
+        return out
+    for c in ["eligible", "b1_event", "h2_exposed", "v1_event", "v1_exposed"]:
+        log_s[c] = log_s[c].astype(str).str.lower().eq("true")
+    outc = sig[["date", "symbol", "move20", "fwd_20", "label_20", "label_10"]]
+    j = log_s.merge(outc, on=["date", "symbol"], how="left")          # signal values come from the LOG, outcomes from now
+    j = j[j["eligible"]]
+    if not log_m.empty:
+        log_m["c1_on"] = log_m["c1_on"].astype(str).str.lower().eq("true")
+    jm = log_m.merge(mkt[["date", "n500_fwd60"]], on="date", how="left") if not log_m.empty else pd.DataFrame()
+    progress = {"D1": int(j.loc[j["move20"].notna(), "date"].nunique()), "D2": int(j.loc[j["fwd_20"].notna(), "date"].nunique()),
+                "H2p": int(j[j["b1_event"]]["label_20"].notna().sum()),
+                "V1": int(min(j[j["v1_event"] & j["v1_exposed"]]["label_10"].notna().sum(),
+                              j[j["v1_event"] & ~j["v1_exposed"]]["label_10"].notna().sum())),
+                "C1": 0 if jm.empty else int(jm["n500_fwd60"].notna().sum())}
+    ready = {k: progress[k] >= V4_MIN[k][1] for k in V4_MIN}
+    res = []
+    if ready["D1"]:
+        res.append(ic_test(j, "D1", "deliv_z20", "move20"))
+    if ready["D2"]:
+        res.append(ic_test(j, "D2", "sds", "fwd_20"))
+    if ready["H2p"]:
+        res.append(rate_test(j[j["b1_event"]], "H2p", "h2_exposed", "label_20"))
+    if ready["C1"]:
+        res.append(c1_test(jm))
+    if ready["V1"]:
+        res.append(rate_test(j[j["v1_event"]], "V1", "v1_exposed", "label_10"))
+    final = {r["hypothesis"]: r for r in family(res)} if res else {}
+    for k, (unit, need) in V4_MIN.items():
+        out["tests"][k] = {"progress": progress[k], "needed": need, "unit": unit,
+                           "status": "final" if ready[k] else f"waiting ({progress[k]}/{need} {unit} matured)",
+                           **({k2: final[k][k2] for k2 in ("estimate", "p", "bh_q", "supported") if k2 in final[k]} if k in final else {})}
+    (TRACK / "summary_v4.json").write_text(json.dumps(out, indent=2, default=str), encoding="utf-8")
+    return out
 
 
 def update_track(as_of, today, panel) -> dict:
@@ -321,7 +439,7 @@ def research_summary(shown: dict | None = None) -> dict:
     return {"v1_confirmatory": conf, "v1_ml_test": p6.get("ml_test"), "v1_backtests": p6.get("backtests"),
             "v1_spa": p6.get("spa"), "v1_walk_forward": p6.get("walk_forward"), "events": p2.get("tier1_eligible_counts"),
             "models": models, "v2_broad": (v2.get("posthoc_test") or {}).get("broad_events_label_10_auc"),
-            "v2_label": (v2.get("posthoc_test") or {}).get("label"), "v3": v3_summary}
+            "v2_label": (v2.get("posthoc_test") or {}).get("label"), "v3": v3_summary, "v4_check": load("v4_check.json") or None}
 
 
 def main(argv=None):

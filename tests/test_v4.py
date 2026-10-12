@@ -72,3 +72,24 @@ def test_c1_and_family():
                   {"hypothesis": "V1", "estimate": 0.1, "p": np.nan}])
     assert res[0]["supported"] and not res[1]["supported"]          # H2p expects a negative difference
     assert not res[2]["supported"] and res[2]["bh_q"] != res[2]["bh_q"]
+
+
+def test_forward_log_starts_after_research_end(tmp_path, monkeypatch):
+    import impi.live as live
+    monkeypatch.setattr(live, "TRACK", tmp_path)
+    days = pd.bdate_range("2026-10-07", periods=6)
+    rows = []
+    for d in days:
+        for i in range(40):
+            rows.append({"date": d, "symbol": f"S{i}", "eligible": True, "deliv_z20": float(i), "sds": float(-i),
+                         "b1_event": i % 10 == 0, "h2_exposed": i % 20 == 0, "v1_event": False, "v1_exposed": False,
+                         "move20": np.nan, "fwd_20": np.nan, "label_20": np.nan, "label_10": np.nan})
+    sig = pd.DataFrame(rows)
+    mkt = pd.DataFrame({"date": days, "fii_fut_stk_cot": 5.0, "c1_on": True, "n500_fwd60": np.nan})
+    out = live.update_track_v4(pd.Timestamp("2026-10-09"), sig, mkt)          # research end: nothing logged
+    assert out["predictions"] == 0 and not (tmp_path / "predictions_v4.csv").exists()
+    out = live.update_track_v4(pd.Timestamp("2026-10-12"), sig, mkt)
+    assert out["predictions"] == 40 and out["first_logged"] == "2026-10-12"
+    out = live.update_track_v4(pd.Timestamp("2026-10-12"), sig, mkt)          # same day again: not duplicated
+    assert out["predictions"] == 40
+    assert out["tests"]["D1"]["status"].startswith("waiting") and "estimate" not in out["tests"]["D1"]

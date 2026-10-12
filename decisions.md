@@ -290,3 +290,15 @@ D1 delivery -> move size, D2 signed delivery (gap x sign of daily return) -> dir
 all breakouts at 20 days, C1 Williams-style contrarian FII stock-futures COT at market level, V1 a looser
 VCP rule chosen from the train+validation grid. Rules only (nothing trained). Evaluated once on 2023-26
 ("rules fixed in advance, previously used period") and confirmatorily on the live forward record.
+
+**D-050 · v4 live, chart highlights, and operational fixes** (12 Oct 2026)
+v4 signals run nightly (impi.v4.signals in the live rebuild); signal values are logged before outcomes to
+data/track/predictions_v4.csv (+ _market.csv) from 12 Oct 2026 (213 F&O stocks) and evaluated in
+summary_v4.json once each pre-set minimum matures. Terminal: "Signals" toggle draws Acc/Dist (top/bottom 10%
+signed delivery), Move? (deliv_z20 >= 2), LVCP and Div markers, plus a v4 panel block; Market page: C1 card and
+C1 zone entries on the Nifty 500 chart; Research page: v4 table. Display thresholds are informational only.
+Operations: the laptop slept through the 12 Oct 19:30 run, so the task now also fires at log-on and on wake
+(scripts/should_run.py skips if the last success is newer than the latest weekday 19:30). Smart App Control
+began blocking pyarrow's Parquet DLL in the main Python (pyarrow 25.0.1): src/_pyenv.py puts the IMPI venv's
+numpy/pandas/pyarrow (pyarrow 26, not blocked) first on sys.path for Delivery Lens and the web app. A crashed
+Delivery Lens rebuild is now retried (scores older than the newest raw file -> rebuild).
