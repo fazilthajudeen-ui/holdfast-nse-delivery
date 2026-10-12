@@ -282,3 +282,11 @@ Run notes: a first training run stopped on +/-inf ratio features (now NaN); a re
 completed from the same frozen pickle (hash checked). Windows Application Control began blocking one unused sklearn
 binary on 11 Oct 2026; `impi._sklearn_compat` registers a placeholder for it (v2 models reproduce exactly).
 The live run now logs v3 predictions to data/track/predictions_v3.csv; v2 keeps logging unchanged.
+
+**D-049 · v4: delivery is direction-neutral; re-framed hypotheses** (12 Oct 2026)
+The team pointed out that every delivered share has a delivering seller, so delivery % shows conviction,
+not direction; v1's H1 wrongly treated delivery expansion as bullish. v4 (pre_registered_v4.md) tests
+D1 delivery -> move size, D2 signed delivery (gap x sign of daily return) -> direction, H2' divergence on
+all breakouts at 20 days, C1 Williams-style contrarian FII stock-futures COT at market level, V1 a looser
+VCP rule chosen from the train+validation grid. Rules only (nothing trained). Evaluated once on 2023-26
+("rules fixed in advance, previously used period") and confirmatorily on the live forward record.
