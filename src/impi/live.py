@@ -439,7 +439,8 @@ def research_summary(shown: dict | None = None) -> dict:
     return {"v1_confirmatory": conf, "v1_ml_test": p6.get("ml_test"), "v1_backtests": p6.get("backtests"),
             "v1_spa": p6.get("spa"), "v1_walk_forward": p6.get("walk_forward"), "events": p2.get("tier1_eligible_counts"),
             "models": models, "v2_broad": (v2.get("posthoc_test") or {}).get("broad_events_label_10_auc"),
-            "v2_label": (v2.get("posthoc_test") or {}).get("label"), "v3": v3_summary, "v4_check": load("v4_check.json") or None}
+            "v2_label": (v2.get("posthoc_test") or {}).get("label"), "v3": v3_summary, "v4_check": load("v4_check.json") or None,
+            "sub_2024": load("subperiod_2024_2026.json") or None}
 
 
 def main(argv=None):
