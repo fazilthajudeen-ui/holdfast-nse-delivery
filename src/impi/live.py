@@ -129,6 +129,7 @@ def export() -> dict:
             "basis_ann", "log_pcr_oi", "ret_1", "ret_5", "ret_20", "ret_60", "dist_52w_high", "rv20", "rv20_pct252",
             "turnover_z20", "iv30", "iv_rv", "iv_term", "iv_skew", "iv_pct252", "iv_chg5", "log_pcr_vol"]
     v4_rows, v4_market, track_v4 = v4_exports(as_of, hist_from)
+    track_v5 = update_track_v5(as_of)
     rows = []
     for r in today.itertuples(index=False):
         d = r._asdict()
@@ -169,7 +170,7 @@ def export() -> dict:
     meta = {"as_of": as_of.strftime("%Y-%m-%d"), "generated": dt.datetime.now().isoformat(timespec="seconds"),
             "n_stocks": int(len(today)), "events_today": {f: int(sum(f in v for v in today_ev.values())) for f in ["all", "broad", "strict"]},
             "models": research.get("models", {}), "disclaimer": DISCLAIMER, "track": track, "track_v3": track_v3,
-            "track_v4": track_v4, "v4_market": v4_market}
+            "track_v4": track_v4, "v4_market": v4_market, "track_v5": track_v5}
     save_json(meta, APP / "meta.json")
     save_json(research, APP / "research.json")
     print(f"[{dt.datetime.now():%H:%M:%S}] export: as of {meta['as_of']}, {len(today)} stocks, events {meta['events_today']}", flush=True)
@@ -287,6 +288,42 @@ def update_track_v4(as_of, sig, mkt) -> dict:
                            "status": "final" if ready[k] else f"waiting ({progress[k]}/{need} {unit} matured)",
                            **({k2: final[k][k2] for k2 in ("estimate", "p", "bh_q", "supported") if k2 in final[k]} if k in final else {})}
     (TRACK / "summary_v4.json").write_text(json.dumps(out, indent=2, default=str), encoding="utf-8")
+    return out
+
+
+V5_START = "2026-10-14"               # first trading day after the one-time v5 check (pre_registered_v5.md)
+V5_MIN_TRADES, V5_MIN_DAYS = 100, 250
+
+
+def update_track_v5(as_of) -> dict | None:
+    """v5 forward record (pre_registered_v5.md, Evaluation 2): log the frozen rule's new signals BEFORE their
+    outcomes exist. The final portfolio evaluation runs once >= 100 trades have closed over >= 250 days."""
+    import pandas as pd
+
+    from impi.v5.strategy import load_events, select
+    dev_file = RESEARCH_METRICS / "v5_dev.json"
+    if not dev_file.exists():
+        return None
+    rule = json.loads(dev_file.read_text(encoding="utf-8"))["chosen"]
+    TRACK.mkdir(parents=True, exist_ok=True)
+    f = TRACK / "predictions_v5.csv"
+    log_ = pd.read_csv(f, parse_dates=["date"]) if f.exists() else pd.DataFrame()
+    ev = load_events()
+    if as_of >= pd.Timestamp(V5_START) and (log_.empty or not (log_["date"] == as_of).any()):
+        new = select(ev[ev["date"] == as_of], rule)[["date", "symbol", "family", "dist_52w_high", "rs120"]]
+        new = new.assign(rule=rule, logged_at=dt.datetime.now().isoformat(timespec="seconds"))
+        log_ = pd.concat([log_, new], ignore_index=True)
+        log_.to_csv(f, index=False)
+    out = {"rule": rule, "starts": V5_START, "signals_logged": int(len(log_)),
+           "days_since_start": int(ev.loc[ev["date"] >= pd.Timestamp(V5_START), "date"].nunique())}
+    if not log_.empty:
+        j = log_.merge(ev[["date", "symbol", "family", "fwd_60"]], on=["date", "symbol", "family"], how="left")
+        out["closed"] = int(j["fwd_60"].notna().sum())
+        out["mean_ret_closed_before_costs"] = float(j["fwd_60"].mean()) if out["closed"] else None
+    ready = out.get("closed", 0) >= V5_MIN_TRADES and out["days_since_start"] >= V5_MIN_DAYS
+    out["status"] = "ready for the final evaluation" if ready else \
+        f"waiting ({out.get('closed', 0)}/{V5_MIN_TRADES} closed trades, {out['days_since_start']}/{V5_MIN_DAYS} days)"
+    (TRACK / "summary_v5.json").write_text(json.dumps(out, indent=2, default=str), encoding="utf-8")
     return out
 
 

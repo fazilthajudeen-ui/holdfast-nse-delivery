@@ -302,3 +302,16 @@ Operations: the laptop slept through the 12 Oct 19:30 run, so the task now also 
 began blocking pyarrow's Parquet DLL in the main Python (pyarrow 25.0.1): src/_pyenv.py puts the IMPI venv's
 numpy/pandas/pyarrow (pyarrow 26, not blocked) first on sys.path for Delivery Lens and the web app. A crashed
 Delivery Lens rebuild is now retried (scores older than the newest raw file -> rebuild).
+
+**D-051 · v5 breakout strategy improvement study** (14 Oct 2026)
+The team asked for better results. Re-tuning on the already-used 2023-26 test period was declined (it would
+overstate performance); instead v5 was pre-registered (pre_registered_v5.md, c530563): a fixed 120-variant
+grid (event set x market filter x stock filter x exit rule, no delivery filter so v4's V1 finding cannot leak),
+one variant chosen on 2015-22 only by max min(train Sharpe, validation Sharpe) (e540c6f), then one post-hoc
+2023-26 check (c7bceba). Development: 1 of 120 variants positive in both periods; the +2/-1 ATR exits lose in
+every combination, 60-day time exits do best. Chosen BROAD|M0|S2|T60 (compression breakout, 120-day strength
+in the top 30%, hold 60 days). 2023-26 (post-hoc): CAGR +10.5% vs Nifty 500 +9.4% on the same days, Sharpe
+0.35 vs 0.30, max DD -19.7% vs -18.8%, PF 1.47, 269 trades, 54.7% of trades up before costs; SPA p 0.35,
+deflated Sharpe ~0 (384 trials) -> "no reliable improvement" under the pass rule. The rule is frozen and
+logged nightly from 14 Oct 2026 (data/track/predictions_v5.csv, summary_v5.json); final evaluation at >= 100
+closed trades and >= 250 trading days (~late 2027).
