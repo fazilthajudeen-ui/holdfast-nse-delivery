@@ -10,11 +10,11 @@ CAFSZL+txmiaX                          Type1           yes  yes  p1
 CKEQVD+STIXGeneral-Regular             Type0//CIDFontT yes  yes  p3 (figure)
 DDIEWW+TeXGyreTermesX-Regular          Type1           yes  yes  p1
 DSQSEB+STIXGeneral-Regular             Type0//CIDFontT yes  yes  p3 (figure)
+ECYQRC+STIXGeneral-Regular             Type0//CIDFontT yes  yes  p4 (figure)
 FFHHJL+STIXGeneral-Regular             Type0//CIDFontT yes  yes  p4 (figure)
 FKPJSN+NewTXMI7                        Type1           yes  yes  p3
 FOHVCW+STIXGeneral-Regular             Type0//CIDFontT yes  yes  p5 (figure)
 FSOWWS+STIXGeneral-Regular             Type0//CIDFontT yes  yes  p4 (figure)
-GVVQSK+STIXGeneral-Regular             Type0//CIDFontT yes  yes  p4 (figure)
 IHAIZV+TeXGyreTermes-Regular-Identity- Type0//CIDFontT yes  yes  p1
 IXFAWU+TeXGyreTermes-Bold-Identity-H   Type0//CIDFontT yes  yes  p1
 QFLJUN+STIXGeneral-Italic              Type0//CIDFontT yes  yes  p3 (figure)

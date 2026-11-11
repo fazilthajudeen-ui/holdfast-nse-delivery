@@ -86,8 +86,7 @@ def t_dataset():
          ["Delivery coverage (worst year)", f"{100 * min(QC['delivery_coverage_by_year'].values()):.2f}\\%"],
          ["Corporate-action adjustments", f"{adj['actions_applied']:,}"]]
     return table("tab_dataset", "Dataset summary (official NSE files)", "tab:dataset",
-                 r"@{}>{\raggedright\arraybackslash}p{3.7cm}>{\raggedright\arraybackslash}p{4.4cm}@{}", r"\textbf{Item} & \textbf{Value}", r,
-                 note="Sources: results/metrics/qc\\_report.json, adjustment\\_qc.json, results/posthoc/paper\\_facts.json.")
+                 r"@{}>{\raggedright\arraybackslash}p{3.7cm}>{\raggedright\arraybackslash}p{4.4cm}@{}", r"\textbf{Item} & \textbf{Value}", r)
 
 
 def t_events():
@@ -316,7 +315,7 @@ def fig_ladder(plt):
                 return "+ML"
             if "composite" in rung:
                 return "+comp."
-            return {"base": "base", "all": "all BO", "broad": "BROAD", "strict": "STRICT"}.get(rung.split("_")[1], "")
+            return {"base": "base", "all": "all\nbreakouts", "broad": "BROAD", "strict": "STRICT"}.get(rung.split("_")[1], "")
         ax.set_xticklabels([f"{r['rung'].split('_')[0]}\n{short(r['rung'])}\n{r['n']:,}" for r in L], fontsize=8)
         ax.set_title(title, fontsize=8)
         ax.set_ylabel("success rate (%)")
