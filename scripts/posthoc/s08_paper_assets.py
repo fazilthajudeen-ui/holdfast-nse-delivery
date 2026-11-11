@@ -204,6 +204,17 @@ def t_backtests_short():
                       "All variants: supplementary Table~\\ref{tab:backtestsfull}.")
 
 
+# Concise descriptions of the listed commits (hashes and times still come from git / the audit JSON).
+SHORT = {"355cbe0": "Pipeline scaffolding: ingest, PIT store, features, labels",
+         "86ddfd7": "Corporate-action adjustment fixes (full data)",
+         "b5829b2": "Ban-list publication-time fix (look-ahead check)",
+         "15103f1": "Pre-registration (H1--H4, rules, power) and feature freeze",
+         "ea49def": "Training/validation results (P3--P5) and model freeze",
+         "359bcc7": "One-time test evaluation (P6) and lock file",
+         "e3dba33": "P7 robustness, report, paper draft",
+         "1fc97ae": "First post-hoc work (v2 models, live mode)"}
+
+
 def t_timeline():
     tl = S0["10_timeline"]
     keep = ["355cbe0", "86ddfd7", "b5829b2", "15103f1", "ea49def", "359bcc7", "e3dba33", "1fc97ae"]
@@ -214,8 +225,7 @@ def t_timeline():
     r = []
     for c in tl["v1_commits_in_order"] + [{"hash": h_, "committed": d_, "subject": s_}]:
         if c["hash"] in keep:
-            subj = c["subject"] if len(c["subject"]) <= 52 else c["subject"][:52].rsplit(" ", 1)[0].rstrip(",:;") + " \\ldots"
-            r.append([f"\\texttt{{{c['hash']}}}", c["committed"][11:16], esc(subj).replace(r"\textbackslash{}ldots", r"\ldots")])
+            r.append([f"\\texttt{{{c['hash']}}}", c["committed"][11:16], SHORT[c["hash"]]])
     p2_last = tl["phase_logs"]["p2.log"]["last"][1:6]                     # "[08:53:14] P2 summary ..."
     first_row = min(g["first"] for g in tl["trial_groups"])[11:16]
     started = tl["test_lock"]["attempts"][0]["started"][11:16]
@@ -283,7 +293,8 @@ def fig_ladder(plt):
     for ax, key, title in [(axes[0], "ladder_broad", "BROAD ladder (test)"), (axes[1], "ladder_strict", "STRICT ladder (test)")]:
         L = P6[key]
         for i, r in enumerate(L):
-            if r["n"] == 0 or r["success_rate"] is None:
+            if r["n"] < 2 or r["success_rate"] is None:          # no meaningful rate/interval: label instead of a bar
+                ax.text(i, 100 * L[0]["success_rate"] + 8, f"n={r['n']}\nnot shown", ha="center", fontsize=5, color="0.35")
                 continue
             lo, hi = wilson(r["success_rate"], r["n"])
             ax.errorbar(i, 100 * r["success_rate"], yerr=[[100 * (r["success_rate"] - lo)], [100 * (hi - r["success_rate"])]],

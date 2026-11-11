@@ -184,26 +184,56 @@ smaller effects cannot be ruled out. Equivalence within $\pm$2 pp is not establi
 
 \input{tables/tab_confirmatory}
 
+\subsection{Backtests (Pre-Registered)}
+After costs (Table~\ref{tab:backtests}; supplementary Fig.~\ref{fig:cagr}) all breakouts returned \CagrAll\% a
+year and BROAD \CagrBroad\%. The composite (\TradesComp{} trades) and the ML top decile (\TradesML{}
+trades)\footnote{Fewer trades than events because signals arriving while all \MaxPositions{} position slots
+are full are skipped (\GapSlotsFull{} ML top-decile signals).} returned \CagrComp\% and \CagrML\%, below the
+Nifty~500's \CagrNifty\% and close to the \CashRate\% a year that idle cash earns in the backtest; their
+Sharpe ratios of \SharpeComp{} and \SharpeML{} show no return above cash. SPA ($p=\SPAp$) and the Reality
+Check ($p=\RCp$) find no strategy beating the benchmark. Breakouts succeed less often than all eligible
+stock-days (\LadAll\% vs.\ \LadBase\%, Fig.~\ref{fig:ladder}).
+
+\input{tables/tab_backtests_short}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figs/fig_ladder.pdf}
+\caption{Pre-registered benchmark ladder in the test period: ten-day success rate with Wilson 95\% intervals;
+the dashed line is the base rate over all eligible stock-days. Rungs with fewer than two events are labelled,
+not plotted.}
+\label{fig:ladder}
+\end{figure}
+
 \subsection{Post-hoc Analyses}
-\emph{All analyses in this subsection were designed after the test set was opened; details in Tables~\ref{tab:audit} and~\ref{tab:robust} of the supplement.}
+\emph{All analyses in this subsection were designed after the test set was opened; details in
+Tables~\ref{tab:audit} and~\ref{tab:robust} of the supplement.}
 
 \textbf{Cost break-even.} A round trip costs \RoundTrip\% on average (\RTLarge--\RTSmall\%); successes return
 \AvgWin\% and failures \AvgLoss\% gross, so a success-rate change $d$ pays one round trip only if
 $d\ge\BreakEven$ pp. The 95\% intervals for H1 (\BEHOneLo{} to \BEHOneHi; month-block \BEHOneBLo{} to
 \BEHOneBHi), H1 without pilot (\BENPHOneLo{} to \BENPHOneHi) and H2 (\BEHTwoLo{} to \BEHTwoHi) lie inside
-$\pm$\BreakEven{} pp; H2 without pilot (\BENPHTwoLo{} to \BENPHTwoHi) reaches it. The composite top decile
-beats other BROAD events by \BECompTopDiff{} pp (\BECompTopLo{} to \BECompTopHi), excluding zero but not
-the break-even.
+$\pm$\BreakEven{} pp. H2 without the pilot window (\NPHTwoDiff{} pp; \BENPHTwoLo{} to \BENPHTwoHi) reaches
+the break-even. The composite top decile beats other BROAD events by \BECompTopDiff{} pp (\BECompTopLo{} to
+\BECompTopHi), excluding zero but not the break-even.
 
 \textbf{Placebo.} Shuffling delivery across stocks within each day \placeboDraws{} times gives a placebo H1
-effect of \placeboMean{} pp (SD \placeboSD); the actual \placeboActual{} pp sits at the \placeboPct{}th
-percentile (one-sided $p=\placeboP$; Fig.~\ref{fig:placebo}), so the test data show no stock-specific delivery information,
-unlike the earlier \PSevenDraws-draw training placebo (\PSevenActual{} pp).
+effect of \placeboMean{} pp (SD \placeboSD), not zero. The reason is in the exposure definition: delivery
+expansion is the 20-day mean delivery of a stock, as a $z$-score against that same series' own trailing
+year. Shuffling keeps each day's cross-section of delivery values, so the shuffled
+series still rises and falls with the market-wide delivery level, and the placebo exposure keeps a
+market-wide, time-varying component that can line up with period-to-period swings in success rates. The
+shuffle distribution is therefore not a clean null. Against it, the actual \placeboActual{} pp sits at the
+\placeboPct{}th percentile (one-sided $p=\placeboP$; Fig.~\ref{fig:placebo}), so the test data show no
+stock-specific delivery information beyond that market-wide component. On training and validation data the
+actual H1 effect had been \PSevenActual{} pp, larger than all \PSevenDraws{} placebo draws; the test data do
+not reproduce this.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figs/fig_placebo_hist.pdf}
-\caption{Post-hoc placebo on the test set: H1 effect under within-day shuffles of delivery across stocks, with the actual effect marked.}
+\caption{Post-hoc placebo on the test set: H1 effect under within-day shuffles of delivery across stocks,
+with the actual effect marked. The shuffle distribution is not centred at zero (see text).}
 \label{fig:placebo}
 \end{figure}
 
@@ -226,45 +256,35 @@ choices (bottom); the outlined dot is the pre-registered specification.}
 
 \textbf{Bayes factors.} BF$_{01}$ for H1 is \BFOneUni{} (uniform priors \cite{kass1995}) and \BFOneLogDef{}
 (unit-normal log-odds prior \cite{gronau2021}) but only \BFOneSkep--\BFOneLogSkep{} under skeptical priors;
-for H2 \BFTwoUni, \BFTwoLogDef{} and \BFTwoSkep--\BFTwoLogSkep, falling to \BFNPTwoSkep{} without the pilot
-window. The null is strongly favoured only under wide priors \cite{leewagenmakers2013}.
+for H2 \BFTwoUni, \BFTwoLogDef{} and \BFTwoSkep--\BFTwoLogSkep. Without the pilot window, H2 under the
+skeptical beta prior gives \BFNPTwoSkep{}, i.e.\ moderate evidence \emph{for} a difference. The null is
+strongly favoured only under wide priors \cite{leewagenmakers2013}.
 
 \textbf{Cluster-robust model.} With two-way date $\times$ stock clustering \cite{cameron2011}, the test-set
 interaction in \eqref{eq:logit} is $\beta_3=\EOneBThree$ [\EOneBThreeLo, \EOneBThreeHi] ($p=\EOneBThreeP$)
-for H1 and \ETwoBThree{} ($p=\ETwoBThreeP$) for H2; the H2 delivery term is \ETwoBTwo{} ($p=\ETwoBTwoP$).
+for H1 and \ETwoBThree{} ($p=\ETwoBThreeP$) for H2. The H2 model's delivery term, \ETwoBTwo{}
+($p=\ETwoBTwoP$), is a single post-hoc coefficient with no multiplicity adjustment.
 
 \textbf{Other checks.} Dropping the 5 sessions before each of \ExpN{} F\&O expiries leaves H1 at
-\ExpDiff{} pp ($p=\ExpP$); \FYearsSig{} of \FYears{} yearly H1 estimates are significant (supplementary Fig.~\ref{fig:forest}).
-Breakouts succeed less often than all stock-days (\LadAll\% vs.\ \LadBase\%, Fig.~\ref{fig:ladder}); same-day barrier
-ties are \GTieShareLoss\% of breakout losses, but day-one stop-outs are more common (\GDayOneBO\% vs.\
-\GDayOneNB\%) on wider next-day ranges.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figs/fig_ladder.pdf}
-\caption{Pre-registered benchmark ladder in the test period: ten-day success rate with Wilson 95\% intervals; the dashed line is the base rate over all eligible stock-days.}
-\label{fig:ladder}
-\end{figure}
-
-\subsection{Backtests (Pre-Registered)}
-After costs (Table~\ref{tab:backtests}; supplementary Fig.~\ref{fig:cagr}) all breakouts returned \CagrAll\% a year and BROAD
-\CagrBroad\%; the composite (\TradesComp{} trades) and ML top decile (\TradesML; \GapSlotsFull{} signals
-skipped for full slots) returned \CagrComp\% and \CagrML\%, all below the Nifty~500's \CagrNifty\%. SPA
-($p=\SPAp$) and the Reality Check ($p=\RCp$) find no strategy beating the benchmark.
-
-\input{tables/tab_backtests_short}
+\ExpDiff{} pp ($p=\ExpP$); \FYearsSig{} of \FYears{} yearly H1 estimates are significant (supplementary
+Fig.~\ref{fig:forest}). Same-day barrier ties are \GTieShareLoss\% of breakout losses, but breakouts are
+stopped out on day one more often (\GDayOneBO\% vs.\ \GDayOneNB\%) on wider next-day ranges.
 
 % =====================================================================================================
 \section{Discussion and Limitations}
 The pre-registered answer is no: delivery expansion, OI divergence and the FII/DII regime do not detectably
-change breakout success, and boosted trees do worse than a fixed composite, largely because market-wide
-positioning features drifted. The null is informative about large effects only: the detectable effect is
+change breakout success, and boosted trees do worse than a fixed composite, consistent with drift in
+market-wide positioning features. The null is informative about large effects only: the detectable effect is
 about \MDEHOne{} pp, $\pm$2 pp equivalence is not established, and Bayes factors favour the null strongly only
-under wide priors. Post hoc, the full-test intervals sit below the \BreakEven{} pp cost break-even. The
-specification curve qualifies this: the pre-registered specification is among the weakest, and stricter
-delivery thresholds or wider barriers give positive effects of a few pp, which may reflect information about
-move size rather than direction. Those effects are post-hoc, overlapping, mostly fail multiple-testing
-control and stay below break-even; they are leads, not findings.
+under wide priors. Post hoc, the full-test intervals sit below the \BreakEven{} pp cost break-even. One subset
+does not fit that picture: without the pilot window, H2 is \NPHTwoDiff{} pp ($p=\NPHTwoP$, $q=\NPHTwoQ$),
+its 95\% interval reaches the \BreakEven{} pp break-even, and the skeptical-prior Bayes factor is
+\BFNPTwoSkep, moderate evidence for H2. This is a subset of the pre-registered test that does not survive
+false-discovery control, examined post hoc; it is a lead, not a finding. The specification curve also
+qualifies the null: the pre-registered H1 specification is among the weakest, and stricter delivery
+thresholds or wider barriers give positive effects of a few pp, which may reflect information about move size
+rather than direction. Those effects are post-hoc, overlapping, mostly fail multiple-testing control and stay
+below break-even.
 
 \emph{Limitations.} Participant positions are market-wide only, futures positions may be hedges, and the
 ``Client'' class mixes retail and wealthy accounts. STRICT events are too rare for inference. The sample spans
@@ -277,16 +297,17 @@ many and were chosen after the result was known.
 With a survivorship-free NSE panel, hypotheses fixed in advance and a test set opened once, we find no support
 for the belief that delivery and futures-positioning footprints predict breakout success, and no strategy that
 beats the Nifty~500 after costs. Smaller effects remain possible, but on the full test set they are below what
-Indian costs require. Three leads need their own pre-registered tests on post-October-2026 data: (1) whether
+Indian costs require. Four leads need their own pre-registered tests on post-October-2026 data: (1) whether
 FIIs follow price in stock futures; (2) whether FII index-futures positioning precedes index returns; (3)
-whether stricter delivery thresholds predict breakout move size. We also plan a market-level
-regime-transition model using participant positioning to forecast volatility regimes, pre-registered and
-evaluated only on post-October-2026 data. Nothing here is investment advice.
+whether stricter delivery thresholds predict breakout move size; (4) whether price-up/OI-down divergence (H2)
+predicts breakout failure, as the post-hoc subset without the pilot window suggests. We also plan a
+market-level regime-transition model using participant positioning to forecast volatility regimes,
+pre-registered and evaluated only on post-October-2026 data. Nothing here is investment advice.
 
 \section*{Data and Code Availability}
 Inputs are public NSE end-of-day files, re-downloaded by the pipeline. Code, configuration, locked and
 post-hoc results, the supplementary material, the generators of every table, figure and number, and SHA-256
-checksums of the locked files are in the project repository (\texttt{impi/}).
+checksums of the locked files are available from the authors on request.
 
 \section*{Acknowledgment}
 The authors used Claude (Anthropic) via Claude Code to write and debug portions of the IMPI pipeline code,
@@ -295,6 +316,7 @@ results, and draft and edit text in all sections. The research question, hypothe
 sources and all interpretive decisions were made by the authors, who reviewed and verified all AI-generated
 code, text and figures and take full responsibility for the content of this paper.
 
+\FloatBarrier
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
 

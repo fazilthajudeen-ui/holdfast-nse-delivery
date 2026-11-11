@@ -58,7 +58,7 @@ HOneP,0.987,results/metrics/p6_test.json,"confirmatory[H1,BROAD].p"
 HOneQ,0.987,results/metrics/p6_test.json,"confirmatory[H1,BROAD].bh_q"
 HTwoExp,23.5,results/metrics/p6_test.json,"confirmatory[H2,BROAD].p1"
 HTwoRest,26.3,results/metrics/p6_test.json,"confirmatory[H2,BROAD].p2"
-HTwoDiff,\ensuremath{-}2.8,results/metrics/p6_test.json,"confirmatory[H2,BROAD].diff"
+HTwoDiff,\ensuremath{-}2.81,results/metrics/p6_test.json,"confirmatory[H2,BROAD].diff"
 HTwoP,0.171,results/metrics/p6_test.json,"confirmatory[H2,BROAD].p"
 HTwoQ,0.286,results/metrics/p6_test.json,"confirmatory[H2,BROAD].bh_q"
 HThreeExp,1.01,results/metrics/p6_test.json,"confirmatory[H3,BROAD].asym_exposed"
@@ -84,7 +84,7 @@ BrierRaw,0.250,results/metrics/p6_test.json,ml_test.xgb.brier_raw
 BrierCal,0.195,results/metrics/p6_test.json,ml_test.xgb.brier_calibrated
 WFAUC,0.502,results/metrics/p6_test.json,walk_forward.oos_auc
 WFMonths,46,results/metrics/p6_test.json,walk_forward.months
-NPHTwoDiff,\ensuremath{-}5.6,results/metrics/p6_test.json,"confirmatory_without_pilot_window[H2,BROAD].diff"
+NPHTwoDiff,\ensuremath{-}5.65,results/metrics/p6_test.json,"confirmatory_without_pilot_window[H2,BROAD].diff"
 NPHTwoP,0.026,results/metrics/p6_test.json,"confirmatory_without_pilot_window[H2,BROAD].p"
 NPHTwoQ,0.128,results/metrics/p6_test.json,"confirmatory_without_pilot_window[H2,BROAD].bh_q"
 NPHFourDiff,\ensuremath{-}0.039,results/metrics/p6_test.json,confirmatory_without_pilot_window[H4_auc].diff
@@ -118,6 +118,10 @@ TradesML,157,results/metrics/p6_test.json,backtests[B4b_broad_ml_top_decile].n_t
 MaxDDML,\ensuremath{-}2.3,results/metrics/p6_test.json,backtests[B4b_broad_ml_top_decile].max_dd
 CagrNifty,+9.7,results/metrics/p6_test.json,benchmark_nifty500_test.cagr
 SPAp,0.77,results/metrics/p6_test.json,spa.spa_p_consistent
+CashRate,6,config/costs.yaml,"risk_free_annual (idle-cash yield, D-022)"
+SharpeComp,\ensuremath{-}0.01,results/metrics/p6_test.json,backtests[B3b_broad_composite].sharpe
+SharpeML,\ensuremath{-}0.85,results/metrics/p6_test.json,backtests[B4b_broad_ml_top_decile].sharpe
+MaxPositions,20,config/costs.yaml,max_positions
 RCp,0.89,results/metrics/p6_test.json,spa.white_rc_p
 DSRtrials,89,results/metrics/p6_test.json,deflated_sharpe.*.n_trials_results_log
 TrialsBefore,67,results/posthoc/s0_supplementary_audit.json,10_timeline.results_log_rows_before_test_run_started

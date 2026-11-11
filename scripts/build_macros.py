@@ -119,7 +119,7 @@ def main():
     M("HOneQ", f"{b1['bh_q']:.3f}", m6, "confirmatory[H1,BROAD].bh_q")
     M("HTwoExp", f(b2["p1"], 1, pct=True), m6, "confirmatory[H2,BROAD].p1")
     M("HTwoRest", f(b2["p2"], 1, pct=True), m6, "confirmatory[H2,BROAD].p2")
-    M("HTwoDiff", f(b2["diff"], 1, True, True), m6, "confirmatory[H2,BROAD].diff")
+    M("HTwoDiff", f(b2["diff"], 2, True, True), m6, "confirmatory[H2,BROAD].diff")
     M("HTwoP", P(b2["p"]), m6, "confirmatory[H2,BROAD].p")
     M("HTwoQ", f"{b2['bh_q']:.3f}", m6, "confirmatory[H2,BROAD].bh_q")
     M("HThreeExp", f(b3["asym_exposed"], 2), m6, "confirmatory[H3,BROAD].asym_exposed")
@@ -147,7 +147,7 @@ def main():
     M("WFAUC", f"{p6['walk_forward']['oos_auc']:.3f}", m6, "walk_forward.oos_auc")
     M("WFMonths", p6["walk_forward"]["months"], m6, "walk_forward.months")
     n2, n4 = cn[("H2", "BROAD")], cn[("H4_auc", "BROAD")]
-    M("NPHTwoDiff", f(n2["diff"], 1, True, True), m6, "confirmatory_without_pilot_window[H2,BROAD].diff")
+    M("NPHTwoDiff", f(n2["diff"], 2, True, True), m6, "confirmatory_without_pilot_window[H2,BROAD].diff")
     M("NPHTwoP", P(n2["p"]), m6, "confirmatory_without_pilot_window[H2,BROAD].p")
     M("NPHTwoQ", f"{n2['bh_q']:.3f}", m6, "confirmatory_without_pilot_window[H2,BROAD].bh_q")
     M("NPHFourDiff", f(n4["diff"], 3, True), m6, "confirmatory_without_pilot_window[H4_auc].diff")
@@ -180,6 +180,12 @@ def main():
     bm = p6["benchmark_nifty500_test"]
     M("CagrNifty", f(bm["cagr"], 1, True, True), m6, "benchmark_nifty500_test.cagr")
     M("SPAp", f"{p6['spa']['spa_p_consistent']:.2f}", m6, "spa.spa_p_consistent")
+    import yaml
+    cfg_costs = yaml.safe_load(open(ROOT / "config" / "costs.yaml", encoding="utf-8"))
+    M("CashRate", f"{100 * cfg_costs['risk_free_annual']:.0f}", "config/costs.yaml", "risk_free_annual (idle-cash yield, D-022)")
+    M("SharpeComp", f(bt["B3b_broad_composite"]["sharpe"], 2), m6, "backtests[B3b_broad_composite].sharpe")
+    M("SharpeML", f(bt["B4b_broad_ml_top_decile"]["sharpe"], 2), m6, "backtests[B4b_broad_ml_top_decile].sharpe")
+    M("MaxPositions", cfg_costs["max_positions"], "config/costs.yaml", "max_positions")
     M("RCp", f"{p6['spa']['white_rc_p']:.2f}", m6, "spa.white_rc_p")
     M("DSRtrials", list(p6["deflated_sharpe"].values())[0]["n_trials_results_log"], m6, "deflated_sharpe.*.n_trials_results_log")
 

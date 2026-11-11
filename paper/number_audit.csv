@@ -15,7 +15,7 @@ page,token,kind,source
 1,-09,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json"
 1,−0.04,macro,"\HOneDiff <- results/metrics/p6_test.json [confirmatory[H1,BROAD].diff]; \SpecOneFrozen <- results/posthoc/C_spec_curve.json [summary.H1.frozen_spec_effect_pp]"
 1,0.987,macro,"\HOneP <- results/metrics/p6_test.json [confirmatory[H1,BROAD].p]"
-1,−2.8,macro,"\HTwoDiff <- results/metrics/p6_test.json [confirmatory[H2,BROAD].diff]; \BENPHOneLo <- results/posthoc/B_breakeven.json [rows[H1 delivery expansion,BROAD,without_pilot].ci95[0]]"
+1,−2.81,macro,"\HTwoDiff <- results/metrics/p6_test.json [confirmatory[H2,BROAD].diff]"
 1,0.286,macro,"\HTwoQ <- results/metrics/p6_test.json [confirmatory[H2,BROAD].bh_q]"
 1,0.460,macro,\AUCxgb <- results/metrics/p6_test.json [ml_test.xgb.auc]
 1,0.526,macro,\AUCcomp <- results/metrics/p6_test.json [ml_test.composite_auc]
@@ -30,7 +30,7 @@ page,token,kind,source
 1,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
 1,4,macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
 1,5,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
-1,6,macro,\SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]
+1,6,macro,"\CashRate <- config/costs.yaml [risk_free_annual (idle-cash yield, D-022)]; \SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]"
 1,7,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
 1,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
 1,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
@@ -50,7 +50,7 @@ page,token,kind,source
 1,18,macro,\SpecTwoN <- results/posthoc/C_spec_curve.json [summary.H2.n_specs]
 1,19,figure/structure,figure text (see FIG_SOURCES) or numbering
 1,5,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
-1,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
+1,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
 1,21,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
 1,22,macro,\TrialsTestRun <- results/posthoc/s0_supplementary_audit.json [through_P6 - before]
 1,23,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
@@ -67,8 +67,8 @@ page,token,kind,source
 2,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
 2,0.10,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
 2,4,macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
-2,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
-2,6,macro,\SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]
+2,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
+2,6,macro,"\CashRate <- config/costs.yaml [risk_free_annual (idle-cash yield, D-022)]; \SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]"
 2,15103,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
 2,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
 2,08,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json; tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
@@ -95,7 +95,7 @@ page,token,kind,source
 2,12,macro,"\NDelivOverlapDates <- results/metrics/qc_report.json [len(legacy_vs_sec_overlap)]; \FYears <- results/posthoc/F_h1_by_year.json [rows[BROAD, year]]"
 2,"1,442",macro,\NAdjust <- results/metrics/adjustment_qc.json [actions_applied]
 2,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-2,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
+2,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
 2,2015,design,split start year
 2,2020,design,train end
 2,2021,design,validation start
@@ -109,12 +109,12 @@ page,token,kind,source
 2,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
 2,57,macro,\NGOneChecks <- results/metrics/p1_g1_check.json [n_checks]
 2,24,figure/structure,figure text (see FIG_SOURCES) or numbering
-2,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
+2,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
 2,30,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
 2,5,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
 2,10,table,tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
 2,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-2,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
+2,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
 2,+1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
 2,14,macro,\XgbTrees <- results/metrics/p5_ml.json [xgb_val.best_iteration + 1]
 2,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
@@ -174,7 +174,7 @@ page,token,kind,source
 2,131,table,tab_events: results/metrics/p2_summary.json
 2,0.262,table,tab_events: results/metrics/p2_summary.json
 2,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-2,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
+2,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
 2,"5,075",table,tab_events: results/metrics/p2_summary.json
 2,"1,979",table,tab_events: results/metrics/p2_summary.json
 2,"4,273",table,tab_events: results/metrics/p2_summary.json
@@ -186,9 +186,9 @@ page,token,kind,source
 2,5,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
 2,26,figure/structure,figure text (see FIG_SOURCES) or numbering
 2,10,table,tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-2,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
+2,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
 2,5,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
-2,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
+2,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
 2,500,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe)"
 2,15103,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
 2,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
@@ -205,8 +205,6 @@ page,token,kind,source
 3,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
 3,02,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
 3,16,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-3,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
-3,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
 3,86,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
 3,7,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
 3,08,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json; tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
@@ -234,14 +232,13 @@ page,token,kind,source
 3,5,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
 3,09,table,tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
 3,23,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-3,6,macro,\SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]
+3,6,macro,"\CashRate <- config/costs.yaml [risk_free_annual (idle-cash yield, D-022)]; \SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]"
 3,49,macro,\SpecOneRank <- results/posthoc/C_spec_curve.json [summary.H1.frozen_rank_in_predicted_direction]
 3,359,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
 3,7,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
 3,09,table,tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
 3,30,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-3,6,macro,\SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]
-3,49,macro,\SpecOneRank <- results/posthoc/C_spec_curve.json [summary.H1.frozen_rank_in_predicted_direction]
+3,6,macro,"\CashRate <- config/costs.yaml [risk_free_annual (idle-cash yield, D-022)]; \SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]"
 3,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
 3,97,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
 3,12,macro,"\NDelivOverlapDates <- results/metrics/qc_report.json [len(legacy_vs_sec_overlap)]; \FYears <- results/posthoc/F_h1_by_year.json [rows[BROAD, year]]"
@@ -249,7 +246,7 @@ page,token,kind,source
 3,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
 3,67,macro,\TrialsBefore <- results/posthoc/s0_supplementary_audit.json [10_timeline.results_log_rows_before_test_run_started]
 3,89,macro,\DSRtrials <- results/metrics/p6_test.json [deflated_sharpe.*.n_trials_results_log]; \TrialsThroughPSix <- results/posthoc/s0_supplementary_audit.json [10_timeline.results_log_rows_through_P6]
-3,6,macro,\SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]
+3,6,macro,"\CashRate <- config/costs.yaml [risk_free_annual (idle-cash yield, D-022)]; \SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]"
 3,22,macro,\TrialsTestRun <- results/posthoc/s0_supplementary_audit.json [through_P6 - before]
 3,359,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
 3,7,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
@@ -291,9 +288,9 @@ page,token,kind,source
 3,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
 3,23.5%,macro,"\HTwoExp <- results/metrics/p6_test.json [confirmatory[H2,BROAD].p1]"
 3,26.3%,macro,"\HTwoRest <- results/metrics/p6_test.json [confirmatory[H2,BROAD].p2]"
-3,−2.8,macro,"\HTwoDiff <- results/metrics/p6_test.json [confirmatory[H2,BROAD].diff]; \BENPHOneLo <- results/posthoc/B_breakeven.json [rows[H1 delivery expansion,BROAD,without_pilot].ci95[0]]"
+3,−2.81,macro,"\HTwoDiff <- results/metrics/p6_test.json [confirmatory[H2,BROAD].diff]"
 3,0.286,macro,"\HTwoQ <- results/metrics/p6_test.json [confirmatory[H2,BROAD].bh_q]"
-3,−5.6,macro,"\NPHTwoDiff <- results/metrics/p6_test.json [confirmatory_without_pilot_window[H2,BROAD].diff]"
+3,−5.65,macro,"\NPHTwoDiff <- results/metrics/p6_test.json [confirmatory_without_pilot_window[H2,BROAD].diff]"
 3,0.026,macro,"\NPHTwoP <- results/metrics/p6_test.json [confirmatory_without_pilot_window[H2,BROAD].p]"
 3,0.128,macro,"\NPHTwoQ <- results/metrics/p6_test.json [confirmatory_without_pilot_window[H2,BROAD].bh_q]"
 3,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
@@ -344,7 +341,7 @@ page,token,kind,source
 3,0.987,macro,"\HOneP <- results/metrics/p6_test.json [confirmatory[H1,BROAD].p]"
 3,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
 3,"1,776",table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
-3,−2.81,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json"
+3,−2.81,macro,"\HTwoDiff <- results/metrics/p6_test.json [confirmatory[H2,BROAD].diff]"
 3,0.171,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
 3,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
 3,0.286,macro,"\HTwoQ <- results/metrics/p6_test.json [confirmatory[H2,BROAD].bh_q]"
@@ -392,7 +389,7 @@ page,token,kind,source
 3,0.440,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
 3,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
 3,"1,221",table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
-3,−5.65,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
+3,−5.65,macro,"\NPHTwoDiff <- results/metrics/p6_test.json [confirmatory_without_pilot_window[H2,BROAD].diff]"
 3,0.026,macro,"\NPHTwoP <- results/metrics/p6_test.json [confirmatory_without_pilot_window[H2,BROAD].p]"
 3,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
 3,0.128,macro,"\NPHTwoQ <- results/metrics/p6_test.json [confirmatory_without_pilot_window[H2,BROAD].bh_q]"
@@ -444,6 +441,24 @@ page,token,kind,source
 3,−6.2,macro,"\TostHTwoLo <- results/posthoc/s0_supplementary_audit.json [2_tost[full,BROAD,H2].ci90_wald[0]]"
 3,+0.6,macro,"\TostHTwoHi <- results/posthoc/s0_supplementary_audit.json [2_tost[full,BROAD,H2].ci90_wald[1]]; \BECompTopLo <- results/posthoc/B_breakeven.json [rows[Composite top decile (H4 cut),BROAD,full].ci95[0]]"
 3,0.65,macro,"\TostHTwoP <- results/posthoc/s0_supplementary_audit.json [2_tost[full,BROAD,H2].p_tost]"
+3,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+3,−26.8%,macro,\CagrAll <- results/metrics/p6_test.json [backtests[B1_all_breakouts].cagr]
+3,−12.6%,macro,\CagrBroad <- results/metrics/p6_test.json [backtests[B2b_broad].cagr]
+3,29,macro,\TradesComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].n_trades]
+3,157,macro,\TradesML <- results/metrics/p6_test.json [backtests[B4b_broad_ml_top_decile].n_trades]
+3,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+3,+6.0%,macro,\CagrComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].cagr]
+3,+4.3%,macro,"\CagrML <- results/metrics/p6_test.json [backtests[B4b_broad_ml_top_decile].cagr]; \BEHOneHi <- results/posthoc/B_breakeven.json [rows[H1 delivery expansion,BROAD,full].ci95[1]]"
+3,500,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe)"
+3,+9.7%,macro,\CagrNifty <- results/metrics/p6_test.json [benchmark_nifty500_test.cagr]
+3,6%,macro,"\CashRate <- config/costs.yaml [risk_free_annual (idle-cash yield, D-022)]; \SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]"
+3,−0.01,macro,\SharpeComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].sharpe]
+3,−0.85,macro,\SharpeML <- results/metrics/p6_test.json [backtests[B4b_broad_ml_top_decile].sharpe]
+3,0.77,macro,\SPAp <- results/metrics/p6_test.json [spa.spa_p_consistent]
+3,0.89,macro,\RCp <- results/metrics/p6_test.json [spa.white_rc_p]
+3,24.9%,macro,"\HOneRest <- results/metrics/p6_test.json [confirmatory[H1,BROAD].p2]; \LadAll <- results/metrics/p6_test.json [ladder_broad[B1].success_rate]"
+3,26.7%,macro,"\TvHTwoExp <- results/metrics/p3_hypotheses.json [tests[H2,BROAD].p1]; \LadBase <- results/metrics/p6_test.json [ladder_broad[B0_base].success_rate]"
+3,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
 3,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
 3,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
 3,0.58%,macro,\RoundTrip <- results/posthoc/B_breakeven.json [break_even.round_trip_cost_pct_weighted]
@@ -459,134 +474,11 @@ page,token,kind,source
 3,−5.3,macro,"\BEHOneBLo <- results/posthoc/B_breakeven.json [rows[H1 delivery expansion,BROAD,full].ci95_block[0]]"
 3,+4.7,macro,"\BEHOneBHi <- results/posthoc/B_breakeven.json [rows[H1 delivery expansion,BROAD,full].ci95_block[1]]"
 3,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-3,−2.8,macro,"\HTwoDiff <- results/metrics/p6_test.json [confirmatory[H2,BROAD].diff]; \BENPHOneLo <- results/posthoc/B_breakeven.json [rows[H1 delivery expansion,BROAD,without_pilot].ci95[0]]"
+3,−2.8,macro,"\BENPHOneLo <- results/posthoc/B_breakeven.json [rows[H1 delivery expansion,BROAD,without_pilot].ci95[0]]"
 3,+8.1,macro,"\BENPHOneHi <- results/posthoc/B_breakeven.json [rows[H1 delivery expansion,BROAD,without_pilot].ci95[1]]"
-3,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-3,−6.8,macro,"\BEHTwoLo <- results/posthoc/B_breakeven.json [rows[H2 price up, OI down,BROAD,full].ci95[0]]"
-3,+1.2,macro,"\BEHTwoHi <- results/posthoc/B_breakeven.json [rows[H2 price up, OI down,BROAD,full].ci95[1]]"
-3,8.8,macro,\BreakEven <- results/posthoc/B_breakeven.json [break_even.break_even_success_rate_change_pp]
-3,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-3,−10.6,macro,"\BENPHTwoLo <- results/posthoc/B_breakeven.json [rows[H2 price up, OI down,BROAD,without_pilot].ci95[0]]"
-3,−0.7,macro,"\BENPHTwoHi <- results/posthoc/B_breakeven.json [rows[H2 price up, OI down,BROAD,without_pilot].ci95[1]]"
-3,+7.0,macro,"\BECompTopDiff <- results/posthoc/B_breakeven.json [rows[Composite top decile (H4 cut),BROAD,full].diff]"
-3,+0.6,macro,"\TostHTwoHi <- results/posthoc/s0_supplementary_audit.json [2_tost[full,BROAD,H2].ci90_wald[1]]; \BECompTopLo <- results/posthoc/B_breakeven.json [rows[Composite top decile (H4 cut),BROAD,full].ci95[0]]"
-3,+13.4,macro,"\BECompTopHi <- results/posthoc/B_breakeven.json [rows[Composite top decile (H4 cut),BROAD,full].ci95[1]]"
-3,"1,000",macro,\placeboDraws <- results/posthoc/A_placebo.json [draws]
 3,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-3,+1.65,macro,\placeboMean <- results/posthoc/A_placebo.json [BROAD.placebo_mean_pp]
-3,1.97,macro,\placeboSD <- results/posthoc/A_placebo.json [BROAD.placebo_sd_pp]
-3,−0.04,macro,"\HOneDiff <- results/metrics/p6_test.json [confirmatory[H1,BROAD].diff]; \SpecOneFrozen <- results/posthoc/C_spec_curve.json [summary.H1.frozen_spec_effect_pp]"
-3,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
-3,0.795,macro,\placeboP <- results/posthoc/A_placebo.json [BROAD.p_one_sided_placebo_ge_actual]
-3,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-3,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
-3,+1.05,macro,"\BFTwoSkep <- results/posthoc/D_bayes.json [rows[BROAD,full,H2,skeptical Beta(100*pi,100*(1-pi))].BF01]; \PSevenActual <- results/metrics/p7_robustness.json [placebo.BROAD.actual_diff]"
-3,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
-3,29,macro,\TradesComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].n_trades]
-3,89%,macro,\DSRtrials <- results/metrics/p6_test.json [deflated_sharpe.*.n_trials_results_log]; \TrialsThroughPSix <- results/posthoc/s0_supplementary_audit.json [10_timeline.results_log_rows_through_P6]
-3,54,macro,\SpecOneN <- results/posthoc/C_spec_curve.json [summary.H1.n_specs]
-3,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-3,15,macro,\SpecOneSig <- results/posthoc/C_spec_curve.json [summary.H1.n_significant]
-3,5%,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
-3,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
-4,−4,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json; tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-4,−2,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
-4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-4,4,macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
-4,6,macro,\SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]
-4,8,macro,\GapSlotsFull <- results/posthoc/s0_supplementary_audit.json [9c_165_vs_157.reasons[all 20 slots full]]
-4,10,table,tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
-4,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
-4,40,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-4,60,reference,refs.bib (Crossref-verified)
-4,80,macro,\NFeatures <- results/metrics/p2_summary.json [features_v1]
-4,100,reference,refs.bib (Crossref-verified)
-4,1000,macro,\placeboDraws <- results/posthoc/A_placebo.json [draws]
-4,0.795,macro,\placeboP <- results/posthoc/A_placebo.json [BROAD.p_one_sided_placebo_ge_actual]
-4,-0.04,macro,"\HOneDiff <- results/metrics/p6_test.json [confirmatory[H1,BROAD].diff]; \SpecOneFrozen <- results/posthoc/C_spec_curve.json [summary.H1.frozen_spec_effect_pp]"
-4,+1.65,macro,\placeboMean <- results/posthoc/A_placebo.json [BROAD.placebo_mean_pp]
-4,−40,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-4,−20,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_events: results/metrics/p2_summary.json"
-4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
-4,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
-4,40,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
-4,25,reference,refs.bib (Crossref-verified)
-4,50,figure/structure,figure text (see FIG_SOURCES) or numbering
-4,75,figure/structure,figure text (see FIG_SOURCES) or numbering
-4,100,reference,refs.bib (Crossref-verified)
-4,125,figure/structure,figure text (see FIG_SOURCES) or numbering
-4,1000,macro,\placeboDraws <- results/posthoc/A_placebo.json [draws]
-4,0.145,figure/structure,figure text (see FIG_SOURCES) or numbering
-4,+12.99,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
-4,-2.73,figure/structure,figure text (see FIG_SOURCES) or numbering
-4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-4,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
-4,+2.36,macro,\SpecOneMedian <- results/posthoc/C_spec_curve.json [summary.H1.median_effect_pp]
-4,5.05,macro,\SpecOneMax <- results/posthoc/C_spec_curve.json [summary.H1.max_effect_predicted_dir_pp]
-4,−0.04,macro,"\HOneDiff <- results/metrics/p6_test.json [confirmatory[H1,BROAD].diff]; \SpecOneFrozen <- results/posthoc/C_spec_curve.json [summary.H1.frozen_spec_effect_pp]"
-4,49,macro,\SpecOneRank <- results/posthoc/C_spec_curve.json [summary.H1.frozen_rank_in_predicted_direction]
-4,54,macro,\SpecOneN <- results/posthoc/C_spec_curve.json [summary.H1.n_specs]
-4,"2,",macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-4,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
-4,18,macro,\SpecTwoN <- results/posthoc/C_spec_curve.json [summary.H2.n_specs]
-4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
-4,−2.24,macro,\SpecTwoMedian <- results/posthoc/C_spec_curve.json [summary.H2.median_effect_pp]
-4,6,macro,\SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]
-4,01,table,tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-4,17.88,macro,"\BFOneUni <- results/posthoc/D_bayes.json [rows[BROAD,full,H1,default Beta(1,1)].BF01]"
-4,30,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-4,8.41,macro,"\BFOneLogDef <- results/posthoc/D_bayes.json [rows[BROAD,full,H1,default logOR~N(0,1)].BF01]"
-4,31,figure/structure,figure text (see FIG_SOURCES) or numbering
-4,2.27,macro,"\BFOneSkep <- results/posthoc/D_bayes.json [rows[BROAD,full,H1,skeptical Beta(100*pi,100*(1-pi))].BF01]"
-4,2.32,macro,"\BFOneLogSkep <- results/posthoc/D_bayes.json [rows[BROAD,full,H1,skeptical logOR~N(0,0.25^2)].BF01]"
-4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-4,7.65,macro,"\BFTwoUni <- results/posthoc/D_bayes.json [rows[BROAD,full,H2,default Beta(1,1)].BF01]"
-4,3.63,macro,"\BFTwoLogDef <- results/posthoc/D_bayes.json [rows[BROAD,full,H2,default logOR~N(0,1)].BF01]"
-4,1.05,macro,"\BFTwoSkep <- results/posthoc/D_bayes.json [rows[BROAD,full,H2,skeptical Beta(100*pi,100*(1-pi))].BF01]; \PSevenActual <- results/metrics/p7_robustness.json [placebo.BROAD.actual_diff]"
-4,1.13,macro,"\BFTwoLogSkep <- results/posthoc/D_bayes.json [rows[BROAD,full,H2,skeptical logOR~N(0,0.25^2)].BF01]"
-4,0.23,macro,"\BFNPTwoSkep <- results/posthoc/D_bayes.json [rows[BROAD,without_pilot,H2,skeptical Beta(100*pi,100*(1-pi))].BF01]"
-4,32,figure/structure,figure text (see FIG_SOURCES) or numbering
-4,33,figure/structure,figure text (see FIG_SOURCES) or numbering
-4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-4,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
-4,+0.246,macro,"\EOneBThree <- results/posthoc/E_clustered_logit.json [rows[BROAD,full,two_way,H1,beta3].coef]"
-4,−0.130,macro,"\EOneBThreeLo <- results/posthoc/E_clustered_logit.json [...H1,beta3.ci95[0]]"
-4,+0.622,macro,"\EOneBThreeHi <- results/posthoc/E_clustered_logit.json [...H1,beta3.ci95[1]]"
-4,0.200,macro,"\EOneBThreeP <- results/posthoc/E_clustered_logit.json [...H1,beta3.p]"
-4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-4,−0.186,macro,"\ETwoBThree <- results/posthoc/E_clustered_logit.json [rows[BROAD,full,two_way,H2,beta3].coef]"
-4,0.142,macro,"\ETwoBThreeP <- results/posthoc/E_clustered_logit.json [...H2,beta3.p]"
-4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-4,+0.185,macro,"\ETwoBTwo <- results/posthoc/E_clustered_logit.json [rows[BROAD,full,two_way,H2,beta2].coef]"
-4,0.043,macro,"\ETwoBTwoP <- results/posthoc/E_clustered_logit.json [...H2,beta2.p]"
-4,5,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
-4,47,macro,\ExpN <- results/posthoc/s0_supplementary_audit.json [4_h1_ex_expiry.n_monthly_expiries_in_test]
-4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-4,−1.4,macro,"\ExpDiff <- results/posthoc/s0_supplementary_audit.json [4_h1_ex_expiry.rows[5_sessions,BROAD].diff]"
-4,0.572,macro,"\ExpP <- results/posthoc/s0_supplementary_audit.json [4_h1_ex_expiry.rows[5_sessions,BROAD].p]"
-4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
-4,12,macro,"\NDelivOverlapDates <- results/metrics/qc_report.json [len(legacy_vs_sec_overlap)]; \FYears <- results/posthoc/F_h1_by_year.json [rows[BROAD, year]]"
-4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-4,24.9%,macro,"\HOneRest <- results/metrics/p6_test.json [confirmatory[H1,BROAD].p2]; \LadAll <- results/metrics/p6_test.json [ladder_broad[B1].success_rate]"
-4,26.7%,macro,"\TvHTwoExp <- results/metrics/p3_hypotheses.json [tests[H2,BROAD].p1]; \LadBase <- results/metrics/p6_test.json [ladder_broad[B0_base].success_rate]"
-4,4,macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
-4,0.12%,macro,\GTieShareLoss <- results/posthoc/G_breakout_ties.json [B1_breakout_events.tie_share_of_losses]
-4,15.0%,macro,\GDayOneBO <- results/posthoc/G_breakout_ties.json [B1_breakout_events.day1_stop_share]
-4,10.3%,macro,\GDayOneNB <- results/posthoc/G_breakout_ties.json [non_breakout_days.day1_stop_share]
-4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-4,−26.8%,macro,\CagrAll <- results/metrics/p6_test.json [backtests[B1_all_breakouts].cagr]
-4,−12.6%,macro,\CagrBroad <- results/metrics/p6_test.json [backtests[B2b_broad].cagr]
-4,29,macro,\TradesComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].n_trades]
-4,157,macro,\TradesML <- results/metrics/p6_test.json [backtests[B4b_broad_ml_top_decile].n_trades]
-4,8,macro,\GapSlotsFull <- results/posthoc/s0_supplementary_audit.json [9c_165_vs_157.reasons[all 20 slots full]]
+3,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
+3,8,macro,\GapSlotsFull <- results/posthoc/s0_supplementary_audit.json [9c_165_vs_157.reasons[all 20 slots full]]
 4,2023,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
 4,-01,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json"
 4,2026,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
@@ -602,41 +494,164 @@ page,token,kind,source
 4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
 4,29,macro,\TradesComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].n_trades]
 4,+6.0,macro,\CagrComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].cagr]
-4,−0.01,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe)"
+4,−0.01,macro,\SharpeComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].sharpe]
 4,−1.0,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe)"
 4,157,macro,\TradesML <- results/metrics/p6_test.json [backtests[B4b_broad_ml_top_decile].n_trades]
 4,+4.3,macro,"\CagrML <- results/metrics/p6_test.json [backtests[B4b_broad_ml_top_decile].cagr]; \BEHOneHi <- results/posthoc/B_breakeven.json [rows[H1 delivery expansion,BROAD,full].ci95[1]]"
-4,−0.85,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe)"
+4,−0.85,macro,\SharpeML <- results/metrics/p6_test.json [backtests[B4b_broad_ml_top_decile].sharpe]
 4,−2.3,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe)"
 4,500,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe)"
 4,+9.7,macro,\CagrNifty <- results/metrics/p6_test.json [benchmark_nifty500_test.cagr]
 4,0.32,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe)"
 4,−18.8,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe)"
-4,"6,",macro,\SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]
-4,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
+4,"6,",macro,"\CashRate <- config/costs.yaml [risk_free_annual (idle-cash yield, D-022)]; \SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]"
+4,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
 4,0.77,macro,\SPAp <- results/metrics/p6_test.json [spa.spa_p_consistent]
 4,0.89,macro,\RCp <- results/metrics/p6_test.json [spa.white_rc_p]
 4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
 4,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
-4,+6.0%,macro,\CagrComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].cagr]
-4,+4.3%,macro,"\CagrML <- results/metrics/p6_test.json [backtests[B4b_broad_ml_top_decile].cagr]; \BEHOneHi <- results/posthoc/B_breakeven.json [rows[H1 delivery expansion,BROAD,full].ci95[1]]"
-4,500,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe)"
-4,+9.7%,macro,\CagrNifty <- results/metrics/p6_test.json [benchmark_nifty500_test.cagr]
-4,0.77,macro,\SPAp <- results/metrics/p6_test.json [spa.spa_p_consistent]
-4,0.89,macro,\RCp <- results/metrics/p6_test.json [spa.white_rc_p]
-4,6.26,macro,"\MDEHOne <- results/posthoc/s0_supplementary_audit.json [3_mde[BROAD,H1].mde_pp_prereg_method]"
+4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
+4,"159,972",figure/structure,figure text (see FIG_SOURCES) or numbering
+4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,"4,273",table,tab_events: results/metrics/p2_summary.json
 4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-4,8.8,macro,\BreakEven <- results/posthoc/B_breakeven.json [break_even.break_even_success_rate_change_pp]
-4,+1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-4,2023,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
-4,2024,design,F&O reform year
-4,2025,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
-4,500,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe)"
-4,-2026,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,"1,796",table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json"
+4,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
+4,29,macro,\TradesComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].n_trades]
+4,4,macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
+4,165,table,tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json
+4,10,table,tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
+4,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
+4,30,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,40,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
+4,50,figure/structure,figure text (see FIG_SOURCES) or numbering
+4,60,reference,refs.bib (Crossref-verified)
+4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
+4,"159,972",figure/structure,figure text (see FIG_SOURCES) or numbering
+4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,"4,273",table,tab_events: results/metrics/p2_summary.json
+4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+4,29,macro,\TradesComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].n_trades]
+4,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
+4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
+4,4,macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
+4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,10,table,tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
+4,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
+4,30,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,40,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
+4,50,figure/structure,figure text (see FIG_SOURCES) or numbering
+4,60,reference,refs.bib (Crossref-verified)
+4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
 4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
 4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+4,95%,design,CI level
+4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+4,−6.8,macro,"\BEHTwoLo <- results/posthoc/B_breakeven.json [rows[H2 price up, OI down,BROAD,full].ci95[0]]"
+4,+1.2,macro,"\BEHTwoHi <- results/posthoc/B_breakeven.json [rows[H2 price up, OI down,BROAD,full].ci95[1]]"
+4,8.8,macro,\BreakEven <- results/posthoc/B_breakeven.json [break_even.break_even_success_rate_change_pp]
+4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+4,−5.65,macro,"\NPHTwoDiff <- results/metrics/p6_test.json [confirmatory_without_pilot_window[H2,BROAD].diff]"
+4,−10.6,macro,"\BENPHTwoLo <- results/posthoc/B_breakeven.json [rows[H2 price up, OI down,BROAD,without_pilot].ci95[0]]"
+4,−0.7,macro,"\BENPHTwoHi <- results/posthoc/B_breakeven.json [rows[H2 price up, OI down,BROAD,without_pilot].ci95[1]]"
+4,+7.0,macro,"\BECompTopDiff <- results/posthoc/B_breakeven.json [rows[Composite top decile (H4 cut),BROAD,full].diff]"
+4,+0.6,macro,"\TostHTwoHi <- results/posthoc/s0_supplementary_audit.json [2_tost[full,BROAD,H2].ci90_wald[1]]; \BECompTopLo <- results/posthoc/B_breakeven.json [rows[Composite top decile (H4 cut),BROAD,full].ci95[0]]"
+4,+13.4,macro,"\BECompTopHi <- results/posthoc/B_breakeven.json [rows[Composite top decile (H4 cut),BROAD,full].ci95[1]]"
+4,"1,000",macro,\placeboDraws <- results/posthoc/A_placebo.json [draws]
+4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,+1.65,macro,\placeboMean <- results/posthoc/A_placebo.json [BROAD.placebo_mean_pp]
+4,1.97,macro,\placeboSD <- results/posthoc/A_placebo.json [BROAD.placebo_sd_pp]
+4,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
+4,−4,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json; tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,−2,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
+4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+4,4,macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
+4,6,macro,"\CashRate <- config/costs.yaml [risk_free_annual (idle-cash yield, D-022)]; \SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]"
+4,8,macro,\GapSlotsFull <- results/posthoc/s0_supplementary_audit.json [9c_165_vs_157.reasons[all 20 slots full]]
+4,10,table,tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
+4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
+4,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
+4,40,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
+4,60,reference,refs.bib (Crossref-verified)
+4,80,macro,\NFeatures <- results/metrics/p2_summary.json [features_v1]
+4,100,reference,refs.bib (Crossref-verified)
+4,1000,macro,\placeboDraws <- results/posthoc/A_placebo.json [draws]
+4,0.795,macro,\placeboP <- results/posthoc/A_placebo.json [BROAD.p_one_sided_placebo_ge_actual]
+4,-0.04,macro,"\HOneDiff <- results/metrics/p6_test.json [confirmatory[H1,BROAD].diff]; \SpecOneFrozen <- results/posthoc/C_spec_curve.json [summary.H1.frozen_spec_effect_pp]"
+4,+1.65,macro,\placeboMean <- results/posthoc/A_placebo.json [BROAD.placebo_mean_pp]
+4,−40,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
+4,−20,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_events: results/metrics/p2_summary.json"
+4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
+4,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
+4,40,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
+4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
+4,25,reference,refs.bib (Crossref-verified)
+4,50,figure/structure,figure text (see FIG_SOURCES) or numbering
+4,75,figure/structure,figure text (see FIG_SOURCES) or numbering
+4,100,reference,refs.bib (Crossref-verified)
+4,125,figure/structure,figure text (see FIG_SOURCES) or numbering
+4,1000,macro,\placeboDraws <- results/posthoc/A_placebo.json [draws]
+4,0.145,figure/structure,figure text (see FIG_SOURCES) or numbering
+4,+12.99,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
+4,-2.73,figure/structure,figure text (see FIG_SOURCES) or numbering
 4,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
-4,-2026,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,−0.04,macro,"\HOneDiff <- results/metrics/p6_test.json [confirmatory[H1,BROAD].diff]; \SpecOneFrozen <- results/posthoc/C_spec_curve.json [summary.H1.frozen_spec_effect_pp]"
+4,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
+4,0.795,macro,\placeboP <- results/posthoc/A_placebo.json [BROAD.p_one_sided_placebo_ge_actual]
+4,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
+4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,+1.05,macro,"\BFTwoSkep <- results/posthoc/D_bayes.json [rows[BROAD,full,H2,skeptical Beta(100*pi,100*(1-pi))].BF01]; \PSevenActual <- results/metrics/p7_robustness.json [placebo.BROAD.actual_diff]"
+4,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
+4,4,macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
+4,29,macro,\TradesComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].n_trades]
+4,89%,macro,\DSRtrials <- results/metrics/p6_test.json [deflated_sharpe.*.n_trials_results_log]; \TrialsThroughPSix <- results/posthoc/s0_supplementary_audit.json [10_timeline.results_log_rows_through_P6]
+4,54,macro,\SpecOneN <- results/posthoc/C_spec_curve.json [summary.H1.n_specs]
+4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,15,macro,\SpecOneSig <- results/posthoc/C_spec_curve.json [summary.H1.n_significant]
+4,5%,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
+4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
+4,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
+4,+2.36,macro,\SpecOneMedian <- results/posthoc/C_spec_curve.json [summary.H1.median_effect_pp]
+4,5.05,macro,\SpecOneMax <- results/posthoc/C_spec_curve.json [summary.H1.max_effect_predicted_dir_pp]
+4,−0.04,macro,"\HOneDiff <- results/metrics/p6_test.json [confirmatory[H1,BROAD].diff]; \SpecOneFrozen <- results/posthoc/C_spec_curve.json [summary.H1.frozen_spec_effect_pp]"
+4,49,macro,\SpecOneRank <- results/posthoc/C_spec_curve.json [summary.H1.frozen_rank_in_predicted_direction]
+4,54,macro,\SpecOneN <- results/posthoc/C_spec_curve.json [summary.H1.n_specs]
+4,"2,",macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+4,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
+4,18,macro,\SpecTwoN <- results/posthoc/C_spec_curve.json [summary.H2.n_specs]
+4,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
+4,−2.24,macro,\SpecTwoMedian <- results/posthoc/C_spec_curve.json [summary.H2.median_effect_pp]
+4,6,macro,"\CashRate <- config/costs.yaml [risk_free_annual (idle-cash yield, D-022)]; \SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]"
+4,01,table,tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
+4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,17.88,macro,"\BFOneUni <- results/posthoc/D_bayes.json [rows[BROAD,full,H1,default Beta(1,1)].BF01]"
+4,30,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,8.41,macro,"\BFOneLogDef <- results/posthoc/D_bayes.json [rows[BROAD,full,H1,default logOR~N(0,1)].BF01]"
+4,31,figure/structure,figure text (see FIG_SOURCES) or numbering
+4,2.27,macro,"\BFOneSkep <- results/posthoc/D_bayes.json [rows[BROAD,full,H1,skeptical Beta(100*pi,100*(1-pi))].BF01]"
+4,2.32,macro,"\BFOneLogSkep <- results/posthoc/D_bayes.json [rows[BROAD,full,H1,skeptical logOR~N(0,0.25^2)].BF01]"
+4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+4,7.65,macro,"\BFTwoUni <- results/posthoc/D_bayes.json [rows[BROAD,full,H2,default Beta(1,1)].BF01]"
+4,3.63,macro,"\BFTwoLogDef <- results/posthoc/D_bayes.json [rows[BROAD,full,H2,default logOR~N(0,1)].BF01]"
+4,1.05,macro,"\BFTwoSkep <- results/posthoc/D_bayes.json [rows[BROAD,full,H2,skeptical Beta(100*pi,100*(1-pi))].BF01]; \PSevenActual <- results/metrics/p7_robustness.json [placebo.BROAD.actual_diff]"
+4,1.13,macro,"\BFTwoLogSkep <- results/posthoc/D_bayes.json [rows[BROAD,full,H2,skeptical logOR~N(0,0.25^2)].BF01]"
+4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+4,0.23,macro,"\BFNPTwoSkep <- results/posthoc/D_bayes.json [rows[BROAD,without_pilot,H2,skeptical Beta(100*pi,100*(1-pi))].BF01]"
+4,32,figure/structure,figure text (see FIG_SOURCES) or numbering
+4,33,figure/structure,figure text (see FIG_SOURCES) or numbering
+4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
+4,+0.246,macro,"\EOneBThree <- results/posthoc/E_clustered_logit.json [rows[BROAD,full,two_way,H1,beta3].coef]"
+4,−0.130,macro,"\EOneBThreeLo <- results/posthoc/E_clustered_logit.json [...H1,beta3.ci95[0]]"
+4,+0.622,macro,"\EOneBThreeHi <- results/posthoc/E_clustered_logit.json [...H1,beta3.ci95[1]]"
+4,0.200,macro,"\EOneBThreeP <- results/posthoc/E_clustered_logit.json [...H1,beta3.p]"
+4,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+4,−0.186,macro,"\ETwoBThree <- results/posthoc/E_clustered_logit.json [rows[BROAD,full,two_way,H2,beta3].coef]"
+4,0.142,macro,"\ETwoBThreeP <- results/posthoc/E_clustered_logit.json [...H2,beta3.p]"
+4,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
 5,−5.0,figure/structure,figure text (see FIG_SOURCES) or numbering
 5,−2.5,figure/structure,figure text (see FIG_SOURCES) or numbering
 5,0.0,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe)"
@@ -658,7 +673,7 @@ page,token,kind,source
 5,-1.5,design,spec-curve barrier
 5,5,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
 5,10,table,tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-5,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
+5,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
 5,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
 5,0.5,design,spec-curve threshold
 5,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
@@ -682,144 +697,151 @@ page,token,kind,source
 5,-1.5,design,spec-curve barrier
 5,5,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
 5,10,table,tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-5,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
+5,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
 5,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-5,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
-5,95%,design,CI level
-5,-256,design,SHA-256
-5,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-5,"53,",table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-5,"6,",macro,\SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]
-5,1315,reference,refs.bib (Crossref-verified)
-5,"1335,",reference,refs.bib (Crossref-verified)
-5,1985,reference,refs.bib (Crossref-verified)
-5,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-5,"14,",macro,\XgbTrees <- results/metrics/p5_ml.json [xgb_val.best_iteration + 1]
-5,"1,",table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-5,71,reference,refs.bib (Crossref-verified)
-5,"100,",reference,refs.bib (Crossref-verified)
-5,1985,reference,refs.bib (Crossref-verified)
-5,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
-5,"51,",reference,refs.bib (Crossref-verified)
-5,"4,",macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
-5,1405,reference,refs.bib (Crossref-verified)
-5,"1436,",reference,refs.bib (Crossref-verified)
-5,1996,reference,refs.bib (Crossref-verified)
 5,4,macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
-5,"25,",reference,refs.bib (Crossref-verified)
-5,"5,",macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
-5,1457,reference,refs.bib (Crossref-verified)
-5,"1493,",reference,refs.bib (Crossref-verified)
-5,2012,reference,refs.bib (Crossref-verified)
+5,95%,design,CI level
+5,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+5,+0.185,macro,"\ETwoBTwo <- results/posthoc/E_clustered_logit.json [rows[BROAD,full,two_way,H2,beta2].coef]"
+5,0.043,macro,"\ETwoBTwoP <- results/posthoc/E_clustered_logit.json [...H2,beta2.p]"
 5,5,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
-5,"29,",macro,\TradesComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].n_trades]
-5,"1,",table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-5,5,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
-5,"68,",reference,refs.bib (Crossref-verified)
-5,2016,reference,refs.bib (Crossref-verified)
-5,6,macro,\SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]
-5,"61,",reference,refs.bib (Crossref-verified)
-5,"5,",macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
-5,458,reference,refs.bib (Crossref-verified)
-5,"471,",reference,refs.bib (Crossref-verified)
-5,2014,table,tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json
-5,7,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-5,"115,",reference,refs.bib (Crossref-verified)
-5,"11,",table,tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json
-5,2600,reference,refs.bib (Crossref-verified)
-5,"2606,",reference,refs.bib (Crossref-verified)
-5,2018,reference,refs.bib (Crossref-verified)
-5,8,macro,\GapSlotsFull <- results/posthoc/s0_supplementary_audit.json [9c_165_vs_157.reasons[all 20 slots full]]
-5,"67,",macro,\TrialsBefore <- results/posthoc/s0_supplementary_audit.json [10_timeline.results_log_rows_before_test_run_started]
-5,45,reference,refs.bib (Crossref-verified)
-5,"79,",reference,refs.bib (Crossref-verified)
-5,2026,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-5,9,design,design/structure
-5,"45,",reference,refs.bib (Crossref-verified)
-5,"1,",table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-5,289,reference,refs.bib (Crossref-verified)
-5,"323,",reference,refs.bib (Crossref-verified)
-5,2023,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
-5,10,table,tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-5,"60,",reference,refs.bib (Crossref-verified)
-5,"1,",table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-5,195,reference,refs.bib (Crossref-verified)
-5,"230,",reference,refs.bib (Crossref-verified)
-5,2023,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
-5,11,table,tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json
-5,"55,",reference,refs.bib (Crossref-verified)
-5,"7,",table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-5,"601,",reference,refs.bib (Crossref-verified)
-5,2025,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
+5,47,macro,\ExpN <- results/posthoc/s0_supplementary_audit.json [4_h1_ex_expiry.n_monthly_expiries_in_test]
+5,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+5,−1.4,macro,"\ExpDiff <- results/posthoc/s0_supplementary_audit.json [4_h1_ex_expiry.rows[5_sessions,BROAD].diff]"
+5,0.572,macro,"\ExpP <- results/posthoc/s0_supplementary_audit.json [4_h1_ex_expiry.rows[5_sessions,BROAD].p]"
+5,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
 5,12,macro,"\NDelivOverlapDates <- results/metrics/qc_report.json [len(legacy_vs_sec_overlap)]; \FYears <- results/posthoc/F_h1_by_year.json [rows[BROAD, year]]"
-5,"12,",macro,"\NDelivOverlapDates <- results/metrics/qc_report.json [len(legacy_vs_sec_overlap)]; \FYears <- results/posthoc/F_h1_by_year.json [rows[BROAD, year]]"
-5,121,figure/structure,figure text (see FIG_SOURCES) or numbering
-5,846,figure/structure,figure text (see FIG_SOURCES) or numbering
-5,121,figure/structure,figure text (see FIG_SOURCES) or numbering
-5,"863,",figure/structure,figure text (see FIG_SOURCES) or numbering
+5,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+5,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+5,0.12%,macro,\GTieShareLoss <- results/posthoc/G_breakout_ties.json [B1_breakout_events.tie_share_of_losses]
+5,15.0%,macro,\GDayOneBO <- results/posthoc/G_breakout_ties.json [B1_breakout_events.day1_stop_share]
+5,10.3%,macro,\GDayOneNB <- results/posthoc/G_breakout_ties.json [non_breakout_days.day1_stop_share]
+5,6.26,macro,"\MDEHOne <- results/posthoc/s0_supplementary_audit.json [3_mde[BROAD,H1].mde_pp_prereg_method]"
+5,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+5,8.8,macro,\BreakEven <- results/posthoc/B_breakeven.json [break_even.break_even_success_rate_change_pp]
+5,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+5,−5.65,macro,"\NPHTwoDiff <- results/metrics/p6_test.json [confirmatory_without_pilot_window[H2,BROAD].diff]"
+5,0.026,macro,"\NPHTwoP <- results/metrics/p6_test.json [confirmatory_without_pilot_window[H2,BROAD].p]"
+5,0.128,macro,"\NPHTwoQ <- results/metrics/p6_test.json [confirmatory_without_pilot_window[H2,BROAD].bh_q]"
+5,95%,design,CI level
+5,8.8,macro,\BreakEven <- results/posthoc/B_breakeven.json [break_even.break_even_success_rate_change_pp]
+5,0.23,macro,"\BFNPTwoSkep <- results/posthoc/D_bayes.json [rows[BROAD,without_pilot,H2,skeptical Beta(100*pi,100*(1-pi))].BF01]"
+5,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+5,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+5,+1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+5,2023,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
 5,2024,design,F&O reform year
-5,13,figure/structure,figure text (see FIG_SOURCES) or numbering
-5,"55,",reference,refs.bib (Crossref-verified)
-5,"1,",table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-5,"21,",table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
 5,2025,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
-5,14,macro,\XgbTrees <- results/metrics/p5_ml.json [xgb_val.best_iteration + 1]
-5,"12,",macro,"\NDelivOverlapDates <- results/metrics/qc_report.json [len(legacy_vs_sec_overlap)]; \FYears <- results/posthoc/F_h1_by_year.json [rows[BROAD, year]]"
-5,186,figure/structure,figure text (see FIG_SOURCES) or numbering
-5,171,figure/structure,figure text (see FIG_SOURCES) or numbering
-5,186,figure/structure,figure text (see FIG_SOURCES) or numbering
-5,"185,",figure/structure,figure text (see FIG_SOURCES) or numbering
-5,2024,design,F&O reform year
-5,15,macro,\SpecOneSig <- results/posthoc/C_spec_curve.json [summary.H1.n_significant]
-5,"2,",macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-5,"1,",table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-5,56,reference,refs.bib (Crossref-verified)
-5,"67,",macro,\TrialsBefore <- results/posthoc/s0_supplementary_audit.json [10_timeline.results_log_rows_before_test_run_started]
-5,2020,design,train end
-5,16,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-5,"57,",macro,\NGOneChecks <- results/metrics/p1_g1_check.json [n_checks]
-5,"216,",reference,refs.bib (Crossref-verified)
-5,2024,design,F&O reform year
-5,17,table,tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json
-5,"12,",macro,"\NDelivOverlapDates <- results/metrics/qc_report.json [len(legacy_vs_sec_overlap)]; \FYears <- results/posthoc/F_h1_by_year.json [rows[BROAD, year]]"
-5,618,reference,refs.bib (Crossref-verified)
-5,"629,",reference,refs.bib (Crossref-verified)
-5,2024,design,F&O reform year
-6,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
-6,"159,972",figure/structure,figure text (see FIG_SOURCES) or numbering
+5,500,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe)"
+5,-2026,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+5,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+5,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+5,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
+5,4,macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
+5,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+5,-2026,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+6,-256,design,SHA-256
 6,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-6,"4,273",table,tab_events: results/metrics/p2_summary.json
+6,"53,",table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
+6,"6,",macro,"\CashRate <- config/costs.yaml [risk_free_annual (idle-cash yield, D-022)]; \SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]"
+6,1315,reference,refs.bib (Crossref-verified)
+6,"1335,",reference,refs.bib (Crossref-verified)
+6,1985,reference,refs.bib (Crossref-verified)
 6,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-6,"1,796",table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json"
+6,"14,",macro,\XgbTrees <- results/metrics/p5_ml.json [xgb_val.best_iteration + 1]
+6,"1,",table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+6,71,reference,refs.bib (Crossref-verified)
+6,"100,",reference,refs.bib (Crossref-verified)
+6,1985,reference,refs.bib (Crossref-verified)
 6,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
-6,29,macro,\TradesComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].n_trades]
+6,"51,",reference,refs.bib (Crossref-verified)
+6,"4,",macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
+6,1405,reference,refs.bib (Crossref-verified)
+6,"1436,",reference,refs.bib (Crossref-verified)
+6,1996,reference,refs.bib (Crossref-verified)
 6,4,macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
-6,165,table,tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json
-6,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
-6,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
-6,40,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-6,60,reference,refs.bib (Crossref-verified)
-6,80,macro,\NFeatures <- results/metrics/p2_summary.json [features_v1]
-6,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
-6,"159,972",figure/structure,figure text (see FIG_SOURCES) or numbering
-6,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-6,"4,273",table,tab_events: results/metrics/p2_summary.json
-6,2,macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
-6,29,macro,\TradesComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].n_trades]
-6,3,macro,\SpecOneBH <- results/posthoc/C_spec_curve.json [summary.H1.n_bh_q10_within_hypothesis]; \SpecTwoSig <- results/posthoc/C_spec_curve.json [summary.H2.n_significant]
-6,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
-6,4,macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
-6,1,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
-6,0,macro,\NDelivOverlapMismatch <- results/metrics/qc_report.json [sum(legacy_vs_sec_overlap.*_mismatch)]; \SpecOneOpp <- results/posthoc/C_spec_curve.json [summary.H1.n_sig_opposite_direction]
-6,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
-6,40,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
-6,60,reference,refs.bib (Crossref-verified)
-6,80,macro,\NFeatures <- results/metrics/p2_summary.json [features_v1]
-6,4,macro,\IncompleteBroad <- results/posthoc/s0_supplementary_audit.json [8_incomplete_labels...broad]
-6,95%,design,CI level
+6,"25,",reference,refs.bib (Crossref-verified)
+6,"5,",macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
+6,1457,reference,refs.bib (Crossref-verified)
+6,"1493,",reference,refs.bib (Crossref-verified)
+6,2012,reference,refs.bib (Crossref-verified)
+6,5,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
+6,"29,",macro,\TradesComp <- results/metrics/p6_test.json [backtests[B3b_broad_composite].n_trades]
+6,"1,",table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+6,5,macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
+6,"68,",reference,refs.bib (Crossref-verified)
+6,2016,reference,refs.bib (Crossref-verified)
+6,6,macro,"\CashRate <- config/costs.yaml [risk_free_annual (idle-cash yield, D-022)]; \SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]"
+6,"61,",reference,refs.bib (Crossref-verified)
+6,"5,",macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
+6,458,reference,refs.bib (Crossref-verified)
+6,"471,",reference,refs.bib (Crossref-verified)
+6,2014,table,tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json
+6,7,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+6,"115,",reference,refs.bib (Crossref-verified)
+6,"11,",table,tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json
+6,2600,reference,refs.bib (Crossref-verified)
+6,"2606,",reference,refs.bib (Crossref-verified)
+6,2018,reference,refs.bib (Crossref-verified)
+6,8,macro,\GapSlotsFull <- results/posthoc/s0_supplementary_audit.json [9c_165_vs_157.reasons[all 20 slots full]]
+6,"67,",macro,\TrialsBefore <- results/posthoc/s0_supplementary_audit.json [10_timeline.results_log_rows_before_test_run_started]
+6,45,reference,refs.bib (Crossref-verified)
+6,"79,",reference,refs.bib (Crossref-verified)
+6,2026,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_dataset: results/metrics/qc_report.json; adjustment_qc.json; results/posthoc/paper_facts.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+6,9,design,design/structure
+6,"45,",reference,refs.bib (Crossref-verified)
+6,"1,",table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+6,289,reference,refs.bib (Crossref-verified)
+6,"323,",reference,refs.bib (Crossref-verified)
+6,2023,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
+6,10,table,tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
+6,"60,",reference,refs.bib (Crossref-verified)
+6,"1,",table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+6,195,reference,refs.bib (Crossref-verified)
+6,"230,",reference,refs.bib (Crossref-verified)
+6,2023,table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
+6,11,table,tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json
+6,"55,",reference,refs.bib (Crossref-verified)
+6,"7,",table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+6,"601,",reference,refs.bib (Crossref-verified)
+6,2025,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
+6,12,macro,"\NDelivOverlapDates <- results/metrics/qc_report.json [len(legacy_vs_sec_overlap)]; \FYears <- results/posthoc/F_h1_by_year.json [rows[BROAD, year]]"
+6,"12,",macro,"\NDelivOverlapDates <- results/metrics/qc_report.json [len(legacy_vs_sec_overlap)]; \FYears <- results/posthoc/F_h1_by_year.json [rows[BROAD, year]]"
+6,121,figure/structure,figure text (see FIG_SOURCES) or numbering
+6,846,figure/structure,figure text (see FIG_SOURCES) or numbering
+6,121,figure/structure,figure text (see FIG_SOURCES) or numbering
+6,"863,",figure/structure,figure text (see FIG_SOURCES) or numbering
+6,2024,design,F&O reform year
+6,13,figure/structure,figure text (see FIG_SOURCES) or numbering
+6,"55,",reference,refs.bib (Crossref-verified)
+6,"1,",table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+6,"21,",table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
+6,2025,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
+6,14,macro,\XgbTrees <- results/metrics/p5_ml.json [xgb_val.best_iteration + 1]
+6,"12,",macro,"\NDelivOverlapDates <- results/metrics/qc_report.json [len(legacy_vs_sec_overlap)]; \FYears <- results/posthoc/F_h1_by_year.json [rows[BROAD, year]]"
+6,186,figure/structure,figure text (see FIG_SOURCES) or numbering
+6,171,figure/structure,figure text (see FIG_SOURCES) or numbering
+6,186,figure/structure,figure text (see FIG_SOURCES) or numbering
+6,"185,",figure/structure,figure text (see FIG_SOURCES) or numbering
+6,2024,design,F&O reform year
+6,15,macro,\SpecOneSig <- results/posthoc/C_spec_curve.json [summary.H1.n_significant]
+6,"2,",macro,\XgbDepth <- results/metrics/p5_ml.json [best_params.xgb.max_depth]
+6,"1,",table,"tab_backtests: results/metrics/p6_test.json (backtests, benchmark, spa, deflated_sharpe); tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json); tab_events: results/metrics/p2_summary.json; tab_posthoc_audit: results/posthoc/s0_supplementary_audit.json; B_breakeven.json; tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json; tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)"
+6,56,reference,refs.bib (Crossref-verified)
+6,"67,",macro,\TrialsBefore <- results/posthoc/s0_supplementary_audit.json [10_timeline.results_log_rows_before_test_run_started]
+6,2020,design,train end
+6,16,table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
+6,"57,",macro,\NGOneChecks <- results/metrics/p1_g1_check.json [n_checks]
+6,"216,",reference,refs.bib (Crossref-verified)
+6,2024,design,F&O reform year
+6,17,table,tab_robustness: results/posthoc/C_spec_curve.json; D_bayes.json; E_clustered_logit.json
+6,"12,",macro,"\NDelivOverlapDates <- results/metrics/qc_report.json [len(legacy_vs_sec_overlap)]; \FYears <- results/posthoc/F_h1_by_year.json [rows[BROAD, year]]"
+6,618,reference,refs.bib (Crossref-verified)
+6,"629,",reference,refs.bib (Crossref-verified)
+6,2024,design,F&O reform year
 6,18,macro,\SpecTwoN <- results/posthoc/C_spec_curve.json [summary.H2.n_specs]
 6,"58,",reference,refs.bib (Crossref-verified)
-6,"6,",macro,\SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]
+6,"6,",macro,"\CashRate <- config/costs.yaml [risk_free_annual (idle-cash yield, D-022)]; \SpecTwoRank <- results/posthoc/C_spec_curve.json [summary.H2.frozen_rank_in_predicted_direction]"
 6,"189,",reference,refs.bib (Crossref-verified)
 6,2025,table,"tab_confirmatory: results/posthoc/s0_supplementary_audit.json (1_bh_family, from locked p6_test.json)"
 6,19,figure/structure,figure text (see FIG_SOURCES) or numbering
@@ -827,7 +849,7 @@ page,token,kind,source
 6,"2016,",reference,refs.bib (Crossref-verified)
 6,785,reference,refs.bib (Crossref-verified)
 6,794,reference,refs.bib (Crossref-verified)
-6,20,macro,\placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]; \PSevenDraws <- results/metrics/p7_robustness.json [len(placebo.BROAD.placebo_draws)]
+6,20,macro,\MaxPositions <- config/costs.yaml [max_positions]; \placeboPct <- results/posthoc/A_placebo.json [BROAD.percentile_of_actual]
 6,"40,",table,tab_timeline: git log + results/posthoc/s0_supplementary_audit.json (10_timeline)
 6,"5,",macro,\BHm <- results/posthoc/s0_supplementary_audit.json [1_bh_family.rows[0].m]
 6,94,reference,refs.bib (Crossref-verified)
