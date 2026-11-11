@@ -9,16 +9,16 @@
 \toprule
 \textbf{Commit} & \textbf{Time} & \textbf{Event} \\
 \midrule
-\texttt{355cbe0} & 02:16 & IMPI P0-P2 scaffolding: config, NSE ingest, PIT store, adjustment \ldots \\
-\texttt{86ddfd7} & 08:21 & Adjustment fixes on full data: downward-only gap snaps, stale ex-date \ldots \\
-\texttt{b5829b2} & 08:40 & Ban list: first-day publication time = previous evening (G1 check strict) \\
+\texttt{355cbe0} & 02:16 & IMPI P0-P2 scaffolding: config, NSE ingest, PIT \ldots \\
+\texttt{86ddfd7} & 08:21 & Adjustment fixes on full data: downward-only gap \ldots \\
+\texttt{b5829b2} & 08:40 & Ban list: first-day publication time = previous \ldots \\
 -- & 08:53 & P2 writes feature freeze (features, events, labels) \\
-\texttt{15103f1} & 08:54 & PRE-REGISTRATION: hypotheses H1-H4, decision rules, P2 counts/power \ldots \\
+\texttt{15103f1} & 08:54 & PRE-REGISTRATION: hypotheses H1-H4, decision rules \ldots \\
 -- & 08:54 & P3 first analysis rows (train+val.) in results log \\
-\texttt{ea49def} & 09:23 & P3-P5 results (train/validation): hypotheses, composite ladder/backtests \ldots \\
+\texttt{ea49def} & 09:23 & P3-P5 results (train/validation): hypotheses \ldots \\
 -- & 09:23 & P6 starts: test set opened; lock written (HEAD = ea49def) \\
 \texttt{359bcc7} & 09:30 & P6: one-time test-set evaluation (lock ea49def) \\
-\texttt{1fc97ae} & 12:01 & IMPI v2 (post-hoc) models, live mode with forward track record, shared day \ldots \\
+\texttt{1fc97ae} & 12:01 & IMPI v2 (post-hoc) models, live mode with forward \ldots \\
 \bottomrule
 \end{tabular}
 \par\smallskip\parbox{0.98\linewidth}{\scriptsize\raggedright 67 of the 89 results-log rows through P6 were written before the test run; the other 22 are the test run's own rows. The lock file was first committed in 359bcc7. Data download, adjustment fixes and QC (before the pre-registration) used the full period. The pre-registration itself lists test-set event counts and the overall test success rate (power table), but no result split by any hypothesis exposure.}

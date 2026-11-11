@@ -103,7 +103,7 @@ def main():
 
 def plot(df):
     plt = mpl()
-    fig = plt.figure(figsize=(7.1, 4.6))
+    fig = plt.figure(figsize=(7.1, 3.3))
     gs = fig.add_gridspec(2, 2, height_ratios=[1.5, 1], width_ratios=[54, 18 + 6], hspace=0.08, wspace=0.32)
     for col, h in enumerate(["H1", "H2"]):
         g = df[df["hypothesis"] == h].sort_values("diff").reset_index(drop=True)
@@ -121,7 +121,8 @@ def plot(df):
         ax.set_title(f"{h} [POST-HOC]: {len(g)} specs, {int(g['significant_5pct'].sum())} with p<.05\n"
                      f"median effect {100 * g['diff'].median():+.1f} pp")
         if col == 0:
-            ax.set_ylabel("success-rate difference (pp), 95% CI")
+            ax.set_ylabel("effect (pp), 95% CI")
+            ax.yaxis.set_label_coords(-0.115, 0.5)
         axi = fig.add_subplot(gs[1, col], sharex=ax)
         dims = [("barrier", ["+1.5/-1", "+2/-1", "+3/-1.5"]), ("horizon", [5, 10, 20]), ("event_set", ["BROAD", "B1"])]
         if h == "H1":
@@ -143,6 +144,7 @@ def plot(df):
         axi.set_ylim(yy + 0.5, 0.5)
     fig.text(0.01, 0.005, "* frozen (pre-registered) choice; large outlined dot = frozen spec. Green / red = significant in / "
                           "against the predicted direction; grey = not significant.", fontsize=6)
+    fig.subplots_adjust(left=0.13)
     fig.savefig(FIGDIR / "fig_spec_curve.pdf")
 
 

@@ -180,12 +180,28 @@ def t_backtests():
     bm = P6["benchmark_nifty500_test"]
     r += ["MID", ["Nifty 500 (benchmark)", "--", pp(bm["cagr"]), num(bm["sharpe"], 2), pp(bm["max_dd"]), "--", "--", ""]]
     dsr = P6["deflated_sharpe"]
-    return table("tab_backtests", "Costed test-set backtests (2023-01 to 2026-10)", "tab:backtests", "lrrrrrrl",
+    return table("tab_backtests", "Costed test-set backtests, all variants (2023-01 to 2026-10)", "tab:backtestsfull", "lrrrrrrl",
                  r"\textbf{Strategy} & \textbf{Trades} & \textbf{CAGR} & \textbf{Sharpe} & \textbf{MaxDD} & \textbf{Hit\%} & \textbf{PF} & ", r,
                  note=f"PRE-REGISTERED (P6, run once). Full Indian costs and slippage; max.\\ 20 positions. Hansen SPA $p$={P6['spa']['spa_p_consistent']:.2f}, "
                       f"White RC $p$={P6['spa']['white_rc_p']:.2f}; deflated Sharpe $\\approx 0$ for all (N = {list(dsr.values())[0]['n_trials_results_log']} "
                       f"results-log rows at the time of the run, of which {S0['10_timeline']['results_log_rows_before_test_run_started']} "
                       "were logged before the test run started).", wide=True)
+
+
+def t_backtests_short():
+    """Single-column version for the 6-page paper (full table goes to the supplement)."""
+    names = {"B1_all_breakouts": "All breakouts", "B2b_broad": "BROAD", "B3b_broad_composite": "Composite $\\geq$ 1",
+             "B4b_broad_ml_top_decile": "ML top decile"}
+    bt = {b["variant"]: b for b in P6["backtests"]}
+    r = [[n, f"{bt[v]['n_trades']:,}", pp(bt[v].get("cagr")), num(bt[v].get("sharpe"), 2), pp(bt[v].get("max_dd"))]
+         for v, n in names.items()]
+    bm = P6["benchmark_nifty500_test"]
+    r += ["MID", ["Nifty 500", "--", pp(bm["cagr"]), num(bm["sharpe"], 2), pp(bm["max_dd"])]]
+    return table("tab_backtests_short", "Costed test-set backtests (2023-01 to 2026-10)", "tab:backtests", "@{}lrrrr@{}",
+                 r"\textbf{Strategy} & \textbf{Trades} & \textbf{CAGR\%} & \textbf{Sharpe} & \textbf{MaxDD\%}", r,
+                 note=f"PRE-REGISTERED (P6, run once). Full Indian costs; max.\\ 20 positions. SPA $p$={P6['spa']['spa_p_consistent']:.2f}, "
+                      f"Reality Check $p$={P6['spa']['white_rc_p']:.2f}; deflated Sharpe $\\approx 0$ for all. "
+                      "All variants: supplementary Table~\\ref{tab:backtestsfull}.")
 
 
 def t_timeline():
@@ -198,7 +214,7 @@ def t_timeline():
     r = []
     for c in tl["v1_commits_in_order"] + [{"hash": h_, "committed": d_, "subject": s_}]:
         if c["hash"] in keep:
-            subj = c["subject"] if len(c["subject"]) <= 75 else c["subject"][:75].rsplit(" ", 1)[0].rstrip(",:;") + " \\ldots"
+            subj = c["subject"] if len(c["subject"]) <= 52 else c["subject"][:52].rsplit(" ", 1)[0].rstrip(",:;") + " \\ldots"
             r.append([f"\\texttt{{{c['hash']}}}", c["committed"][11:16], esc(subj).replace(r"\textbackslash{}ldots", r"\ldots")])
     p2_last = tl["phase_logs"]["p2.log"]["last"][1:6]                     # "[08:53:14] P2 summary ..."
     first_row = min(g["first"] for g in tl["trial_groups"])[11:16]
@@ -224,7 +240,7 @@ def fig_pipeline(plt):
     tl = S0["10_timeline"]
     prereg = tl["files_first_committed"]["pre_registered_hypotheses.md"].split()
     lock = tl["test_lock"]["attempts"][0]
-    fig, ax = plt.subplots(figsize=(7.16, 2.7))
+    fig, ax = plt.subplots(figsize=(7.16, 2.15))
     ax.set_xlim(0, 100)
     ax.set_ylim(-1, 34)
     ax.axis("off")
@@ -309,7 +325,7 @@ def fig_cagr(plt):
 
 
 def main():
-    made = [t_dataset(), t_events(), t_confirmatory(), t_posthoc_audit(), t_robust(), t_backtests(), t_timeline()]
+    made = [t_dataset(), t_events(), t_confirmatory(), t_posthoc_audit(), t_robust(), t_backtests(), t_backtests_short(), t_timeline()]
     (TABDIR / "all_tables.tex").write_text("% \\usepackage{booktabs}\n" + "\n".join(f"\\input{{tables/{m}}}" for m in made) + "\n",
                                            encoding="utf-8")
     plt = mpl()
