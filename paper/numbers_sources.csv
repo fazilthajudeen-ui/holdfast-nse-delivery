@@ -1,0 +1,297 @@
+macro,value,source_file,key
+NTradingDays,"3,161",results/metrics/qc_report.json,calendar.trading_days
+DataStart,2014-01-01,results/metrics/qc_report.json,calendar.first
+DataEnd,2026-10-09,results/metrics/qc_report.json,calendar.last
+NEquityRowsM,5.84,results/metrics/qc_report.json,rows.equity_rows (/1e6)
+NEquityRows,"5,836,673",results/metrics/qc_report.json,rows.equity_rows
+NSymbols,"3,748",results/posthoc/paper_facts.json,n_symbols_equity_store
+NFOUnderlyings,354,results/posthoc/paper_facts.json,n_fo_underlyings_ever
+FOPerDayMin,134,results/posthoc/paper_facts.json,fo_underlyings_per_day_min
+FOPerDayMax,227,results/posthoc/paper_facts.json,fo_underlyings_per_day_max
+NStaleFiles,92,results/metrics/qc_report.json,stale_files_rejected
+NDelivOverlapDates,12,results/metrics/qc_report.json,len(legacy_vs_sec_overlap)
+NDelivOverlapMismatch,0,results/metrics/qc_report.json,sum(legacy_vs_sec_overlap.*_mismatch)
+NFOOverlapDays,5,results/metrics/qc_report.json,len(fo_legacy_vs_udiff)
+NAdjust,"1,442",results/metrics/adjustment_qc.json,actions_applied
+NAdjustNSE,841,results/metrics/adjustment_qc.json,methods.nse_confirmed_gap(+_close)
+NAdjustGap,468,results/metrics/adjustment_qc.json,methods.gap_snap
+NAdjustDemerger,133,results/metrics/adjustment_qc.json,methods.demerger_gap(+_close)
+NGOneChecks,57,results/metrics/p1_g1_check.json,n_checks
+GOneMaxDiff,0,results/metrics/p1_g1_check.json,max(truncation.max_abs_diff)
+NFeatures,80,results/metrics/p2_summary.json,features_v1
+NBroadTrain,"2,102",results/metrics/p2_summary.json,tier1_eligible_counts.broad.train
+NBroadVal,978,results/metrics/p2_summary.json,tier1_eligible_counts.broad.validation
+NBroadTest,"1,796",results/metrics/p2_summary.json,tier1_eligible_counts.broad.test
+NBroadTotal,"4,876",results/metrics/p2_summary.json,sum tier1_eligible_counts.broad.train+validation+test
+SuccBroad,0.262,results/metrics/p2_summary.json,class_balance.broad.label_10
+NAllTrain,"5,075",results/metrics/p2_summary.json,tier1_eligible_counts.all.train
+NAllVal,"1,979",results/metrics/p2_summary.json,tier1_eligible_counts.all.validation
+NAllTest,"4,273",results/metrics/p2_summary.json,tier1_eligible_counts.all.test
+NAllTotal,"11,327",results/metrics/p2_summary.json,sum tier1_eligible_counts.all.train+validation+test
+SuccAll,0.249,results/metrics/p2_summary.json,class_balance.all.label_10
+NStrictTrain,38,results/metrics/p2_summary.json,tier1_eligible_counts.strict.train
+NStrictVal,15,results/metrics/p2_summary.json,tier1_eligible_counts.strict.validation
+NStrictTest,29,results/metrics/p2_summary.json,tier1_eligible_counts.strict.test
+NStrictTotal,82,results/metrics/p2_summary.json,sum tier1_eligible_counts.strict.train+validation+test
+SuccStrict,0.241,results/metrics/p2_summary.json,class_balance.strict.label_10
+TvHOneExp,27.3,results/metrics/p3_hypotheses.json,"tests[H1,BROAD].p1"
+TvHOneRest,26.2,results/metrics/p3_hypotheses.json,"tests[H1,BROAD].p2"
+TvHOneDiff,+1.0,results/metrics/p3_hypotheses.json,"tests[H1,BROAD].diff"
+TvHOneP,0.513,results/metrics/p3_hypotheses.json,"tests[H1,BROAD].p"
+TvHOneQ,0.94,results/metrics/p3_hypotheses.json,"tests[H1,BROAD].bh_q"
+TvHTwoExp,26.7,results/metrics/p3_hypotheses.json,"tests[H2,BROAD].p1"
+TvHTwoRest,26.8,results/metrics/p3_hypotheses.json,"tests[H2,BROAD].p2"
+TvHTwoP,0.936,results/metrics/p3_hypotheses.json,"tests[H2,BROAD].p"
+TvHThreeExp,1.03,results/metrics/p3_hypotheses.json,"tests[H3,BROAD].asym_exposed"
+TvHThreeRest,1.07,results/metrics/p3_hypotheses.json,"tests[H3,BROAD].asym_rest"
+TvHThreeP,0.801,results/metrics/p3_hypotheses.json,"tests[H3,BROAD].p"
+ValAUCxgb,0.492,results/metrics/p5_ml.json,xgb_val.auc
+ValAUCrf,0.487,results/metrics/p5_ml.json,rf_val.auc
+ValAUClogit,0.528,results/metrics/p5_ml.json,logit_val.auc
+ValAUCcomp,0.506,results/metrics/p5_ml.json,composite_val_auc
+XgbTrees,14,results/metrics/p5_ml.json,xgb_val.best_iteration + 1
+XgbDepth,2,results/metrics/p5_ml.json,best_params.xgb.max_depth
+HOneExp,24.8,results/metrics/p6_test.json,"confirmatory[H1,BROAD].p1"
+HOneRest,24.9,results/metrics/p6_test.json,"confirmatory[H1,BROAD].p2"
+HOneDiff,\ensuremath{-}0.04,results/metrics/p6_test.json,"confirmatory[H1,BROAD].diff"
+HOneP,0.987,results/metrics/p6_test.json,"confirmatory[H1,BROAD].p"
+HOneQ,0.987,results/metrics/p6_test.json,"confirmatory[H1,BROAD].bh_q"
+HTwoExp,23.5,results/metrics/p6_test.json,"confirmatory[H2,BROAD].p1"
+HTwoRest,26.3,results/metrics/p6_test.json,"confirmatory[H2,BROAD].p2"
+HTwoDiff,\ensuremath{-}2.8,results/metrics/p6_test.json,"confirmatory[H2,BROAD].diff"
+HTwoP,0.171,results/metrics/p6_test.json,"confirmatory[H2,BROAD].p"
+HTwoQ,0.286,results/metrics/p6_test.json,"confirmatory[H2,BROAD].bh_q"
+HThreeExp,1.01,results/metrics/p6_test.json,"confirmatory[H3,BROAD].asym_exposed"
+HThreeRest,0.88,results/metrics/p6_test.json,"confirmatory[H3,BROAD].asym_rest"
+HThreeP,0.384,results/metrics/p6_test.json,"confirmatory[H3,BROAD].p"
+HThreeQ,0.480,results/metrics/p6_test.json,"confirmatory[H3,BROAD].bh_q"
+AUCxgb,0.460,results/metrics/p6_test.json,ml_test.xgb.auc
+AUCrf,0.466,results/metrics/p6_test.json,ml_test.rf.auc
+AUClogit,0.468,results/metrics/p6_test.json,ml_test.logit.auc
+AUCcomp,0.526,results/metrics/p6_test.json,ml_test.composite_auc
+HFourDiff,\ensuremath{-}0.066,results/metrics/p6_test.json,confirmatory[H4_auc].diff
+HFourSE,0.023,results/metrics/p6_test.json,confirmatory[H4_auc].se
+HFourP,0.005,results/metrics/p6_test.json,confirmatory[H4_auc].p
+HFourQ,0.024,results/metrics/p6_test.json,confirmatory[H4_auc].bh_q
+TopMLPrec,22.4,results/metrics/p6_test.json,confirmatory[H4_top_decile].ml_precision
+TopCompPrec,31.0,results/metrics/p6_test.json,confirmatory[H4_top_decile].composite_precision
+TopMLN,165,results/metrics/p6_test.json,confirmatory[H4_top_decile].n_ml
+TopP,0.108,results/metrics/p6_test.json,confirmatory[H4_top_decile].p
+TopSpread,\ensuremath{-}0.26,results/metrics/p6_test.json,confirmatory[H4_top_decile].return_spread.estimate
+TopSpreadLo,\ensuremath{-}1.29,results/metrics/p6_test.json,...return_spread.ci_low
+TopSpreadHi,+0.64,results/metrics/p6_test.json,...return_spread.ci_high
+BrierRaw,0.250,results/metrics/p6_test.json,ml_test.xgb.brier_raw
+BrierCal,0.195,results/metrics/p6_test.json,ml_test.xgb.brier_calibrated
+WFAUC,0.502,results/metrics/p6_test.json,walk_forward.oos_auc
+WFMonths,46,results/metrics/p6_test.json,walk_forward.months
+NPHTwoDiff,\ensuremath{-}5.6,results/metrics/p6_test.json,"confirmatory_without_pilot_window[H2,BROAD].diff"
+NPHTwoP,0.026,results/metrics/p6_test.json,"confirmatory_without_pilot_window[H2,BROAD].p"
+NPHTwoQ,0.128,results/metrics/p6_test.json,"confirmatory_without_pilot_window[H2,BROAD].bh_q"
+NPHFourDiff,\ensuremath{-}0.039,results/metrics/p6_test.json,confirmatory_without_pilot_window[H4_auc].diff
+NPHFourP,0.141,results/metrics/p6_test.json,confirmatory_without_pilot_window[H4_auc].p
+BHm,5,results/posthoc/s0_supplementary_audit.json,1_bh_family.rows[0].m
+BaseRateTest,0.248,results/metrics/p6_test.json,ml_test.base_rate
+TTwoDiff,+0.8,results/metrics/p6_test.json,tier2_replication_H1.broad.diff
+TTwoP,0.586,results/metrics/p6_test.json,tier2_replication_H1.broad.p
+PowRuleN,144,results/metrics/p6_test.json,power_rule_H1_strict_tier1_or_2.n
+PowRuleDiff,\ensuremath{-}0.2,results/metrics/p6_test.json,power_rule_H1_strict_tier1_or_2.diff
+PowRuleP,0.978,results/metrics/p6_test.json,power_rule_H1_strict_tier1_or_2.p
+LadBaseN,"159,972",results/metrics/p6_test.json,ladder_broad[B0_base].n
+LadBase,26.7,results/metrics/p6_test.json,ladder_broad[B0_base].success_rate
+LadAll,24.9,results/metrics/p6_test.json,ladder_broad[B1].success_rate
+LadAllDiff,\ensuremath{-}1.9,results/metrics/p6_test.json,ladder_broad[B1].vs_previous.success_diff
+LadAllP,0.005,results/metrics/p6_test.json,ladder_broad[B1].vs_previous.success_p
+LadBroad,24.8,results/metrics/p6_test.json,ladder_broad[B2b].success_rate
+LadComp,41.4,results/metrics/p6_test.json,ladder_broad[B3b].success_rate
+LadCompN,29,results/metrics/p6_test.json,ladder_broad[B3b].n
+CagrAll,\ensuremath{-}26.8,results/metrics/p6_test.json,backtests[B1_all_breakouts].cagr
+TradesAll,"2,736",results/metrics/p6_test.json,backtests[B1_all_breakouts].n_trades
+MaxDDAll,\ensuremath{-}68.6,results/metrics/p6_test.json,backtests[B1_all_breakouts].max_dd
+CagrBroad,\ensuremath{-}12.6,results/metrics/p6_test.json,backtests[B2b_broad].cagr
+TradesBroad,"1,599",results/metrics/p6_test.json,backtests[B2b_broad].n_trades
+MaxDDBroad,\ensuremath{-}39.2,results/metrics/p6_test.json,backtests[B2b_broad].max_dd
+CagrComp,+6.0,results/metrics/p6_test.json,backtests[B3b_broad_composite].cagr
+TradesComp,29,results/metrics/p6_test.json,backtests[B3b_broad_composite].n_trades
+MaxDDComp,\ensuremath{-}1.0,results/metrics/p6_test.json,backtests[B3b_broad_composite].max_dd
+CagrML,+4.3,results/metrics/p6_test.json,backtests[B4b_broad_ml_top_decile].cagr
+TradesML,157,results/metrics/p6_test.json,backtests[B4b_broad_ml_top_decile].n_trades
+MaxDDML,\ensuremath{-}2.3,results/metrics/p6_test.json,backtests[B4b_broad_ml_top_decile].max_dd
+CagrNifty,+9.7,results/metrics/p6_test.json,benchmark_nifty500_test.cagr
+SPAp,0.77,results/metrics/p6_test.json,spa.spa_p_consistent
+RCp,0.89,results/metrics/p6_test.json,spa.white_rc_p
+DSRtrials,89,results/metrics/p6_test.json,deflated_sharpe.*.n_trials_results_log
+TrialsBefore,67,results/posthoc/s0_supplementary_audit.json,10_timeline.results_log_rows_before_test_run_started
+TrialsTestRun,22,results/posthoc/s0_supplementary_audit.json,through_P6 - before
+TrialsThroughPSix,89,results/posthoc/s0_supplementary_audit.json,10_timeline.results_log_rows_through_P6
+PreregCommit,15103f1,results/posthoc/s0_supplementary_audit.json,files_first_committed[pre_registered_hypotheses.md]
+PreregTime,08:54,results/posthoc/s0_supplementary_audit.json,files_first_committed[pre_registered_hypotheses.md]
+LockHead,ea49def,results/posthoc/s0_supplementary_audit.json,10_timeline.test_lock.attempts[0].git_commit
+LockStart,09:23,results/posthoc/s0_supplementary_audit.json,10_timeline.test_lock.attempts[0].started
+LockCommit,359bcc7,results/posthoc/s0_supplementary_audit.json,files_first_committed[results/test_lock.json]
+LockCommitTime,09:30,results/posthoc/s0_supplementary_audit.json,files_first_committed[results/test_lock.json]
+TostHOneLo,\ensuremath{-}3.7,results/posthoc/s0_supplementary_audit.json,"2_tost[full,BROAD,H1].ci90_wald[0]"
+TostHOneHi,+3.6,results/posthoc/s0_supplementary_audit.json,"2_tost[full,BROAD,H1].ci90_wald[1]"
+TostHOneP,0.19,results/posthoc/s0_supplementary_audit.json,"2_tost[full,BROAD,H1].p_tost"
+TostHTwoLo,\ensuremath{-}6.2,results/posthoc/s0_supplementary_audit.json,"2_tost[full,BROAD,H2].ci90_wald[0]"
+TostHTwoHi,+0.6,results/posthoc/s0_supplementary_audit.json,"2_tost[full,BROAD,H2].ci90_wald[1]"
+TostHTwoP,0.65,results/posthoc/s0_supplementary_audit.json,"2_tost[full,BROAD,H2].p_tost"
+TostNPHOneLo,\ensuremath{-}1.9,results/posthoc/s0_supplementary_audit.json,"2_tost[without_pilot,BROAD,H1].ci90_wald[0]"
+TostNPHOneHi,+7.2,results/posthoc/s0_supplementary_audit.json,"2_tost[without_pilot,BROAD,H1].ci90_wald[1]"
+TostNPHOneP,0.59,results/posthoc/s0_supplementary_audit.json,"2_tost[without_pilot,BROAD,H1].p_tost"
+TostNPHTwoLo,\ensuremath{-}9.8,results/posthoc/s0_supplementary_audit.json,"2_tost[without_pilot,BROAD,H2].ci90_wald[0]"
+TostNPHTwoHi,\ensuremath{-}1.5,results/posthoc/s0_supplementary_audit.json,"2_tost[without_pilot,BROAD,H2].ci90_wald[1]"
+TostNPHTwoP,0.93,results/posthoc/s0_supplementary_audit.json,"2_tost[without_pilot,BROAD,H2].p_tost"
+MDEHOne,6.26,results/posthoc/s0_supplementary_audit.json,"3_mde[BROAD,H1].mde_pp_prereg_method"
+MDEHTwo,5.71,results/posthoc/s0_supplementary_audit.json,"3_mde[BROAD,H2].mde_pp_prereg_method"
+ExpN,47,results/posthoc/s0_supplementary_audit.json,4_h1_ex_expiry.n_monthly_expiries_in_test
+ExpRemoved,331,results/posthoc/s0_supplementary_audit.json,"4_h1_ex_expiry.rows[5_sessions,BROAD].n_removed"
+ExpDiff,\ensuremath{-}1.4,results/posthoc/s0_supplementary_audit.json,"4_h1_ex_expiry.rows[5_sessions,BROAD].diff"
+ExpP,0.572,results/posthoc/s0_supplementary_audit.json,"4_h1_ex_expiry.rows[5_sessions,BROAD].p"
+ExpPMin,0.516,results/posthoc/s0_supplementary_audit.json,min p over 3 window variants
+PSIpcr,0.55,results/posthoc/s0_supplementary_audit.json,5_auc_psi.psi_top10_shap[log_pcr_oi].psi
+PSIclient,0.31,results/posthoc/s0_supplementary_audit.json,5_auc_psi.psi_top10_shap[client_fut_idx_cot].psi
+PSInModerate,7,results/posthoc/s0_supplementary_audit.json,count 0.10<=psi<=0.25
+PSInLarge,2,results/posthoc/s0_supplementary_audit.json,count psi>0.25
+BrierConstVal,0.188,results/posthoc/s0_supplementary_audit.json,6_brier.brier_constant_at_validation_base_rate
+BrierConstTest,0.187,results/posthoc/s0_supplementary_audit.json,6_brier.brier_constant_at_test_base_rate
+IncompleteBroad,4,results/posthoc/s0_supplementary_audit.json,8_incomplete_labels...broad
+GapEvents,165,results/posthoc/s0_supplementary_audit.json,9c_165_vs_157.ml_top_decile_events
+GapTrades,157,results/posthoc/s0_supplementary_audit.json,9c_165_vs_157.trades
+GapSlotsFull,8,results/posthoc/s0_supplementary_audit.json,9c_165_vs_157.reasons[all 20 slots full]
+RoundTrip,0.58,results/posthoc/B_breakeven.json,break_even.round_trip_cost_pct_weighted
+RTLarge,0.45,results/posthoc/B_breakeven.json,cost_components_by_bucket.large.round_trip_pct
+RTSmall,0.75,results/posthoc/B_breakeven.json,cost_components_by_bucket.small.round_trip_pct
+AvgWin,+4.74,results/posthoc/B_breakeven.json,break_even.avg_success_return_pct
+AvgLoss,\ensuremath{-}1.85,results/posthoc/B_breakeven.json,break_even.avg_failure_return_pct
+WinLossSpread,6.59,results/posthoc/B_breakeven.json,break_even.spread_pp
+BreakEven,8.8,results/posthoc/B_breakeven.json,break_even.break_even_success_rate_change_pp
+BEHOneDiff,\ensuremath{-}0.0,results/posthoc/B_breakeven.json,"rows[H1 delivery expansion,BROAD,full].diff"
+BEHOneLo,\ensuremath{-}4.4,results/posthoc/B_breakeven.json,"rows[H1 delivery expansion,BROAD,full].ci95[0]"
+BEHOneHi,+4.3,results/posthoc/B_breakeven.json,"rows[H1 delivery expansion,BROAD,full].ci95[1]"
+BEHOneBLo,\ensuremath{-}5.3,results/posthoc/B_breakeven.json,"rows[H1 delivery expansion,BROAD,full].ci95_block[0]"
+BEHOneBHi,+4.7,results/posthoc/B_breakeven.json,"rows[H1 delivery expansion,BROAD,full].ci95_block[1]"
+BEHOneN,1265,results/posthoc/B_breakeven.json,"rows[H1 delivery expansion,BROAD,full].n1"
+BEHTwoDiff,\ensuremath{-}2.8,results/posthoc/B_breakeven.json,"rows[H2 price up, OI down,BROAD,full].diff"
+BEHTwoLo,\ensuremath{-}6.8,results/posthoc/B_breakeven.json,"rows[H2 price up, OI down,BROAD,full].ci95[0]"
+BEHTwoHi,+1.2,results/posthoc/B_breakeven.json,"rows[H2 price up, OI down,BROAD,full].ci95[1]"
+BEHTwoBLo,\ensuremath{-}8.3,results/posthoc/B_breakeven.json,"rows[H2 price up, OI down,BROAD,full].ci95_block[0]"
+BEHTwoBHi,+2.1,results/posthoc/B_breakeven.json,"rows[H2 price up, OI down,BROAD,full].ci95_block[1]"
+BEHTwoN,924,results/posthoc/B_breakeven.json,"rows[H2 price up, OI down,BROAD,full].n1"
+BENPHOneDiff,+2.6,results/posthoc/B_breakeven.json,"rows[H1 delivery expansion,BROAD,without_pilot].diff"
+BENPHOneLo,\ensuremath{-}2.8,results/posthoc/B_breakeven.json,"rows[H1 delivery expansion,BROAD,without_pilot].ci95[0]"
+BENPHOneHi,+8.1,results/posthoc/B_breakeven.json,"rows[H1 delivery expansion,BROAD,without_pilot].ci95[1]"
+BENPHOneBLo,\ensuremath{-}2.8,results/posthoc/B_breakeven.json,"rows[H1 delivery expansion,BROAD,without_pilot].ci95_block[0]"
+BENPHOneBHi,+7.9,results/posthoc/B_breakeven.json,"rows[H1 delivery expansion,BROAD,without_pilot].ci95_block[1]"
+BENPHOneN,899,results/posthoc/B_breakeven.json,"rows[H1 delivery expansion,BROAD,without_pilot].n1"
+BENPHTwoDiff,\ensuremath{-}5.6,results/posthoc/B_breakeven.json,"rows[H2 price up, OI down,BROAD,without_pilot].diff"
+BENPHTwoLo,\ensuremath{-}10.6,results/posthoc/B_breakeven.json,"rows[H2 price up, OI down,BROAD,without_pilot].ci95[0]"
+BENPHTwoHi,\ensuremath{-}0.7,results/posthoc/B_breakeven.json,"rows[H2 price up, OI down,BROAD,without_pilot].ci95[1]"
+BENPHTwoBLo,\ensuremath{-}12.3,results/posthoc/B_breakeven.json,"rows[H2 price up, OI down,BROAD,without_pilot].ci95_block[0]"
+BENPHTwoBHi,+0.7,results/posthoc/B_breakeven.json,"rows[H2 price up, OI down,BROAD,without_pilot].ci95_block[1]"
+BENPHTwoN,617,results/posthoc/B_breakeven.json,"rows[H2 price up, OI down,BROAD,without_pilot].n1"
+BEMLDiff,\ensuremath{-}2.7,results/posthoc/B_breakeven.json,"rows[ML top decile (XGBoost),BROAD,full].diff"
+BEMLLo,\ensuremath{-}9.4,results/posthoc/B_breakeven.json,"rows[ML top decile (XGBoost),BROAD,full].ci95[0]"
+BEMLHi,+4.1,results/posthoc/B_breakeven.json,"rows[ML top decile (XGBoost),BROAD,full].ci95[1]"
+BEMLBLo,\ensuremath{-}13.8,results/posthoc/B_breakeven.json,"rows[ML top decile (XGBoost),BROAD,full].ci95_block[0]"
+BEMLBHi,+7.3,results/posthoc/B_breakeven.json,"rows[ML top decile (XGBoost),BROAD,full].ci95_block[1]"
+BEMLN,165,results/posthoc/B_breakeven.json,"rows[ML top decile (XGBoost),BROAD,full].n1"
+BECompTopDiff,+7.0,results/posthoc/B_breakeven.json,"rows[Composite top decile (H4 cut),BROAD,full].diff"
+BECompTopLo,+0.6,results/posthoc/B_breakeven.json,"rows[Composite top decile (H4 cut),BROAD,full].ci95[0]"
+BECompTopHi,+13.4,results/posthoc/B_breakeven.json,"rows[Composite top decile (H4 cut),BROAD,full].ci95[1]"
+BECompTopBLo,+0.8,results/posthoc/B_breakeven.json,"rows[Composite top decile (H4 cut),BROAD,full].ci95_block[0]"
+BECompTopBHi,+15.0,results/posthoc/B_breakeven.json,"rows[Composite top decile (H4 cut),BROAD,full].ci95_block[1]"
+BECompTopN,226,results/posthoc/B_breakeven.json,"rows[Composite top decile (H4 cut),BROAD,full].n1"
+BECompRuleDiff,+16.8,results/posthoc/B_breakeven.json,"rows[Composite rule (score >= 1.0),BROAD,full].diff"
+BECompRuleLo,\ensuremath{-}1.2,results/posthoc/B_breakeven.json,"rows[Composite rule (score >= 1.0),BROAD,full].ci95[0]"
+BECompRuleHi,+34.9,results/posthoc/B_breakeven.json,"rows[Composite rule (score >= 1.0),BROAD,full].ci95[1]"
+BECompRuleBLo,\ensuremath{-}10.0,results/posthoc/B_breakeven.json,"rows[Composite rule (score >= 1.0),BROAD,full].ci95_block[0]"
+BECompRuleBHi,+46.3,results/posthoc/B_breakeven.json,"rows[Composite rule (score >= 1.0),BROAD,full].ci95_block[1]"
+BECompRuleN,29,results/posthoc/B_breakeven.json,"rows[Composite rule (score >= 1.0),BROAD,full].n1"
+BEnBelow,3,results/posthoc/B_breakeven.json,count BROAD H1/H2 rows with below_break_even_ci95
+SpecOneN,54,results/posthoc/C_spec_curve.json,summary.H1.n_specs
+SpecOnePred,89,results/posthoc/C_spec_curve.json,summary.H1.share_predicted_direction
+SpecOneSig,15,results/posthoc/C_spec_curve.json,summary.H1.n_significant
+SpecOneSigPct,28,results/posthoc/C_spec_curve.json,summary.H1.share_significant_5pct
+SpecOneOpp,0,results/posthoc/C_spec_curve.json,summary.H1.n_sig_opposite_direction
+SpecOneBH,3,results/posthoc/C_spec_curve.json,summary.H1.n_bh_q10_within_hypothesis
+SpecOneMedian,+2.36,results/posthoc/C_spec_curve.json,summary.H1.median_effect_pp
+SpecOneMax,5.05,results/posthoc/C_spec_curve.json,summary.H1.max_effect_predicted_dir_pp
+SpecOneCIAbove,4,results/posthoc/C_spec_curve.json,summary.H1.n_upper_ci95_above_break_even
+SpecOneFrozen,\ensuremath{-}0.04,results/posthoc/C_spec_curve.json,summary.H1.frozen_spec_effect_pp
+SpecOneRank,49,results/posthoc/C_spec_curve.json,summary.H1.frozen_rank_in_predicted_direction
+SpecTwoN,18,results/posthoc/C_spec_curve.json,summary.H2.n_specs
+SpecTwoPred,94,results/posthoc/C_spec_curve.json,summary.H2.share_predicted_direction
+SpecTwoSig,3,results/posthoc/C_spec_curve.json,summary.H2.n_significant
+SpecTwoSigPct,17,results/posthoc/C_spec_curve.json,summary.H2.share_significant_5pct
+SpecTwoOpp,0,results/posthoc/C_spec_curve.json,summary.H2.n_sig_opposite_direction
+SpecTwoBH,0,results/posthoc/C_spec_curve.json,summary.H2.n_bh_q10_within_hypothesis
+SpecTwoMedian,\ensuremath{-}2.24,results/posthoc/C_spec_curve.json,summary.H2.median_effect_pp
+SpecTwoMax,4.44,results/posthoc/C_spec_curve.json,summary.H2.max_effect_predicted_dir_pp
+SpecTwoCIAbove,0,results/posthoc/C_spec_curve.json,summary.H2.n_upper_ci95_above_break_even
+SpecTwoFrozen,\ensuremath{-}2.81,results/posthoc/C_spec_curve.json,summary.H2.frozen_spec_effect_pp
+SpecTwoRank,6,results/posthoc/C_spec_curve.json,summary.H2.frozen_rank_in_predicted_direction
+BFOneUni,17.88,results/posthoc/D_bayes.json,"rows[BROAD,full,H1,default Beta(1,1)].BF01"
+BFNPOneUni,9.31,results/posthoc/D_bayes.json,"rows[BROAD,without_pilot,H1,default Beta(1,1)].BF01"
+BFOneSkep,2.27,results/posthoc/D_bayes.json,"rows[BROAD,full,H1,skeptical Beta(100*pi,100*(1-pi))].BF01"
+BFNPOneSkep,1.27,results/posthoc/D_bayes.json,"rows[BROAD,without_pilot,H1,skeptical Beta(100*pi,100*(1-pi))].BF01"
+BFOneLogDef,8.41,results/posthoc/D_bayes.json,"rows[BROAD,full,H1,default logOR~N(0,1)].BF01"
+BFNPOneLogDef,4.49,results/posthoc/D_bayes.json,"rows[BROAD,without_pilot,H1,default logOR~N(0,1)].BF01"
+BFOneLogSkep,2.32,results/posthoc/D_bayes.json,"rows[BROAD,full,H1,skeptical logOR~N(0,0.25^2)].BF01"
+BFNPOneLogSkep,1.43,results/posthoc/D_bayes.json,"rows[BROAD,without_pilot,H1,skeptical logOR~N(0,0.25^2)].BF01"
+BFTwoUni,7.65,results/posthoc/D_bayes.json,"rows[BROAD,full,H2,default Beta(1,1)].BF01"
+BFNPTwoUni,1.31,results/posthoc/D_bayes.json,"rows[BROAD,without_pilot,H2,default Beta(1,1)].BF01"
+BFTwoSkep,1.05,results/posthoc/D_bayes.json,"rows[BROAD,full,H2,skeptical Beta(100*pi,100*(1-pi))].BF01"
+BFNPTwoSkep,0.23,results/posthoc/D_bayes.json,"rows[BROAD,without_pilot,H2,skeptical Beta(100*pi,100*(1-pi))].BF01"
+BFTwoLogDef,3.63,results/posthoc/D_bayes.json,"rows[BROAD,full,H2,default logOR~N(0,1)].BF01"
+BFNPTwoLogDef,0.67,results/posthoc/D_bayes.json,"rows[BROAD,without_pilot,H2,default logOR~N(0,1)].BF01"
+BFTwoLogSkep,1.13,results/posthoc/D_bayes.json,"rows[BROAD,full,H2,skeptical logOR~N(0,0.25^2)].BF01"
+BFNPTwoLogSkep,0.30,results/posthoc/D_bayes.json,"rows[BROAD,without_pilot,H2,skeptical logOR~N(0,0.25^2)].BF01"
+EOneBOne,+0.008,results/posthoc/E_clustered_logit.json,"rows[BROAD,full,two_way,H1,beta1].coef"
+EOneBOneLo,\ensuremath{-}0.237,results/posthoc/E_clustered_logit.json,"...H1,beta1.ci95[0]"
+EOneBOneHi,+0.254,results/posthoc/E_clustered_logit.json,"...H1,beta1.ci95[1]"
+EOneBOneP,0.946,results/posthoc/E_clustered_logit.json,"...H1,beta1.p"
+EOneBTwo,\ensuremath{-}0.225,results/posthoc/E_clustered_logit.json,"rows[BROAD,full,two_way,H1,beta2].coef"
+EOneBTwoLo,\ensuremath{-}0.592,results/posthoc/E_clustered_logit.json,"...H1,beta2.ci95[0]"
+EOneBTwoHi,+0.142,results/posthoc/E_clustered_logit.json,"...H1,beta2.ci95[1]"
+EOneBTwoP,0.229,results/posthoc/E_clustered_logit.json,"...H1,beta2.p"
+EOneBThree,+0.246,results/posthoc/E_clustered_logit.json,"rows[BROAD,full,two_way,H1,beta3].coef"
+EOneBThreeLo,\ensuremath{-}0.130,results/posthoc/E_clustered_logit.json,"...H1,beta3.ci95[0]"
+EOneBThreeHi,+0.622,results/posthoc/E_clustered_logit.json,"...H1,beta3.ci95[1]"
+EOneBThreeP,0.200,results/posthoc/E_clustered_logit.json,"...H1,beta3.p"
+ETwoBOne,\ensuremath{-}0.129,results/posthoc/E_clustered_logit.json,"rows[BROAD,full,two_way,H2,beta1].coef"
+ETwoBOneLo,\ensuremath{-}0.361,results/posthoc/E_clustered_logit.json,"...H2,beta1.ci95[0]"
+ETwoBOneHi,+0.102,results/posthoc/E_clustered_logit.json,"...H2,beta1.ci95[1]"
+ETwoBOneP,0.273,results/posthoc/E_clustered_logit.json,"...H2,beta1.p"
+ETwoBTwo,+0.185,results/posthoc/E_clustered_logit.json,"rows[BROAD,full,two_way,H2,beta2].coef"
+ETwoBTwoLo,+0.006,results/posthoc/E_clustered_logit.json,"...H2,beta2.ci95[0]"
+ETwoBTwoHi,+0.364,results/posthoc/E_clustered_logit.json,"...H2,beta2.ci95[1]"
+ETwoBTwoP,0.043,results/posthoc/E_clustered_logit.json,"...H2,beta2.p"
+ETwoBThree,\ensuremath{-}0.186,results/posthoc/E_clustered_logit.json,"rows[BROAD,full,two_way,H2,beta3].coef"
+ETwoBThreeLo,\ensuremath{-}0.435,results/posthoc/E_clustered_logit.json,"...H2,beta3.ci95[0]"
+ETwoBThreeHi,+0.063,results/posthoc/E_clustered_logit.json,"...H2,beta3.ci95[1]"
+ETwoBThreeP,0.142,results/posthoc/E_clustered_logit.json,"...H2,beta3.p"
+EMonthMatches,exactly,results/posthoc/E_clustered_logit.json,month-clustered p == locked p6 p (all BROAD full terms)
+FYears,12,results/posthoc/F_h1_by_year.json,"rows[BROAD, year]"
+FYearsSig,0,results/posthoc/F_h1_by_year.json,count year rows with p<0.05
+FFirstYear,2015,results/posthoc/F_h1_by_year.json,rows[BROAD][0].period
+FLastYear,2026,results/posthoc/F_h1_by_year.json,rows[BROAD][-1].period
+GTieShareLoss,0.12,results/posthoc/G_breakout_ties.json,B1_breakout_events.tie_share_of_losses
+GTieExplained,0.1,results/posthoc/G_breakout_ties.json,gap_decomposition_pp.share_of_gap_explained_by_ties_excluded
+GDayOneBO,15.0,results/posthoc/G_breakout_ties.json,B1_breakout_events.day1_stop_share
+GDayOneNB,10.3,results/posthoc/G_breakout_ties.json,non_breakout_days.day1_stop_share
+GRangeBO,1.07,results/posthoc/G_breakout_ties.json,B1_breakout_events.mean_day1_range_atr
+GRangeNB,0.95,results/posthoc/G_breakout_ties.json,non_breakout_days.mean_day1_range_atr
+GGapBO,0.11,results/posthoc/G_breakout_ties.json,B1_breakout_events.mean_gap_atr
+GGapNB,0.05,results/posthoc/G_breakout_ties.json,non_breakout_days.mean_gap_atr
+GATRBO,2.55,results/posthoc/G_breakout_ties.json,B1_breakout_events.mean_atr_pct
+GATRNB,2.68,results/posthoc/G_breakout_ties.json,non_breakout_days.mean_atr_pct
+GAgree,100.0,results/posthoc/G_breakout_ties.json,label_agreement_with_frozen_label_10_B0
+placeboDraws,"1,000",results/posthoc/A_placebo.json,draws
+placeboActual,\ensuremath{-}0.04,results/posthoc/A_placebo.json,BROAD.actual_diff_pp
+placeboMean,+1.65,results/posthoc/A_placebo.json,BROAD.placebo_mean_pp
+placeboSD,1.97,results/posthoc/A_placebo.json,BROAD.placebo_sd_pp
+placeboP,0.795,results/posthoc/A_placebo.json,BROAD.p_one_sided_placebo_ge_actual
+placeboPct,20,results/posthoc/A_placebo.json,BROAD.percentile_of_actual
+PSevenActual,+1.05,results/metrics/p7_robustness.json,placebo.BROAD.actual_diff
+PSevenDraws,20,results/metrics/p7_robustness.json,len(placebo.BROAD.placebo_draws)
+PSevenGE,0,results/metrics/p7_robustness.json,placebo.BROAD.share_placebo_ge_actual
