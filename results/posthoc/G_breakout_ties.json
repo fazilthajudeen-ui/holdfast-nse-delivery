@@ -1,0 +1,126 @@
+{
+  "label": "POST-HOC (designed after the test set was opened on 10 Oct 2026 09:23:35 IST)",
+  "task": "G breakout vs base",
+  "label_agreement_with_frozen_label_10_B0": 1.0,
+  "label_agreement_with_frozen_label_10_B1": 1.0,
+  "locked_ladder": {
+    "B0_base": 0.2674593053784412,
+    "B1_all_breakouts": 0.24877135501989234,
+    "B2b_broad": 0.24832962138084633,
+    "B3b_broad_composite": 0.41379310344827586,
+    "B4b_broad_ml_top_decile": 0.22424242424242424
+  },
+  "B0_all_stock_days": {
+    "n": 159972,
+    "success_rate": 0.2674593053784412,
+    "frozen_success_rate": 0.2674593053784412,
+    "tie_share_of_all": 0.0008251444002700472,
+    "tie_share_of_losses": 0.0011264144181045517,
+    "success_rate_ties_excluded": 0.2676801801801802,
+    "success_rate_ties_as_half": 0.2678718775785763,
+    "day1_stop_share": 0.10445577976145826,
+    "mean_gap_pct": 0.12856819456466734,
+    "median_gap_pct": 0.09951403979981954,
+    "mean_abs_gap_atr": 0.17670127683275294,
+    "mean_gap_atr": 0.04841272417393393,
+    "mean_atr_pct": 2.671744995849174,
+    "median_atr_pct": 2.5615786769630744,
+    "mean_day1_range_atr": 0.9535601146788097
+  },
+  "B1_breakout_events": {
+    "n": 4273,
+    "success_rate": 0.24877135501989234,
+    "frozen_success_rate": 0.24877135501989234,
+    "tie_share_of_all": 0.000936110461034402,
+    "tie_share_of_losses": 0.0012461059190031153,
+    "success_rate_ties_excluded": 0.24900445069102833,
+    "success_rate_ties_as_half": 0.24923941025040955,
+    "day1_stop_share": 0.15001170138076292,
+    "mean_gap_pct": 0.28046443788634207,
+    "median_gap_pct": 0.27259259259257984,
+    "mean_abs_gap_atr": 0.20245789312159543,
+    "mean_gap_atr": 0.11028880492339731,
+    "mean_atr_pct": 2.5462746351315007,
+    "median_atr_pct": 2.4633688701578516,
+    "mean_day1_range_atr": 1.0728226248822175
+  },
+  "non_breakout_days": {
+    "n": 155699,
+    "success_rate": 0.2679721770852735,
+    "frozen_success_rate": 0.2679721770852735,
+    "tie_share_of_all": 0.0008220990500902382,
+    "tie_share_of_losses": 0.0011230434477433845,
+    "success_rate_ties_excluded": 0.2681926580146685,
+    "success_rate_ties_as_half": 0.2683832266103186,
+    "day1_stop_share": 0.10320554403046904,
+    "mean_gap_pct": 0.12439955733698112,
+    "median_gap_pct": 0.09532888465204614,
+    "mean_abs_gap_atr": 0.17599441281049058,
+    "mean_gap_atr": 0.04671459834754804,
+    "mean_atr_pct": 2.6751884017242706,
+    "median_atr_pct": 2.564431538892148,
+    "mean_day1_range_atr": 0.9502870769194204
+  },
+  "breakout_days_in_B0": {
+    "n": 4273,
+    "success_rate": 0.24877135501989234,
+    "frozen_success_rate": 0.24877135501989234,
+    "tie_share_of_all": 0.000936110461034402,
+    "tie_share_of_losses": 0.0012461059190031153,
+    "success_rate_ties_excluded": 0.24900445069102833,
+    "success_rate_ties_as_half": 0.24923941025040955,
+    "day1_stop_share": 0.15001170138076292,
+    "mean_gap_pct": 0.28046443788634207,
+    "median_gap_pct": 0.27259259259257984,
+    "mean_abs_gap_atr": 0.20245789312159543,
+    "mean_gap_atr": 0.11028880492339731,
+    "mean_atr_pct": 2.5462746351315007,
+    "median_atr_pct": 2.4633688701578516,
+    "mean_day1_range_atr": 1.0728226248822175
+  },
+  "gap_decomposition_pp": {
+    "breakout_minus_nonbreakout_frozen_rule": -1.9200822065381151,
+    "ties_excluded": -1.9188207323640183,
+    "ties_counted_as_half": -1.9143816359909054,
+    "share_of_gap_explained_by_ties_excluded": 0.0006569896694013197
+  },
+  "tests_B1_vs_nonbreakout": {
+    "gap_atr": {
+      "breakout_mean": 0.11028880492339731,
+      "nonbreakout_mean": 0.04671459834754804,
+      "welch_t": 14.472171891513632,
+      "welch_p": 1.967314571817116e-46
+    },
+    "atr_pct": {
+      "breakout_mean": 2.5462746351315007,
+      "nonbreakout_mean": 2.6751884017242706,
+      "welch_t": -12.630469030790499,
+      "welch_p": 5.6449548276799644e-36
+    },
+    "day1_range_atr": {
+      "breakout_mean": 1.0728226248822175,
+      "nonbreakout_mean": 0.9502870769194204,
+      "welch_t": 12.964805855646746,
+      "welch_p": 9.465745458892142e-38
+    },
+    "tie_rate": {
+      "p1": 0.000936110461034402,
+      "p2": 0.0008220990500902382,
+      "n1": 4273,
+      "n2": 155699,
+      "diff": 0.0001140114109441638,
+      "se": 0.00047344094936472073,
+      "z": 0.2560648485476139,
+      "p": 0.7979007640685178,
+      "ci95": [
+        -0.0008139158059365117,
+        0.0010419386278248393
+      ],
+      "ci90": [
+        -0.0006647298283821945,
+        0.0008927526502705221
+      ]
+    }
+  },
+  "caveat": "Non-breakout days are overlapping stock-days (serially dependent), so the t-tests overstate precision; they are descriptive."
+}

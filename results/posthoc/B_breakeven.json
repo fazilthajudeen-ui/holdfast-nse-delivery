@@ -1,0 +1,661 @@
+{
+  "label": "POST-HOC (designed after the test set was opened on 10 Oct 2026 09:23:35 IST)",
+  "task": "B break-even check",
+  "break_even": {
+    "notional_per_trade_rs": 50000.0,
+    "cost_components_by_bucket": {
+      "large": {
+        "buy_cost_pct": 0.16592259999999998,
+        "sell_cost_pct": 0.18278260000000002,
+        "slippage_both_legs_pct": 0.1,
+        "round_trip_pct": 0.4487052
+      },
+      "mid": {
+        "buy_cost_pct": 0.16592259999999998,
+        "sell_cost_pct": 0.18278260000000002,
+        "slippage_both_legs_pct": 0.2,
+        "round_trip_pct": 0.5487052
+      },
+      "small": {
+        "buy_cost_pct": 0.16592259999999998,
+        "sell_cost_pct": 0.18278260000000002,
+        "slippage_both_legs_pct": 0.4,
+        "round_trip_pct": 0.7487052
+      }
+    },
+    "bucket_mix_test_B2b_trades": {
+      "large": 546,
+      "mid": 519,
+      "small": 534
+    },
+    "round_trip_cost_pct_weighted": 0.5813506033771106,
+    "avg_success_return_pct": 4.735246956923691,
+    "avg_failure_return_pct": -1.8529881630961456,
+    "n_success": 446,
+    "n_failure": 1350,
+    "spread_pp": 6.588235120019837,
+    "break_even_success_rate_change_pp": 8.824071891583618,
+    "formula": "d* = round-trip cost / (avg success return - avg failure return)",
+    "backtest_trade_level_reference_B2b": {
+      "avg_win": 0.0361973924245125,
+      "avg_loss": -0.028974621454602313,
+      "hit_rate": 0.3214509068167605,
+      "avg_net_ret": -0.008025018494086357,
+      "n_trades": 1599
+    },
+    "gross_vs_net_note": "Triple-barrier returns are gross (before costs) and measured from the T+1 open; the backtest avg_win/avg_loss are net of costs and slippage."
+  },
+  "rows": [
+    {
+      "test": "H1 delivery expansion",
+      "family": "BROAD",
+      "set": "full",
+      "expected_sign": "+",
+      "p1": 0.2482213438735178,
+      "p2": 0.24858757062146894,
+      "n1": 1265,
+      "n2": 531,
+      "diff": -0.00036622674795114274,
+      "se": 0.0223447853724068,
+      "z": -0.01639311314443731,
+      "p": 0.9869207739269847,
+      "ci95": [
+        -0.04416120166559506,
+        0.04342874816969278
+      ],
+      "ci90": [
+        -0.037120136346895954,
+        0.03638768285099367
+      ],
+      "ci90_block": [
+        -0.04320816112216351,
+        0.040397300875723414
+      ],
+      "ci95_block": [
+        -0.05252462922465337,
+        0.04719210463491459
+      ],
+      "small_sample": false,
+      "max_effect_predicted_dir_pp_ci90_wald": 3.638768285099367,
+      "max_effect_predicted_dir_pp_ci90_block": 4.039730087572342,
+      "below_break_even_ci90": true,
+      "max_effect_predicted_dir_pp_ci95_wald": 4.342874816969278,
+      "max_effect_predicted_dir_pp_ci95_block": 4.719210463491459,
+      "below_break_even_ci95": true
+    },
+    {
+      "test": "H2 price up, OI down",
+      "family": "BROAD",
+      "set": "full",
+      "expected_sign": "-",
+      "p1": 0.23484848484848486,
+      "p2": 0.26291079812206575,
+      "n1": 924,
+      "n2": 852,
+      "diff": -0.028062313273580886,
+      "se": 0.020540844515210113,
+      "z": -1.3675424138166068,
+      "p": 0.1714553523975123,
+      "ci95": [
+        -0.06832162905299016,
+        0.012197002505828392
+      ],
+      "ci90": [
+        -0.0618490035378023,
+        0.005724376990640531
+      ],
+      "ci90_block": [
+        -0.07115881123287765,
+        0.013245777989228921
+      ],
+      "ci95_block": [
+        -0.0828508442654834,
+        0.020886699452273883
+      ],
+      "small_sample": false,
+      "max_effect_predicted_dir_pp_ci90_wald": 6.18490035378023,
+      "max_effect_predicted_dir_pp_ci90_block": 7.115881123287765,
+      "below_break_even_ci90": true,
+      "max_effect_predicted_dir_pp_ci95_wald": 6.8321629052990165,
+      "max_effect_predicted_dir_pp_ci95_block": 8.285084426548341,
+      "below_break_even_ci95": true
+    },
+    {
+      "test": "Composite rule (score >= 1.0)",
+      "family": "BROAD",
+      "set": "full",
+      "expected_sign": "+",
+      "p1": 0.41379310344827586,
+      "p2": 0.24561403508771928,
+      "n1": 29,
+      "n2": 1767,
+      "diff": 0.16817906836055657,
+      "se": 0.09202872745392639,
+      "z": 2.079256503822751,
+      "p": 0.037593780691446844,
+      "ci95": [
+        -0.012193924414950819,
+        0.34855206113606396
+      ],
+      "ci90": [
+        0.01680524789305593,
+        0.3195528888280572
+      ],
+      "ci90_block": [
+        -0.062225643934155604,
+        0.41083812548176346
+      ],
+      "ci95_block": [
+        -0.09973712083693793,
+        0.46250571830444
+      ],
+      "small_sample": true,
+      "max_effect_predicted_dir_pp_ci90_wald": 31.95528888280572,
+      "max_effect_predicted_dir_pp_ci90_block": 41.08381254817635,
+      "below_break_even_ci90": false,
+      "max_effect_predicted_dir_pp_ci95_wald": 34.8552061136064,
+      "max_effect_predicted_dir_pp_ci95_block": 46.250571830443995,
+      "below_break_even_ci95": false
+    },
+    {
+      "test": "Composite top decile (H4 cut)",
+      "family": "BROAD",
+      "set": "full",
+      "expected_sign": "+",
+      "p1": 0.30973451327433627,
+      "p2": 0.2394904458598726,
+      "n1": 226,
+      "n2": 1570,
+      "diff": 0.07024406741446365,
+      "se": 0.03258869252600863,
+      "z": 2.2852438527081733,
+      "p": 0.022298533158805863,
+      "ci95": [
+        0.0063714032564176765,
+        0.13411673157250964
+      ],
+      "ci90": [
+        0.016640426158288257,
+        0.12384770867063905
+      ],
+      "ci90_block": [
+        0.016254185255505905,
+        0.13502166843220897
+      ],
+      "ci95_block": [
+        0.008256820371933246,
+        0.15000845753189904
+      ],
+      "small_sample": false,
+      "max_effect_predicted_dir_pp_ci90_wald": 12.384770867063905,
+      "max_effect_predicted_dir_pp_ci90_block": 13.502166843220898,
+      "below_break_even_ci90": false,
+      "max_effect_predicted_dir_pp_ci95_wald": 13.411673157250965,
+      "max_effect_predicted_dir_pp_ci95_block": 15.000845753189903,
+      "below_break_even_ci95": false
+    },
+    {
+      "test": "ML top decile (XGBoost)",
+      "family": "BROAD",
+      "set": "full",
+      "expected_sign": "+",
+      "p1": 0.22424242424242424,
+      "p2": 0.25076640098099323,
+      "n1": 165,
+      "n2": 1631,
+      "diff": -0.02652397673856899,
+      "se": 0.034197721944437785,
+      "z": -0.7514956024477052,
+      "p": 0.45235444633335276,
+      "ci95": [
+        -0.09355028063167704,
+        0.04050232715453907
+      ],
+      "ci90": [
+        -0.08277423646976526,
+        0.02972628299262728
+      ],
+      "ci90_block": [
+        -0.11746730189534177,
+        0.058280020795628815
+      ],
+      "ci95_block": [
+        -0.13755029328380391,
+        0.07332146719196227
+      ],
+      "small_sample": false,
+      "max_effect_predicted_dir_pp_ci90_wald": 2.9726282992627278,
+      "max_effect_predicted_dir_pp_ci90_block": 5.828002079562881,
+      "below_break_even_ci90": true,
+      "max_effect_predicted_dir_pp_ci95_wald": 4.050232715453907,
+      "max_effect_predicted_dir_pp_ci95_block": 7.332146719196227,
+      "below_break_even_ci95": true
+    },
+    {
+      "test": "H1 delivery expansion",
+      "family": "STRICT",
+      "set": "full",
+      "expected_sign": "+",
+      "p1": 0.2727272727272727,
+      "p2": 0.14285714285714285,
+      "n1": 22,
+      "n2": 7,
+      "diff": 0.12987012987012986,
+      "se": 0.16281427757135222,
+      "z": 0.6993720528746109,
+      "p": 0.48431954854174664,
+      "ci95": [
+        -0.18923999285572796,
+        0.44898025259598767
+      ],
+      "ci90": [
+        -0.13793558585021914,
+        0.39767584559047886
+      ],
+      "ci90_block": [
+        -0.0764751552795031,
+        0.35294117647058826
+      ],
+      "ci95_block": [
+        -0.11527009222661397,
+        0.38525641025640966
+      ],
+      "small_sample": true,
+      "max_effect_predicted_dir_pp_ci90_wald": 39.76758455904788,
+      "max_effect_predicted_dir_pp_ci90_block": 35.294117647058826,
+      "below_break_even_ci90": false,
+      "max_effect_predicted_dir_pp_ci95_wald": 44.89802525959877,
+      "max_effect_predicted_dir_pp_ci95_block": 38.525641025640965,
+      "below_break_even_ci95": false
+    },
+    {
+      "test": "H2 price up, OI down",
+      "family": "STRICT",
+      "set": "full",
+      "expected_sign": "-",
+      "p1": 0.26666666666666666,
+      "p2": 0.15384615384615385,
+      "n1": 15,
+      "n2": 13,
+      "diff": 0.11282051282051281,
+      "se": 0.15182454353992383,
+      "z": 0.7256002525466253,
+      "p": 0.4680838662448845,
+      "ci95": [
+        -0.18475012683417047,
+        0.4103911524751961
+      ],
+      "ci90": [
+        -0.13690869491930507,
+        0.3625497205603307
+      ],
+      "ci90_block": [
+        -0.16666666666666666,
+        0.3592132867132866
+      ],
+      "ci95_block": [
+        -0.23217261904761904,
+        0.403921568627451
+      ],
+      "small_sample": true,
+      "max_effect_predicted_dir_pp_ci90_wald": 13.690869491930508,
+      "max_effect_predicted_dir_pp_ci90_block": 16.666666666666664,
+      "below_break_even_ci90": false,
+      "max_effect_predicted_dir_pp_ci95_wald": 18.47501268341705,
+      "max_effect_predicted_dir_pp_ci95_block": 23.217261904761905,
+      "below_break_even_ci95": false
+    },
+    {
+      "test": "Composite rule (score >= 1.0)",
+      "family": "STRICT",
+      "set": "full",
+      "expected_sign": "+",
+      "n1": 0,
+      "n2": 29,
+      "note": "not estimable: one group is empty"
+    },
+    {
+      "test": "Composite top decile (H4 cut)",
+      "family": "STRICT",
+      "set": "full",
+      "expected_sign": "+",
+      "p1": 0.3333333333333333,
+      "p2": 0.23076923076923078,
+      "n1": 3,
+      "n2": 26,
+      "diff": 0.10256410256410253,
+      "se": 0.2844320061256586,
+      "z": 0.39308034104004036,
+      "p": 0.6942601434441398,
+      "ci95": [
+        -0.45491238988996785,
+        0.6600405950181729
+      ],
+      "ci90": [
+        -0.36528502043971156,
+        0.5704132255679166
+      ],
+      "ci90_block": [
+        -0.3068561872909699,
+        0.7692307692307692
+      ],
+      "ci95_block": [
+        -0.3448275862068966,
+        0.8181818181818181
+      ],
+      "small_sample": true,
+      "max_effect_predicted_dir_pp_ci90_wald": 57.04132255679166,
+      "max_effect_predicted_dir_pp_ci90_block": 76.92307692307692,
+      "below_break_even_ci90": false,
+      "max_effect_predicted_dir_pp_ci95_wald": 66.0040595018173,
+      "max_effect_predicted_dir_pp_ci95_block": 81.81818181818181,
+      "below_break_even_ci95": false
+    },
+    {
+      "test": "H1 delivery expansion",
+      "family": "BROAD",
+      "set": "without_pilot",
+      "expected_sign": "+",
+      "p1": 0.2725250278086763,
+      "p2": 0.24629080118694363,
+      "n1": 899,
+      "n2": 337,
+      "diff": 0.026234226621732692,
+      "se": 0.027773445078117895,
+      "z": 0.9302345194024789,
+      "p": 0.352249672709984,
+      "ci95": [
+        -0.028200725887355567,
+        0.08066917913082094
+      ],
+      "ci90": [
+        -0.01944903560878984,
+        0.07191748885225523
+      ],
+      "ci90_block": [
+        -0.02113628203268656,
+        0.0718652856820131
+      ],
+      "ci95_block": [
+        -0.028033962747828673,
+        0.07883391717146399
+      ],
+      "small_sample": false,
+      "max_effect_predicted_dir_pp_ci90_wald": 7.191748885225523,
+      "max_effect_predicted_dir_pp_ci90_block": 7.18652856820131,
+      "below_break_even_ci90": true,
+      "max_effect_predicted_dir_pp_ci95_wald": 8.066917913082094,
+      "max_effect_predicted_dir_pp_ci95_block": 7.883391717146399,
+      "below_break_even_ci95": true
+    },
+    {
+      "test": "H2 price up, OI down",
+      "family": "BROAD",
+      "set": "without_pilot",
+      "expected_sign": "-",
+      "p1": 0.23824959481361427,
+      "p2": 0.2947019867549669,
+      "n1": 617,
+      "n2": 604,
+      "diff": -0.056452391941352625,
+      "se": 0.025264022456290898,
+      "z": -2.2315444713259045,
+      "p": 0.025645085170608553,
+      "ci95": [
+        -0.10596896645087436,
+        -0.006935817431830887
+      ],
+      "ci90": [
+        -0.09800802033467254,
+        -0.014896763548032717
+      ],
+      "ci90_block": [
+        -0.11105749604309846,
+        -0.0016014739142703991
+      ],
+      "ci95_block": [
+        -0.12273956347950325,
+        0.006909274783839266
+      ],
+      "small_sample": false,
+      "max_effect_predicted_dir_pp_ci90_wald": 9.800802033467255,
+      "max_effect_predicted_dir_pp_ci90_block": 11.105749604309846,
+      "below_break_even_ci90": false,
+      "max_effect_predicted_dir_pp_ci95_wald": 10.596896645087437,
+      "max_effect_predicted_dir_pp_ci95_block": 12.273956347950325,
+      "below_break_even_ci95": false
+    },
+    {
+      "test": "Composite rule (score >= 1.0)",
+      "family": "BROAD",
+      "set": "without_pilot",
+      "expected_sign": "+",
+      "p1": 0.34615384615384615,
+      "p2": 0.2636363636363636,
+      "n1": 26,
+      "n2": 1210,
+      "diff": 0.08251748251748253,
+      "se": 0.09415674274724488,
+      "z": 0.9428762972481897,
+      "p": 0.34574418005483976,
+      "ci95": [
+        -0.10202634362437854,
+        0.26706130865934363
+      ],
+      "ci90": [
+        -0.07235661241729419,
+        0.23739157745225925
+      ],
+      "ci90_block": [
+        -0.1670730050101167,
+        0.3524332068877023
+      ],
+      "ci95_block": [
+        -0.20473972109898353,
+        0.3980201163007442
+      ],
+      "small_sample": true,
+      "max_effect_predicted_dir_pp_ci90_wald": 23.739157745225924,
+      "max_effect_predicted_dir_pp_ci90_block": 35.24332068877023,
+      "below_break_even_ci90": false,
+      "max_effect_predicted_dir_pp_ci95_wald": 26.706130865934362,
+      "max_effect_predicted_dir_pp_ci95_block": 39.80201163007442,
+      "below_break_even_ci95": false
+    },
+    {
+      "test": "Composite top decile (H4 cut)",
+      "family": "BROAD",
+      "set": "without_pilot",
+      "expected_sign": "+",
+      "p1": 0.3096446700507614,
+      "p2": 0.2569778633301251,
+      "n1": 197,
+      "n2": 1039,
+      "diff": 0.05266680672063628,
+      "se": 0.03562125550359954,
+      "z": 1.5349960535527978,
+      "p": 0.12478479743132809,
+      "ci95": [
+        -0.017149571701220695,
+        0.12248318514249326
+      ],
+      "ci90": [
+        -0.005924957879481441,
+        0.11125857132075401
+      ],
+      "ci90_block": [
+        -0.0070132548357812975,
+        0.12417266664080286
+      ],
+      "ci95_block": [
+        -0.014148351575350805,
+        0.13546328593991894
+      ],
+      "small_sample": false,
+      "max_effect_predicted_dir_pp_ci90_wald": 11.125857132075401,
+      "max_effect_predicted_dir_pp_ci90_block": 12.417266664080286,
+      "below_break_even_ci90": false,
+      "max_effect_predicted_dir_pp_ci95_wald": 12.248318514249327,
+      "max_effect_predicted_dir_pp_ci95_block": 13.546328593991893,
+      "below_break_even_ci95": false
+    },
+    {
+      "test": "ML top decile (XGBoost)",
+      "family": "BROAD",
+      "set": "without_pilot",
+      "expected_sign": "+",
+      "p1": 0.2159090909090909,
+      "p2": 0.2691637630662021,
+      "n1": 88,
+      "n2": 1148,
+      "diff": -0.05325467215711119,
+      "se": 0.04577260069521485,
+      "z": -1.0904340009389806,
+      "p": 0.27552201120328634,
+      "ci95": [
+        -0.14296732170610726,
+        0.03645797739188489
+      ],
+      "ci90": [
+        -0.1285439175010381,
+        0.02203457318681573
+      ],
+      "ci90_block": [
+        -0.17801665777085168,
+        0.06265195629520662
+      ],
+      "ci95_block": [
+        -0.19693103420006902,
+        0.09381581454938792
+      ],
+      "small_sample": false,
+      "max_effect_predicted_dir_pp_ci90_wald": 2.203457318681573,
+      "max_effect_predicted_dir_pp_ci90_block": 6.265195629520662,
+      "below_break_even_ci90": true,
+      "max_effect_predicted_dir_pp_ci95_wald": 3.645797739188489,
+      "max_effect_predicted_dir_pp_ci95_block": 9.381581454938793,
+      "below_break_even_ci95": false
+    },
+    {
+      "test": "H1 delivery expansion",
+      "family": "STRICT",
+      "set": "without_pilot",
+      "expected_sign": "+",
+      "p1": 0.3333333333333333,
+      "p2": 0.2,
+      "n1": 18,
+      "n2": 5,
+      "diff": 0.1333333333333333,
+      "se": 0.21058413760857128,
+      "z": 0.5732115042211107,
+      "p": 0.566501495947662,
+      "ci95": [
+        -0.2794039953505125,
+        0.5460706620171791
+      ],
+      "ci90": [
+        -0.21304682774867562,
+        0.4797134944153422
+      ],
+      "ci90_block": [
+        -0.12222222222222223,
+        0.4375
+      ],
+      "ci95_block": [
+        -0.16461380724538618,
+        0.5
+      ],
+      "small_sample": true,
+      "max_effect_predicted_dir_pp_ci90_wald": 47.97134944153422,
+      "max_effect_predicted_dir_pp_ci90_block": 43.75,
+      "below_break_even_ci90": false,
+      "max_effect_predicted_dir_pp_ci95_wald": 54.60706620171791,
+      "max_effect_predicted_dir_pp_ci95_block": 50.0,
+      "below_break_even_ci95": false
+    },
+    {
+      "test": "H2 price up, OI down",
+      "family": "STRICT",
+      "set": "without_pilot",
+      "expected_sign": "-",
+      "p1": 0.3333333333333333,
+      "p2": 0.2,
+      "n1": 12,
+      "n2": 10,
+      "diff": 0.1333333333333333,
+      "se": 0.1857915996984754,
+      "z": 0.699205898780101,
+      "p": 0.48442336471277603,
+      "ci95": [
+        -0.23081151357808932,
+        0.49747818024475593
+      ],
+      "ci90": [
+        -0.17226672259710274,
+        0.43893338926376935
+      ],
+      "ci90_block": [
+        -0.25,
+        0.4461538461538461
+      ],
+      "ci95_block": [
+        -0.35480519480519473,
+        0.5
+      ],
+      "small_sample": true,
+      "max_effect_predicted_dir_pp_ci90_wald": 17.226672259710273,
+      "max_effect_predicted_dir_pp_ci90_block": 25.0,
+      "below_break_even_ci90": false,
+      "max_effect_predicted_dir_pp_ci95_wald": 23.08115135780893,
+      "max_effect_predicted_dir_pp_ci95_block": 35.480519480519476,
+      "below_break_even_ci95": false
+    },
+    {
+      "test": "Composite rule (score >= 1.0)",
+      "family": "STRICT",
+      "set": "without_pilot",
+      "expected_sign": "+",
+      "n1": 0,
+      "n2": 23,
+      "note": "not estimable: one group is empty"
+    },
+    {
+      "test": "Composite top decile (H4 cut)",
+      "family": "STRICT",
+      "set": "without_pilot",
+      "expected_sign": "+",
+      "p1": 0.3333333333333333,
+      "p2": 0.3,
+      "n1": 3,
+      "n2": 20,
+      "diff": 0.033333333333333326,
+      "se": 0.2908162204452738,
+      "z": 0.11700630833624392,
+      "p": 0.9068550544925881,
+      "ci95": [
+        -0.5366559893554672,
+        0.6033226560221339
+      ],
+      "ci90": [
+        -0.445016890130957,
+        0.5116835567976237
+      ],
+      "ci90_block": [
+        -0.4090909090909091,
+        0.6666666666666667
+      ],
+      "ci95_block": [
+        -0.43478260869565216,
+        0.7391304347826086
+      ],
+      "small_sample": true,
+      "max_effect_predicted_dir_pp_ci90_wald": 51.16835567976237,
+      "max_effect_predicted_dir_pp_ci90_block": 66.66666666666667,
+      "below_break_even_ci90": false,
+      "max_effect_predicted_dir_pp_ci95_wald": 60.33226560221338,
+      "max_effect_predicted_dir_pp_ci95_block": 73.91304347826086,
+      "below_break_even_ci95": false
+    }
+  ],
+  "reading": "below_break_even = even the most favourable end of the CI (Wald and block, whichever is larger) is smaller than the success-rate change needed to pay one round trip."
+}

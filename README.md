@@ -76,6 +76,65 @@ Then commit `pre_registered_hypotheses.md` and continue:
 The first download is about 17,000 polite requests (~5 hours); files are cached and the downloader
 resumes where it stopped.
 
+## Reproducing the paper
+
+Environment: Python 3.12.10 on Windows 11 x64. `requirements.txt` pins the research packages to the
+versions in the `.venv` that produced the results; `requirements-lock.txt` is the full `pip freeze`.
+Licence: `LICENSE` (MIT, code only). Data: `DATA_AVAILABILITY.md` (public NSE files, not redistributed).
+
+```bash
+py -3.12 -m venv .venv
+.venv/Scripts/python -m pip install -r requirements-lock.txt
+.venv/Scripts/python -m pip install -e .
+```
+
+**1. Pre-registered study (already run once; P6 refuses to run again).** Runtimes measured on the
+authors' laptop.
+
+| Step | Command | Runtime |
+|---|---|---|
+| Download + point-in-time store + QC + G1 check + features/events/freeze | `.venv/Scripts/python -m impi.pipeline.run_all --to p2` | ~5 h download, ~20 min build |
+| Pre-registration | commit `pre_registered_hypotheses.md` (done: `15103f1`) | – |
+| P3 hypotheses, P4 composite/backtests, P5 ML search + freeze (train/validation only) | `.venv/Scripts/python -m impi.pipeline.run_all --from p3 --to p5` | ~30 min |
+| P6 one-time test evaluation (writes `results/test_lock.json`) | `.venv/Scripts/python -m impi.pipeline.p6_test` | ~7 min |
+| P7 robustness, P8 report | `.venv/Scripts/python -m impi.pipeline.run_all --from p7` | ~10 min |
+
+**2. Post-hoc robustness suite (after the test unlock; every output is labelled POST-HOC).** Run from
+`scripts/posthoc/` in this order. None of these scripts writes to a locked file; step 0 records SHA-256
+checksums of the locked files before, and the last step verifies them after.
+
+| Step | Script | Output (`results/posthoc/`) | Runtime |
+|---|---|---|---|
+| 0 | `s00_checksums.py before` | `checksums_before.json` | seconds |
+| supplementary audit (BH ranks, TOST, MDE, expiry, PSI, Brier, labels, timeline) | `s0_supplementary_audit.py` | `s0_supplementary_audit.json` | ~2 min |
+| A placebo, 1,000 within-day delivery shuffles | `s01_placebo.py 1000` | `A_placebo.json`, `paper/figs/fig_placebo_hist.pdf` | ~60–70 min |
+| B cost break-even CIs | `s02_breakeven.py` | `B_breakeven.json` | ~5–8 min |
+| D Bayes factors | `s03_bayes.py` | `D_bayes.json` | ~5–10 min |
+| E cluster-robust eq. (3) | `s04_clustered_logit.py` | `E_clustered_logit.json` | < 1 min |
+| F H1 by year | `s05_forest_by_year.py` | `F_h1_by_year.json`, `paper/figs/fig_h1_forest.pdf` | ~3–5 min |
+| G breakout vs base, barrier ties | `s06_breakout_ties.py` | `G_breakout_ties.json` | < 1 min |
+| C specification curve (72 specs) | `s07_spec_curve.py` | `C_spec_curve.json`, `paper/figs/fig_spec_curve.pdf` | < 1 min |
+| H paper tables and figures (from JSON only) | `s08_paper_assets.py` | `paper/tables/*.tex`, `paper/figs/*.pdf` | < 1 min |
+| last | `s00_checksums.py after` | `checksums_after.json` (exit code 1 if anything changed) | seconds |
+
+```bash
+cd scripts/posthoc
+../../.venv/Scripts/python s00_checksums.py before
+../../.venv/Scripts/python s0_supplementary_audit.py
+../../.venv/Scripts/python s01_placebo.py 1000
+../../.venv/Scripts/python s02_breakeven.py
+../../.venv/Scripts/python s03_bayes.py
+../../.venv/Scripts/python s04_clustered_logit.py
+../../.venv/Scripts/python s05_forest_by_year.py
+../../.venv/Scripts/python s06_breakout_ties.py
+../../.venv/Scripts/python s07_spec_curve.py
+../../.venv/Scripts/python s08_paper_assets.py
+../../.venv/Scripts/python s00_checksums.py after
+```
+
+LaTeX: tables use `booktabs` (`\usepackage{booktabs}`); `paper/tables/all_tables.tex` inputs them all.
+Seeds are fixed in each script, so results should reproduce exactly with the same package versions.
+
 ## After the study: model v2, live mode and the terminal
 
 * **Model v2 (post-hoc):** `python -m impi.v2.panel` then `python -m impi.v2.train` (and `python -m impi.v2.ranker`).
