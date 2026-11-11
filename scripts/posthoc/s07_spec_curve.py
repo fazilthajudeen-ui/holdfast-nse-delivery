@@ -102,27 +102,38 @@ def main():
 
 
 def plot(df):
+    """Drawn at the printed width (7.16 in) with 8 pt labels; significance is shown by marker SHAPE as well as
+    colour so the figure reads in greyscale."""
     plt = mpl()
-    fig = plt.figure(figsize=(7.1, 3.3))
-    gs = fig.add_gridspec(2, 2, height_ratios=[1.5, 1], width_ratios=[54, 18 + 6], hspace=0.08, wspace=0.32)
+    fig = plt.figure(figsize=(7.16, 3.75))
+    gs = fig.add_gridspec(2, 2, height_ratios=[1.25, 1.2], width_ratios=[54, 18 + 6], hspace=0.10, wspace=0.42,
+                          left=0.14, right=0.99, top=0.885, bottom=0.135)
+    styles = {"pred": dict(marker="^", c="0.05", s=22), "opp": dict(marker="v", c="0.05", s=22),
+              "ns": dict(marker="o", facecolors="white", edgecolors="0.35", s=14)}
     for col, h in enumerate(["H1", "H2"]):
         g = df[df["hypothesis"] == h].sort_values("diff").reset_index(drop=True)
         x = np.arange(len(g))
         ax = fig.add_subplot(gs[0, col])
         lo = 100 * np.array([c[0] for c in g["ci95"]])
         hi = 100 * np.array([c[1] for c in g["ci95"]])
-        colr = np.where(g["sig_predicted_direction"], "#2a7f3f", np.where(g["sig_opposite_direction"], "#C44E52", "0.45"))
-        ax.vlines(x, lo, hi, colors=colr, lw=0.8)
-        ax.scatter(x, 100 * g["diff"], c=colr, s=np.where(g["is_frozen_spec"], 28, 8), marker="o", zorder=3,
-                   edgecolors=np.where(g["is_frozen_spec"], "k", "none"), linewidths=0.8)
+        kind = np.where(g["sig_predicted_direction"], "pred", np.where(g["sig_opposite_direction"], "opp", "ns"))
+        ax.vlines(x, lo, hi, colors=np.where(kind == "ns", "0.6", "0.1"), lw=0.8,
+                  linestyles=[("solid" if k != "ns" else (0, (2, 1))) for k in kind])
+        for k, st in styles.items():
+            m = kind == k
+            if m.any():
+                ax.scatter(x[m], 100 * g.loc[m, "diff"], zorder=3, linewidths=0.8, **st)
+        fz = g["is_frozen_spec"].to_numpy()
+        ax.scatter(x[fz], 100 * g.loc[fz, "diff"], marker="s", s=60, facecolors="none", edgecolors="k", linewidths=1.2,
+                   zorder=4)
         ax.axhline(0, color="0.3", lw=0.6)
         ax.set_xticks([])
         ax.set_xlim(-1, len(g))
-        ax.set_title(f"{h} [POST-HOC]: {len(g)} specs, {int(g['significant_5pct'].sum())} with p<.05\n"
-                     f"median effect {100 * g['diff'].median():+.1f} pp")
+        med = f"{100 * g['diff'].median():+.1f}".replace("-", "−")
+        ax.set_title(f"{h} (post hoc), {len(g)} specs\n"
+                     f"{int(g['significant_5pct'].sum())} with p < .05; median {med} pp", fontsize=8)
         if col == 0:
             ax.set_ylabel("effect (pp), 95% CI")
-            ax.yaxis.set_label_coords(-0.115, 0.5)
         axi = fig.add_subplot(gs[1, col], sharex=ax)
         dims = [("barrier", ["+1.5/-1", "+2/-1", "+3/-1.5"]), ("horizon", [5, 10, 20]), ("event_set", ["BROAD", "B1"])]
         if h == "H1":
@@ -131,21 +142,23 @@ def plot(df):
         for name, vals in dims:
             for v in vals:
                 m = (g[name] == v).to_numpy()
-                axi.scatter(x[m], np.full(m.sum(), yy), s=5, marker="s", color="0.15")
+                axi.scatter(x[m], np.full(m.sum(), yy), s=6, marker="s", color="0.15")
                 lab = (f"barrier {v}" if name == "barrier" else f"h = {v} d" if name == "horizon"
                        else f"z > {v:g}" if name == "threshold" else f"{v}")
-                labels.append(lab + (" *" if v in (FROZEN["barrier"], FROZEN["horizon"], FROZEN["event_set"]) or
-                                     (name == "threshold" and v == 0.0) else ""))
+                labels.append(lab.replace("-", "−") + (" *" if v in (FROZEN["barrier"], FROZEN["horizon"], FROZEN["event_set"])
+                                                          or (name == "threshold" and v == 0.0) else ""))
                 yy -= 1
         axi.set_yticks(np.arange(0, yy, -1))
-        axi.set_yticklabels(labels, fontsize=6)
+        axi.set_yticklabels(labels, fontsize=8)
         axi.set_xticks([])
         axi.spines["bottom"].set_visible(False)
         axi.set_ylim(yy + 0.5, 0.5)
-    fig.text(0.01, 0.005, "* frozen (pre-registered) choice; large outlined dot = frozen spec. Green / red = significant in / "
-                          "against the predicted direction; grey = not significant.", fontsize=6)
-    fig.subplots_adjust(left=0.13)
-    fig.savefig(FIGDIR / "fig_spec_curve.pdf")
+    fig.text(0.01, 0.06, "▲ significant (p < .05) in the predicted direction;  ▼ significant against it;  "
+                          "○ not significant (dashed CI);  □ pre-registered (frozen) specification.",
+             fontsize=8)
+    fig.text(0.01, 0.012, "* marks the frozen choice in each dimension. Specifications share events and are not "
+                          "independent tests.", fontsize=8)
+    fig.savefig(FIGDIR / "fig_spec_curve.pdf", bbox_inches=None)
 
 
 if __name__ == "__main__":

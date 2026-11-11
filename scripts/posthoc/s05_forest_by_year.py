@@ -68,7 +68,7 @@ def main():
         ax.plot([], [], "o", color=col[sp], label=sp)
     ax.legend(frameon=False, loc="upper right", fontsize=6)
     ax.set_title("H1 by year, BROAD events  [POST-HOC]\n(right: n exposed / n rest)")
-    fig.savefig(FIGDIR / "fig_h1_forest.pdf")
+    fig.savefig(FIGDIR / "fig_h1_forest.pdf", bbox_inches="tight")
 
 
 if __name__ == "__main__":

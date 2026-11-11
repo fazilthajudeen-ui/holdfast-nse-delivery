@@ -96,19 +96,21 @@ def main():
 
 def plot(out: dict):
     plt = mpl()
-    fig, axes = plt.subplots(2, 1, figsize=(3.45, 3.9))
-    for ax, k in zip(axes, ["BROAD", "STRICT"]):
+    fig, axes = plt.subplots(2, 1, figsize=(3.45, 4.2))
+    sgn = lambda v: f"{v:+.2f}".replace("-", "−")
+    for ax, k, loc in zip(axes, ["BROAD", "STRICT"], ["upper right", "upper left"]):
         a = np.array(out[k]["draws_pp"])
         ax.hist(a, bins=40, color="0.75", edgecolor="0.45", linewidth=0.4)
-        ax.axvline(out[k]["actual_diff_pp"], color="C3", lw=1.4, label=f"actual {out[k]['actual_diff_pp']:+.2f} pp")
-        ax.axvline(a.mean(), color="0.2", lw=0.8, ls="--", label=f"placebo mean {a.mean():+.2f} pp")
-        ax.set_title(f"{k}: {len(a)} shuffles, one-sided p = {out[k]['p_one_sided_placebo_ge_actual']:.3f}", fontsize=7)
+        ax.axvline(out[k]["actual_diff_pp"], color="k", lw=1.6, label="actual")
+        ax.axvline(a.mean(), color="0.2", lw=0.8, ls="--", label="placebo mean")
+        ax.set_title(f"{k}: actual {sgn(out[k]['actual_diff_pp'])} pp, placebo mean {sgn(a.mean())} pp\n"
+                     f"{len(a):,} shuffles, one-sided p = {out[k]['p_one_sided_placebo_ge_actual']:.3f}", fontsize=8)
         ax.set_ylabel("draws")
-        ax.legend(frameon=False, loc="upper left", fontsize=6, handlelength=1.5)
+        ax.legend(frameon=False, loc=loc, fontsize=8, handlelength=1.8)
         ax.set_ylim(0, ax.get_ylim()[1] * 1.35)          # head-room for the legend
-    axes[-1].set_xlabel("H1: exposed − rest success rate (pp)   [POST-HOC]")
+    axes[-1].set_xlabel("H1 effect: exposed − rest success rate (pp)")
     fig.tight_layout(h_pad=0.6)
-    fig.savefig(FIGDIR / "fig_placebo_hist.pdf")
+    fig.savefig(FIGDIR / "fig_placebo_hist.pdf", bbox_inches=None)
 
 
 if __name__ == "__main__":

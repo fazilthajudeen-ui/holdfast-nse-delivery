@@ -82,7 +82,10 @@ def mpl():
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    plt.rcParams.update({"font.family": "serif", "font.size": 8, "axes.titlesize": 8, "axes.labelsize": 8,
-                         "legend.fontsize": 7, "xtick.labelsize": 7, "ytick.labelsize": 7, "pdf.fonttype": 42,
-                         "axes.spines.top": False, "axes.spines.right": False, "savefig.bbox": "tight"})
+    # IEEE print rules: every label >= 8 pt at printed size (figures are drawn at their printed width),
+    # Times-like STIX font, TrueType (Type 42) embedding - no Type 3 fonts.
+    plt.rcParams.update({"font.family": "STIXGeneral", "mathtext.fontset": "stix", "font.size": 8,
+                         "axes.titlesize": 8, "axes.labelsize": 8, "legend.fontsize": 8, "xtick.labelsize": 8,
+                         "ytick.labelsize": 8, "pdf.fonttype": 42, "ps.fonttype": 42,
+                         "axes.spines.top": False, "axes.spines.right": False, "savefig.bbox": "standard"})
     return plt

@@ -11,7 +11,7 @@ import json
 import numpy as np
 import pandas as pd
 
-from _common import FIGDIR, OUTDIR, TABDIR, mpl
+from _common import FIGDIR, OUTDIR, ROOT, TABDIR, mpl
 from impi.common import METRICS
 
 FIGDIR.mkdir(parents=True, exist_ok=True)
@@ -19,6 +19,8 @@ TABDIR.mkdir(parents=True, exist_ok=True)
 J = lambda p: json.loads(p.read_text(encoding="utf-8"))
 P6, QC, P2 = J(METRICS / "p6_test.json"), J(METRICS / "qc_report.json"), J(METRICS / "p2_summary.json")
 S0 = J(OUTDIR / "s0_supplementary_audit.json")
+import yaml
+CONFIG_COSTS = yaml.safe_load((ROOT / "config" / "costs.yaml").read_text(encoding="utf-8"))
 A, B, C, D, E, F, G = (J(OUTDIR / f) for f in ["A_placebo.json", "B_breakeven.json", "C_spec_curve.json", "D_bayes.json",
                                                 "E_clustered_logit.json", "F_h1_by_year.json", "G_breakout_ties.json"])
 
@@ -75,10 +77,10 @@ def t_dataset():
          ["Trading days", f"{cal['trading_days']:,}"],
          ["Daily equity rows", f"{rows['equity_rows']:,}"],
          ["Symbols (incl.\\ delisted)", f"{facts['n_symbols_equity_store']:,}"],
-         ["F\\&O underlyings", f"{facts['n_fo_underlyings_ever']} over time; {facts['fo_underlyings_per_day_min']}--"
+         ["Futures and options (F\\&O) underlyings", f"{facts['n_fo_underlyings_ever']} over time; {facts['fo_underlyings_per_day_min']}--"
                                 f"{facts['fo_underlyings_per_day_max']} per day"],
          ["Delivery rebuild vs.\\ modern file", f"{mism} mismatches on {len(ov)} overlap dates"],
-         ["F\\&O legacy vs.\\ UDiFF", f"{fo_mism} mismatches on {len(fo_ov)} overlap days"],
+         ["F\\&O old vs.\\ new file format", f"{fo_mism} mismatches on {len(fo_ov)} overlap days"],
          ["Stale files rejected", f"{QC['stale_files_rejected']}"],
          ["Duplicate symbol-date rows", f"{rows['duplicates_symbol_date']}"],
          ["Delivery coverage (worst year)", f"{100 * min(QC['delivery_coverage_by_year'].values()):.2f}\\%"],
@@ -93,7 +95,7 @@ def t_events():
     fams = [("strict", "STRICT (VCP)"), ("broad", "BROAD"), ("all", "B1 (20-day highs)")]
     r = [[n, f"{c[k]['train']:,}", f"{c[k]['validation']:,}", f"{c[k]['test']:,}", f"{c[k].get('nan', 0):,}",
           f"{P2['class_balance'][k]['label_10']:.3f}"] for k, n in fams]
-    return table("tab_events", "Tier-1 eligible events by split (frozen at P2)", "tab:events", "@{}lrrrrr@{}",
+    return table("tab_events", "Tier-1 eligible events by split (frozen before registration)", "tab:events", "@{}lrrrrr@{}",
                  r"\textbf{Event set} & \textbf{Train} & \textbf{Val.} & \textbf{Test} & \textbf{Purged} & \textbf{Success}", r,
                  note="Purged = label window crosses a split boundary or is incomplete. Success = share with label$_{10}=1$ (all splits).")
 
@@ -199,9 +201,10 @@ def t_backtests_short():
     r += ["MID", ["Nifty 500", "--", pp(bm["cagr"]), num(bm["sharpe"], 2), pp(bm["max_dd"])]]
     return table("tab_backtests_short", "Costed test-set backtests (2023-01 to 2026-10)", "tab:backtests", "@{}lrrrr@{}",
                  r"\textbf{Strategy} & \textbf{Trades} & \textbf{CAGR\%} & \textbf{Sharpe} & \textbf{MaxDD\%}", r,
-                 note=f"PRE-REGISTERED (P6, run once). Full Indian costs; max.\\ 20 positions. SPA $p$={P6['spa']['spa_p_consistent']:.2f}, "
-                      f"Reality Check $p$={P6['spa']['white_rc_p']:.2f}; deflated Sharpe $\\approx 0$ for all. "
-                      "All variants: supplementary Table~\\ref{tab:backtestsfull}.")
+                 note=f"Pre-registered (test set, run once). CAGR = compound annual growth rate; MaxDD = maximum "
+                      f"drawdown. Full Indian costs; at most {CONFIG_COSTS['max_positions']} positions. "
+                      f"SPA $p$ = {P6['spa']['spa_p_consistent']:.2f}, Reality Check $p$ = {P6['spa']['white_rc_p']:.2f}; "
+                      "deflated Sharpe ratio $\\approx 0$ for all. All variants are available from the authors on request.")
 
 
 # Concise descriptions of the listed commits (hashes and times still come from git / the audit JSON).
@@ -209,8 +212,8 @@ SHORT = {"355cbe0": "Pipeline scaffolding: ingest, PIT store, features, labels",
          "86ddfd7": "Corporate-action adjustment fixes (full data)",
          "b5829b2": "Ban-list publication-time fix (look-ahead check)",
          "15103f1": "Pre-registration (H1--H4, rules, power) and feature freeze",
-         "ea49def": "Training/validation results (P3--P5) and model freeze",
-         "359bcc7": "One-time test evaluation (P6) and lock file",
+         "ea49def": "Training/validation results and model freeze",
+         "359bcc7": "One-time test evaluation and lock file",
          "e3dba33": "P7 robustness, report, paper draft",
          "1fc97ae": "First post-hoc work (v2 models, live mode)"}
 
@@ -230,13 +233,13 @@ def t_timeline():
     first_row = min(g["first"] for g in tl["trial_groups"])[11:16]
     started = tl["test_lock"]["attempts"][0]["started"][11:16]
     head = tl["test_lock"]["attempts"][0]["git_commit"]
-    ev = [("--", p2_last, "P2 writes feature freeze (features, events, labels)"),
-          ("--", first_row, "P3 first analysis rows (train+val.) in results log"),
-          ("--", started, f"P6 starts: test set opened; lock written (HEAD = {head})")]
+    ev = [("--", p2_last, "Feature freeze written (features, events, labels)"),
+          ("--", first_row, "First training/validation analysis rows logged"),
+          ("--", started, f"Test run starts: test set opened; lock written (HEAD = {head})")]
     r = sorted(r + [[a, b, c] for a, b, c in ev], key=lambda x: x[1])
     return table("tab_timeline", "Pre-registration timeline, 10 Oct 2026 (IST, from git and run logs)", "tab:timeline", r"@{}ll>{\raggedright\arraybackslash}p{5.9cm}@{}",
                  r"\textbf{Commit} & \textbf{Time} & \textbf{Event}", r,
-                 note=f"{tl['results_log_rows_before_test_run_started']} of the {tl['results_log_rows_through_P6']} results-log rows through P6 "
+                 note=f"{tl['results_log_rows_before_test_run_started']} of the {tl['results_log_rows_through_P6']} results-log rows up to the test evaluation "
                       f"were written before the test run; the other {tl['results_log_rows_through_P6'] - tl['results_log_rows_before_test_run_started']} "
                       f"are the test run's own rows. The lock file was first committed in "
                       f"{tl['files_first_committed']['results/test_lock.json'].split()[0]}. Data download, adjustment fixes and QC "
@@ -250,33 +253,38 @@ def fig_pipeline(plt):
     tl = S0["10_timeline"]
     prereg = tl["files_first_committed"]["pre_registered_hypotheses.md"].split()
     lock = tl["test_lock"]["attempts"][0]
-    fig, ax = plt.subplots(figsize=(7.16, 2.15))
+    # Drawn at its printed width (7.16 in, IEEE text width) so every label is 8 pt in print; no tight bbox.
+    fig = plt.figure(figsize=(7.16, 2.35))
+    ax = fig.add_axes([0, 0, 1, 1])
     ax.set_xlim(0, 100)
-    ax.set_ylim(-1, 34)
+    ax.set_ylim(0, 33)
     ax.axis("off")
-    W, FS = 15.0, 5.4
-    boxes = [(0.5, 11.5, W, 10, "NSE public files\nbhavcopy, MTO,\nF&O bhavcopy,\nparticipant OI,\nban list, indices"),
-             (17.5, 11.5, W, 10, "Point-in-time store\navailable_at stamps,\nsplit/bonus\nadjustment, QC"),
-             (34.5, 11.5, W, 10, "Feature library\nv1.0 (frozen)\ndelivery, OI, COT,\ncompression,\nregime"),
-             (51.5, 11.5, W, 10, "Events + labels\nSTRICT / BROAD / B1\ntriple barrier\n+2 / −1 ATR, 10 d"),
-             (69, 22.5, W, 9, "H1–H3 tests\nz-test, month-block\nbootstrap, BH q=0.10"),
-             (69, 12, W, 9, "H4: composite vs\nXGBoost / RF / logit\npurged CV, isotonic"),
-             (69, 1.5, W, 9, "Costed backtests\n20 slots, Indian costs\nSPA, deflated Sharpe"),
-             (86.5, 11.5, 13, 10, "Test set\nopened once\n(P6 + lock)\n→ post-hoc\nrobustness")]
-    for x, y, w, h, t in boxes:
-        ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.25,rounding_size=0.8", fc="0.94", ec="0.25", lw=0.7))
-        ax.text(x + w / 2, y + h / 2, t, ha="center", va="center", fontsize=FS, linespacing=1.15)
-    arr = dict(arrowstyle="-|>", lw=0.7, color="0.2", shrinkA=0, shrinkB=0)
-    for x0 in [0.5, 17.5, 34.5]:
-        ax.annotate("", (x0 + W + 1.6, 16.5), (x0 + W + 0.4, 16.5), arrowprops=arr)
-    for yy in [27, 16.5, 6]:
-        ax.annotate("", (68.6, yy), (67.0, 16.5), arrowprops=arr)
-        ax.annotate("", (86.1, 16.5), (84.4, yy), arrowprops=arr)
-    ax.text(34, 32.5, f"pre-registered {prereg[0]} ({prereg[1][11:16]} IST) · train 2015-06–2020 · validation 2021–22",
-            ha="center", fontsize=FS + 0.4, style="italic")
-    ax.text(34, -0.5, f"test 2023-01 → 2026-10-09, evaluated once at {lock['git_commit']} ({lock['started'][11:16]} IST)",
-            ha="center", fontsize=FS + 0.4, style="italic")
-    fig.savefig(FIGDIR / "fig1_pipeline.pdf")
+    FS = 8
+    row1 = [(1.0, "NSE public files\nbhavcopy, MTO, F&O,\nparticipant OI, indices"),
+            (26.0, "Point-in-time store\nrelease-time stamps,\nadjustments, QC"),
+            (51.0, "Feature library v1.0 (frozen)\ndelivery, OI, COT,\ncompression, regime"),
+            (76.0, "Events and labels\nSTRICT / BROAD / B1\nbarrier +2/−1 ATR, 10 d")]
+    row2 = [(1.0, 31.0, "Training / validation\nH1–H3 tests, H4 models,\ncosted backtests"),
+            (36.5, 29.0, f"Test set opened once\n2023-01 to 2026-10-09\nat {lock['git_commit']}, {lock['started'][11:16]} IST"),
+            (70.5, 28.5, "Post-hoc robustness\nlabeled as post hoc,\nnot confirmatory")]
+    W, H = 23.0, 10.0
+    box = dict(boxstyle="round,pad=0.3,rounding_size=0.8", fc="0.94", ec="0.25", lw=0.7)
+    for x, t in row1:
+        ax.add_patch(FancyBboxPatch((x, 18.5), W, H, **box))
+        ax.text(x + W / 2, 18.5 + H / 2, t, ha="center", va="center", fontsize=FS, linespacing=1.2)
+    for x, w, t in row2:
+        ax.add_patch(FancyBboxPatch((x, 2.0), w, H, **box))
+        ax.text(x + w / 2, 2.0 + H / 2, t, ha="center", va="center", fontsize=FS, linespacing=1.2)
+    arr = dict(arrowstyle="-|>", lw=0.8, color="0.2", shrinkA=0, shrinkB=0)
+    for x, _ in row1[:-1]:
+        ax.annotate("", (x + W + 2.4, 23.5), (x + W + 0.6, 23.5), arrowprops=arr)
+    ax.plot([87.5, 87.5, 16.5], [18.0, 15.3, 15.3], color="0.2", lw=0.8)        # events -> training/validation
+    ax.annotate("", (16.5, 12.6), (16.5, 15.3), arrowprops=arr)
+    ax.annotate("", (36.0, 7.0), (32.6, 7.0), arrowprops=arr)
+    ax.annotate("", (70.0, 7.0), (66.1, 7.0), arrowprops=arr)
+    ax.text(50, 31.2, f"Pre-registered at {prereg[0]} ({prereg[1][11:16]} IST): hypotheses, features and test family "
+            "frozen before any confirmatory analysis", ha="center", fontsize=FS, style="italic")
+    fig.savefig(FIGDIR / "fig1_pipeline.pdf", bbox_inches=None)
 
 
 def wilson(p, n, z=1.959964):
@@ -289,12 +297,13 @@ def wilson(p, n, z=1.959964):
 
 
 def fig_ladder(plt):
-    fig, axes = plt.subplots(2, 1, figsize=(3.45, 4.4), sharey=True)
-    for ax, key, title in [(axes[0], "ladder_broad", "BROAD ladder (test)"), (axes[1], "ladder_strict", "STRICT ladder (test)")]:
+    fig, axes = plt.subplots(2, 1, figsize=(3.45, 4.0), sharey=True)
+    for ax, key, title in [(axes[0], "ladder_broad", "BROAD ladder (test, pre-registered)"),
+                           (axes[1], "ladder_strict", "STRICT ladder (test, pre-registered)")]:
         L = P6[key]
         for i, r in enumerate(L):
             if r["n"] < 2 or r["success_rate"] is None:          # no meaningful rate/interval: label instead of a bar
-                ax.text(i, 100 * L[0]["success_rate"] + 8, f"n={r['n']}\nnot shown", ha="center", fontsize=5, color="0.35")
+                ax.text(i, 100 * L[0]["success_rate"] + 10, "not\nshown", ha="center", fontsize=8, color="0.3")
                 continue
             lo, hi = wilson(r["success_rate"], r["n"])
             ax.errorbar(i, 100 * r["success_rate"], yerr=[[100 * (r["success_rate"] - lo)], [100 * (hi - r["success_rate"])]],
@@ -304,15 +313,15 @@ def fig_ladder(plt):
 
         def short(rung):
             if "ml_top" in rung:
-                return "+ ML top decile"
+                return "+ML"
             if "composite" in rung:
-                return "+ composite"
-            return {"base": "base", "all": "all breakouts", "broad": "BROAD", "strict": "STRICT"}.get(rung.split("_")[1], "")
-        ax.set_xticklabels([f"{r['rung'].split('_')[0]}\n{short(r['rung'])}\nn={r['n']:,}" for r in L], fontsize=5)
-        ax.set_title(title + "  [PRE-REGISTERED]", fontsize=7)
+                return "+comp."
+            return {"base": "base", "all": "all BO", "broad": "BROAD", "strict": "STRICT"}.get(rung.split("_")[1], "")
+        ax.set_xticklabels([f"{r['rung'].split('_')[0]}\n{short(r['rung'])}\n{r['n']:,}" for r in L], fontsize=8)
+        ax.set_title(title, fontsize=8)
         ax.set_ylabel("success rate (%)")
     fig.tight_layout(h_pad=0.8)
-    fig.savefig(FIGDIR / "fig_ladder.pdf")
+    fig.savefig(FIGDIR / "fig_ladder.pdf", bbox_inches=None)
 
 
 def fig_cagr(plt):
@@ -332,7 +341,7 @@ def fig_cagr(plt):
     ax.set_xlabel("CAGR after costs, test 2023–26 (%)")
     ax.set_xlim(min(vals) - 32, max(vals) + 22)
     ax.set_title("Costed backtests  [PRE-REGISTERED]")
-    fig.savefig(FIGDIR / "fig_cagr.pdf")
+    fig.savefig(FIGDIR / "fig_cagr.pdf", bbox_inches="tight")
 
 
 def main():

@@ -23,121 +23,128 @@
 
 \bibitem{kyle1985}
 A.~S. Kyle, ``Continuous auctions and insider trading,'' \emph{Econometrica},
-  vol.~53, no.~6, pp. 1315--1335, 1985.
+  vol.~53, no.~6, pp. 1315--1335, 1985, doi: \url{10.2307/1913210}.
 
 \bibitem{glosten1985}
 L.~R. Glosten and P.~R. Milgrom, ``Bid, ask and transaction prices in a
-  specialist market with heterogeneously informed traders,'' \emph{Journal of
-  Financial Economics}, vol.~14, no.~1, pp. 71--100, 1985.
+  specialist market with heterogeneously informed traders,'' \emph{J. Financial
+  Econ.}, vol.~14, no.~1, pp. 71--100, 1985, doi:
+  \url{10.1016/0304-405X(85)90044-3}.
 
 \bibitem{easley1996}
 D.~Easley, N.~M. Kiefer, M.~O'Hara, and J.~B. Paperman, ``Liquidity,
-  information, and infrequently traded stocks,'' \emph{The Journal of Finance},
-  vol.~51, no.~4, pp. 1405--1436, 1996.
+  information, and infrequently traded stocks,'' \emph{J. Finance}, vol.~51,
+  no.~4, pp. 1405--1436, 1996, doi: \url{10.1111/j.1540-6261.1996.tb04074.x}.
 
 \bibitem{easley2012}
 D.~Easley, M.~M. L{\'o}pez~de Prado, and M.~O'Hara, ``Flow toxicity and
-  liquidity in a high-frequency world,'' \emph{The Review of Financial
-  Studies}, vol.~25, no.~5, pp. 1457--1493, 2012.
+  liquidity in a high-frequency world,'' \emph{Rev. Financial Stud.}, vol.~25,
+  no.~5, pp. 1457--1493, 2012, doi: \url{10.1093/rfs/hhs053}.
 
 \bibitem{harvey2016}
-C.~R. Harvey, Y.~Liu, and H.~Zhu, ``{\ldots} and the cross-section of expected
-  returns,'' \emph{The Review of Financial Studies}, vol.~29, no.~1, pp. 5--68,
-  2016.
+C.~R. Harvey, Y.~Liu, and H.~Zhu, ``{\ldots}and the cross-section of expected
+  returns,'' \emph{Rev. Financial Stud.}, vol.~29, no.~1, pp. 5--68, 2016, doi:
+  \url{10.1093/rfs/hhv059}.
 
 \bibitem{bailey2014pseudo}
 D.~H. Bailey, J.~M. Borwein, M.~L{\'o}pez~de Prado, and Q.~J. Zhu,
   ``Pseudo-mathematics and financial charlatanism: The effects of backtest
-  overfitting on out-of-sample performance,'' \emph{Notices of the American
-  Mathematical Society}, vol.~61, no.~5, pp. 458--471, 2014.
+  overfitting on out-of-sample performance,'' \emph{Notices Amer. Math. Soc.},
+  vol.~61, no.~5, pp. 458--471, 2014, doi: \url{10.1090/noti1105}.
 
 \bibitem{nosek2018}
 B.~A. Nosek, C.~R. Ebersole, A.~C. DeHaven, and D.~T. Mellor, ``The
-  preregistration revolution,'' \emph{Proceedings of the National Academy of
-  Sciences}, vol. 115, no.~11, pp. 2600--2606, 2018.
+  preregistration revolution,'' \emph{Proc. Nat. Acad. Sci. USA}, vol. 115,
+  no.~11, pp. 2600--2606, 2018, doi: \url{10.1073/pnas.1708274114}.
+
+\bibitem{chen2016}
+T.~Chen and C.~Guestrin, ``{XGBoost}: A scalable tree boosting system,'' in
+  \emph{Proc. 22nd ACM SIGKDD Int. Conf. Knowl. Discov. Data Mining}, 2016, pp.
+  785--794, doi: \url{10.1145/2939672.2939785}.
 
 \bibitem{thapa2026}
 C.~Thapa, B.~Neupane, C.~Shrestha, and N.~P. Bhattarai, ``Policy information
   uncertainty and foreign institutional investors trading behavior: Evidence
-  from {India},'' \emph{Review of Quantitative Finance and Accounting},
-  vol.~67, pp. 45--79, 2026.
+  from {India},'' \emph{Rev. Quant. Finance Account.}, vol.~67, pp. 45--79,
+  2026, doi: \url{10.1007/s11156-025-01448-8}.
 
 \bibitem{fieberg2023}
 C.~Fieberg, D.~Metko, T.~Poddig, and T.~Loy, ``Machine learning techniques for
-  cross-sectional equity returns' prediction,'' \emph{OR Spectrum}, vol.~45,
-  no.~1, pp. 289--323, 2023.
+  cross-sectional equity returns' prediction,'' \emph{OR Spectr.}, vol.~45,
+  no.~1, pp. 289--323, 2023, doi: \url{10.1007/s00291-022-00693-w}.
 
 \bibitem{azevedo2023}
 V.~Azevedo and C.~Hoegner, ``Enhancing stock market anomalies with machine
-  learning,'' \emph{Review of Quantitative Finance and Accounting}, vol.~60,
-  no.~1, pp. 195--230, 2023.
+  learning,'' \emph{Rev. Quant. Finance Account.}, vol.~60, no.~1, pp.
+  195--230, 2023, doi: \url{10.1007/s11156-022-01099-z}.
 
 \bibitem{lu2025}
 X.~Lu, J.~Poon, and M.~Khushi, ``Leveraging {BiLSTM-GAT} for enhanced stock
   market prediction: A dual-graph approach to portfolio optimization,''
-  \emph{Applied Intelligence}, vol.~55, no.~7, p. 601, 2025.
+  \emph{Appl. Intell.}, vol.~55, no.~7, p. 601, 2025, doi:
+  \url{10.1007/s10489-025-06462-w}.
 
 \bibitem{farimani2024}
 S.~A. Farimani, M.~V. Jahan, and A.~M. Fard, ``An adaptive multimodal learning
   model for financial market price prediction,'' \emph{IEEE Access}, vol.~12,
-  pp. 121\,846--121\,863, 2024.
+  pp. 121\,846--121\,863, 2024, doi: \url{10.1109/ACCESS.2024.3441029}.
 
 \bibitem{gonzaleznunez2025}
 E.~Gonz{\'a}lez-N{\'u}{\~n}ez, L.~A. Trejo, and M.~Kampouridis, ``Expanding a
   machine learning class towards its application to the stock market
-  forecast,'' \emph{Applied Intelligence}, vol.~55, no.~1, p.~21, 2025.
+  forecast,'' \emph{Appl. Intell.}, vol.~55, no.~1, p.~21, 2025, doi:
+  \url{10.1007/s10489-024-06018-4}.
 
 \bibitem{lu2024}
 X.~Lu, J.~Poon, and M.~Khushi, ``Bridging the gap between machine and human in
   stock prediction: Addressing heterogeneity in stock market,'' \emph{IEEE
-  Access}, vol.~12, pp. 186\,171--186\,185, 2024.
+  Access}, vol.~12, pp. 186\,171--186\,185, 2024, doi:
+  \url{10.1109/ACCESS.2024.3511613}.
 
 \bibitem{lundberg2020}
 S.~M. Lundberg, G.~Erion, H.~Chen, A.~DeGrave, J.~M. Prutkin, B.~Nair, R.~Katz,
   J.~Himmelfarb, N.~Bansal, and S.-I. Lee, ``From local explanations to global
-  understanding with explainable {AI} for trees,'' \emph{Nature Machine
-  Intelligence}, vol.~2, no.~1, pp. 56--67, 2020.
+  understanding with explainable {AI} for trees,'' \emph{Nature Mach. Intell.},
+  vol.~2, no.~1, pp. 56--67, 2020, doi: \url{10.1038/s42256-019-0138-9}.
 
 \bibitem{cerneviciene2024}
 J.~{\v{C}}ernevi{\v{c}}ien{\.{e}} and A.~Kaba{\v{s}}inskas, ``Explainable
   artificial intelligence ({XAI}) in finance: A systematic literature review,''
-  \emph{Artificial Intelligence Review}, vol.~57, p. 216, 2024.
+  \emph{Artif. Intell. Rev.}, vol.~57, p. 216, 2024, doi:
+  \url{10.1007/s10462-024-10854-8}.
 
 \bibitem{martins2024}
 T.~Martins, A.~M. de~Almeida, E.~Cardoso, and L.~Nunes, ``Explainable
   artificial intelligence ({XAI}): A systematic literature review on taxonomies
   and applications in finance,'' \emph{IEEE Access}, vol.~12, pp. 618--629,
-  2024.
+  2024, doi: \url{10.1109/ACCESS.2023.3347028}.
 
 \bibitem{yeo2025}
 W.~J. Yeo, W.~Van Der~Heever, R.~Mao, E.~Cambria, R.~Satapathy, and
   G.~Mengaldo, ``A comprehensive review on financial explainable {AI},''
-  \emph{Artificial Intelligence Review}, vol.~58, no.~6, p. 189, 2025.
-
-\bibitem{chen2016}
-T.~Chen and C.~Guestrin, ``{XGBoost}: A scalable tree boosting system,'' in
-  \emph{Proceedings of the 22nd ACM SIGKDD International Conference on
-  Knowledge Discovery and Data Mining}, 2016, pp. 785--794.
+  \emph{Artif. Intell. Rev.}, vol.~58, no.~6, p. 189, 2025, doi:
+  \url{10.1007/s10462-024-11077-7}.
 
 \bibitem{bailey2014dsr}
 D.~H. Bailey and M.~L{\'o}pez~de Prado, ``The deflated {Sharpe} ratio:
   Correcting for selection bias, backtest overfitting, and non-normality,''
-  \emph{The Journal of Portfolio Management}, vol.~40, no.~5, pp. 94--107,
-  2014.
+  \emph{J. Portfolio Manage.}, vol.~40, no.~5, pp. 94--107, 2014, doi:
+  \url{10.3905/jpm.2014.40.5.094}.
 
 \bibitem{benjamini1995}
 Y.~Benjamini and Y.~Hochberg, ``Controlling the false discovery rate: A
-  practical and powerful approach to multiple testing,'' \emph{Journal of the
-  Royal Statistical Society: Series B (Methodological)}, vol.~57, no.~1, pp.
-  289--300, 1995.
+  practical and powerful approach to multiple testing,'' \emph{J. Roy. Statist.
+  Soc. Ser. B (Methodol.)}, vol.~57, no.~1, pp. 289--300, 1995, doi:
+  \url{10.1111/j.2517-6161.1995.tb02031.x}.
 
 \bibitem{hansen2005}
-P.~R. Hansen, ``A test for superior predictive ability,'' \emph{Journal of
-  Business \& Economic Statistics}, vol.~23, no.~4, pp. 365--380, 2005.
+P.~R. Hansen, ``A test for superior predictive ability,'' \emph{J. Bus. Econ.
+  Statist.}, vol.~23, no.~4, pp. 365--380, 2005, doi:
+  \url{10.1198/073500105000000063}.
 
 \bibitem{white2000}
 H.~White, ``A reality check for data snooping,'' \emph{Econometrica}, vol.~68,
-  no.~5, pp. 1097--1126, 2000.
+  no.~5, pp. 1097--1126, 2000, doi: \url{10.1111/1468-0262.00152}.
 
 \bibitem{minervini2013}
 M.~Minervini, \emph{Trade Like a Stock Market Wizard}.\hskip 1em plus 0.5em
@@ -151,30 +158,32 @@ M.~L{\'o}pez~de Prado, \emph{Advances in Financial Machine Learning}.\hskip 1em
 E.~R. DeLong, D.~M. DeLong, and D.~L. Clarke-Pearson, ``Comparing the areas
   under two or more correlated receiver operating characteristic curves: A
   nonparametric approach,'' \emph{Biometrics}, vol.~44, no.~3, pp. 837--845,
-  1988.
+  1988, doi: \url{10.2307/2531595}.
 
 \bibitem{brier1950}
 G.~W. Brier, ``Verification of forecasts expressed in terms of probability,''
-  \emph{Monthly Weather Review}, vol.~78, no.~1, pp. 1--3, 1950.
+  \emph{Monthly Weather Rev.}, vol.~78, no.~1, pp. 1--3, 1950, doi:
+  \url{10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2}.
 
 \bibitem{lakens2017}
 D.~Lakens, ``Equivalence tests: A practical primer for $t$ tests, correlations,
-  and meta-analyses,'' \emph{Social Psychological and Personality Science},
-  vol.~8, no.~4, pp. 355--362, 2017.
+  and meta-analyses,'' \emph{Social Psychol. Personality Sci.}, vol.~8, no.~4,
+  pp. 355--362, 2017, doi: \url{10.1177/1948550617697177}.
 
 \bibitem{simonsohn2020}
 U.~Simonsohn, J.~P. Simmons, and L.~D. Nelson, ``Specification curve
-  analysis,'' \emph{Nature Human Behaviour}, vol.~4, no.~11, pp. 1208--1214,
-  2020.
+  analysis,'' \emph{Nature Human Behav.}, vol.~4, no.~11, pp. 1208--1214, 2020,
+  doi: \url{10.1038/s41562-020-0912-z}.
 
 \bibitem{kass1995}
-R.~E. Kass and A.~E. Raftery, ``Bayes factors,'' \emph{Journal of the American
-  Statistical Association}, vol.~90, no. 430, pp. 773--795, 1995.
+R.~E. Kass and A.~E. Raftery, ``Bayes factors,'' \emph{J. Amer. Statist.
+  Assoc.}, vol.~90, no. 430, pp. 773--795, 1995, doi:
+  \url{10.1080/01621459.1995.10476572}.
 
 \bibitem{gronau2021}
 Q.~F. Gronau, A.~Raj K.~N., and E.-J. Wagenmakers, ``Informed {Bayesian}
-  inference for the {A/B} test,'' \emph{Journal of Statistical Software}, vol.
-  100, no.~17, 2021.
+  inference for the {A/B} test,'' \emph{J. Statist. Softw.}, vol. 100, no.~17,
+  2021, doi: \url{10.18637/jss.v100.i17}.
 
 \bibitem{leewagenmakers2013}
 M.~D. Lee and E.-J. Wagenmakers, \emph{Bayesian Cognitive Modeling: A Practical
@@ -183,7 +192,7 @@ M.~D. Lee and E.-J. Wagenmakers, \emph{Bayesian Cognitive Modeling: A Practical
 
 \bibitem{cameron2011}
 A.~C. Cameron, J.~B. Gelbach, and D.~L. Miller, ``Robust inference with
-  multiway clustering,'' \emph{Journal of Business \& Economic Statistics},
-  vol.~29, no.~2, pp. 238--249, 2011.
+  multiway clustering,'' \emph{J. Bus. Econ. Statist.}, vol.~29, no.~2, pp.
+  238--249, 2011, doi: \url{10.1198/jbes.2010.07136}.
 
 \end{thebibliography}
