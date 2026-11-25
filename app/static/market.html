@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Market · Holdfast</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/static/ds/lens.css">
+<script src="/static/ds/lens.js"></script>
+<script src="/static/freshness.js"></script>
+<style>
+  body { background: var(--canvas); }
+  .mood { font: 600 clamp(22px, 2.4vw, 30px)/1.3 var(--f-display); letter-spacing: -.02em; max-width: 900px; margin-top: 18px; }
+  .mood .t { display: inline; }
+  .kpis { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 28px; }
+  .kpi { padding: 18px 18px 16px; }
+  .kpi .v { font: 600 28px/1.05 var(--f-display); letter-spacing: -.018em; margin-top: 10px; font-variant-numeric: tabular-nums; }
+  .kpi small { display: block; font-size: 12.5px; color: var(--ink-3); margin-top: 6px; line-height: 1.4; }
+  .kpi .tag { margin-top: 10px; }
+  .c1 { display: grid; grid-template-columns: 300px 1fr; gap: 32px; align-items: center; }
+  .gauge { position: relative; width: 280px; margin: 0 auto; }
+  .gauge svg { width: 100%; height: 160px; overflow: visible; }
+  .gauge .needle { transform-origin: 140px 140px; transition: transform 1600ms var(--spring); }
+  .gauge .gv { text-align: center; margin-top: 10px; }
+  .gauge .gv small { display: block; font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
+  .gauge .gv b { font: 600 40px/1 var(--f-display); letter-spacing: -.025em; }
+  .chart-card { padding: 22px 22px 16px; }
+  .chartbox { height: 360px; margin-top: 12px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; font-size: 14px; color: var(--ink-2); }
+  .legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .legend i { width: 14px; height: 4px; border-radius: 4px; }
+  .legend b { font-family: var(--f-num); color: var(--ink); }
+  .ctl { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+  @media (max-width: 1180px) { .kpis { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px) { .kpis { grid-template-columns: 1fr 1fr; } .c1 { grid-template-columns: 1fr; gap: 12px; } .chartbox { height: 280px; } }
+</style>
+</head>
+<body>
+<header id="nav"></header>
+<main class="wrap page-in" style="max-width:1300px;padding-bottom:60px">
+  <div class="phead">
+    <p class="eyebrow">Whole-market view</p>
+    <h1 class="h1">The market today</h1>
+    <p class="mood" id="mood"><span class="sk" style="display:block;height:32px;max-width:640px"></span></p>
+  </div>
+  <div class="warn" id="warn" style="display:none"></div>
+  <div class="kpis" id="kpis"></div>
+
+  <div class="card" style="margin-top:16px" id="c1Card"></div>
+
+  <div class="card chart-card" style="margin-top:16px">
+    <div class="ctl">
+      <div><h2 class="h3">Who is betting which way?</h2><p class="note" style="margin-top:4px">Net-long futures positions of each group, from NSE’s participant-wise open interest. Market-wide, not per stock.</p></div>
+      <div class="row wrap-x">
+        <div class="seg sm" id="segSeg"><button data-s="fut_idx" class="on">Index futures</button><button data-s="fut_stk">Stock futures</button></div>
+        <div class="seg sm" id="kindSeg"><button data-k="share" class="on">Net long, % of OI</button><button data-k="cot">Range in its year (0–100)</button></div>
+      </div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="chartbox" id="posChart"></div>
+    <p class="note" id="posNote" style="margin-top:10px"></p>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card chart-card"><h2 class="h3">Nifty 500</h2><p class="note" style="margin-top:4px">▲ C1 = the first day FII stock-futures positioning entered the bottom of its 52-week range.</p><div class="chartbox" id="idxChart" style="height:260px"></div></div>
+    <div class="card chart-card"><h2 class="h3">India VIX</h2><p class="note" style="margin-top:4px">Expected volatility for the next 30 days. Higher = more fear.</p><div class="chartbox" id="vixChart" style="height:260px"></div></div>
+  </div>
+
+  <div class="card tint" style="margin-top:16px"><h2 class="h3">What the research found</h2>
+    <p style="margin-top:10px;color:var(--ink-2);max-width:900px">In IMPI’s 2015–2022 data (exploratory, not pre-registered): daily Nifty 500 moves <b>came before</b> changes in FII stock-futures positioning — FIIs chased price.
+      Changes in FII <b>index</b>-futures positioning had some lead on index returns. Days when FII stock-futures positioning sat at the bottom of its 52-week range were followed by above-average
+      60-day index returns — a contrarian pattern. None of this improved stock-level breakout predictions.</p>
+    <p class="note" style="margin-top:10px">Data: NSE participant-wise open interest, ind_close_all, India VIX · <span id="disc"></span></p></div>
+</main>
+<script src="/static/vendor/lightweight-charts.standalone.production.js"></script>
+<script>
+Lens.nav('Market');
+const LC = LightweightCharts;
+const P = [['fii', 'FII', '--ink'], ['dii', 'DII', '--gold'], ['pro', 'Pro', '#8B6DFF'], ['client', 'Client', '#1597B8']];
+const col_ = c => c.startsWith('--') ? cssVar(c) : c;
+let DATA = null, SEG = 'fut_idx', KIND = 'share', charts = [];
+const FONT = '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Arial, sans-serif';
+function baseOpts(fmtFn) {
+  return { autoSize: true, layout: { background: { type: 'solid', color: cssVar('--paper') }, textColor: cssVar('--ink-3'), fontSize: 12, fontFamily: FONT, attributionLogo: true },
+    grid: { vertLines: { visible: false }, horzLines: { color: cssVar('--grid') } }, rightPriceScale: { borderVisible: false },
+    timeScale: { borderVisible: false }, localization: { priceFormatter: fmtFn },
+    crosshair: { mode: LC.CrosshairMode.Normal, vertLine: { color: cssVar('--ink-4'), style: LC.LineStyle.Dashed, labelBackgroundColor: cssVar('--ink') }, horzLine: { color: cssVar('--ink-4'), style: LC.LineStyle.Dashed, labelBackgroundColor: cssVar('--ink') } } };
+}
+function build() {
+  charts.forEach(c => c.remove()); charts = [];
+  if (!DATA) return;
+  const isShare = KIND === 'share';
+  const pos = LC.createChart($('posChart'), baseOpts(v => isShare ? (v * 100).toFixed(0) + '%' : v.toFixed(0)));
+  P.forEach(([p, name, col]) => {
+    const s = pos.addSeries(LC.LineSeries, { color: col_(col), lineWidth: p === 'fii' ? 2.5 : 2, priceLineVisible: false, lastValueVisible: true, title: name });
+    s.setData(DATA.series[`${p}_${SEG}_${KIND}`] || []);
+  });
+  const ref = pos.addSeries(LC.LineSeries, { color: cssVar('--ink-4'), lineWidth: 1, lineStyle: LC.LineStyle.Dashed, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false });
+  const s0 = DATA.series[`fii_${SEG}_${KIND}`] || []; ref.setData(s0.map(x => ({ time: x.time, value: isShare ? 0 : 50 })));
+  pos.timeScale().fitContent(); charts.push(pos);
+  $('legend').innerHTML = P.map(([p, name, col]) => {
+    const v = DATA.latest[`${p}_${SEG}_${KIND}`];
+    return `<span><i style="background:${col_(col)}"></i>${name}${Lens.qm(p)} <b>${v == null ? '–' : isShare ? (v * 100).toFixed(1) + '%' : v.toFixed(0)}</b></span>`;
+  }).join('');
+  $('posNote').textContent = isShare
+    ? `Each line: a group’s (long − short) ${SEG === 'fut_idx' ? 'index' : 'stock'}-futures contracts as a share of all open interest. Above the dashed line = net long. FIIs often hold index futures as hedges, so a net short is not necessarily bearish.`
+    : `Where today’s position sits within its own past 52 weeks: 100 = most bullish of the year, 0 = most bearish. The dashed line marks 50.`;
+  const mk = (el, series, col, f) => { const c = LC.createChart($(el), baseOpts(f));
+    const s = c.addSeries(LC.AreaSeries, { lineColor: col, topColor: col + '2E', bottomColor: col + '00', lineWidth: 2.5, priceLineVisible: false });
+    s.setData(series || []); c.timeScale().fitContent(); charts.push(c); return s; };
+  const n500 = mk('idxChart', DATA.index.nifty500, cssVar('--ink'), v => fmt(v, 0));
+  const cot = DATA.series.fii_fut_stk_cot || [], have = new Set((DATA.index.nifty500 || []).map(x => x.time));
+  const c1 = cot.filter((x, i) => x.value <= 10 && (i === 0 || cot[i - 1].value > 10) && have.has(x.time))
+    .map(x => ({ time: x.time, position: 'belowBar', shape: 'arrowUp', color: cssVar('--smooth'), text: 'C1', size: 1 }));
+  LC.createSeriesMarkers(n500, c1);
+  mk('vixChart', DATA.index.india_vix, cssVar('--down'), v => v.toFixed(1));
+}
+function gauge(v) {
+  // semicircle 0..100, contrarian zone 0..10 shaded
+  const arc = (a0, a1) => { const p = a => [140 - 120 * Math.cos(a * Math.PI / 100), 140 - 120 * Math.sin(a * Math.PI / 100)];
+    const [x0, y0] = p(a0), [x1, y1] = p(a1); return `M${x0.toFixed(1)} ${y0.toFixed(1)} A120 120 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`; };
+  return `<div class="gauge"><svg viewBox="0 0 280 160" aria-label="Positioning gauge">
+    <path d="${arc(0, 100)}" fill="none" style="stroke:var(--tint-2)" stroke-width="18" stroke-linecap="round"/>
+    <path d="${arc(0, 10)}" fill="none" style="stroke:var(--gold)" stroke-width="18" stroke-linecap="round"/>
+    <text x="14" y="158" font-size="11" style="fill:var(--ink-3)" font-family="-apple-system, BlinkMacSystemFont, Helvetica Neue, Segoe UI, sans-serif">0</text><text x="250" y="158" font-size="11" style="fill:var(--ink-3)" font-family="-apple-system, BlinkMacSystemFont, Helvetica Neue, Segoe UI, sans-serif">100</text>
+    <g class="needle" id="needle" style="transform:rotate(-90deg)"><line x1="140" y1="140" x2="140" y2="38" style="stroke:var(--ink)" stroke-width="3" stroke-linecap="round"/><circle cx="140" cy="140" r="7" style="fill:var(--ink)"/></g>
+  </svg><div class="gv"><b class="num" id="gval">–</b><small>of 100 · FII stock futures</small></div></div>`;
+}
+function c1Card() {
+  const v = DATA.v4_market, c = DATA.c1_check;
+  if (!v) { $('c1Card').style.display = 'none'; return; }
+  const on = v.c1_on, cot = v.fii_fut_stk_cot;
+  const verdict = !c ? 'not yet tested' : c.supported ? `supported in the 2023–26 check (q ${fmt(c.bh_q, 3)})`
+    : `not supported in the 2023–26 check: 60-day Nifty 500 return ${sgnPct(c.mean_signal_days)} after signal days vs ${sgnPct(c.mean_all_days)} on all days`;
+  $('c1Card').innerHTML = `<div class="c1">${gauge(cot)}
+    <div><span class="label">FII mood in stock futures${Lens.qm('cot')}</span>
+      <h2 class="h2" style="margin-top:8px">${on ? 'Extreme pessimism — the contrarian zone' : cot == null ? 'No reading' : cot < 35 ? 'Leaning bearish' : cot > 65 ? 'Leaning bullish' : 'Middle of its range'}</h2>
+      <p style="margin-top:10px;color:var(--ink-2)">Foreign funds’ stock-futures position is at <b class="num">${cot == null ? '–' : cot.toFixed(0)} / 100</b> of its 52-week range (${dstr(v.date)}).
+        ${on ? 'Below 10 is the zone where, historically, the index did better over the next 60 days.' : 'The contrarian signal (C1) fires only below 10 — shaded gold on the dial.'}</p>
+      <p class="note" style="margin-top:10px">C1 test, Larry Williams–style COT reading: ${verdict}. Logged nightly for the forward test (a final verdict needs ~3 years of new data). Not investment advice.</p></div></div>`;
+  requestAnimationFrame(() => setTimeout(() => {
+    if (cot != null) $('needle').style.transform = `rotate(${-90 + cot * 1.8}deg)`;
+    Lens.tween($('gval'), cot, x => Math.round(x), 1400);
+  }, 250));
+}
+function kpis() {
+  const r = DATA.regime;
+  const vix = r.vix_pct252, br = r.breadth10;
+  const tile = (label, key, val, small, tag) => `<div class="card kpi"><span class="label">${label}${key ? Lens.qm(key) : ''}</span><div class="v">${val}</div><small>${small}</small>${tag ? `<div class="tag">${tag}</div>` : ''}</div>`;
+  $('kpis').innerHTML = [
+    tile('Nifty trend', null, r.nifty_above_200 == null ? '–' : r.nifty_above_200 ? '▲ Up' : '▼ Down', `${r.nifty_above_200 ? 'Above' : 'Below'} its 200-day average · 50d vs 200d ${sgnPct(r.nifty_trend_50_200)}`),
+    tile('Nifty 500 · 20 days', null, `<span class="${cls(r.nifty500_ret20)}">${sgnPct(r.nifty500_ret20)}</span>`, 'Price change over 20 trading days'),
+    tile('Fear (VIX)', 'vix', vix == null ? '–' : Math.round(vix), 'Percentile of the past year', vix == null ? '' : `<span class="pill sm ${vix > 70 ? 'down' : vix < 30 ? 'up' : 'plain'}">${vix > 70 ? 'High fear' : vix < 30 ? 'Calm' : 'Normal'}</span>`),
+    tile('Breadth · 10 days', 'breadth', br == null ? '–' : (br > 0 ? '+' : '') + (br * 100).toFixed(0) + '%', 'Advances minus declines', br == null ? '' : `<span class="pill sm ${br > .1 ? 'up' : br < -.1 ? 'down' : 'plain'}">${br > .1 ? 'Most stocks rising' : br < -.1 ? 'Most stocks falling' : 'Mixed'}</span>`),
+    tile('FII · 20 days', 'fii', r.fii_flow20 == null ? '–' : `<span class="${cls(r.fii_flow20)}">${sgn(r.fii_flow20 * 100, 1, '')}</span>`, 'Change in futures net-long share, pts'),
+    tile('DII · 20 days', 'dii', r.dii_flow20 == null ? '–' : `<span class="${cls(r.dii_flow20)}">${sgn(r.dii_flow20 * 100, 1, '')}</span>`, 'Change in futures net-long share, pts'),
+  ].join('');
+  Lens.stagger($('kpis'), '.card', 60);
+  // one plain-English sentence
+  const parts = [];
+  if (r.nifty_above_200 != null) parts.push(`The Nifty is in an <span class="hl">${r.nifty_above_200 ? 'uptrend' : 'downtrend'}</span>`);
+  if (vix != null) parts.push(`fear is <span class="hl">${vix > 70 ? 'high' : vix < 30 ? 'low' : 'normal'}</span>`);
+  if (br != null) parts.push(br > .1 ? 'most stocks are rising' : br < -.1 ? 'most stocks are falling' : 'stocks are mixed');
+  if (r.fii_flow20 != null) parts.push(`foreign funds have been <span class="hl">${r.fii_flow20 > 0 ? 'adding' : 'cutting'}</span> futures bets over 20 days`);
+  $('mood').innerHTML = parts.length ? parts.join(', ').replace(/, ([^,]*)$/, ' and $1') + '.' : 'Market data not available.';
+}
+Lens.onTheme(() => build());
+Lens.seg($('segSeg'), s => { SEG = s; build(); }, 's');
+Lens.seg($('kindSeg'), k => { KIND = k; build(); }, 'k');
+(async () => {
+  try {
+    const [meta, m] = await Promise.all([getJSON('/api/impi/meta'), getJSON('/api/impi/market')]);
+    DATA = m; $('asof') && ($('asof').textContent = dstr(m.as_of)); $('disc').textContent = meta.disclaimer || '';
+    kpis(); c1Card(); build();
+    if (window.watchData) watchData({ url: '/api/impi/meta', read: j => j.available ? j.as_of : null });
+  } catch (err) { $('warn').style.display = 'block'; $('warn').textContent = err.message; $('mood').textContent = ''; }
+})();
+</script>
+</body>
+</html>

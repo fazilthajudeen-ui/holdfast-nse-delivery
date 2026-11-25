@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IMPI Research · Delivery Lens</title>
+<link rel="stylesheet" href="/static/impi.css">
+<script src="/static/impi.js"></script>
+<script src="/static/freshness.js"></script>
+<style>
+  .dec { display: flex; align-items: flex-end; gap: 3px; height: 54px; }
+  .dec i { flex: 1; background: var(--s1); border-radius: 3px 3px 0 0; min-height: 2px; }
+  .figs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr)); gap: 14px; }
+  .figs figure { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .figs img { width: 100%; display: block; border-radius: 6px; background: #fff; }
+  .figs figcaption { color: var(--muted); font-size: 12px; margin-top: 6px; }
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+  .pill.no { background: var(--chip); color: var(--muted); } .pill.yes { background: rgba(8,153,129,.14); color: var(--up); } .pill.loss { background: rgba(242,54,69,.12); color: var(--down); }
+  table.t th { position: static; cursor: default; }
+  table.t tbody tr { cursor: default; }
+</style>
+</head>
+<body>
+<div id="topbar"></div>
+<main class="wrap">
+  <h1>Research</h1>
+  <p class="sub">IMPI tested whether delivery behaviour, futures positioning and price compression — and their interactions — predict breakout success on NSE,
+    using official NSE data from 2014 to 2026, hypotheses committed to git before any test, and a test set (2023 onwards) evaluated exactly once.</p>
+  <div class="warn" id="warn" style="display:none"></div>
+  <div class="grid g4" id="kpis"></div>
+
+  <div class="card" style="margin-top:14px"><h2>Pre-registered confirmatory tests (test set, run once)</h2>
+    <table class="t"><thead><tr><th class="l">Hypothesis</th><th class="l">Events</th><th>n</th><th>Difference</th><th>p</th><th>BH q</th><th class="l">Verdict</th><th class="l">2024–26 re-test (post-hoc)</th></tr></thead>
+      <tbody id="conf"></tbody></table>
+    <p class="note" style="margin-top:8px">The 2024–26 column re-runs the same tests on the later part of the test period at the team's request (12 Oct 2026). It is post-hoc and
+      exploratory; the official verdict is the one-time 2023–26 test.</p>
+    <p class="note" style="margin-top:4px">H1 delivery expansion → more success · H2 price up while futures OI falls → less success · H3 FII selling with DII buying → better asymmetry ·
+      H4 XGBoost beats the fixed-weight composite. "Supported" requires the predicted direction and BH-adjusted q ≤ 0.10. STRICT (VCP) groups had fewer than 30 events, so they get no p-value.</p></div>
+
+  <div class="card" style="margin-top:14px"><h2>Models in use — improved after the pre-registered study (post-hoc)</h2>
+    <p class="note" style="margin-bottom:10px">v2 was trained on every F&amp;O stock-day with extra features and cross-sectional ranking. v3 adds option-implied volatility from the F&amp;O bhavcopy and
+      20-day targets, under a protocol pre-registered on 11 Oct 2026 (impi/pre_registered_v3.md); a v3 model replaces v2 only if its CV AUC is ≥ 0.005 higher in ≥ 4 of 5 folds.
+      All models were chosen only by walk-forward cross-validation on 2015–2022. Test-period numbers are <b>post-hoc</b>: that period had already been used once for the
+      pre-registered study. The clean test is the live track record below.</p>
+    <table class="t"><thead><tr><th class="l">Target</th><th class="l">Chosen model</th><th>v2 CV AUC</th><th>CV AUC (2018–22)</th><th>Test AUC (post-hoc)</th><th>Base rate</th><th class="l">Success rate by score decile (test)</th></tr></thead>
+      <tbody id="models"></tbody></table></div>
+
+  <div class="card" style="margin-top:14px"><h2>v4 — re-framed hypotheses (pre-registered 12 Oct 2026)</h2>
+    <p class="note" style="margin-bottom:10px">Delivery is direction-neutral: every delivered share has a seller, so high delivery shows conviction, not who is in control.
+      v4 tests delivery as a predictor of move size (D1) and, signed by price direction, of direction (D2); re-tests the price-up/OI-down lead on all breakouts (H2′);
+      tests positioning the way Larry Williams used the COT report (C1); and a looser VCP rule (V1). Rules were fixed in git before testing (impi/pre_registered_v4.md).
+      The 2023–26 check below ran once on a previously used period; the live forward record is the confirmatory test.</p>
+    <table class="t"><thead><tr><th class="l">Hypothesis</th><th>Estimate</th><th>p</th><th>BH q</th><th class="l">2023–26 check</th><th class="l">2024–26 re-test (post-hoc)</th><th class="l">Live forward test</th></tr></thead>
+      <tbody id="v4"></tbody></table></div>
+
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h2>Live track record (true out-of-sample)</h2><div id="track" class="note"></div></div>
+    <div class="card"><h2>Backtests on the test set (after Indian costs)</h2>
+      <table class="t"><thead><tr><th class="l">Strategy</th><th>Trades</th><th>CAGR</th><th>Sharpe</th><th>Max DD</th></tr></thead><tbody id="bt"></tbody></table>
+      <p class="note" id="spa" style="margin-top:8px"></p></div>
+  </div>
+
+  <h2 style="margin:22px 0 10px">Figures</h2>
+  <div class="figs" id="figs"></div>
+  <p class="foot">Full details: impi/results/summary.md, impi/pre_registered_hypotheses.md, impi/decisions.md, impi/paper/IMPI_paper_draft.md · Research tool — not investment advice.</p>
+</main>
+<script>
+document.getElementById('topbar').innerHTML = topBar('Research');
+initTheme();
+const NAMES = { label_10: 'Breakout success (10 days, +2 ATR before −1 ATR)', label_xs10: 'Beats the median F&O stock (10 days)', vol_exp: 'Volatility expansion (10-day vol ×1.5)',
+  label_xs20: 'Beats the median F&O stock (20 days)', label_20: 'Breakout success (20 days, +2 ATR before −1 ATR)' };
+const ORDER = ['vol_exp', 'label_xs10', 'label_xs20', 'label_10', 'label_20'];
+const CAPS = { fig1_benchmark_ladders_test: 'Benchmark ladder on the test set', fig2_h1_delivery_success: 'H1: success rate by delivery behaviour',
+  fig3_event_study_by_delivery: 'Event study: excess returns by delivery', fig4_reliability_test: 'Calibration of the v1 model (test)',
+  fig5_shap_importance: 'v1 XGBoost: SHAP feature importance', fig6_equity_curves_test: 'Test-period backtests vs Nifty 500',
+  fig7_vcp_grid_counts: 'VCP parameter grid: event counts', fig8_placebo: 'Placebo: delivery shuffled across stocks' };
+(async () => {
+  try {
+    const r = await getJSON('/api/impi/research');
+    $('asof').textContent = dateStr(r.as_of);
+    const conf = r.v1_confirmatory || [];
+    const nSupported = conf.filter(t => t.supported).length;
+    const h4 = conf.find(t => t.hypothesis === 'H4_auc');
+    const ml = r.v1_ml_test || {};
+    const ev = r.events || {};
+    const tot = k => ev[k] ? (ev[k].train || 0) + (ev[k].validation || 0) + (ev[k].test || 0) : 0;
+    $('kpis').innerHTML = [
+      ['Hypotheses supported', `${nSupported} of ${conf.length}`, 'Pre-registered, BH q ≤ 0.10'],
+      ['Compression breakouts', tot('broad').toLocaleString('en-IN'), `VCP events: ${tot('strict')} (too few to test)`],
+      ['v1 ML vs rule (test AUC)', `${fmt(ml.xgb?.auc, 3)} vs ${fmt(ml.composite_auc, 3)}`, 'XGBoost lost to the fixed-weight composite'],
+      ['Volatility model, test AUC', fmt(r.models?.vol_exp?.posthoc_test_auc, 3), `${r.models?.vol_exp?.version || 'v2'} · post-hoc · direction is barely predictable`],
+    ].map(([h, v, s]) => `<div class="card kpi"><h3>${h}</h3><div class="v num">${v}</div><small>${s}</small></div>`).join('');
+    // 2024-26 sub-period re-test (requested 12 Oct 2026): exploratory, shown next to - never instead of - the official verdicts
+    const sub = r.sub_2024 || {}, s1 = {}, s4 = {};
+    (sub.v1 || []).forEach(t => { s1[t.hypothesis + '|' + t.family] = t; });
+    (sub.v4 || []).forEach(t => { s4[t.hypothesis] = t; });
+    const subCell = t => {
+      if (!t) return '<span class="muted">–</span>';
+      const opp = t.direction_ok === false && t.bh_q != null && t.bh_q <= 0.1;
+      const tag = t.supported ? '<span class="pill yes">Passed</span>' : opp ? '<span class="pill loss">Significant, wrong way</span>'
+        : t.p == null ? '<span class="pill no">Insufficient data</span>' : '<span class="pill no">Not passed</span>';
+      return `${tag} <span class="muted num">${t.bh_q == null ? '' : 'q ' + fmt(t.bh_q, 3)}</span>`;
+    };
+    $('conf').innerHTML = conf.map(t => {
+      const verdict = t.supported ? '<span class="pill yes">Supported</span>' : (t.hypothesis === 'H4_auc' && t.bh_q != null && t.bh_q <= 0.1 && t.diff < 0) ? '<span class="pill loss">Loss (significant, wrong way)</span>'
+        : t.p == null ? '<span class="pill no">Insufficient data</span>' : '<span class="pill no">Not supported</span>';
+      return `<tr><td class="l"><b>${esc(t.hypothesis)}</b></td><td class="l">${esc(t.family)}</td><td class="num">${t.n ?? '–'}</td><td class="num">${t.diff == null ? '–' : fmt(Math.abs(t.diff) < 0.0005 ? 0 : t.diff, 3)}</td>
+        <td class="num">${t.p == null ? '–' : fmt(t.p, 3)}</td><td class="num">${t.bh_q == null ? '–' : fmt(t.bh_q, 3)}</td><td class="l">${verdict}</td><td class="l">${subCell(s1[t.hypothesis + '|' + t.family])}</td></tr>`;
+    }).join('');
+    const ad = r.v3?.adoption || {};
+    $('models').innerHTML = Object.entries(r.models || {}).sort((a, b) => ORDER.indexOf(a[0]) - ORDER.indexOf(b[0])).map(([k, m]) => {
+      const dec = m.posthoc_rate_by_decile || [], mx = Math.max(...dec, 0.001);
+      const weak = m.posthoc_test_auc != null && m.posthoc_test_auc < 0.52 ? ' <span class="pill no">no edge in test</span>' : '';
+      return `<tr><td class="l"><b>${NAMES[k] || k}</b>${weak}</td><td class="l muted">${esc(m.version || 'v2')} · ${esc(m.model)} · ${esc(m.feature_set)}</td>
+        <td class="num">${ad[k]?.v2_cv_auc != null ? fmt(ad[k].v2_cv_auc, 3) : '–'}</td><td class="num">${fmt(m.cv_auc, 3)}</td>
+        <td class="num">${fmt(m.posthoc_test_auc, 3)}</td><td class="num">${pct(m.posthoc_base_rate)}</td>
+        <td class="l"><div class="dec" title="Lowest decile on the left">${dec.map(v => `<i style="height:${(v / mx * 100).toFixed(0)}%" title="${(v * 100).toFixed(1)}%"></i>`).join('')}</div></td></tr>`;
+    }).join('') || '<tr><td colspan="7" class="empty">Models not trained yet.</td></tr>';
+    const V4N = { D1: 'D1 · Delivery → size of the next 20-day move (IC)', D2: 'D2 · Signed delivery → 20-day direction (IC)',
+      H2p: 'H2′ · Price up, OI down → weaker breakouts (20 days)', C1: 'C1 · FII stock-futures COT ≤ 10 → Nifty 500, 60 days', V1: 'V1 · Loose VCP: high delivery → success (10 days)' };
+    const chk = (r.v4_check || {}).results || [], fw = (r.track_v4 || {}).tests || {};
+    const est = x => x.hypothesis === 'D1' || x.hypothesis === 'D2' ? fmt(x.estimate, 3) : pct(x.estimate);
+    $('v4').innerHTML = chk.map(x => {
+      const v = x.supported ? '<span class="pill yes">Supported</span>' : x.direction_ok === false && x.bh_q != null && x.bh_q <= 0.1
+        ? '<span class="pill loss">Significant, opposite direction</span>' : x.p == null ? '<span class="pill no">Insufficient data</span>' : '<span class="pill no">Not supported</span>';
+      const f = fw[x.hypothesis];
+      return `<tr><td class="l"><b>${V4N[x.hypothesis] || x.hypothesis}</b></td><td class="num">${est(x)}</td><td class="num">${fmt(x.p, 3)}</td><td class="num">${fmt(x.bh_q, 3)}</td>
+        <td class="l">${v}</td><td class="l">${subCell(s4[x.hypothesis])}</td><td class="l muted">${f ? esc(f.status) : 'logging starts after 9 Oct 2026'}</td></tr>`; }).join('')
+      || '<tr><td colspan="7" class="empty">v4 check not run yet.</td></tr>';
+    const tr = r.track || {};
+    const line = (k, label) => { const x = tr[k] || {}; return `<li>${label}: ${x.matured || 0} matured predictions${x.auc != null ? ` · AUC <b class="num">${fmt(x.auc, 3)}</b> (base rate ${pct(x.base_rate)})` : ' · AUC shown after 50+ outcomes'}</li>`; };
+    $('track').innerHTML = `<p>Predictions are logged every evening <b>before</b> their outcomes exist (10 trading days later), starting ${esc(tr.first_logged || '–')}.
+      ${tr.days_logged || 0} day(s), ${tr.predictions || 0} predictions so far.</p><p style="margin-top:6px"><b>v2 models</b> (frozen 10 Oct 2026):</p>
+      <ul style="margin:4px 0 0 18px">${line('label_10', 'Breakout success')}${line('label_xs10', 'Beats median stock')}${line('vol_exp', 'Volatility expansion')}</ul>`;
+    const t3 = r.track_v3;
+    if (t3) {
+      const F = { F1: 'v3 volatility model beats v2', F2: 'Volatility model has skill', F3: '20-day rank has skill', F4: '20-day breakout has skill', F5: '10-day rank has skill' };
+      const tests = t3.tests || {};
+      $('track').innerHTML += `<p style="margin-top:10px"><b>v3 models</b> (pre-registered forward tests F1–F5, from ${esc(t3.first_logged || '–')}): ${t3.predictions || 0} predictions;
+        status: ${esc(t3.status || '–')}.</p><ul style="margin:4px 0 0 18px">${Object.entries(F).map(([k, lbl]) => { const x = tests[k];
+          return `<li>${k} · ${lbl}: ${x ? `${x.auc != null ? 'AUC ' + fmt(x.auc, 3) : 'AUC diff ' + fmt(x.stat, 3)} · p ${fmt(x.p, 3)} · q ${fmt(x.bh_q, 3)}` : 'waiting for matured outcomes'}</li>`; }).join('')}</ul>
+        <p class="muted" style="margin-top:4px">Final verdicts only once 60 prediction dates have matured for the 20-day targets (expected around Feb 2027).</p>`;
+    }
+    $('bt').innerHTML = (r.v1_backtests || []).map(b => `<tr><td class="l">${esc(b.variant.replace(/_/g, ' '))}${(b.n_trades || 0) < 30 ? ' <span class="muted">(n&lt;30)</span>' : ''}</td><td class="num">${b.n_trades}</td><td class="num ${cls(b.cagr)}">${pct(b.cagr)}</td>
+      <td class="num">${fmt(b.sharpe)}</td><td class="num">${pct(b.max_dd)}</td></tr>`).join('');
+    if (r.v1_spa) $('spa').textContent = `Hansen SPA p = ${fmt(r.v1_spa.spa_p_consistent, 2)}, White Reality Check p = ${fmt(r.v1_spa.white_rc_p, 2)}: no strategy variant beat the Nifty 500. Idle cash earns 6%/yr in these backtests.`;
+    $('figs').innerHTML = (r.figures || []).filter(f => f.startsWith('fig')).map(f => `<figure><img src="/impi-figures/${encodeURIComponent(f)}" alt="${esc(CAPS[f.replace('.png', '')] || f)}" loading="lazy"><figcaption>${esc(CAPS[f.replace('.png', '')] || f)}</figcaption></figure>`).join('');
+  } catch (err) { $('warn').style.display = 'block'; $('warn').textContent = err.message; }
+})();
+</script>
+</body>
+</html>

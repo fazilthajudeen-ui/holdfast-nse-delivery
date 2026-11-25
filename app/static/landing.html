@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Holdfast · Is this move real?</title>
+<meta name="description" content="Holdfast reads NSE delivery data to show whether buyers are really holding a stock — in plain words.">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/static/ds/lens.css">
+<script src="/static/ds/lens.js"></script>
+<script src="/static/freshness.js"></script>
+<style>
+  /* hero */
+  .hero { position: relative; padding: clamp(56px, 9vw, 120px) 0 40px; text-align: center; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; left: 50%; top: 52%; width: 1100px; height: 700px; transform: translateX(-50%);
+    background: radial-gradient(closest-side, rgba(0,113,227,.13), rgba(0,113,227,0)); pointer-events: none; z-index: -1; }
+  .hero .display .w { display: inline-block; animation: word 1100ms var(--ease) both; }
+  @keyframes word { from { opacity: 0; transform: translateY(.35em); filter: blur(8px); } }
+  .hero .lead { margin: 26px auto 0; animation: page-in 900ms 420ms var(--ease) both; }
+  .hero .cta { margin-top: 36px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; animation: page-in 900ms 560ms var(--ease) both; }
+  .bigsearch { display: inline-flex; align-items: center; gap: 12px; height: 60px; width: min(440px, 100%); padding: 0 10px 0 22px; border-radius: 999px;
+    background: var(--paper); box-shadow: 0 0 0 1.5px var(--line-2), var(--sh-2); color: var(--ink-3); font-size: 17px; text-align: left;
+    transition: box-shadow var(--t) var(--ease), transform var(--t) var(--spring); }
+  .bigsearch:hover { box-shadow: 0 0 0 2px var(--ink), var(--sh-2); transform: translateY(-2px); }
+  .bigsearch span { flex: 1; }
+  .bigsearch .go { width: 42px; height: 42px; border-radius: 50%; background: var(--ink); color: var(--paper); display: flex; align-items: center; justify-content: center; }
+  .trust { margin-top: 22px; font-size: 14px; color: var(--ink-3); animation: page-in 900ms 680ms var(--ease) both; }
+  .trust b { color: var(--ink); }
+
+  /* two rallies */
+  .duo { margin: clamp(48px, 7vw, 80px) auto 0; max-width: 1040px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; text-align: left;
+    animation: duo-in 1200ms 700ms var(--ease) both; }
+  @keyframes duo-in { from { opacity: 0; transform: translateY(40px) scale(.97); } }
+  .rally { position: relative; display: block; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-xl); padding: 26px 26px 22px;
+    box-shadow: var(--sh-2); transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease); }
+  .rally:hover { transform: translateY(-6px); box-shadow: var(--sh-3); }
+  .rally .tag { font: 700 12px/1 var(--f-text); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+  .rally .sym { font: 600 30px/1 var(--f-display); letter-spacing: -.018em; margin-top: 12px; }
+  .rally .nm { font-size: 14px; color: var(--ink-3); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rally .mv { position: absolute; top: 24px; right: 24px; text-align: right; }
+  .rally .mv b { display: block; font: 600 28px/1 var(--f-display); letter-spacing: -.018em; color: var(--up); }
+  .rally .mv small { font-size: 12.5px; color: var(--ink-3); }
+  .rally svg.spark { width: 100%; height: 120px; margin: 18px 0 10px; overflow: visible; }
+  .rally .spark path.ln { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+  .rally .spark path.ar { opacity: .9; }
+  .rally .dbar { display: flex; height: 12px; border-radius: 12px; background: var(--tint-2); overflow: hidden; position: relative; }
+  .rally .dbar i { display: block; width: 0; height: 100%; border-radius: 12px; transition: width 1400ms var(--ease); }
+  .rally .dbar u { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--ink); border-radius: 2px; opacity: 0; transition: opacity 600ms 900ms; }
+  .rally .drow { display: flex; justify-content: space-between; margin-top: 10px; font-size: 14px; color: var(--ink-2); }
+  .rally .verdict { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .rally .verdict p { font: 700 17px/1.25 var(--f-text); letter-spacing: -.01em; }
+  .duo-cap { grid-column: 1 / -1; text-align: center; color: var(--ink-3); font-size: 15px; margin-top: 6px; }
+
+  /* problem: split bar */
+  .split { margin-top: 56px; display: flex; height: 96px; border-radius: 22px; overflow: hidden; background: var(--tint); position: relative; }
+  .split .a { background: var(--gold); width: 0; display: flex; align-items: center; padding: 0 28px; transition: width 1800ms var(--ease); white-space: nowrap; }
+  .split .a b, .split .b b { font: 600 30px/1 var(--f-display); letter-spacing: -.018em; }
+  .split .a span, .split .b span { font-size: 15px; margin-left: 10px; color: var(--ink-2); }
+  .split .b { flex: 1; display: flex; align-items: center; justify-content: flex-end; padding: 0 28px; color: var(--ink-2); white-space: nowrap; }
+  .split-note { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; font-size: 14px; color: var(--ink-3); }
+
+  /* method: sticky story */
+  .story { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 64px; }
+  .stage { position: sticky; top: calc(var(--nav-h) + 40px); height: min(520px, 70vh); border-radius: var(--r-xl); background: var(--paper);
+    border: 1px solid var(--line); box-shadow: var(--sh-2); overflow: hidden; }
+  .stage .lay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 36px; text-align: center;
+    opacity: 0; transform: translateY(24px) scale(.98); transition: opacity 600ms var(--ease), transform 800ms var(--ease); pointer-events: none; }
+  .stage .lay.on { opacity: 1; transform: none; }
+  .stage .cap { margin-top: 26px; font-size: 15px; color: var(--ink-2); max-width: 340px; }
+  .stage .ex { position: absolute; top: 20px; left: 24px; font: 700 12px/1 var(--f-text); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .stage .prog { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
+  .stage .prog i { width: 8px; height: 8px; border-radius: 8px; background: var(--line-2); transition: all 500ms var(--ease); }
+  .stage .prog i.on { width: 26px; background: var(--gold); }
+  .steps .st { min-height: 62vh; display: flex; flex-direction: column; justify-content: center; opacity: .28; transition: opacity 600ms var(--ease); }
+  .steps .st.on { opacity: 1; }
+  .steps .st:first-child { min-height: 46vh; } .steps .st:last-child { min-height: 52vh; }
+  .st .n { font: 700 15px/1 var(--f-num); color: var(--gold-ink); }
+  .st h3 { font: 600 clamp(30px, 3.4vw, 44px)/1.05 var(--f-display); letter-spacing: -.022em; margin: 14px 0 14px; }
+  .st p { font-size: 19px; line-height: 1.55; color: var(--ink-2); max-width: 460px; }
+  .st .mvis { display: none; }
+  .dots { display: grid; grid-template-columns: repeat(10, 1fr); gap: 7px; width: 250px; }
+  .dots i { aspect-ratio: 1; border-radius: 50%; background: var(--tint-2); transition: background 400ms, transform 500ms var(--spring); }
+  .dots i.g { background: var(--gold); }
+  .bigv { font: 600 76px/1 var(--f-display); letter-spacing: -.018em; }
+  .hbars { display: flex; align-items: flex-end; gap: 3px; height: 150px; width: 300px; position: relative; }
+  .hbars i { flex: 1; background: var(--tint-2); border-radius: 3px 3px 0 0; transition: height 700ms var(--ease); }
+  .hbars u { position: absolute; left: -6px; right: -6px; height: 2px; background: var(--ink); }
+  .hbars u::after { content: attr(data-l); position: absolute; right: 0; top: -22px; font: 700 12px/1 var(--f-num); background: var(--ink); color: var(--paper); padding: 4px 6px; border-radius: 6px; }
+  .cmp { width: 300px; display: grid; gap: 14px; text-align: left; }
+  .cmp .r { display: grid; grid-template-columns: 70px 1fr 56px; align-items: center; gap: 12px; font-size: 14px; color: var(--ink-2); }
+  .cmp .t { height: 18px; border-radius: 18px; background: var(--tint); overflow: hidden; }
+  .cmp .t i { display: block; height: 100%; border-radius: 18px; transition: width 1000ms var(--ease); }
+  .cmp b { text-align: right; font-family: var(--f-num); color: var(--ink); }
+
+  /* evidence */
+  .ev3 { margin-top: 56px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .ev3 .card { padding: 32px 28px; }
+  .ev3 .verd { margin-top: 18px; }
+  .exc { margin-top: 16px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; }
+  .xbars { display: grid; gap: 16px; margin-top: 18px; }
+  .xbars .r { display: grid; grid-template-columns: 76px 1fr 70px; gap: 14px; align-items: center; font-size: 15px; }
+  .xbars .t { height: 30px; border-radius: 10px; background: var(--tint); overflow: hidden; }
+  .xbars .t i { display: block; height: 100%; width: 0; border-radius: 10px; transition: width 1400ms var(--ease); }
+  .xbars b { font: 700 16px/1 var(--f-num); text-align: right; }
+  .honest ul { list-style: none; display: grid; gap: 14px; margin-top: 18px; }
+  .honest li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 16px; line-height: 1.5; color: var(--ink-2); }
+  .honest li::before { content: ''; width: 10px; height: 10px; margin-top: 8px; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--ink-3); }
+
+  /* tools */
+  .tools4 { margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .tool { display: flex; flex-direction: column; min-height: 280px; padding: 28px 26px 24px; }
+  .tool .ic { width: 52px; height: 52px; border-radius: 16px; background: var(--tint); display: flex; align-items: center; justify-content: center; transition: background var(--t), transform var(--t-slow) var(--spring); }
+  .tool:hover .ic { background: var(--gold-soft); transform: rotate(-6deg) scale(1.06); }
+  .tool h3 { margin-top: 22px; }
+  .tool p { margin-top: 8px; color: var(--ink-2); font-size: 15.5px; flex: 1; }
+  .tool .go { margin-top: 18px; font: 700 15px/1 var(--f-text); display: inline-flex; gap: 6px; align-items: center; }
+  .tool .go span { transition: transform var(--t) var(--ease); } .tool:hover .go span { transform: translateX(4px); }
+
+  .closing .display { font-size: clamp(42px, 6.6vw, 88px); }
+  .closing .display em { font-style: normal; background: linear-gradient(transparent 64%, var(--gold-2) 64%); }
+
+  @media (max-width: 980px) {
+    .tools4 { grid-template-columns: 1fr 1fr; }
+    .ev3 { grid-template-columns: 1fr; } .exc { grid-template-columns: 1fr; }
+    .story { grid-template-columns: 1fr; gap: 0; } .stage { display: none; }
+    .steps .st, .steps .st:first-child, .steps .st:last-child { min-height: 0; opacity: 1; padding: 36px 0; border-bottom: 1px solid var(--line); }
+    .st .mvis { display: flex; justify-content: center; margin-top: 28px; padding: 28px; border-radius: var(--r-l); background: var(--canvas); }
+  }
+  @media (max-width: 720px) {
+    .duo { grid-template-columns: 1fr; }
+    .tools4 { grid-template-columns: 1fr; } .tool { min-height: 0; }
+    .split { height: 76px; } .split .a, .split .b { padding: 0 16px; } .split .a b, .split .b b { font-size: 22px; } .split .a span, .split .b span { display: none; }
+  }
+</style>
+</head>
+<body>
+<header id="nav"></header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow" style="animation:page-in 800ms var(--ease) both">Delivery data for 500 NSE stocks</p>
+    <h1 class="display" style="margin-top:22px" aria-label="Is this move real?"><span class="w">Is</span> <span class="w" style="animation-delay:90ms">this</span> <span class="w" style="animation-delay:180ms">move</span> <span class="w hl" style="animation-delay:270ms">real?</span></h1>
+    <p class="lead">A price chart shows that a stock went up. Delivery shows whether buyers <b>kept</b> the shares — or sold them the same day. We check it for every stock, every evening, in plain words.</p>
+    <div class="cta">
+      <button class="bigsearch" id="heroSearch" aria-label="Search a stock"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Check a stock — e.g. Reliance</span><i class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></button>
+    </div>
+    <p class="trust">Free NSE data · <b id="nst">–</b> stocks · updated <b id="asofHero">–</b> · no tips, no sign-up</p>
+
+    <div class="duo" id="duo">
+      <div class="rally"><div class="sk" style="height:300px"></div></div>
+      <div class="rally"><div class="sk" style="height:300px"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec center" id="problem">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow rv">The blind spot</p>
+      <h2 class="h1 rv d1">About half of every trade<br>never leaves the day.</h2>
+      <p class="lead rv d2">Every evening NSE reports how many traded shares were actually delivered to buyers. The rest were bought and sold within the same day. On a price chart, both look exactly the same.</p>
+    </div>
+    <div class="split rv d2" id="split"><div class="a" id="splitA"><b class="num">–</b><span>delivered — kept by buyers</span></div><div class="b"><b class="num" id="splitB">–</b><span>same-day trading</span></div></div>
+    <div class="split-note rv d3"><span>Out of every 100 shares traded on a typical day</span><span>Median across <span id="nst2">–</span> stocks</span></div>
+  </div>
+</section>
+
+<section class="sec tint" id="method">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow rv">How it works</p>
+      <h2 class="h1 rv d1">One score. Four honest steps.</h2>
+      <p class="lead rv d2">Each stock is compared only with its own past — never with a fixed rule. Only data from before each day is used.</p>
+    </div>
+    <div class="story">
+      <div class="stage" id="stage" aria-hidden="true">
+        <span class="ex" id="exLabel">Example</span>
+        <div class="lay on" data-i="0"><div class="dots" id="dots"></div><p class="cap" id="cap0">–</p></div>
+        <div class="lay" data-i="1"><div class="hbars" id="hbars"></div><p class="cap" id="cap1">–</p></div>
+        <div class="lay" data-i="2"><div class="cmp" id="cmp"></div><p class="cap" id="cap2">–</p></div>
+        <div class="lay" data-i="3"><div id="ringBig"></div><div style="margin-top:18px" id="ringPill"></div><p class="cap" id="cap3">–</p></div>
+        <div class="prog"><i class="on"></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="steps" id="steps">
+        <div class="st on"><span class="n">01</span><h3>How much was delivered?</h3><p>Out of all shares traded today, how many did buyers actually take home? That is the stock’s <b>delivery %</b>.</p><div class="mvis" data-m="0"></div></div>
+        <div class="st"><span class="n">02</span><h3>What is usual for this stock?</h3><p>Some stocks always have high delivery, some always low. So we find each stock’s <b>usual level</b> — the middle of its last 60 days.</p><div class="mvis" data-m="1"></div></div>
+        <div class="st"><span class="n">03</span><h3>Is it above or below usual?</h3><p>We measure the <b>gap</b> between recent delivery and usual, averaged over five days so one odd day doesn’t fool us.</p><div class="mvis" data-m="2"></div></div>
+        <div class="st"><span class="n">04</span><h3>One clear verdict.</h3><p>The gap is ranked against the stock’s own last year into a <b>score from 0 to 100</b>. 70+ means <b>Strong</b>: buyers are holding. Under 30 means <b>Weak</b>: mostly day-trading.</p><div class="mvis" data-m="3"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="evidence">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow rv">The evidence</p>
+      <h2 class="h1 rv d1">We tested it on <span class="num" id="nEv">–</span> sharp rises.</h2>
+      <p class="lead rv d2">Every time a Nifty 500 stock gained 20% or more in 20 trading days over the past year, we checked delivery at that moment — and then what the stock did next.</p>
+    </div>
+    <div class="ev3">
+      <div class="card tint stat rv d1"><div class="v num" id="evDiff">–</div><p class="k">more return in the next 20 days when delivery was <b>Strong</b> rather than Weak, versus the Nifty 500.</p>
+        <div class="verd"><span class="pill normal" id="evP">p = –</span><button class="qm" data-x="p" aria-label="What is a p-value?">?</button></div></div>
+      <div class="card tint stat rv d2"><div class="v num"><span id="rtH">–</span> <span class="faint" style="font-size:.5em">vs</span> <span id="rtL">–</span></div><p class="k">gave back half of their rise afterwards — Strong-delivery rallies vs Weak ones. <b>Lower is better.</b></p>
+        <div class="verd"><span class="pill strong">Strong rallies held up better</span></div></div>
+      <div class="card tint stat rv d3"><div class="v num"><span id="btH">–</span> <span class="faint" style="font-size:.5em">vs</span> <span id="btL">–</span></div><p class="k">beat the Nifty 500 over the next 60 days, Strong vs Weak.</p>
+        <div class="verd"><span class="pill plain">Almost no difference at 60 days</span></div></div>
+    </div>
+    <div class="exc">
+      <div class="card rv" id="xcard"><h3 class="h3">Extra return vs Nifty 500, 20 days after a sharp rise</h3><p class="note" style="margin-top:6px">Grouped by delivery at the moment of the rise.</p><div class="xbars" id="xbars"></div></div>
+      <div class="card honest rv d1"><h3 class="h3">What we don’t claim</h3>
+        <ul>
+          <li><span>Delivery <b>doesn’t tell you which stock will rise next.</b> It tells you how real a move that already happened looks.</span></li>
+          <li><span>One year of data is a pilot. The 20-day gap is <b>suggestive, not proven</b> (p above 0.05).</span></li>
+          <li><span>Our breakout-prediction model <b>failed</b> its pre-registered test. We publish that too.</span></li>
+        </ul>
+        <a class="link" href="/research" style="display:inline-block;margin-top:20px">See every test, including failures →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec tint" id="tools">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow rv">What’s inside</p>
+      <h2 class="h1 rv d1">Simple when you want it.<br>Pro when you need it.</h2>
+      <p class="lead rv d2">Every page has a Simple view in plain English, and a Pro view with the full trading terminal. Switch any time from the top bar.</p>
+    </div>
+    <div class="tools4">
+      <a class="card lift tool rv d1" href="/terminal"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l5-6 4 3 6-8 3 3"/><path d="M3 21h18"/></svg></span><h3 class="h3">Terminal</h3><p>Open any stock and get its verdict, chart and delivery history in one view.</p><span class="go">Open terminal <span>→</span></span></a>
+      <a class="card lift tool rv d2" href="/scanner"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><h3 class="h3">Scanner</h3><p>All F&amp;O stocks in one sortable table. Find what’s squeezing, what’s building up.</p><span class="go">Open scanner <span>→</span></span></a>
+      <a class="card lift tool rv d3" href="/market"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 12l5-3"/><path d="M12 3v2M21 12h-2M5 12H3"/></svg></span><h3 class="h3">Market</h3><p>How foreign funds, Indian funds and traders are positioned — in one glance.</p><span class="go">Open market <span>→</span></span></a>
+      <a class="card lift tool rv d4" href="/research"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg></span><h3 class="h3">Research</h3><p>Every hypothesis we tested, written down before testing. Wins and losses.</p><span class="go">Read research <span>→</span></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec center closing">
+  <div class="wrap">
+    <h2 class="display rv">Don’t just watch the price.<br><em>Watch the delivery.</em></h2>
+    <p class="lead rv d1" style="margin-top:26px">A fresh verdict for <span id="nst3">–</span> stocks, every trading evening at 7:30 PM.</p>
+    <div class="rv d2" style="margin-top:36px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a class="btn" href="/terminal">Open the terminal <span class="arr">→</span></a><a class="btn ghost" href="/about">About the project</a></div>
+  </div>
+</section>
+</main>
+
+<script>
+Lens.nav('Home');
+Lens.footer();
+Lens.reveal();
+$('heroSearch').onclick = () => Lens.palette.open();
+
+let META = null, A = null;
+const fmtPts = v => sgn(v, 1, ' pts');
+
+// ---------------------------------------------------------------- two rallies (real data)
+function sparkSVG(arr, color, id) {
+  const w = 440, h = 120, mn = Math.min(...arr), mx = Math.max(...arr), r = mx - mn || 1;
+  const pts = arr.map((v, i) => [i / (arr.length - 1) * w, h - 8 - (v - mn) / r * (h - 20)]);
+  const d = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">
+    <defs><linearGradient id="g${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${color}" stop-opacity=".28"/><stop offset="1" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>
+    <path class="ar" d="${d} L${w} ${h} L0 ${h} Z" fill="url(#g${id})"/><path class="ln" d="${d}" vector-effect="non-scaling-stroke"/></svg>`;
+}
+function rallyCard(x, tag, i) {
+  const v = Lens.verdict(x.band), strong = x.band === 'High';
+  const col = strong ? '#0071E3' : x.band === 'Low' ? '#6B7385' : '#A3A6AD';
+  const said = strong ? 'Buyers kept the shares.' : x.band === 'Low' ? 'Mostly traded away the same day.' : 'Delivery about usual.';
+  return `<a class="rally" href="/terminal#${encodeURIComponent(x.symbol)}" data-s="${esc(x.symbol)}">
+    <div class="tag">${tag}</div><div class="sym">${esc(x.symbol)}</div><div class="nm">${esc(x.name)}</div>
+    <div class="mv"><b class="num">${x.ret_20 > 0 ? '▲' : '▼'} ${Math.abs(x.ret_20).toFixed(1)}%</b><small>last 20 days</small></div>
+    ${sparkSVG(x.spark, col, i)}
+    <div class="dbar"><i data-w="${Math.min(100, x.deliv || 0)}" style="background:${col}"></i><u style="left:${Math.min(100, x.normal || 0)}%" title="Usual"></u></div>
+    <div class="drow"><span><b class="num">${fmt(x.deliv, 0)}%</b> delivered today</span><span>usual <b class="num">${fmt(x.normal, 0)}%</b></span></div>
+    <div class="verdict"><p>${said}</p>${Lens.pill(x.band, x.score)}</div></a>`;
+}
+function drawDuo(rows) {
+  const up = r => r.ret_20 != null && r.spark && r.spark.length > 5;
+  const strong = rows.filter(r => up(r) && r.band === 'High' && r.ret_20 > 0).sort((a, b) => b.ret_20 - a.ret_20);
+  const weak = rows.filter(r => up(r) && r.band === 'Low' && r.ret_20 > 0).sort((a, b) => b.ret_20 - a.ret_20);
+  const a = strong[0] || rows.filter(up).sort((x, y) => y.score - x.score)[0];
+  const b = weak[0] || rows.filter(up).sort((x, y) => x.score - y.score)[0];
+  A = a;
+  $('duo').innerHTML = rallyCard(a, 'Rally one', 1) + rallyCard(b, 'Rally two', 2) +
+    `<p class="duo-cap">Two real rallies from the latest trading day. Similar charts — very different buyers.</p>`;
+  // draw-in: line strokes, area fades, bars fill
+  $('duo').querySelectorAll('.rally').forEach((card, i) => {
+    const ln = card.querySelector('.ln'), ar = card.querySelector('.ar');
+    if (!reduceMotion && ln.getTotalLength) {
+      const L = ln.getTotalLength(); ln.style.strokeDasharray = L; ln.style.strokeDashoffset = L;
+      ln.animate([{ strokeDashoffset: L }, { strokeDashoffset: 0 }], { duration: 1800, delay: 900 + i * 200, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'forwards' });
+      ar.animate([{ opacity: 0 }, { opacity: .9 }], { duration: 1200, delay: 1500 + i * 200, fill: 'backwards' });
+    }
+    setTimeout(() => { const f = card.querySelector('.dbar i'); f.style.width = f.dataset.w + '%'; card.querySelector('.dbar u').style.opacity = 1; }, reduceMotion ? 0 : 1300 + i * 200);
+    card.addEventListener('click', () => Lens.morph(card.querySelector('.sym')));
+  });
+  buildStory(a);
+}
+
+// ---------------------------------------------------------------- method story (uses rally one's real numbers)
+function buildStory(x) {
+  const d = Math.round(x.deliv ?? 50), n = Math.round(x.normal ?? 45), gap = (x.deliv ?? 0) - (x.normal ?? 0);
+  $('exLabel').textContent = `Example · ${x.symbol}, latest day`;
+  $('dots').innerHTML = Array.from({ length: 100 }, () => '<i></i>').join('');
+  $('cap0').innerHTML = `<b class="num">${d}</b> of every 100 shares of ${esc(x.symbol)} traded today were delivered to buyers.`;
+  // 60 illustrative days around the stock's usual level
+  let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  const days = Array.from({ length: 60 }, () => Math.max(5, Math.min(98, n + (rnd() - .5) * 34)));
+  $('hbars').innerHTML = days.map(v => `<i data-h="${v}" style="height:0"></i>`).join('') + `<u data-l="usual ${n}%" style="bottom:${n / 100 * 150}px"></u>`;
+  $('cap1').innerHTML = `Over its last 60 trading days, ${esc(x.symbol)} usually sees about <b class="num">${n}%</b> delivery.`;
+  $('cmp').innerHTML = `<div class="r"><span>Recent</span><span class="t"><i data-w="${d}" style="width:0;background:var(--gold)"></i></span><b>${d}%</b></div>
+    <div class="r"><span>Usual</span><span class="t"><i data-w="${n}" style="width:0;background:var(--ink-4)"></i></span><b>${n}%</b></div>
+    <div style="text-align:center;margin-top:8px"><span class="bigv num" style="font-size:56px">${fmtPts(gap)}</span></div>`;
+  $('cap2').innerHTML = `Today ${esc(x.symbol)} is <b>${gap >= 0 ? 'above' : 'below'}</b> its usual level.`;
+  const rg = Lens.ring($('ringBig'), 180, 14);
+  $('ringPill').innerHTML = Lens.pill(x.band, null);
+  $('cap3').innerHTML = `${Lens.verdict(x.band).head}. Ranked against ${esc(x.symbol)}’s own past year.`;
+  // mobile: copy each layer into its step
+  document.querySelectorAll('.mvis').forEach(m => { const lay = document.querySelector(`.lay[data-i="${m.dataset.m}"]`).cloneNode(true); lay.className = ''; lay.style.textAlign = 'center';
+    lay.querySelectorAll('[id]').forEach(e => e.removeAttribute('id')); m.appendChild(lay); });
+  const play = (i, scope = document) => {
+    if (i === 0) scope.querySelectorAll('.dots i').forEach((e, k) => setTimeout(() => e.classList.toggle('g', k < d), reduceMotion ? 0 : k * 9));
+    if (i === 1) scope.querySelectorAll('.hbars i').forEach((e, k) => setTimeout(() => e.style.height = e.dataset.h / 100 * 150 + 'px', reduceMotion ? 0 : k * 12));
+    if (i === 2) scope.querySelectorAll('.cmp i').forEach(e => e.style.width = e.dataset.w + '%');
+    if (i === 3) rg.set(Lens.capScore(x.score), x.band === 'High' ? cssVar('--gold') : x.band === 'Low' ? cssVar('--slate') : cssVar('--ink'));
+  };
+  // desktop: sticky stage follows the active step
+  const st = [...document.querySelectorAll('#steps .st')], lays = [...document.querySelectorAll('.stage .lay')], prog = [...document.querySelectorAll('.stage .prog i')];
+  const played = new Set();
+  const activate = i => {
+    st.forEach((s, k) => s.classList.toggle('on', k === i)); lays.forEach((l, k) => l.classList.toggle('on', k === i)); prog.forEach((p, k) => p.classList.toggle('on', k === i));
+    if (!played.has(i)) { played.add(i); setTimeout(() => play(i, document.querySelector('.stage')), 200); }
+  };
+  if (getComputedStyle($('stage')).display !== 'none') {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) activate(st.indexOf(e.target)); }), { rootMargin: '-45% 0px -45% 0px' });
+    st.forEach(s => io.observe(s));
+  } else {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const m = e.target; io.unobserve(m); setTimeout(() => play(+m.dataset.m, m), 150);
+      if (m.dataset.m === '3') { const r2 = Lens.ring(m.querySelector('.ring') || m.querySelector('div > div'), 160, 13); r2.set(Lens.capScore(x.score), x.band === 'High' ? '#0071E3' : '#6B7385'); } } }), { threshold: .4 });
+    document.querySelectorAll('.mvis').forEach(m => io.observe(m));
+  }
+}
+
+// ---------------------------------------------------------------- evidence
+function drawEvidence(m) {
+  const e = m.evidence;
+  $('nEv').textContent = e.n_events.toLocaleString('en-IN');
+  $('evP').textContent = `p = ${e.p_20.toFixed(2)} · ${e.p_20 < .05 ? 'significant' : 'suggestive, not proven'}`;
+  $('evP').className = 'pill ' + (e.p_20 < .05 ? 'strong' : 'normal');
+  const io = new IntersectionObserver(es => es.forEach(en => {
+    if (!en.isIntersecting) return; io.disconnect();
+    Lens.tween($('evDiff'), e.diff_20, v => sgn(v, 1, ' pts'), 1400);
+    Lens.tween($('rtH'), e.rt_high, v => Math.round(v) + '%', 1400); Lens.tween($('rtL'), e.rt_low, v => Math.round(v) + '%', 1400);
+    Lens.tween($('btH'), e.beat_high, v => Math.round(v) + '%', 1400); Lens.tween($('btL'), e.beat_low, v => Math.round(v) + '%', 1400);
+  }), { threshold: .3 });
+  io.observe(document.querySelector('.ev3'));
+  const mx = Math.max(...Object.values(e.exc20).map(Math.abs), .1);
+  const C = { Low: ['Weak', '#6B7385'], Mid: ['Normal', '#A3A6AD'], High: ['Strong', '#0071E3'] };
+  $('xbars').innerHTML = ['High', 'Mid', 'Low'].map(k => `<div class="r"><span>${C[k][0]}</span><span class="t"><i data-w="${Math.abs(e.exc20[k]) / mx * 100}" style="background:${C[k][1]}"></i></span><b class="${cls(e.exc20[k])}">${sgn(e.exc20[k], 2)}</b></div>`).join('');
+  const io2 = new IntersectionObserver(es => { if (es[0].isIntersecting) { io2.disconnect(); $('xbars').querySelectorAll('i').forEach(i => i.style.width = i.dataset.w + '%'); } }, { threshold: .4 });
+  io2.observe($('xcard'));
+}
+
+// ---------------------------------------------------------------- data
+(async () => {
+  try {
+    const [m, wl] = await Promise.all([getJSON('/api/meta'), getJSON('/api/watchlist')]);
+    META = m; Lens.palette.setRows(wl.rows);
+    $('asof').textContent = m.as_of; $('asofHero').textContent = m.as_of;
+    ['nst', 'nst2', 'nst3'].forEach(id => $(id).textContent = m.n_stocks);
+    $('splitB').textContent = (100 - m.median_delivery);
+    $('splitA').querySelector('b').textContent = m.median_delivery;
+    const sp = () => { $('splitA').style.width = Math.max(m.median_delivery, 22) + '%'; };
+    $('split').classList.contains('in') ? sp() : $('split').addEventListener('reveal', sp, { once: true });
+    drawDuo(wl.rows);
+    drawEvidence(m);
+    if (window.watchData) watchData({ url: '/api/meta', read: j => j.as_of });
+  } catch (err) {
+    $('duo').innerHTML = `<div class="warn" style="grid-column:1/-1">Data could not be loaded (${esc(err.message)}). Is the daily update finished?</div>`;
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delivery Lens · Watch the delivery</title>
+<link rel="stylesheet" href="/static/site.css">
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" href="/"><i></i>Delivery Lens</a>
+  <div class="links"><a href="#method">Method</a><a href="#results">Results</a><a href="/about">About</a></div>
+  <div class="right"><span class="num">Data as of <b id="asof" style="color:var(--text)">–</b></span><a class="btn sm" href="/terminal">Open Terminal</a></div>
+</nav>
+
+<section class="hero center">
+  <div class="wrap">
+    <p class="eyebrow reveal">Delivery-Based Movement Analysis on NSE</p>
+    <h1 class="reveal d1">Watch the delivery.</h1>
+    <p class="lead reveal d2" style="margin-top:24px">Every rise looks the same on a price chart. Delivery shows which ones buyers are actually holding.</p>
+    <div class="cta reveal d3"><a class="btn" href="/terminal">Open Terminal</a><a class="btn ghost" href="#method">How it works ›</a></div>
+  </div>
+  <div class="shot reveal d4"><div class="shot-bar"><i></i><i></i><i></i></div><img src="/static/img/terminal.png" alt="The Delivery Lens terminal: watchlist, price chart with buyer zones, delivery bars and the Conviction Score"></div>
+</section>
+
+<section class="center" id="problem">
+  <div class="wrap">
+    <p class="eyebrow reveal">The problem</p>
+    <h2 class="reveal d1">Half of every trade<br>never leaves the day.</h2>
+    <p class="lead reveal d2" style="margin-top:22px">NSE reports, every evening, how many traded shares were actually delivered to buyers. The rest were bought and sold the same day. A price chart can’t tell the two apart.</p>
+    <div class="split reveal d3" id="split"><div class="a num" id="splitA">– delivered</div><div class="b num" id="splitB">– same-day</div></div>
+    <p class="split-note reveal d3 num">Out of every 100 shares traded on a typical day · median of <span id="nst">–</span> stocks</p>
+  </div>
+</section>
+
+<section class="alt center" id="method">
+  <div class="wrap">
+    <p class="eyebrow reveal">How it works</p>
+    <h2 class="reveal d1">One score. Four honest steps.</h2>
+    <p class="lead reveal d2" style="margin-top:22px">Every stock is judged against its own history, never a fixed rule. Only past data is used.</p>
+    <div class="steps" style="text-align:left">
+      <div class="step reveal d1"><div class="n">01</div><h3>Delivery</h3><p>Share of today’s traded shares actually taken home by buyers.</p></div>
+      <div class="step reveal d2"><div class="n">02</div><h3>Normal</h3><p>That stock’s usual delivery: the median of its previous 60 days.</p></div>
+      <div class="step reveal d3"><div class="n">03</div><h3>Gap</h3><p>How far above or below normal it has been, on a 5-day average.</p></div>
+      <div class="step reveal d4"><div class="n">04</div><h3>Score</h3><p>Ranked 0–100 against the stock’s own last 250 days. 70+ is High.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="center" id="results">
+  <div class="wrap">
+    <p class="eyebrow reveal">The proof</p>
+    <h2 class="reveal d1">Tested on every sharp rise<br>of the past year.</h2>
+    <div class="stats" style="text-align:left">
+      <div class="stat reveal d1"><div class="v num" data-count="n_events">0</div><p>sharp rises (20%+ in 20 days) across Nifty 500 stocks</p></div>
+      <div class="stat reveal d2"><div class="v blue num" data-count="diff_20" data-prefix="+" data-suffix=" pts" data-dec="1">0</div><p>more return in 20 days when delivery was high (p = <span id="p20">–</span>)</p></div>
+      <div class="stat reveal d3"><div class="v num"><span data-count="beat_high" data-suffix="%">0</span> <span style="color:var(--grey)">vs</span> <span data-count="beat_low" data-suffix="%">0</span></div><p>beat the Nifty 500 over 60 days, high vs low delivery</p></div>
+    </div>
+    <p class="fine reveal num">At 60 days the gap is <span id="d60">–</span> pts: promising, not yet statistically proven (p = <span id="p60">–</span>). One year of data is a pilot.</p>
+  </div>
+</section>
+
+<section class="alt center closing">
+  <div class="wrap">
+    <h2 class="reveal">Don’t just watch the price.<br><span>Watch the delivery.</span></h2>
+    <p class="lead reveal d1" style="margin-top:22px">A live Conviction Score for <span id="nst2">–</span> stocks, refreshed every trading evening from free NSE data.</p>
+    <div class="cta reveal d2" style="margin-top:36px;display:flex;justify-content:center"><a class="btn" href="/terminal">Open Terminal</a></div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Delivery-Based Movement Analysis on NSE · <a href="/about" style="color:var(--accent)">About</a></span><span>Data: NSE daily bhavcopy with delivery · Research tool, not investment advice.</span></div></footer>
+
+<script>
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let META;
+function countUp(el) {
+  const k = el.dataset.count, end = META.evidence[k] ?? META[k], dec = +(el.dataset.dec || 0);
+  const pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+  const show = v => el.textContent = pre + v.toLocaleString('en-IN', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf;
+  if (reduce) return show(end);
+  const t0 = performance.now(), dur = 1400;
+  (function tick(t) { const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 4); show(end * e); if (p < 1) requestAnimationFrame(tick); })(t0);
+}
+const seen = new Set();
+function activate(el) {                       // runs once both visible and data loaded
+  if (!META || !seen.has(el) || el.dataset.done) return;
+  el.dataset.done = 1;
+  el.querySelectorAll('[data-count]').forEach(countUp); if (el.dataset.count) countUp(el);
+  if (el.id === 'split') document.getElementById('splitA').style.width = META.median_delivery + '%';
+}
+const io = new IntersectionObserver(entries => entries.forEach(en => {
+  if (!en.isIntersecting) return;
+  const el = en.target; el.classList.add('in'); io.unobserve(el); seen.add(el); activate(el);
+}), { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));   // animate immediately, data or not
+fetch('/api/meta').then(r => r.json()).then(m => {
+  META = m;
+  const e = m.evidence, $ = id => document.getElementById(id);
+  $('asof').textContent = m.as_of; $('nst').textContent = $('nst2').textContent = m.n_stocks;
+  $('splitA').textContent = m.median_delivery + ' delivered'; $('splitB').textContent = (100 - m.median_delivery) + ' same-day';
+  $('p20').textContent = e.p_20.toFixed(2); $('p60').textContent = e.p_60.toFixed(2); $('d60').textContent = '+' + e.diff_60.toFixed(1);
+  seen.forEach(activate);
+});
+</script>
+</body>
+</html>

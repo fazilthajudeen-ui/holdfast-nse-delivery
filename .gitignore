@@ -1,0 +1,7 @@
+# raw downloads are large and re-downloadable
+data/raw/
+__pycache__/
+.pytest_cache/
+*.pyc
+data/logs/*stdout*.txt
+.venv/

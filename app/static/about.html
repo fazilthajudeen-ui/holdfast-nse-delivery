@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About · Holdfast</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/static/ds/lens.css">
+<script src="/static/ds/lens.js"></script>
+<script src="/static/freshness.js"></script>
+<style>
+  .facts { margin-top: 56px; display: grid; grid-template-columns: 200px 1fr; border-top: 1px solid var(--line); }
+  .facts > div { padding: 22px 0; border-bottom: 1px solid var(--line); font-size: 19px; }
+  .facts > div:nth-child(odd) { color: var(--ink-3); font-size: 15px; padding-top: 25px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips span { background: var(--tint); border-radius: 999px; padding: 6px 14px; font-size: 15px; }
+  .why { margin-top: 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .why .card h3 { margin-top: 14px; }
+  .why .card p { margin-top: 8px; color: var(--ink-2); font-size: 15.5px; }
+  .why .ix { font: 800 15px/1 var(--f-num); color: var(--gold-ink); }
+  @media (max-width: 760px) { .facts { grid-template-columns: 1fr; } .facts > div:nth-child(odd) { padding-bottom: 0; border-bottom: 0; } .why { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header id="nav"></header>
+<main class="page-in">
+  <section class="sec" style="padding-top:clamp(56px,8vw,110px)">
+    <div class="wrap narrow">
+      <p class="eyebrow rv">About the project</p>
+      <h1 class="h1 rv d1" style="margin-top:18px">Built as a research project.</h1>
+      <p class="lead rv d2" style="margin-top:20px">A research project testing whether NSE’s daily delivery data can tell lasting price rises from fading ones — turned into a free, plain-English tool anyone can use.</p>
+
+      <div class="why">
+        <div class="card tint rv d1"><span class="ix">01</span><h3 class="h3">Plain words</h3><p>Every number has a one-line meaning. Tap any <span class="qm" style="pointer-events:none">?</span> to learn it.</p></div>
+        <div class="card tint rv d2"><span class="ix">02</span><h3 class="h3">Honest results</h3><p>Tests were written down before they were run. Failures are published next to wins.</p></div>
+        <div class="card tint rv d3"><span class="ix">03</span><h3 class="h3">Free data</h3><p>Everything comes from official NSE files, refreshed every trading evening at 7:30 PM.</p></div>
+      </div>
+
+      <div class="facts rv">
+        <div>Project</div><div>Delivery-Based Movement Analysis on NSE</div>
+        <div>Data</div><div>NSE daily bhavcopy with delivery (Nifty 500), F&amp;O bhavcopy, participant-wise open interest, India VIX — updated every trading evening</div>
+        <div>Built with</div><div class="chips"><span>Python</span><span>pandas</span><span>NumPy</span><span>SciPy</span><span>XGBoost</span><span>FastAPI</span><span>Lightweight Charts</span><span>pytest</span></div>
+      </div>
+      <div class="callout rv" style="margin-top:40px"><span>⚠︎</span><span><b>Research and education tool. Not investment advice.</b> One year of delivery data is a pilot: results are indicative, not proof. Delivery shows that shares were taken — not who took them or why.</span></div>
+    </div>
+  </section>
+</main>
+<script>
+Lens.nav('About');
+Lens.footer();
+Lens.reveal();
+getJSON('/api/meta').then(m => { $('asof').textContent = m.as_of; if (window.watchData) watchData({ url: '/api/meta', read: j => j.as_of }); }).catch(() => {});
+</script>
+</body>
+</html>

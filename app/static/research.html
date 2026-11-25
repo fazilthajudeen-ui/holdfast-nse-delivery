@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research · Holdfast</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/static/ds/lens.css">
+<script src="/static/ds/lens.js"></script>
+<script src="/static/freshness.js"></script>
+<style>
+  body { background: var(--canvas); }
+  .short { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+  .vc { padding: 28px 26px; display: flex; flex-direction: column; }
+  .vc .n { font: 700 13px/1 var(--f-num); color: var(--ink-3); }
+  .vc h3 { margin-top: 12px; }
+  .vc .big { font: 600 clamp(44px, 4.6vw, 62px)/1 var(--f-display); letter-spacing: -.028em; margin-top: 22px; font-variant-numeric: tabular-nums; }
+  .vc .big small { font-size: 15px; letter-spacing: 0; color: var(--ink-3); font-weight: 600; margin-left: 6px; }
+  .vc p { margin-top: 12px; color: var(--ink-2); font-size: 15.5px; flex: 1; }
+  .vc .pill { align-self: flex-start; margin-top: 18px; }
+  .kp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
+  .kp .card { padding: 18px 20px; }
+  .kp .v { font: 600 26px/1.1 var(--f-display); letter-spacing: -.018em; margin-top: 8px; font-variant-numeric: tabular-nums; }
+  .kp small { display: block; font-size: 12.5px; color: var(--ink-3); margin-top: 6px; }
+  details.dsec { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-l); margin-top: 14px; overflow: hidden; }
+  details.dsec > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 14px; padding: 22px 24px; }
+  details.dsec > summary::-webkit-details-marker { display: none; }
+  details.dsec > summary .h3 { flex: 1; }
+  details.dsec > summary::after { content: ''; width: 10px; height: 10px; border-right: 2px solid var(--ink-3); border-bottom: 2px solid var(--ink-3); transform: rotate(45deg); transition: transform var(--t) var(--ease); }
+  details.dsec[open] > summary::after { transform: rotate(-135deg); }
+  details.dsec > summary:hover { background: var(--canvas); }
+  .dbody { padding: 0 24px 24px; }
+  details.dsec[open] .dbody { animation: page-in 600ms var(--ease) both; }
+  .dbody .tbl-wrap { margin-top: 14px; border-radius: var(--r); }
+  .dbody .intro { color: var(--ink-2); font-size: 15.5px; max-width: 900px; }
+  .dec { display: flex; align-items: flex-end; gap: 3px; height: 40px; width: 150px; }
+  .dec i { flex: 1; background: var(--ink-4); border-radius: 3px 3px 0 0; min-height: 2px; }
+  .dec.good i { background: var(--gold); }
+  .figs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr)); gap: 14px; margin-top: 14px; }
+  .figs figure { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 12px; cursor: zoom-in; transition: box-shadow var(--t), transform var(--t) var(--ease); }
+  .figs figure:hover { box-shadow: var(--sh-2); transform: translateY(-2px); }
+  .figs img { width: 100%; border-radius: 8px; }
+  .figs figcaption { color: var(--ink-3); font-size: 13px; margin-top: 8px; }
+  .lightbox { position: fixed; inset: 0; z-index: 120; background: var(--glass-2); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 40px;
+    opacity: 0; pointer-events: none; transition: opacity var(--t); cursor: zoom-out; }
+  .lightbox.open { opacity: 1; pointer-events: auto; }
+  .lightbox img { max-width: 100%; max-height: 100%; border-radius: 12px; box-shadow: var(--sh-3); transform: scale(.96); transition: transform 500ms var(--ease); }
+  .lightbox.open img { transform: none; }
+  .track li { margin: 6px 0 0 20px; }
+  .short > *, .kp > * { min-width: 0; }
+  details.dsec > summary { flex-wrap: wrap; }
+  @media (max-width: 980px) { .short { grid-template-columns: 1fr; } .kp { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<header id="nav"></header>
+<main class="wrap page-in" style="max-width:1300px;padding-bottom:60px">
+  <div class="phead">
+    <p class="eyebrow">Research · IMPI</p>
+    <h1 class="h1">What we tested —<br>and what held up.</h1>
+    <p class="lead">Official NSE data from 2014 to 2026. Every main hypothesis was written down and saved <b>before</b> testing<button type="button" class="qm" data-x="pre" aria-label="What is pre-registered?">?</button>, and the 2023+ test set was used exactly once.
+      Failures are published next to wins.</p>
+  </div>
+  <div class="warn" id="warn" style="display:none"></div>
+
+  <h2 class="h3" style="margin:6px 0 12px">The short version</h2>
+  <div class="short" id="short">
+    <div class="card vc"><div class="sk" style="height:240px"></div></div><div class="card vc"><div class="sk" style="height:240px"></div></div><div class="card vc"><div class="sk" style="height:240px"></div></div>
+  </div>
+  <div class="kp" id="kpis"></div>
+
+  <details class="dsec" data-auto><summary><span class="h3">Pre-registered tests</span><span class="pill sm plain" id="confTag">–</span></summary><div class="dbody">
+    <p class="intro">Four ideas, fixed in git before the test data was touched<button type="button" class="qm" data-x="pre" aria-label="What is pre-registered?">?</button>. “Supported” needs the predicted direction and a multiple-testing-adjusted q ≤ 0.10.</p>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th class="l">Hypothesis</th><th class="l">Events</th><th>n</th><th>Difference</th><th>p</th><th>BH q</th><th class="l">Verdict</th><th class="l">2024–26 re-test (post-hoc)</th></tr></thead><tbody id="conf"></tbody></table></div>
+    <p class="note" style="margin-top:10px">H1 delivery expansion → more success · H2 price up while futures OI falls → less success · H3 FII selling with DII buying → better asymmetry ·
+      H4 XGBoost beats the fixed-weight composite. STRICT (VCP) groups had fewer than 30 events, so they get no p-value. The 2024–26 column re-runs the same tests on the later part of the test period
+      (requested 12 Oct 2026); it is exploratory — the official verdict is the one-time 2023–26 test.</p>
+  </div></details>
+
+  <details class="dsec" data-auto><summary><span class="h3">Models in use (improved after the study)</span><span class="pill sm plain">Post-hoc</span></summary><div class="dbody">
+    <p class="intro">v2 was trained on every F&amp;O stock-day with extra features and cross-sectional ranking. v3 adds option-implied volatility and 20-day targets (protocol pre-registered 11 Oct 2026);
+      it replaces v2 only if its CV AUC is ≥ 0.005 higher in ≥ 4 of 5 folds. Models were chosen only by walk-forward CV on 2015–2022; test-period numbers are post-hoc. The clean test is the live record below.</p>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th class="l">Target</th><th class="l">Chosen model</th><th>v2 CV AUC</th><th>CV AUC (2018–22)</th><th>Test AUC</th><th>Base rate</th><th class="l">Success rate by score decile (test)</th></tr></thead><tbody id="models"></tbody></table></div>
+  </div></details>
+
+  <details class="dsec" data-auto><summary><span class="h3">v4 — re-framed hypotheses</span><span class="pill sm plain">Pre-registered 12 Oct 2026</span></summary><div class="dbody">
+    <p class="intro">Delivery is direction-neutral: every delivered share has a seller, so high delivery shows conviction, not who is in control. v4 tests delivery as a predictor of move size (D1) and,
+      signed by price direction, of direction (D2); re-tests price-up/OI-down on all breakouts (H2′); tests positioning the way Larry Williams used the COT report (C1); and a looser VCP rule (V1).</p>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th class="l">Hypothesis</th><th>Estimate</th><th>p</th><th>BH q</th><th class="l">2023–26 check</th><th class="l">2024–26 re-test</th><th class="l">Live forward test</th></tr></thead><tbody id="v4"></tbody></table></div>
+  </div></details>
+
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h2 class="h3">Live track record</h2><p class="note" style="margin-top:4px">True out-of-sample: predictions logged every evening before outcomes exist.</p><div id="track" class="track" style="margin-top:12px;font-size:15px;color:var(--ink-2)"></div></div>
+    <div class="card"><h2 class="h3">Backtests on the test set</h2><p class="note" style="margin-top:4px">After Indian trading costs. Idle cash earns 6%/yr.</p>
+      <div class="tbl-wrap" style="margin-top:12px;border-radius:var(--r)"><table class="tbl"><thead><tr><th class="l">Strategy</th><th>Trades</th><th>CAGR</th><th>Sharpe</th><th>Max DD</th></tr></thead><tbody id="bt"></tbody></table></div>
+      <p class="note" id="spa" style="margin-top:10px"></p></div>
+  </div>
+
+  <details class="dsec" open><summary><span class="h3">Figures</span><span class="pill sm plain">Tap to enlarge</span></summary><div class="dbody"><div class="figs" id="figs"></div></div></details>
+  <p class="note" style="margin-top:18px">Full details: impi/results/summary.md, impi/pre_registered_hypotheses.md, impi/decisions.md, impi/paper/IMPI_paper_draft.md · Research tool — not investment advice.</p>
+</main>
+<div class="lightbox" id="lb"><img alt=""></div>
+<script>
+Lens.nav('Research', { mode: true });
+const syncOpen = () => document.querySelectorAll('details[data-auto]').forEach(d => d.open = Lens.getMode() === 'pro');
+syncOpen(); Lens.onMode(syncOpen);
+const NAMES = { label_10: 'Breakout success (10 days)', label_xs10: 'Beats the median F&O stock (10 days)', vol_exp: 'Big move — volatility expansion (10 days)',
+  label_xs20: 'Beats the median F&O stock (20 days)', label_20: 'Breakout success (20 days)' };
+const ORDER = ['vol_exp', 'label_xs10', 'label_xs20', 'label_10', 'label_20'];
+const CAPS = { fig1_benchmark_ladders_test: 'Benchmark ladder on the test set', fig2_h1_delivery_success: 'H1: success rate by delivery behaviour',
+  fig3_event_study_by_delivery: 'Event study: excess returns by delivery', fig4_reliability_test: 'Calibration of the v1 model (test)',
+  fig5_shap_importance: 'v1 XGBoost: SHAP feature importance', fig6_equity_curves_test: 'Test-period backtests vs Nifty 500',
+  fig7_vcp_grid_counts: 'VCP parameter grid: event counts', fig8_placebo: 'Placebo: delivery shuffled across stocks' };
+const P = { yes: t => `<span class="pill sm up">${t}</span>`, loss: t => `<span class="pill sm down">${t}</span>`, no: t => `<span class="pill sm plain">${t}</span>` };
+$('lb').onclick = () => $('lb').classList.remove('open');
+(async () => {
+  try {
+    const [r, m] = await Promise.all([getJSON('/api/impi/research'), getJSON('/api/meta').catch(() => null)]);
+    $('asof') && ($('asof').textContent = dstr(r.as_of));
+    const conf = r.v1_confirmatory || [];
+    const nSupported = conf.filter(t => t.supported).length;
+    const ml = r.v1_ml_test || {}, ev = r.events || {};
+    const tot = k => ev[k] ? (ev[k].train || 0) + (ev[k].validation || 0) + (ev[k].test || 0) : 0;
+    const vauc = r.models?.vol_exp?.posthoc_test_auc;
+    // ---- the short version
+    const e = m?.evidence;
+    $('short').innerHTML = [
+      `<div class="card vc rv"><span class="n">01 · Holdfast</span><h3 class="h3">Delivery after sharp rises</h3>
+        <div class="big">${e ? sgn(e.diff_20, 1, '') : '–'}<small>pts in 20 days</small></div>
+        <p>Rallies with <b>strong</b> delivery beat rallies with weak delivery by this much, versus the Nifty 500 — and gave back their gains less often${e ? ` (${e.rt_high}% vs ${e.rt_low}%)` : ''}. One year of data; ${e ? `p = ${e.p_20.toFixed(2)}` : ''}.</p>
+        <span class="pill ${e && e.p_20 < .05 ? 'up' : 'strong'}">${e && e.p_20 < .05 ? 'Significant' : 'Suggestive, not proven'}</span></div>`,
+      `<div class="card vc rv d1"><span class="n">02 · IMPI v1</span><h3 class="h3">Predicting breakouts</h3>
+        <div class="big">${nSupported} of ${conf.length}<small>supported</small></div>
+        <p>Delivery, futures positioning and price compression did <b>not</b> predict which breakouts succeed. The ML model even lost to a simple rule (AUC ${fmt(ml.xgb?.auc, 2)} vs ${fmt(ml.composite_auc, 2)}).</p>
+        <span class="pill down">Did not work</span></div>`,
+      `<div class="card vc rv d2"><span class="n">03 · IMPI v3</span><h3 class="h3">Predicting big moves</h3>
+        <div class="big">${fmt(vauc, 2)}<small>AUC${Lens.qm('auc')}</small></div>
+        <p>Which stocks are about to move <b>more than usual</b> (either direction) is predictable. Built after seeing the data, so a live forward test (F1–F5) decides — around <b>Feb 2027</b>.</p>
+        <span class="pill strong">Promising · being tested live</span></div>`,
+    ].join('');
+    Lens.reveal($('short'));
+    $('kpis').innerHTML = [
+      ['Hypotheses supported', `${nSupported} of ${conf.length}`, 'Pre-registered, BH q ≤ 0.10'],
+      ['Compression breakouts', tot('broad').toLocaleString('en-IN'), `VCP events: ${tot('strict')} (too few to test)`],
+      ['v1 ML vs rule (test AUC)', `${fmt(ml.xgb?.auc, 3)} vs ${fmt(ml.composite_auc, 3)}`, 'XGBoost lost to the fixed-weight composite'],
+      ['Big-move model, test AUC', fmt(vauc, 3), `${r.models?.vol_exp?.version || 'v2'} · post-hoc · direction barely predictable`],
+    ].map(([h, v, s]) => `<div class="card"><span class="label">${h}</span><div class="v">${v}</div><small>${s}</small></div>`).join('');
+    $('confTag').textContent = `${nSupported} of ${conf.length} supported`;
+    // ---- confirmatory
+    const sub = r.sub_2024 || {}, s1 = {}, s4 = {};
+    (sub.v1 || []).forEach(t => { s1[t.hypothesis + '|' + t.family] = t; });
+    (sub.v4 || []).forEach(t => { s4[t.hypothesis] = t; });
+    const subCell = t => {
+      if (!t) return '<span class="faint">–</span>';
+      const opp = t.direction_ok === false && t.bh_q != null && t.bh_q <= 0.1;
+      const tag = t.supported ? P.yes('Passed') : opp ? P.loss('Significant, wrong way') : t.p == null ? P.no('Insufficient data') : P.no('Not passed');
+      return `${tag} <span class="faint num">${t.bh_q == null ? '' : 'q ' + fmt(t.bh_q, 3)}</span>`;
+    };
+    $('conf').innerHTML = conf.map(t => {
+      const verdict = t.supported ? P.yes('Supported') : (t.hypothesis === 'H4_auc' && t.bh_q != null && t.bh_q <= 0.1 && t.diff < 0) ? P.loss('Loss (significant, wrong way)')
+        : t.p == null ? P.no('Insufficient data') : P.no('Not supported');
+      return `<tr><td class="l"><b>${esc(t.hypothesis)}</b></td><td class="l">${esc(t.family)}</td><td class="num">${t.n ?? '–'}</td><td class="num">${t.diff == null ? '–' : fmt(Math.abs(t.diff) < 0.0005 ? 0 : t.diff, 3)}</td>
+        <td class="num">${t.p == null ? '–' : fmt(t.p, 3)}</td><td class="num">${t.bh_q == null ? '–' : fmt(t.bh_q, 3)}</td><td class="l">${verdict}</td><td class="l">${subCell(s1[t.hypothesis + '|' + t.family])}</td></tr>`;
+    }).join('');
+    // ---- models
+    const ad = r.v3?.adoption || {};
+    $('models').innerHTML = Object.entries(r.models || {}).sort((a, b) => ORDER.indexOf(a[0]) - ORDER.indexOf(b[0])).map(([k, mm]) => {
+      const dec = mm.posthoc_rate_by_decile || [], mx = Math.max(...dec, 0.001);
+      const weak = mm.posthoc_test_auc != null && mm.posthoc_test_auc < 0.52, good = mm.posthoc_test_auc >= 0.7;
+      return `<tr><td class="l"><b>${NAMES[k] || k}</b> ${weak ? P.no('no edge in test') : good ? P.yes('real skill') : ''}</td><td class="l muted">${esc(mm.version || 'v2')} · ${esc(mm.model)} · ${esc(mm.feature_set)}</td>
+        <td class="num">${ad[k]?.v2_cv_auc != null ? fmt(ad[k].v2_cv_auc, 3) : '–'}</td><td class="num">${fmt(mm.cv_auc, 3)}</td>
+        <td class="num"><b>${fmt(mm.posthoc_test_auc, 3)}</b></td><td class="num">${pct(mm.posthoc_base_rate)}</td>
+        <td class="l"><div class="dec ${good ? 'good' : ''}" title="Lowest decile on the left">${dec.map(v => `<i style="height:${(v / mx * 100).toFixed(0)}%" title="${(v * 100).toFixed(1)}%"></i>`).join('')}</div></td></tr>`;
+    }).join('') || '<tr><td colspan="7" class="empty">Models not trained yet.</td></tr>';
+    // ---- v4
+    const V4N = { D1: 'D1 · Delivery → size of the next 20-day move', D2: 'D2 · Signed delivery → 20-day direction',
+      H2p: 'H2′ · Price up, OI down → weaker breakouts', C1: 'C1 · FII stock-futures COT ≤ 10 → Nifty 500, 60 days', V1: 'V1 · Loose VCP: high delivery → success' };
+    const chk = (r.v4_check || {}).results || [], fw = (r.track_v4 || {}).tests || {};
+    const est = x => x.hypothesis === 'D1' || x.hypothesis === 'D2' ? fmt(x.estimate, 3) : pct(x.estimate);
+    $('v4').innerHTML = chk.map(x => {
+      const v = x.supported ? P.yes('Supported') : x.direction_ok === false && x.bh_q != null && x.bh_q <= 0.1 ? P.loss('Significant, opposite direction') : x.p == null ? P.no('Insufficient data') : P.no('Not supported');
+      const f = fw[x.hypothesis];
+      return `<tr><td class="l"><b>${V4N[x.hypothesis] || x.hypothesis}</b></td><td class="num">${est(x)}</td><td class="num">${fmt(x.p, 3)}</td><td class="num">${fmt(x.bh_q, 3)}</td>
+        <td class="l">${v}</td><td class="l">${subCell(s4[x.hypothesis])}</td><td class="l muted">${f ? esc(f.status) : 'logging since 9 Oct 2026'}</td></tr>`; }).join('')
+      || '<tr><td colspan="7" class="empty">v4 check not run yet.</td></tr>';
+    // ---- track
+    const tr = r.track || {};
+    const line = (k, label) => { const x = tr[k] || {}; return `<li>${label}: ${x.matured || 0} matured predictions${x.auc != null ? ` · AUC <b class="num">${fmt(x.auc, 3)}</b> (base rate ${pct(x.base_rate)})` : ' · AUC shown after 50+ outcomes'}</li>`; };
+    $('track').innerHTML = `<p>Logging since <b>${esc(tr.first_logged || '–')}</b>: ${tr.days_logged || 0} day(s), ${tr.predictions || 0} predictions. Outcomes arrive 10 trading days later.</p>
+      <p style="margin-top:10px"><b>v2 models</b> (frozen 10 Oct 2026)</p><ul>${line('label_10', 'Breakout success')}${line('label_xs10', 'Beats median stock')}${line('vol_exp', 'Big move')}</ul>`;
+    const t3 = r.track_v3;
+    if (t3) {
+      const F = { F1: 'v3 big-move model beats v2', F2: 'Big-move model has skill', F3: '20-day rank has skill', F4: '20-day breakout has skill', F5: '10-day rank has skill' };
+      const tests = t3.tests || {};
+      $('track').innerHTML += `<p style="margin-top:12px"><b>v3 forward tests F1–F5</b> (from ${esc(t3.first_logged || '–')}): ${t3.predictions || 0} predictions · ${esc(t3.status || '–')}</p>
+        <ul>${Object.entries(F).map(([k, lbl]) => { const x = tests[k];
+          return `<li>${k} · ${lbl}: ${x ? `${x.auc != null ? 'AUC ' + fmt(x.auc, 3) : 'AUC diff ' + fmt(x.stat, 3)} · p ${fmt(x.p, 3)} · q ${fmt(x.bh_q, 3)}` : '<span class="muted">waiting for outcomes</span>'}</li>`; }).join('')}</ul>
+        <div class="callout" style="margin-top:14px"><span>⏳</span><span>Final verdicts once 60 prediction dates have matured for the 20-day targets — <b>around Feb 2027</b>.</span></div>`;
+    }
+    $('bt').innerHTML = (r.v1_backtests || []).map(b => `<tr><td class="l">${esc(b.variant.replace(/_/g, ' '))}${(b.n_trades || 0) < 30 ? ' <span class="faint">(n&lt;30)</span>' : ''}</td><td class="num">${b.n_trades}</td><td class="num">${arrow(b.cagr == null ? null : b.cagr * 100, 1)}</td>
+      <td class="num">${fmt(b.sharpe)}</td><td class="num">${pct(b.max_dd)}</td></tr>`).join('');
+    if (r.v1_spa) $('spa').textContent = `Hansen SPA p = ${fmt(r.v1_spa.spa_p_consistent, 2)}, White Reality Check p = ${fmt(r.v1_spa.white_rc_p, 2)}: no strategy variant beat the Nifty 500.`;
+    $('figs').innerHTML = (r.figures || []).filter(f => f.startsWith('fig')).map(f => `<figure><img src="/impi-figures/${encodeURIComponent(f)}" alt="${esc(CAPS[f.replace('.png', '')] || f)}" loading="lazy"><figcaption>${esc(CAPS[f.replace('.png', '')] || f)}</figcaption></figure>`).join('');
+    $('figs').onclick = e => { const img = e.target.closest('figure')?.querySelector('img'); if (!img) return; $('lb').querySelector('img').src = img.src; $('lb').classList.add('open'); };
+    if (window.watchData) watchData({ url: '/api/impi/meta', read: j => j.available ? j.as_of : null });
+  } catch (err) { $('warn').style.display = 'block'; $('warn').textContent = err.message; }
+})();
+document.addEventListener('keydown', e => { if (e.key === 'Escape') $('lb').classList.remove('open'); });
+</script>
+</body>
+</html>

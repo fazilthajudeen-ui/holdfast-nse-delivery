@@ -1,0 +1,135 @@
+[Mon 10/12/2026 21:02:07.16] start 
+[Mon 10/12/2026 21:28:37.14] end: delivery_lens=1 impi_live=0 
+[manual Mon 10/12/2026 21:32] delivery_lens rebuilt after the Parquet fix; impi_live=0 from the 21:02 run; marker written
+[2026-10-14 11:33] update due: True (last success 2026-10-12 21:32:48, last scheduled slot 2026-10-13 19:30:00)
+[Wed 10/14/2026 11:33:01.29] start 
+[2026-10-14 14:33] update due: True (last success 2026-10-12 21:32:48, last scheduled slot 2026-10-13 19:30:00)  (started by the web app)
+[2026-10-14 14:33] update forced
+[Wed 10/14/2026 14:33:52.72] start 
+[manual Wed 10/14/2026 14:36] web-app run stopped on request (killed during impi.live); no success marker
+[2026-10-20 16:51] update due: True (last success 2026-10-12 21:32:48, last scheduled slot 2026-10-19 19:30:00)
+[Tue 10/20/2026 16:51:22.59] start 
+[Tue 10/20/2026 20:11:15.73] end: delivery_lens=0 impi_live=0 
+[2026-10-20 20:14] update due: False (last success 2026-10-20 20:11:15, last scheduled slot 2026-10-20 19:30:00)
+[2026-10-20 22:51] update due: False (last success 2026-10-20 20:11:15, last scheduled slot 2026-10-20 19:30:00)
+[2026-10-21 09:49] update due: False (last success 2026-10-20 20:11:15, last scheduled slot 2026-10-20 19:30:00)
+[2026-10-21 14:44] update due: False (last success 2026-10-20 20:11:15, last scheduled slot 2026-10-20 19:30:00)
+[2026-10-21 14:46] update due: False (last success 2026-10-20 20:11:15, last scheduled slot 2026-10-20 19:30:00)
+[2026-10-21 15:41] update due: False (last success 2026-10-20 20:11:15, last scheduled slot 2026-10-20 19:30:00)
+[2026-10-23 12:57] update due: True (last success 2026-10-20 20:11:15, last scheduled slot 2026-10-22 19:30:00)
+[Fri 10/23/2026 12:57:33.99] start 
+[2026-10-24 09:20] update due: True (last success 2026-10-20 20:11:15, last scheduled slot 2026-10-23 19:30:00)
+[Sat 10/24/2026  9:20:06.56] start 
+[Sat 10/24/2026  9:52:18.61] end: delivery_lens=0 impi_live=0 
+[2026-10-25 13:25] update due: False (last success 2026-10-24 09:52:18, last scheduled slot 2026-10-23 19:30:00)
+[2026-10-30 10:40] update due: True (last success 2026-10-24 09:52:18, last scheduled slot 2026-10-29 19:30:00)
+[Fri 10/30/2026 10:40:41.97] start 
+[2026-10-30 22:45] update due: True (last success 2026-10-24 09:52:18, last scheduled slot 2026-10-30 19:30:00)
+[Fri 10/30/2026 22:45:09.13] start 
+[Fri 10/30/2026 23:16:31.16] end: delivery_lens=0 impi_live=1 
+[2026-10-31 10:03] update due: True (last success 2026-10-24 09:52:18, last scheduled slot 2026-10-30 19:30:00)
+[Sat 10/31/2026 10:03:52.72] start 
+[Sat 10/31/2026 10:35:17.43] end: delivery_lens=0 impi_live=0 
+[2026-10-31 11:28] update due: False (last success 2026-10-31 10:35:17, last scheduled slot 2026-10-30 19:30:00)
+[2026-10-31 13:14] update due: False (last success 2026-10-31 10:35:17, last scheduled slot 2026-10-30 19:30:00)
+[2026-10-31 20:42] update due: False (last success 2026-10-31 10:35:17, last scheduled slot 2026-10-30 19:30:00)
+[2026-10-31 23:07] update due: False (last success 2026-10-31 10:35:17, last scheduled slot 2026-10-30 19:30:00)
+[2026-11-01 13:41] update due: False (last success 2026-10-31 10:35:17, last scheduled slot 2026-10-30 19:30:00)
+[2026-11-02 00:46] update due: False (last success 2026-10-31 10:35:17, last scheduled slot 2026-10-30 19:30:00)
+[2026-11-02 12:18] update due: False (last success 2026-10-31 10:35:17, last scheduled slot 2026-10-30 19:30:00)
+[2026-11-02 14:58] update due: False (last success 2026-10-31 10:35:17, last scheduled slot 2026-10-30 19:30:00)
+[2026-11-03 09:53] update due: True (last success 2026-10-31 10:35:17, last scheduled slot 2026-11-02 19:30:00)
+[Tue 11/03/2026  9:53:17.04] start 
+[Tue 11/03/2026 10:22:35.75] end: delivery_lens=0 impi_live=0 
+[2026-11-03 11:06] update due: False (last success 2026-11-03 10:22:35, last scheduled slot 2026-11-02 19:30:00)
+[2026-11-03 13:56] update due: False (last success 2026-11-03 10:22:35, last scheduled slot 2026-11-02 19:30:00)
+[2026-11-03 21:31] update due: True (last success 2026-11-03 10:22:35, last scheduled slot 2026-11-03 19:30:00)
+[Tue 11/03/2026 21:31:37.09] start 
+[2026-11-03 23:59] update already running (lock update.lock) - skip
+[2026-11-04 10:43] update due: True (last success 2026-11-03 10:22:35, last scheduled slot 2026-11-03 19:30:00)
+[Wed 11/04/2026 10:43:23.38] start 
+[Wed 11/04/2026 11:16:11.30] end: delivery_lens=0 impi_live=0 
+[2026-11-05 18:24] update due: True (last success 2026-11-04 11:16:11, last scheduled slot 2026-11-04 19:30:00)
+[Thu 11/05/2026 18:24:27.29] start 
+[Thu 11/05/2026 19:00:37.77] end: delivery_lens=0 impi_live=0 
+[2026-11-05 19:30] update due: True (last success 2026-11-05 19:00:37, last scheduled slot 2026-11-05 19:30:00)
+[Thu 11/05/2026 19:30:02.94] start 
+[Thu 11/05/2026 19:56:34.22] end: delivery_lens=0 impi_live=0 
+[2026-11-06 05:35] update due: False (last success 2026-11-05 19:56:34, last scheduled slot 2026-11-05 19:30:00)
+[2026-11-10 12:39] update due: True (last success 2026-11-05 19:56:34, last scheduled slot 2026-11-09 19:30:00)
+[Tue 11/10/2026 12:39:36.85] start 
+[Tue 11/10/2026 19:47:08.67] end: delivery_lens=0 impi_live=0 
+[2026-11-10 22:18] update due: False (last success 2026-11-10 19:47:09, last scheduled slot 2026-11-10 19:30:00)
+[2026-11-11 12:01] update due: False (last success 2026-11-10 19:47:09, last scheduled slot 2026-11-10 19:30:00)
+[2026-11-11 13:21] update due: False (last success 2026-11-10 19:47:09, last scheduled slot 2026-11-10 19:30:00)
+[2026-11-11 19:30] update due: True (last success 2026-11-10 19:47:09, last scheduled slot 2026-11-11 19:30:00)
+[Wed 11/11/2026 19:30:03.78] start 
+[Wed 11/11/2026 20:00:22.89] end: delivery_lens=0 impi_live=0 
+[2026-11-12 02:01] update due: False (last success 2026-11-11 20:00:23, last scheduled slot 2026-11-11 19:30:00)
+[2026-11-12 03:36] update due: False (last success 2026-11-11 20:00:23, last scheduled slot 2026-11-11 19:30:00)
+[2026-11-12 06:20] update due: False (last success 2026-11-11 20:00:23, last scheduled slot 2026-11-11 19:30:00)
+[2026-11-12 08:16] update due: False (last success 2026-11-11 20:00:23, last scheduled slot 2026-11-11 19:30:00)
+[2026-11-12 12:25] update due: False (last success 2026-11-11 20:00:23, last scheduled slot 2026-11-11 19:30:00)
+[2026-11-12 12:50] update due: False (last success 2026-11-11 20:00:23, last scheduled slot 2026-11-11 19:30:00)
+[2026-11-12 14:00] update due: False (last success 2026-11-11 20:00:23, last scheduled slot 2026-11-11 19:30:00)
+[2026-11-12 14:01] update due: False (last success 2026-11-11 20:00:23, last scheduled slot 2026-11-11 19:30:00)
+[2026-11-13 07:12] update due: True (last success 2026-11-11 20:00:23, last scheduled slot 2026-11-12 19:30:00)
+[Fri 11/13/2026  7:12:55.26] start 
+[Fri 11/13/2026  7:46:08.08] end: delivery_lens=0 impi_live=1 
+[2026-11-13 22:46] update due: True (last success 2026-11-11 20:00:23, last scheduled slot 2026-11-13 19:30:00)
+[Fri 11/13/2026 22:46:13.44] start 
+[Fri 11/13/2026 23:24:06.20] end: delivery_lens=0 impi_live=0 
+[2026-11-14 12:37] update due: False (last success 2026-11-13 23:24:06, last scheduled slot 2026-11-13 19:30:00)
+[2026-11-16 08:18] update due: False (last success 2026-11-13 23:24:06, last scheduled slot 2026-11-13 19:30:00)
+[2026-11-16 12:08] update due: False (last success 2026-11-13 23:24:06, last scheduled slot 2026-11-13 19:30:00)
+[2026-11-16 18:34] update due: False (last success 2026-11-13 23:24:06, last scheduled slot 2026-11-13 19:30:00)
+[2026-11-16 19:30] update due: True (last success 2026-11-13 23:24:06, last scheduled slot 2026-11-16 19:30:00)
+[Mon 11/16/2026 19:30:02.62] start 
+[2026-11-17 07:37] update due: True (last success 2026-11-13 23:24:06, last scheduled slot 2026-11-16 19:30:00)
+[Tue 11/17/2026  7:37:59.76] start 
+[Tue 11/17/2026  8:08:54.44] end: delivery_lens=0 impi_live=1 
+[2026-11-17 10:29] update due: True (last success 2026-11-13 23:24:06, last scheduled slot 2026-11-16 19:30:00)
+[Tue 11/17/2026 10:29:01.82] start 
+[Tue 11/17/2026 10:57:04.96] end: delivery_lens=0 impi_live=1 
+[2026-11-17 16:41] update due: True (last success 2026-11-13 23:24:06, last scheduled slot 2026-11-16 19:30:00)
+[Tue 11/17/2026 16:41:13.00] start 
+[2026-11-17 17:18] update already running (lock update.lock) - skip
+[2026-11-17 19:27] update already running (lock update.lock) - skip
+[2026-11-17 19:30] update already running (lock update.lock) - skip
+[2026-11-17 20:26] update due: True (last success 2026-11-13 23:24:06, last scheduled slot 2026-11-17 19:30:00)
+[Tue 11/17/2026 20:26:56.01] start 
+[Tue 11/17/2026 20:54:34.01] end: delivery_lens=0 impi_live=0 
+[2026-11-18 08:40] update due: False (last success 2026-11-17 20:54:34, last scheduled slot 2026-11-17 19:30:00)
+[2026-11-18 08:41] update due: False (last success 2026-11-17 20:54:34, last scheduled slot 2026-11-17 19:30:00)
+[2026-11-18 08:42] update due: False (last success 2026-11-17 20:54:34, last scheduled slot 2026-11-17 19:30:00)
+[2026-11-18 08:58] update due: False (last success 2026-11-17 20:54:34, last scheduled slot 2026-11-17 19:30:00)
+[2026-11-18 11:31] update due: False (last success 2026-11-17 20:54:34, last scheduled slot 2026-11-17 19:30:00)
+[2026-11-18 11:33] update due: False (last success 2026-11-17 20:54:34, last scheduled slot 2026-11-17 19:30:00)
+[2026-11-18 13:10] update due: False (last success 2026-11-17 20:54:34, last scheduled slot 2026-11-17 19:30:00)
+[2026-11-19 18:44] update due: True (last success 2026-11-17 20:54:34, last scheduled slot 2026-11-18 19:30:00)
+[Thu 11/19/2026 18:44:31.67] start 
+[Thu 11/19/2026 19:31:57.85] end: delivery_lens=0 impi_live=0 
+[2026-11-19 21:47] update due: False (last success 2026-11-19 19:31:58, last scheduled slot 2026-11-19 19:30:00)
+[2026-11-20 00:06] update due: False (last success 2026-11-19 19:31:58, last scheduled slot 2026-11-19 19:30:00)
+[2026-11-20 13:04] update due: False (last success 2026-11-19 19:31:58, last scheduled slot 2026-11-19 19:30:00)
+[2026-11-20 14:36] update due: False (last success 2026-11-19 19:31:58, last scheduled slot 2026-11-19 19:30:00)
+[2026-11-20 16:08] update due: False (last success 2026-11-19 19:31:58, last scheduled slot 2026-11-19 19:30:00)
+[2026-11-20 18:38] update due: False (last success 2026-11-19 19:31:58, last scheduled slot 2026-11-19 19:30:00)
+[2026-11-20 18:38] update due: False (last success 2026-11-19 19:31:58, last scheduled slot 2026-11-19 19:30:00)
+[2026-11-21 20:45] update due: True (last success 2026-11-19 19:31:58, last scheduled slot 2026-11-20 19:30:00)
+[Sat 11/21/2026 20:45:42.52] start 
+[Sat 11/21/2026 21:59:39.76] end: delivery_lens=0 impi_live=0 
+[2026-11-21 22:00] update due: False (last success 2026-11-21 21:59:39, last scheduled slot 2026-11-20 19:30:00)
+[2026-11-22 19:54] update due: False (last success 2026-11-21 21:59:39, last scheduled slot 2026-11-20 19:30:00)
+[2026-11-24 11:11] update due: True (last success 2026-11-21 21:59:39, last scheduled slot 2026-11-23 19:30:00)
+[Tue 11/24/2026 11:11:11.22] start 
+[Tue 11/24/2026 11:42:42.77] end: delivery_lens=1 impi_live=0 
+[2026-11-24 13:47] update due: True (last success 2026-11-21 21:59:39, last scheduled slot 2026-11-23 19:30:00)
+[Tue 11/24/2026 13:47:48.32] start 
+[Tue 11/24/2026 14:11:57.19] end: delivery_lens=0 impi_live=0 
+[2026-11-24 19:22] update due: False (last success 2026-11-24 14:11:57, last scheduled slot 2026-11-23 19:30:00)
+[2026-11-24 19:30] update due: True (last success 2026-11-24 14:11:57, last scheduled slot 2026-11-24 19:30:00)
+[Tue 11/24/2026 19:30:01.46] start 
+[Tue 11/24/2026 19:51:40.27] end: delivery_lens=0 impi_live=0 
+[2026-11-25 19:33] update due: True (last success 2026-11-24 19:51:40, last scheduled slot 2026-11-25 19:30:00)
+[Wed 11/25/2026 19:33:13.40] start 

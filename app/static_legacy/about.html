@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About · Delivery Lens</title>
+<link rel="stylesheet" href="/static/site.css">
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" href="/"><i></i>Delivery Lens</a>
+  <div class="links"><a href="/#method">Method</a><a href="/#results">Results</a><a href="/about" style="color:var(--text)">About</a></div>
+  <div class="right"><a class="btn sm" href="/terminal">Open Terminal</a></div>
+</nav>
+
+<section>
+  <div class="wrap" style="max-width:860px">
+    <p class="eyebrow reveal">About the project</p>
+    <h2 class="reveal d1">Built as a research project.</h2>
+    <p class="lead reveal d2" style="margin-top:22px">A research project testing whether NSE’s daily delivery data tells lasting price rises from fading ones, turned into a live terminal.</p>
+    <div class="facts reveal d3">
+      <div>Project</div><div>Delivery-Based Movement Analysis on NSE</div>
+      <div>Data</div><div>NSE daily bhavcopy with delivery, Nifty 500 stocks, updated every trading evening</div>
+      <div>Built with</div><div class="chips"><span>Python</span><span>pandas</span><span>NumPy</span><span>SciPy</span><span>FastAPI</span><span>TradingView Lightweight Charts</span><span>pytest</span></div>
+    </div>
+    <p class="fine reveal" style="margin-top:40px">Research and education tool. Not investment advice. One year of data is a pilot study: results are indicative, not proof. Delivery shows that shares were taken, not who took them or why.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Delivery-Based Movement Analysis on NSE</span><span>Data: NSE daily bhavcopy with delivery</span></div></footer>
+<script>
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

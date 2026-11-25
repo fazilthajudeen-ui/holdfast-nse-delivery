@@ -1,0 +1,83 @@
+# Delivery-Based Movement Analysis on NSE — configuration
+# Every threshold used by the pipeline lives here. Change a value, re-run the stages.
+
+source: nse               # nse | github  (github mirror only covers up to ~Dec 2025)
+months: 14                # months of history to download (12 analysis + ~2 warm-up)
+analysis_months: 12       # the pilot-study window = most recent N months of the panel
+
+paths:
+  raw: data/raw
+  index: data/raw/index        # daily ind_close_all files (Nifty 500 benchmark)
+  universe: data/universe
+  clean: data/clean/panel.parquet
+  benchmark: data/clean/benchmark.parquet
+  features: data/derived/features.parquet
+  events: data/derived/events.parquet
+  events_all_params: data/derived/robustness.parquet
+  scores: data/derived/scores.parquet
+  stats: data/derived/stats.json
+  logs: data/logs
+  reports: reports
+  charts: reports/charts
+
+download:
+  sleep_seconds: 1.2       # >= 1 s between requests (be polite)
+  retries: 4
+  backoff_seconds: 3       # exponential: 3, 6, 12, 24
+  timeout_seconds: 30
+  fetch_index: true        # also fetch ind_close_all_DDMMYYYY.csv for the Nifty 500 close
+  # weekend special trading sessions (weekdays are tried automatically)
+  extra_dates: ["2026-02-01"]   # Union Budget, Sunday session
+
+universe:
+  mode: nifty500           # nifty500 | all  (all = every EQ stock passing the liquidity filters)
+  nifty500_url: https://nsearchives.nseindia.com/content/indices/ind_nifty500list.csv
+  min_median_turnover_lacs: 100   # ₹1 crore = 100 lakh
+  min_trading_days: 200
+  series_keep: [EQ]
+  # series used only to stitch the PREV_CLOSE chain when a stock hops EQ <-> BE/BZ
+  series_chain: [EQ, BE, BZ]
+
+corporate_actions:
+  threshold: 0.02          # |PREV_CLOSE[t] / CLOSE[t-1] - 1| > 2%  => split/bonus
+  # if more than this share of stocks "split" on the same day, it is a missing trading
+  # session (e.g. a weekend special session not downloaded), not corporate actions
+  mass_event_share: 0.05
+
+features:
+  baseline_window: 60      # trading days, shifted by 1 (no look-ahead)
+  baseline_min_periods: 40
+
+events:
+  move_pct: 0.20           # >= 20% move ...
+  window: 20               # ... within 20 trading days (trough close -> event close)
+  cooldown: 40             # no new same-direction event for a stock within 40 days
+  horizons: [5, 20, 60]
+  roundtrip_giveback: 0.5  # gave back >= 50% of the move within roundtrip_days
+  roundtrip_days: 60
+  n_groups: 3              # terciles
+
+stats:
+  bootstrap_resamples: 10000
+  min_n: 30                # below this a group is labelled "insufficient data"
+  seed: 42
+  headline_horizon: 60
+
+robustness:
+  move_pcts: [0.15, 0.20, 0.25]
+  windows: [10, 20, 30]
+
+score:
+  rel_avg_days: 5          # 5-day average of rel_deliv
+  history_days: 250        # percentile rank within the stock's own last 250 days
+  min_history: 60
+  band_low: 30
+  band_high: 70
+  price_change_days: 20
+
+regime:                   # chart "buyer zones" (descriptive, not backtested)
+  ema_span: 10             # trailing EMA of (delivery % − its 60-day normal)
+  enter_pts: 5             # zone starts at +5 pts (or −5 for a low-delivery zone)
+  exit_pts: 2              # zone ends when it falls back inside ±2 pts
+
+git_push: false            # update_daily --push also commits & pushes data/derived to GitHub

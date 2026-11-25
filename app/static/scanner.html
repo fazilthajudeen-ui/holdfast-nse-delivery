@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scanner · Holdfast</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/static/ds/lens.css">
+<script src="/static/ds/lens.js"></script>
+<script src="/static/freshness.js"></script>
+<style>
+  body { background: var(--canvas); }
+  .sum { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 18px; }
+  .sum .card { padding: 18px 20px; cursor: default; }
+  .sum .card.click { cursor: pointer; }
+  .sum .v { font: 600 30px/1.05 var(--f-display); letter-spacing: -.018em; margin-top: 8px; }
+  .sum small { display: block; font-size: 13px; color: var(--ink-3); margin-top: 6px; }
+  .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .field { display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 14px; border-radius: 999px; background: var(--paper); box-shadow: inset 0 0 0 1.5px var(--line-2);
+    transition: box-shadow var(--t-fast); }
+  .field:focus-within { box-shadow: inset 0 0 0 2px var(--ink); }
+  .field input, .field select { border: 0; outline: 0; background: transparent; font-size: 15px; height: 100%; }
+  .field input { width: 170px; }
+  .field select { padding-right: 6px; cursor: pointer; max-width: 210px; }
+  .count { margin-left: auto; font-size: 14px; color: var(--ink-3); }
+  .tbl-wrap { max-height: calc(100vh - 180px); }
+  .tbl td .sym { display: block; }
+  .tbl .ev { display: inline-flex; gap: 4px; }
+  .cards { display: none; }
+  .scard { display: block; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-l); padding: 16px 18px; }
+  .scard + .scard { margin-top: 10px; }
+  .scard .t { display: flex; justify-content: space-between; gap: 10px; }
+  .scard .t b { font: 600 19px/1.1 var(--f-display); letter-spacing: -.02em; }
+  .scard .t small { display: block; font-size: 13px; color: var(--ink-3); margin-top: 3px; }
+  .scard .g { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; font-size: 13px; color: var(--ink-3); }
+  .scard .g b { display: block; color: var(--ink); font: 700 15px/1.3 var(--f-num); margin-top: 2px; }
+  .sum > * { min-width: 0; }
+  .sum .v { overflow-wrap: anywhere; }
+  @media (max-width: 980px) { .sum { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .sum { grid-template-columns: 1fr; } }
+  @media (max-width: 720px) {
+    .tbl-wrap { display: none; } .cards { display: block; }
+    .field, .field input { width: 100%; } .field select { max-width: none; width: 100%; }
+    .bar > .field { flex: 1 1 100%; } .count { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<header id="nav"></header>
+<main class="wrap page-in" style="max-width:1400px">
+  <div class="phead">
+    <p class="eyebrow">F&amp;O stocks · IMPI model</p>
+    <h1 class="h1">Scanner</h1>
+    <p class="lead">Every F&amp;O stock on the latest trading day: price, delivery, squeeze and futures positioning in one table. Tap any stock to open it.
+      <span class="simple-only">Switch to <b>Pro</b> for every model column.</span></p>
+  </div>
+  <div class="warn" id="warn" style="display:none"></div>
+  <div class="sum" id="sum">
+    <div class="card"><div class="sk" style="height:62px"></div></div><div class="card"><div class="sk" style="height:62px"></div></div>
+    <div class="card"><div class="sk" style="height:62px"></div></div><div class="card"><div class="sk" style="height:62px"></div></div>
+  </div>
+  <div class="bar">
+    <label class="field"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:var(--ink-3)" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" placeholder="Filter by symbol" autocomplete="off" aria-label="Filter by symbol"></label>
+    <label class="field"><select id="sector" aria-label="Sector"><option value="">All sectors</option></select></label>
+    <div class="seg" id="evseg"><button data-e="" class="on">All</button><button data-e="broad">Compression breakouts</button><button data-e="strict">VCP breakouts</button><button data-e="all">20-day highs</button></div>
+    <span class="count" id="count"></span>
+  </div>
+  <div class="tbl-wrap">
+    <table class="tbl" id="tbl">
+      <thead><tr>
+        <th data-k="symbol" class="l sortable">Stock</th>
+        <th data-k="close" class="sortable">Price</th>
+        <th data-k="ret_1" class="sortable">Today</th>
+        <th data-k="ret_20" class="sortable">20 days</th>
+        <th data-k="deliv_z20" class="sortable">Delivery vs its year</th>
+        <th data-k="vol_pct" class="sortable">Big-move chance</th>
+        <th data-k="breakout_pct" class="sortable pro-only">Breakout chance</th>
+        <th data-k="xs_pct" class="sortable pro-only">Rank vs F&amp;O</th>
+        <th data-k="bbw_pct252" class="sortable pro-only">Squeeze</th>
+        <th data-k="oi_chg20" class="sortable pro-only">OI · 20d</th>
+        <th data-k="buildup" class="l sortable pro-only">OI build-up</th>
+        <th data-k="events" class="l sortable">Today’s events</th>
+      </tr></thead>
+      <tbody id="rows"><tr><td colspan="12" class="empty">Loading…</td></tr></tbody>
+    </table>
+  </div>
+  <div class="cards" id="cards"></div>
+  <p class="note" style="margin:18px 0 40px">Probabilities come from post-hoc models trained on 2015–2022. Only the big-move model has real skill (test AUC 0.77); breakout and rank models are weak.
+    See <a class="link" href="/research">Research</a>. Data: NSE bhavcopy, delivery and F&amp;O files. <span id="disc"></span></p>
+</main>
+<script>
+Lens.nav('Scanner', { mode: true });
+const H = { deliv_z20: 'delz', vol_pct: 'vol', breakout_pct: 'breakout', xs_pct: 'rank', bbw_pct252: 'bbw', oi_chg20: 'oi', buildup: 'buildup' };
+document.querySelectorAll('#tbl th').forEach(th => { th.innerHTML = th.innerHTML + (H[th.dataset.k] ? Lens.qm(H[th.dataset.k]) : '') + '<span class="dir"></span>'; });
+
+let ROWS = [], SORT = { k: 'vol_pct', dir: -1 }, EV = '';
+const buildup = r => r.long_buildup === 1 ? 'Long build-up' : r.short_covering === 1 ? 'Short covering' :
+  r.short_buildup === 1 ? 'Short build-up' : r.long_unwinding === 1 ? 'Long unwinding' : '–';
+const delWord = z => z == null ? ['plain', '–'] : z >= 1 ? ['strong', 'High'] : z <= -1 ? ['weak', 'Low'] : ['normal', 'Usual'];
+const evChips = x => ['broad', 'strict', 'all'].filter(e => (x.events || []).includes(e))
+  .map(e => `<span class="chip ${e === 'all' ? '' : 'gold'}">${e === 'broad' ? 'Compression' : e === 'strict' ? 'VCP' : '20-day high'}</span>`).join('') || '<span class="faint">–</span>';
+const meter = (p, pc, gold) => p == null ? '<span class="faint">–</span>' :
+  `<span class="meter"><span class="num">${(p * 100).toFixed(0)}%</span><span class="track" title="Percentile among today's F&O stocks: ${pc == null ? '–' : Math.round(pc)}"><span class="fill ${gold ? 'gold' : ''}" data-w="${pc == null ? 0 : Math.max(3, pc).toFixed(0)}"></span></span></span>`;
+function val(r, k) { if (k === 'buildup') return buildup(r); if (k === 'events') return (r.events || []).join(','); return r[k]; }
+function filtered() {
+  const q = $('q').value.trim().toUpperCase(), sec = $('sector').value;
+  const r = ROWS.filter(x => (!q || x.symbol.includes(q)) && (!sec || x.sector === sec) && (!EV || (x.events || []).includes(EV)));
+  r.sort((a, b) => {
+    const va = val(a, SORT.k), vb = val(b, SORT.k);
+    if (va == null && vb == null) return 0; if (va == null) return 1; if (vb == null) return -1;
+    return (typeof va === 'string' ? va.localeCompare(vb) : va - vb) * SORT.dir;
+  });
+  return r;
+}
+function fillBars(scope) { requestAnimationFrame(() => scope.querySelectorAll('.fill').forEach(f => f.style.width = f.dataset.w + '%')); }
+function render(animate = true) {
+  const r = filtered();
+  document.querySelectorAll('#tbl th').forEach(th => { const on = th.dataset.k === SORT.k; th.querySelector('.dir').textContent = on ? (SORT.dir > 0 ? '↑' : '↓') : ''; });
+  $('count').textContent = `${r.length} of ${ROWS.length} stocks`;
+  const draw = () => {
+    $('rows').innerHTML = r.map(x => { const [dc, dw] = delWord(x.deliv_z20); return `<tr class="click" data-s="${esc(x.symbol)}" data-key="${esc(x.symbol)}">
+      <td class="l"><span class="sym">${esc(x.symbol)}</span><span class="sub">${esc(x.sector)}</span></td>
+      <td class="num">${fmt(x.close)}</td><td class="num">${arrow(x.ret_1 == null ? null : x.ret_1 * 100)}</td><td class="num">${arrow(x.ret_20 == null ? null : x.ret_20 * 100, 1)}</td>
+      <td><span class="pill sm ${dc}">${dw}${x.deliv_z20 == null ? '' : ` <span class="n">${x.deliv_z20 > 0 ? '+' : ''}${x.deliv_z20.toFixed(1)}σ</span>`}</span></td>
+      <td>${meter(x.p_vol_expansion, x.vol_pct, true)}</td>
+      <td class="pro-only">${meter(x.p_breakout, x.breakout_pct)}</td>
+      <td class="num pro-only">${x.xs_pct == null ? '–' : Math.round(x.xs_pct)}</td>
+      <td class="num pro-only">${x.bbw_pct252 == null ? '–' : Math.round(x.bbw_pct252)}</td>
+      <td class="num pro-only">${arrow(x.oi_chg20 == null ? null : x.oi_chg20 * 100, 1)}</td>
+      <td class="l pro-only">${buildup(x)}</td>
+      <td class="l"><span class="ev">${evChips(x)}</span></td></tr>`; }).join('')
+      || '<tr><td colspan="12" class="empty">No stocks match these filters today.</td></tr>';
+    $('cards').innerHTML = r.slice(0, 120).map(x => { const [dc, dw] = delWord(x.deliv_z20); return `<a class="scard" href="/terminal#${encodeURIComponent(x.symbol)}" data-s="${esc(x.symbol)}">
+      <div class="t"><span><b>${esc(x.symbol)}</b><small>${esc(x.sector)}</small></span><span style="text-align:right"><b class="num" style="font-family:var(--f-num);font-size:16px">${fmt(x.close)}</b><small>${arrow(x.ret_1 == null ? null : x.ret_1 * 100)} today</small></span></div>
+      <div class="g"><div>Delivery vs its year<b><span class="pill sm ${dc}">${dw}</span></b></div><div>Big-move chance<b>${x.p_vol_expansion == null ? '–' : (x.p_vol_expansion * 100).toFixed(0) + '%'}</b></div>
+      <div>20 days<b>${arrow(x.ret_20 == null ? null : x.ret_20 * 100, 1)}</b></div><div>Today<b>${evChips(x)}</b></div></div></a>`; }).join('')
+      || '<p class="empty" style="padding:30px;text-align:center;color:var(--ink-3)">No stocks match these filters today.</p>';
+  };
+  animate ? Lens.flip($('rows'), draw) : draw();
+  fillBars($('rows'));
+}
+$('tbl').querySelector('thead').onclick = e => {
+  if (e.target.closest('.qm')) return;
+  const k = e.target.closest('th')?.dataset.k; if (!k) return;
+  SORT = { k, dir: SORT.k === k ? -SORT.dir : (['symbol', 'buildup', 'events'].includes(k) ? 1 : -1) }; render();
+};
+function openStock(el) { Lens.morph(el.querySelector('.sym, b')); location.href = '/terminal#' + encodeURIComponent(el.dataset.s); }
+$('rows').onclick = e => { const tr = e.target.closest('tr[data-s]'); if (tr) openStock(tr); };
+$('cards').onclick = e => { const a = e.target.closest('[data-s]'); if (a) { e.preventDefault(); openStock(a); } };
+$('q').oninput = () => render(false); $('sector').onchange = () => render();
+Lens.seg($('evseg'), e => { EV = e; render(); }, 'e');
+Lens.onMode(() => fillBars($('rows')));
+
+function summary(meta) {
+  const ev = meta.events_today || {};
+  const top = (k, f = x => x) => ROWS.filter(x => x[k] != null).sort((a, b) => f(b[k]) - f(a[k]))[0];
+  const bm = top('p_vol_expansion'), dz = top('deliv_z20'), sq = ROWS.filter(x => x.bbw_pct252 != null).sort((a, b) => a.bbw_pct252 - b.bbw_pct252)[0];
+  const tile = (label, key, v, small, sym) => `<div class="card ${sym ? 'click lift' : ''}" ${sym ? `data-s="${esc(sym)}"` : ''}><span class="label">${label}${Lens.qm(key)}</span><div class="v ${sym ? 'sym' : 'num'}">${v}</div><small>${small}</small></div>`;
+  $('sum').innerHTML = [
+    tile('Breakouts today', 'vcp', `<span class="num">${(ev.broad || 0) + (ev.strict || 0)}</span>`, `${ev.broad || 0} compression · ${ev.strict || 0} VCP · ${ev.all || 0} at a 20-day high`),
+    bm ? tile('Highest big-move chance', 'vol', esc(bm.symbol), `${(bm.p_vol_expansion * 100).toFixed(0)}% chance of a bigger-than-usual 10 days`, bm.symbol) : '',
+    dz ? tile('Delivery most above its year', 'delz', esc(dz.symbol), `+${dz.deliv_z20.toFixed(1)}σ over the last 20 days`, dz.symbol) : '',
+    sq ? tile('Tightest squeeze', 'bbw', esc(sq.symbol), `Price range at the ${Math.round(sq.bbw_pct252)}th percentile of its year`, sq.symbol) : '',
+  ].join('');
+  $('sum').onclick = e => { if (e.target.closest('.qm')) return; const c = e.target.closest('[data-s]'); if (c) openStock(c); };
+  Lens.stagger($('sum'), '.card', 70);
+}
+(async () => {
+  try {
+    const [meta, sc] = await Promise.all([getJSON('/api/impi/meta'), getJSON('/api/impi/scanner')]);
+    $('asof') && ($('asof').textContent = dstr(sc.as_of)); $('disc').textContent = meta.disclaimer || '';
+    ROWS = sc.rows;
+    [...new Set(ROWS.map(r => r.sector))].sort().forEach(s => { const o = document.createElement('option'); o.value = o.textContent = s; $('sector').appendChild(o); });
+    const ev = meta.events_today || {};
+    $('evseg').querySelectorAll('button').forEach(b => { if (b.dataset.e) b.innerHTML += ` <span class="num faint">${ev[b.dataset.e] ?? 0}</span>`; });
+    summary(meta);
+    render(false); Lens.stagger($('rows'), 'tr', 18, 24);
+    if (window.watchData) watchData({ url: '/api/impi/meta', read: j => j.available ? j.as_of : null });
+  } catch (err) {
+    $('warn').style.display = 'block'; $('warn').textContent = err.message; $('sum').style.display = 'none';
+    $('rows').innerHTML = '<tr><td colspan="12" class="empty">IMPI data unavailable.</td></tr>';
+  }
+})();
+</script>
+</body>
+</html>

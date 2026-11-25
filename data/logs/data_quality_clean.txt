@@ -1,0 +1,15 @@
+DATA QUALITY REPORT (clean panel)
+  universe            : Nifty 500 (ind_nifty500list_2026-11-25.csv)
+  raw rows parsed     : 1,051,242
+  EQ symbols in raw   : 3,056
+  universe listed/found: 501 / 497
+  dropped (<200 days) : 10
+  dropped (turnover < ₹1 cr): 0
+  symbols kept        : 487
+  trading days        : 328  (2025-07-28 -> 2026-11-25)
+  rows per day        : min 465, median 487, max 487
+  panel rows          : 158,405
+  missing delivery    : 0.35% of rows (558 BE/BZ-series rows kept for price only, delivery blanked)
+  corporate actions   : 27 (see data/logs/corporate_actions.csv)
+  gaps > 4 calendar days: 0
+  Nifty 500 index days: 328

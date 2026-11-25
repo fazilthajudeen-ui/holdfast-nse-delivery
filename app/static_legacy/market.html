@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Market Positioning · Delivery Lens</title>
+<link rel="stylesheet" href="/static/impi.css">
+<script src="/static/impi.js"></script>
+<script src="/static/freshness.js"></script>
+</head>
+<body>
+<div id="topbar"></div>
+<main class="wrap">
+  <h1>Market positioning</h1>
+  <p class="sub">How FIIs, DIIs, proprietary desks and clients are positioned in NSE equity futures, from NSE's participant-wise open interest.
+    NSE publishes these only as market-wide totals, so they describe the whole market, not individual stocks.</p>
+  <div class="warn" id="warn" style="display:none"></div>
+  <div class="grid g6" id="kpis"></div>
+  <div class="card" style="margin-top:14px" id="c1Card"></div>
+  <div class="card" style="margin-top:14px">
+    <div class="toolbar" style="margin-bottom:6px">
+      <h2 style="margin:0">Net-long positioning</h2>
+      <div class="seg" id="segSeg"><button data-s="fut_idx" class="on">Index futures</button><button data-s="fut_stk">Stock futures</button></div>
+      <div class="seg" id="kindSeg"><button data-k="share" class="on">Net long, % of OI</button><button data-k="cot">52-week range (0–100)</button></div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="chartbox" id="posChart"></div>
+    <p class="note" id="posNote" style="margin-top:8px"></p>
+  </div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h2>Nifty 500</h2><div class="chartbox" id="idxChart" style="height:240px"></div>
+      <p class="note" style="margin-top:6px">▲ marks the first day FII stock-futures positioning entered the bottom of its 52-week range (COT ≤ 10, the C1 contrarian zone).</p></div>
+    <div class="card"><h2>India VIX</h2><div class="chartbox" id="vixChart" style="height:240px"></div></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h2>What the research found</h2>
+    <p class="note">In IMPI's 2015–2022 data (exploratory analysis, not a pre-registered result): daily Nifty 500 moves strongly <b>preceded</b> changes in FII
+      stock-futures positioning (FIIs chased price), while changes in FII <b>index</b>-futures positioning had some lead on index returns. Days when FII
+      stock-futures positioning sat at the bottom of its 52-week range were followed by above-average 60-day index returns — a contrarian pattern.
+      None of this was strong enough to improve stock-level breakout predictions. Research tool — not investment advice.</p></div>
+  <p class="foot">Data: NSE participant-wise open interest, ind_close_all, India VIX · <span id="disc"></span></p>
+</main>
+<script src="/static/vendor/lightweight-charts.standalone.production.js"></script>
+<script>
+document.getElementById('topbar').innerHTML = topBar('Market');
+const LC = LightweightCharts;
+const P = [['fii', 'FII', '--s1'], ['dii', 'DII', '--s2'], ['pro', 'Pro', '--s3'], ['client', 'Client', '--s4']];
+let DATA = null, SEG = 'fut_idx', KIND = 'share', charts = [];
+function baseOpts(fmtFn) {
+  return { autoSize: true, layout: { background: { type: 'solid', color: cssVar('--panel') }, textColor: cssVar('--muted'), fontSize: 11,
+      fontFamily: "'JetBrains Mono', Consolas, monospace", attributionLogo: true },
+    grid: { vertLines: { visible: false }, horzLines: { color: cssVar('--line') } }, rightPriceScale: { borderVisible: false },
+    timeScale: { borderVisible: false }, crosshair: { mode: LC.CrosshairMode.Normal }, localization: { priceFormatter: fmtFn } };
+}
+function build() {
+  charts.forEach(c => c.remove()); charts = [];
+  if (!DATA) return;
+  const isShare = KIND === 'share';
+  const pos = LC.createChart($('posChart'), baseOpts(v => isShare ? (v * 100).toFixed(0) + '%' : v.toFixed(0)));
+  P.forEach(([p, name, col]) => {
+    const s = pos.addSeries(LC.LineSeries, { color: cssVar(col), lineWidth: 2, priceLineVisible: false, lastValueVisible: true, title: name });
+    s.setData(DATA.series[`${p}_${SEG}_${KIND}`] || []);
+  });
+  if (!isShare) { const ref = pos.addSeries(LC.LineSeries, { color: cssVar('--faint'), lineWidth: 1, lineStyle: LC.LineStyle.Dashed, priceLineVisible: false, lastValueVisible: false });
+    const s0 = DATA.series[`fii_${SEG}_cot`] || []; ref.setData(s0.map(x => ({ time: x.time, value: 50 }))); }
+  pos.timeScale().fitContent(); charts.push(pos);
+  $('legend').innerHTML = P.map(([p, name, col]) => {
+    const v = DATA.latest[`${p}_${SEG}_${KIND}`];
+    return `<span><i style="background:${cssVar(col)}"></i>${name} <b class="num">${v == null ? '–' : isShare ? (v * 100).toFixed(1) + '%' : v.toFixed(0)}</b></span>`;
+  }).join('');
+  $('posNote').textContent = isShare
+    ? `Each line is a participant's (long − short) futures contracts divided by total open interest in ${SEG === 'fut_idx' ? 'index' : 'stock'} futures. Using a share of total OI keeps the series comparable across lot-size changes. FIIs typically hold index futures as hedges, so a net short is not necessarily bearish.`
+    : `Where today's net-long share sits within its own past 52 weeks: 100 = most net-long of the year, 0 = least. The dashed line marks 50.`;
+  const mk = (el, series, col, f) => { const c = LC.createChart($(el), baseOpts(f)); const s = c.addSeries(LC.AreaSeries, { lineColor: cssVar(col), topColor: cssVar(col) + '33', bottomColor: cssVar(col) + '05', lineWidth: 2, priceLineVisible: false });
+    s.setData(series || []); c.timeScale().fitContent(); charts.push(c); return s; };
+  const n500 = mk('idxChart', DATA.index.nifty500, '--s1', v => fmt(v, 0));
+  // C1 zone entries: first day the FII stock-futures COT index is <= 10 (pre_registered_v4.md)
+  const cot = DATA.series.fii_fut_stk_cot || [], have = new Set((DATA.index.nifty500 || []).map(x => x.time));
+  const c1 = cot.filter((x, i) => x.value <= 10 && (i === 0 || cot[i - 1].value > 10) && have.has(x.time))
+    .map(x => ({ time: x.time, position: 'belowBar', shape: 'arrowUp', color: cssVar('--up'), text: 'C1', size: 0.8 }));
+  LC.createSeriesMarkers(n500, c1);
+  mk('vixChart', DATA.index.india_vix, '--s2', v => v.toFixed(1));
+}
+function c1Card() {
+  const v = DATA.v4_market, c = DATA.c1_check;
+  if (!v) { $('c1Card').style.display = 'none'; return; }
+  const on = v.c1_on, cot = v.fii_fut_stk_cot;
+  const verdict = !c ? 'not yet tested' : c.supported ? `supported in the 2023–26 check (q ${fmt(c.bh_q, 3)})`
+    : `not supported in the 2023–26 check: 60-day Nifty 500 return ${sgnPct(c.mean_signal_days)} after signal days vs ${sgnPct(c.mean_all_days)} on all days`;
+  $('c1Card').innerHTML = `<h2>Indian COT signal (C1, Larry Williams–style)</h2>
+    <div class="toolbar" style="gap:18px;margin:6px 0">
+      <div><small class="muted">FII stock-futures positioning, 52-week range</small><div class="v num" style="font-size:22px;font-weight:600">${cot == null ? '–' : cot.toFixed(0)} / 100</div></div>
+      <div><small class="muted">State on ${dateStr(v.date)}</small><div style="font-size:16px;font-weight:600" class="${on ? 'up' : ''}">${on ? 'Contrarian zone (COT ≤ 10)' : 'Normal'}</div></div>
+    </div>
+    <p class="note">Williams read extreme positioning as a contrarian signal at market level over weeks. C1 tests whether extreme FII pessimism in stock futures precedes higher 60-day
+      Nifty 500 returns: ${verdict}. It keeps being logged nightly for the forward test (final verdict needs ~3 years of new data). Not investment advice.</p>`;
+}
+function kpis() {
+  const r = DATA.regime;
+  const tile = (label, val, small) => `<div class="card kpi"><h3>${label}</h3><div class="v num">${val}</div><small>${small}</small></div>`;
+  $('kpis').innerHTML = [
+    tile('Nifty trend', r.nifty_above_200 == null ? '–' : r.nifty_above_200 ? 'Above 200d' : 'Below 200d', `50d vs 200d average: ${sgnPct(r.nifty_trend_50_200)}`),
+    tile('Nifty 500 · 20D', sgnPct(r.nifty500_ret20), 'Price change over 20 trading days'),
+    tile('India VIX', r.vix_pct252 == null ? '–' : Math.round(r.vix_pct252) + '', 'Percentile of the past year (100 = most fearful)'),
+    tile('Breadth · 10D', r.breadth10 == null ? '–' : (r.breadth10 > 0 ? '+' : '') + (r.breadth10 * 100).toFixed(0) + '%', 'Advances minus declines, share of stocks'),
+    tile('FII · 20D', r.fii_flow20 == null ? '–' : (r.fii_flow20 > 0 ? '+' : '') + (r.fii_flow20 * 100).toFixed(1) + ' pts', 'Change in futures net-long share'),
+    tile('DII · 20D', r.dii_flow20 == null ? '–' : (r.dii_flow20 > 0 ? '+' : '') + (r.dii_flow20 * 100).toFixed(1) + ' pts', 'Change in futures net-long share'),
+  ].join('');
+}
+$('segSeg').onclick = e => { if (!e.target.dataset.s) return; SEG = e.target.dataset.s; document.querySelectorAll('#segSeg button').forEach(b => b.classList.toggle('on', b === e.target)); build(); };
+$('kindSeg').onclick = e => { if (!e.target.dataset.k) return; KIND = e.target.dataset.k; document.querySelectorAll('#kindSeg button').forEach(b => b.classList.toggle('on', b === e.target)); build(); };
+initTheme(() => build());
+(async () => {
+  try {
+    const [meta, m] = await Promise.all([getJSON('/api/impi/meta'), getJSON('/api/impi/market')]);
+    DATA = m; $('asof').textContent = dateStr(m.as_of); $('disc').textContent = meta.disclaimer || '';
+    kpis(); c1Card(); build();
+  } catch (err) { $('warn').style.display = 'block'; $('warn').textContent = err.message; }
+})();
+</script>
+</body>
+</html>

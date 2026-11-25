@@ -1,0 +1,12 @@
+requests==2.34.2
+pandas==3.0.3
+pyarrow==25.0.1
+duckdb==1.5.5
+numpy==2.4.6
+scipy==1.18.1
+plotly==6.8.0
+kaleido==1.4.0
+streamlit==1.64.0
+schedule==1.2.2
+pytest==9.1.1
+PyYAML==6.0.3

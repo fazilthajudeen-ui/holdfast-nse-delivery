@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terminal · Holdfast</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/static/ds/lens.css">
+<script src="/static/ds/lens.js"></script>
+<style>
+  html, body { height: 100%; }
+  body { overflow: hidden; background: var(--canvas); }
+  .app { height: calc(100vh - var(--nav-h)); height: calc(100dvh - var(--nav-h)); display: grid; grid-template-columns: 308px minmax(0, 1fr) 388px; gap: 12px; padding: 12px; }
+  .pane { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-l); min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+
+  /* ---------------- watchlist */
+  .wl-top { padding: 14px 14px 10px; border-bottom: 1px solid var(--line); }
+  .wl-top .seg { width: 100%; display: flex; } .wl-top .seg button { flex: 1; padding: 0 6px; }
+  .wl-note { font-size: 12.5px; color: var(--ink-3); margin-top: 10px; line-height: 1.4; }
+  .wl { flex: 1; overflow-y: auto; padding: 6px; overscroll-behavior: contain; }
+  .wl-row { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 92px auto; align-items: center; gap: 10px; padding: 11px 12px; border-radius: 12px; cursor: pointer;
+    transition: background var(--t-fast); }
+  html[data-mode="simple"] .wl-row { grid-template-columns: minmax(0, 1fr) auto; row-gap: 3px; }
+  html[data-mode="simple"] .wl-row .px { grid-column: 1 / -1; grid-row: 2; text-align: left; display: flex; gap: 10px; align-items: baseline; font-size: 13.5px; color: var(--ink-2); }
+  html[data-mode="simple"] .wl-row .px small { display: inline; }
+  html[data-mode="pro"] .wl-row { grid-template-columns: minmax(0, 1fr) 46px 78px 52px; padding: 8px 10px; gap: 8px; }
+  .wl-row:hover { background: var(--canvas); }
+  .wl-row.on { background: var(--tint); }
+  .wl-row.on::before { content: ''; position: absolute; left: 0; top: 10px; bottom: 10px; width: 3px; border-radius: 3px; background: var(--gold); }
+  .wl-row .id b { display: block; font: 700 15px/1.2 var(--f-text); letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .wl-row .id small { display: block; font-size: 12.5px; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+  html[data-mode="pro"] .wl-row .id small { display: none; }
+  .wl-row .px { text-align: right; font-size: 14px; line-height: 1.3; }
+  .wl-row .px small { display: block; font-size: 12.5px; }
+  html[data-mode="pro"] .wl-row .px { font-size: 13px; }
+  .wl-row .zd { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); margin-left: 6px; vertical-align: 2px; }
+  .score-dot { display: inline-flex; align-items: center; justify-content: center; min-width: 46px; height: 26px; border-radius: 8px; font: 700 13px/1 var(--f-num); }
+  .score-dot.strong { background: var(--gold-soft); color: var(--gold-ink); box-shadow: inset 0 0 0 1px rgba(0,113,227,.4); }
+  .score-dot.normal { background: var(--tint); color: var(--ink-2); }
+  .score-dot.weak { background: var(--slate-soft); color: var(--slate); }
+
+  /* ---------------- center */
+  .center { position: relative; }
+  .ch-head { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; padding: 18px 22px 8px; }
+  .ch-head .sym { font: 600 34px/1 var(--f-display); letter-spacing: -.022em; view-transition-name: sym-hero; }
+  .ch-head .nm { font-size: 14px; color: var(--ink-3); margin-top: 5px; max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ch-head .last { font: 700 30px/1 var(--f-num); letter-spacing: -.018em; transition: color 600ms; }
+  .ch-head .chg { font-size: 14px; margin-top: 6px; color: var(--ink-3); }
+  .ch-head .chg b { font-family: var(--f-num); }
+  .flash-up { animation: flashU 1.1s var(--ease); } .flash-down { animation: flashD 1.1s var(--ease); }
+  @keyframes flashU { 0% { color: var(--up); text-shadow: 0 0 18px rgba(11,138,90,.35); } }
+  @keyframes flashD { 0% { color: var(--down); text-shadow: 0 0 18px rgba(204,59,47,.35); } }
+  .stocks-btn { display: none; }
+  .ch-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 6px 22px 10px; }
+  .tools { display: flex; gap: 2px; padding: 3px; border-radius: 12px; background: var(--tint); }
+  .tools button { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; color: var(--ink-3); transition: all var(--t-fast); }
+  .tools button:hover { color: var(--ink); background: var(--paper); }
+  .tools button.on { color: var(--ink); background: var(--paper); box-shadow: var(--sh-1); }
+  .tools i { width: 1px; height: 18px; background: var(--line-2); margin: 8px 3px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 16px; padding: 0 22px 8px; font-size: 13px; color: var(--ink-3); min-height: 26px; }
+  .legend b { color: var(--ink); font-family: var(--f-num); font-weight: 600; }
+  .legend .k { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .sw { width: 10px; height: 10px; border-radius: 3px; } .legend .ln { width: 14px; height: 2px; border-radius: 2px; }
+  .chart-wrap { position: relative; flex: 1; min-height: 0; margin: 0 8px 8px; }
+  #chart { position: absolute; inset: 0; transition: opacity 260ms var(--ease), transform 420ms var(--ease), filter 260ms; }
+  #chart.swap { opacity: 0; transform: translateY(8px) scale(.995); filter: blur(3px); }
+  #chart.draw { cursor: crosshair; }
+  .hint { position: absolute; z-index: 5; top: 10px; left: 50%; transform: translateX(-50%); display: none; padding: 8px 14px; border-radius: 999px; background: var(--ink); color: var(--paper); font-size: 13px; }
+  .mlabel { position: absolute; z-index: 5; padding: 4px 9px; border-radius: 8px; color: #fff; font: 700 12px/1.3 var(--f-num); pointer-events: none; white-space: nowrap; }
+  .chart-key { display: flex; flex-wrap: wrap; gap: 6px 18px; padding: 10px 22px 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-2); }
+  .chart-key span { display: inline-flex; align-items: center; gap: 7px; }
+  .chart-key i { display: inline-block; }
+  .center:fullscreen { background: var(--paper); border-radius: 0; }
+
+  /* ---------------- inspector */
+  .insp { overflow-y: auto; overscroll-behavior: contain; }
+  .verdict { padding: 22px 22px 20px; border-bottom: 1px solid var(--line); }
+  .verdict .top { display: flex; gap: 18px; align-items: center; }
+  .verdict h2 { font: 600 27px/1.08 var(--f-display); letter-spacing: -.018em; margin-top: 10px; }
+  .verdict .line { margin-top: 14px; font-size: 15.5px; color: var(--ink-2); line-height: 1.55; }
+  .verdict .ctx { margin-top: 14px; padding: 14px 16px; border-radius: 14px; background: var(--canvas); font-size: 15px; line-height: 1.5; display: flex; gap: 12px; }
+  .verdict .ctx .ic { flex: none; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; }
+  .facts3 { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); }
+  .facts3 > div { padding: 16px 14px 16px 22px; }
+  .facts3 > div + div { border-left: 1px solid var(--line); padding-left: 16px; }
+  .facts3 .label { display: flex; align-items: center; font-size: 12.5px; }
+  .facts3 b { display: block; font: 700 22px/1.1 var(--f-num); margin-top: 6px; letter-spacing: -.02em; }
+  details.isec { border-bottom: 1px solid var(--line); }
+  details.isec > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 16px 22px; font: 700 15.5px/1.2 var(--f-text); letter-spacing: -.01em; }
+  details.isec > summary::-webkit-details-marker { display: none; }
+  details.isec > summary::after { content: ''; margin-left: auto; width: 8px; height: 8px; border-right: 2px solid var(--ink-3); border-bottom: 2px solid var(--ink-3); transform: rotate(45deg); transition: transform var(--t) var(--ease); }
+  details.isec[open] > summary::after { transform: rotate(-135deg); }
+  details.isec > summary:hover { background: var(--canvas); }
+  .ibody { padding: 0 22px 20px; font-size: 14.5px; }
+  details.isec[open] .ibody { animation: page-in 500ms var(--ease) both; }
+  .step { display: grid; grid-template-columns: 26px 1fr auto; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+  .step:last-child { border-bottom: 0; }
+  .step .k { width: 24px; height: 24px; border-radius: 50%; background: var(--tint); font: 700 12px/24px var(--f-num); text-align: center; }
+  .step small { display: block; color: var(--ink-3); font-size: 12.5px; }
+  .step .v { font: 700 15px/1 var(--f-num); }
+  .zrow { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-size: 13.5px; }
+  .zrow i { width: 9px; height: 9px; border-radius: 3px; }
+  .evr { display: grid; grid-template-columns: 84px 64px 1fr; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 1px dashed var(--line); font-size: 13.5px; }
+  .evr:last-child { border-bottom: 0; }
+  .xb { display: grid; gap: 10px; margin-top: 8px; }
+  .xb .r { display: grid; grid-template-columns: 62px 1fr 60px; gap: 10px; align-items: center; font-size: 13.5px; }
+  .xb .t { height: 10px; border-radius: 10px; background: var(--tint); overflow: hidden; }
+  .xb .t i { display: block; height: 100%; width: 0; border-radius: 10px; transition: width 1100ms var(--ease); }
+  .xb b { text-align: right; font-family: var(--f-num); }
+  .duo2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .duo2 > div { padding: 12px 14px; border-radius: 12px; background: var(--canvas); font-size: 12.5px; color: var(--ink-3); }
+  .duo2 b { display: block; font: 700 18px/1.2 var(--f-num); color: var(--ink); margin-bottom: 2px; }
+  .ip-row { display: grid; grid-template-columns: 1fr 52px; gap: 4px 12px; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+  .ip-row .t { font-weight: 600; font-size: 14px; }
+  .ip-row .t small { display: block; font-weight: 400; color: var(--ink-3); font-size: 12px; margin-top: 2px; }
+  .ip-row .v { text-align: right; font: 700 17px/1 var(--f-num); }
+  .ip-track { grid-column: 1 / -1; position: relative; height: 6px; border-radius: 6px; background: var(--tint-2); }
+  .ip-track i { display: block; height: 100%; width: 0; border-radius: 6px; background: var(--ink); transition: width 900ms var(--ease); }
+  .ip-track b { position: absolute; top: -4px; width: 2px; height: 14px; background: var(--gold); border-radius: 2px; }
+  .ip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-top: 12px; }
+  .ip-grid > div { background: var(--paper); padding: 10px 12px; font-size: 12px; color: var(--ink-3); }
+  .ip-grid b { display: block; font: 700 14px/1.3 var(--f-num); color: var(--ink); margin-top: 2px; }
+  .ip-q { font-size: 12.5px; color: var(--ink-3); margin-top: 12px; line-height: 1.5; }
+  .why-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px; border-bottom: 1px dashed var(--line); }
+  .empty { color: var(--ink-3); font-size: 14px; padding: 6px 0; }
+
+  /* ---------------- assistant */
+  .ask-btn { position: fixed; right: 24px; bottom: 24px; z-index: 40; display: inline-flex; align-items: center; gap: 9px; height: 52px; padding: 0 22px 0 18px; border-radius: 999px;
+    background: var(--ink); color: var(--paper); font: 700 15px/1 var(--f-text); box-shadow: 0 16px 36px -14px rgba(22,24,29,.55);
+    transition: transform var(--t) var(--spring), opacity var(--t); }
+  .ask-btn:hover { transform: translateY(-3px) scale(1.02); }
+  .ask-btn svg { color: var(--gold-2); }
+  .ask-btn.hide { opacity: 0; transform: translateY(20px) scale(.9); pointer-events: none; }
+  .chat { position: fixed; right: 24px; bottom: 24px; z-index: 41; width: min(420px, calc(100vw - 32px)); height: min(620px, calc(100dvh - 120px)); display: flex; flex-direction: column;
+    background: var(--paper); border-radius: 24px; box-shadow: var(--sh-3); border: 1px solid var(--line); overflow: hidden;
+    opacity: 0; transform: translateY(24px) scale(.96); transform-origin: bottom right; pointer-events: none; transition: opacity var(--t) var(--ease), transform 480ms var(--ease); }
+  .chat.open { opacity: 1; transform: none; pointer-events: auto; }
+  .chat-h { display: flex; align-items: center; gap: 12px; padding: 16px 16px 14px 18px; border-bottom: 1px solid var(--line); }
+  .chat-h small { display: block; color: var(--ink-3); font-size: 12.5px; }
+  .chat-h .x { margin-left: auto; }
+  .av { width: 32px; height: 32px; border-radius: 50%; background: var(--gold-soft); display: flex; align-items: center; justify-content: center; flex: none; }
+  .msgs { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .msg { display: flex; gap: 10px; font-size: 14.5px; line-height: 1.55; animation: page-in 420ms var(--ease) both; }
+  .msg.me { align-self: flex-end; background: var(--ink); color: var(--paper); padding: 10px 14px; border-radius: 18px 18px 4px 18px; max-width: 85%; }
+  .msg .bubble { background: var(--canvas); padding: 12px 14px; border-radius: 4px 18px 18px 18px; max-width: calc(100% - 42px); }
+  .msg .bubble p + p, .msg .bubble ul { margin-top: 6px; }
+  .msg .bubble ul { padding-left: 18px; }
+  .msg .bubble .note { font-size: 12.5px; }
+  .typing { display: flex; gap: 4px; padding: 16px !important; }
+  .typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-4); animation: blink 1.2s infinite; }
+  .typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+  @keyframes blink { 0%, 60%, 100% { opacity: .3; transform: none; } 30% { opacity: 1; transform: translateY(-3px); } }
+  .qchips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 10px; }
+  .qchips button { padding: 7px 12px; border-radius: 999px; font-size: 13px; box-shadow: inset 0 0 0 1.3px var(--line-2); transition: all var(--t-fast); }
+  .qchips button:hover { box-shadow: inset 0 0 0 1.3px var(--ink); }
+  .chat-src { padding: 0 16px 8px; font-size: 11.5px; color: var(--ink-4); }
+  .chat-f { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--line); }
+  .chat-f input { flex: 1; height: 46px; border: 0; border-radius: 999px; background: var(--tint); padding: 0 18px; outline: 0; font-size: 15px; }
+  .chat-f input:focus { box-shadow: inset 0 0 0 2px var(--gold); }
+  .chat-f button { width: 46px; height: 46px; border-radius: 50%; background: var(--ink); color: var(--paper); display: flex; align-items: center; justify-content: center; }
+
+  /* ---------------- help */
+  .overlay { position: fixed; inset: 0; z-index: 100; background: rgba(22,24,29,.24); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity var(--t); }
+  .overlay.open { opacity: 1; pointer-events: auto; }
+  .help { width: min(440px, calc(100vw - 32px)); background: var(--paper); border-radius: 22px; padding: 24px 26px; box-shadow: var(--sh-3); transform: scale(.96); transition: transform var(--t) var(--ease); }
+  .overlay.open .help { transform: none; }
+  .help .r { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .help .r:last-child { border-bottom: 0; }
+
+  /* ---------------- responsive */
+  @media (max-width: 1280px) { .app { grid-template-columns: 280px minmax(0, 1fr) 350px; } }
+  @media (max-width: 1080px) {
+    body { overflow: auto; }
+    .app { height: auto; grid-template-columns: minmax(0, 1fr); }
+    .center { height: auto; }
+    .chart-wrap { flex: none; height: min(62vh, 540px); min-height: 340px; }
+    .stocks-btn { display: inline-flex; margin-left: auto; }
+    .wl-pane { position: fixed; z-index: 70; top: calc(var(--nav-h) + 8px); left: 8px; bottom: 8px; width: min(360px, calc(100vw - 16px)); box-shadow: var(--sh-3);
+      transform: translateX(calc(-100% - 20px)); transition: transform 480ms var(--ease); }
+    .wl-pane.open { transform: none; }
+    .scrim { position: fixed; inset: 0; z-index: 69; background: rgba(22,24,29,.2); opacity: 0; pointer-events: none; transition: opacity var(--t); }
+    .scrim.open { opacity: 1; pointer-events: auto; }
+    .insp { overflow: visible; }
+  }
+  @media (max-width: 640px) {
+    .app { padding: 8px; gap: 8px; }
+    .ch-head { padding: 14px 14px 6px; gap: 12px; } .ch-head .sym { font-size: 28px; } .ch-head .last { font-size: 24px; }
+    .ch-bar, .legend { padding-left: 14px; padding-right: 14px; } .chart-key { padding: 10px 14px 12px; }
+    .tools, .tog[data-k^="sma"] { display: none !important; }
+    .chart-wrap { margin: 0 4px 6px; }
+    .facts3 > div { padding: 14px 10px 14px 16px; } .facts3 b { font-size: 18px; }
+    .ask-btn { right: 14px; bottom: 14px; }
+  }
+</style>
+</head>
+<body>
+<header id="nav"></header>
+<div class="scrim" id="scrim"></div>
+<div class="app">
+  <aside class="pane wl-pane" id="wlPane" aria-label="Stock list">
+    <div class="wl-top">
+      <div class="seg sm" id="tabs" role="tablist"><button data-t="High" class="on">Strong</button><button data-t="Low">Weak</button><button data-t="Watch" title="Up 10%+ in 20 days, but on weak delivery">Rising, weak</button><button data-t="All">All</button></div>
+      <p class="wl-note" id="wlnote">Loading…</p>
+    </div>
+    <div class="wl" id="wl"></div>
+  </aside>
+
+  <main class="pane center" id="center">
+    <div class="ch-head">
+      <div><h1 class="sym" id="sym"><span class="sk" style="display:inline-block;width:120px;height:30px"></span></h1><div class="nm" id="name"></div></div>
+      <div><div class="last num" id="last"></div><div class="chg" id="chg"></div></div>
+      <span id="bandBadge"></span>
+      <button class="btn ghost sm stocks-btn" id="stocksBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Stocks</button>
+    </div>
+    <div class="ch-bar">
+      <div class="seg sm pro-only" id="ivl"><button data-i="D" class="on" title="Daily candles (D)">Daily</button><button data-i="W" title="Weekly candles (W)">Weekly</button></div>
+      <div class="seg sm" id="ranges"><button data-r="1">1M</button><button data-r="3">3M</button><button data-r="6" class="on">6M</button><button data-r="12">1Y</button><button data-r="0">All</button></div>
+      <div class="togs" id="inds">
+        <button class="tog on" data-k="zones" title="Shaded buyer zones"><i></i>Buyer zones</button>
+        <button class="tog on pro-only" data-k="impi" title="IMPI breakout markers"><i></i>IMPI</button>
+        <button class="tog on pro-only" data-k="v4" title="Delivery signals: Acc / Dist / Move? / LVCP / Div"><i></i>Signals</button>
+        <button class="tog pro-only" data-k="sma20"><i></i>SMA 20</button>
+        <button class="tog pro-only" data-k="sma50"><i></i>SMA 50</button>
+      </div>
+      <span class="sp"></span>
+      <div class="tools pro-only" id="tools">
+        <button data-tool="cursor" class="on" title="Crosshair (Esc)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg></button>
+        <button data-tool="trend" title="Trend line"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 19L19 5"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="5" r="2"/></svg></button>
+        <button data-tool="hline" title="Horizontal line"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18"/><circle cx="12" cy="12" r="2"/></svg></button>
+        <button data-tool="measure" title="Measure %"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="8" rx="1.5"/><path d="M7 8v3M11 8v4M15 8v3M19 8v4"/></svg></button>
+        <i></i>
+        <button data-act="fit" title="Reset view"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg></button>
+        <button data-act="clear" title="Remove drawings"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></button>
+        <button data-act="shot" title="Save chart image"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></button>
+        <button data-act="fs" title="Fullscreen (F)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        <button data-act="help" title="Keyboard shortcuts (?)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg></button>
+      </div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="chart-wrap"><div id="chart"><div class="hint" id="hint"></div></div></div>
+    <div class="chart-key simple-only" id="chartKey">
+      <span><i style="width:16px;height:2.5px;background:var(--ink);border-radius:2px"></i>Price</span>
+      <span><i style="width:10px;height:10px;border-radius:3px;background:var(--gold)"></i>Delivery above usual</span>
+      <span><i style="width:10px;height:10px;border-radius:3px;background:var(--line-2)"></i>Below usual</span>
+      <span><i style="width:16px;height:0;border-top:2px dashed var(--ink-2)"></i>Usual level</span>
+      <span><i style="width:14px;height:14px;border-radius:4px;background:rgba(0,113,227,.16)"></i>Buyer zone</span>
+      <span><i style="color:var(--gold);font-size:11px">▲</i>Past sharp rise</span>
+    </div>
+  </main>
+
+  <aside class="pane insp" id="right" aria-label="Stock verdict">
+    <div class="verdict">
+      <div class="top">
+        <div id="ring"></div>
+        <div style="min-width:0"><div id="vPill"><span class="sk" style="display:block;width:90px;height:26px"></span></div><h2 id="vHead"><span class="sk" style="display:block;width:180px;height:28px"></span></h2></div>
+      </div>
+      <p class="line" id="vLine"></p>
+      <div class="ctx" id="vCtx" style="display:none"></div>
+    </div>
+    <div class="facts3">
+      <div><span class="label">Delivered<button type="button" class="qm" data-x="delivery">?</button></span><b class="num" id="fD">–</b></div>
+      <div><span class="label">Usual<button type="button" class="qm" data-x="normal">?</button></span><b class="num" id="fN">–</b></div>
+      <div><span class="label">Gap · 5d<button type="button" class="qm" data-x="gap">?</button></span><b class="num" id="fG">–</b></div>
+    </div>
+    <details class="isec" open><summary>Buyer zone <button type="button" class="qm" data-x="zone">?</button></summary><div class="ibody" id="zone"><div class="sk" style="height:60px"></div></div></details>
+    <details class="isec pro-only" open><summary>IMPI model <button type="button" class="qm" data-x="impi">?</button></summary><div class="ibody" id="impi"><div class="sk" style="height:120px"></div></div></details>
+    <details class="isec pro-only"><summary>How the score is calculated <button type="button" class="qm" data-x="score">?</button></summary><div class="ibody" id="method"></div></details>
+    <details class="isec"><summary>Sharp rises in this stock <button type="button" class="qm" data-x="rise">?</button></summary><div class="ibody" id="events"></div></details>
+    <details class="isec"><summary id="evh">What history says</summary><div class="ibody" id="evidence"></div></details>
+    <p class="note" style="padding:16px 22px 90px" id="disc">Research and education tool. Not investment advice.</p>
+  </aside>
+</div>
+
+<button class="ask-btn" id="askBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19.5 9l-5.7 1.6L12 16l-1.8-5.4L4.5 9l5.7-1.4zM19 15l.9 2.6 2.6.9-2.6.9L19 22l-.9-2.6-2.6-.9 2.6-.9z"/></svg>Ask Holdfast</button>
+<div class="chat" id="chat" role="dialog" aria-label="Holdfast assistant">
+  <div class="chat-h"><span class="av"><svg width="16" height="16" viewBox="0 0 28 28"><rect x="3" y="3" width="22" height="22" rx="7" fill="none" stroke="currentColor" stroke-width="3"/><rect x="8" y="13" width="12" height="7.5" rx="2.4" fill="#0071E3"/></svg></span>
+    <div><b class="h4">Holdfast assistant</b><small>Answers from our own NSE data</small></div>
+    <button class="icon-btn x" id="chatClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="msgs" id="msgs"></div>
+  <div class="qchips" id="chips"></div>
+  <div class="chat-src">Built from the project’s own data and backtests. No external AI. Not investment advice.</div>
+  <form class="chat-f" id="chatForm"><input id="chatIn" placeholder="Ask about any stock — e.g. “summarize TCS”" autocomplete="off">
+    <button type="submit" aria-label="Send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>
+</div>
+
+<div class="overlay" id="help"><div class="help">
+  <h3 class="h3" style="margin-bottom:10px">Keyboard shortcuts</h3>
+  <div class="r"><span>Search a stock</span><kbd>/</kbd></div>
+  <div class="r"><span>Next / previous stock</span><span><kbd>↓</kbd> <kbd>↑</kbd></span></div>
+  <div class="r"><span>Simple / Pro view</span><kbd>P</kbd></div>
+  <div class="r"><span>Light / dark theme</span><kbd>T</kbd></div>
+  <div class="r"><span>Daily / weekly candles (Pro)</span><span><kbd>D</kbd> <kbd>W</kbd></span></div>
+  <div class="r"><span>Range 1M · 3M · 6M · 1Y · All</span><span><kbd>1</kbd>–<kbd>5</kbd></span></div>
+  <div class="r"><span>Ask the assistant</span><kbd>A</kbd></div>
+  <div class="r"><span>Fullscreen chart</span><kbd>F</kbd></div>
+  <div class="r"><span>Cancel tool / close</span><kbd>Esc</kbd></div>
+</div></div>
+
+<script src="/static/vendor/lightweight-charts.standalone.production.js"></script>
+<script src="/static/freshness.js"></script>
+<script>
+Lens.nav('Terminal', { mode: true, full: true });
+const LC = LightweightCharts;
+const capScore = Lens.capScore;
+let META, ROWS = [], TAB = 'High', CUR = null, RAW = null, VIEW = null, RANGE = 6, INTERVAL = 'D';
+const SHOW = { impi: true, v4: true, zones: true, sma20: false, sma50: false };
+let IMPI = null, IMPI_TGT = 'label_10', FRESH = null;
+let C = {};
+function readC() {
+  const v = n => cssVar(n);
+  C = { bg: v('--paper'), text: v('--ink-3'), grid: v('--grid'), line: v('--line'), ink: v('--ink'), up: v('--up'), down: v('--down'), gold: v('--gold'), goldInk: v('--gold-ink'),
+    above: v('--gold'), below: v('--bar-off'), normal: v('--ink-2'), smooth: v('--smooth'), weak: v('--slate'), mid: v('--ink-4'), cross: v('--ink-4'),
+    zAcc: v('--zone-acc'), zLow: 'rgba(107,115,133,0.09)', sma20: '#8B6DFF', sma50: '#1597B8', wm: v('--wm'), areaTop: v('--area-top') };
+}
+readC();
+const isSimple = () => Lens.getMode() === 'simple';
+
+// ================================================================ chart
+const FONT = '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Arial, sans-serif';
+const chart = LC.createChart($('chart'), {
+  autoSize: true,
+  layout: { background: { type: 'solid', color: C.bg }, textColor: C.text, fontSize: 12, fontFamily: FONT,
+            panes: { separatorColor: C.line, separatorHoverColor: 'rgba(0,113,227,.25)', enableResize: true }, attributionLogo: true },
+  grid: { vertLines: { visible: false }, horzLines: { color: C.grid } },
+  rightPriceScale: { borderVisible: false }, timeScale: { borderVisible: false, rightOffset: 4, minBarSpacing: 2 },
+  crosshair: { mode: LC.CrosshairMode.Normal, vertLine: { color: C.cross, width: 1, style: LC.LineStyle.Dashed, labelBackgroundColor: C.ink },
+               horzLine: { color: C.cross, width: 1, style: LC.LineStyle.Dashed, labelBackgroundColor: C.ink } },
+  localization: { priceFormatter: p => fmt(p) },
+});
+const zoneSeries = chart.addSeries(LC.HistogramSeries, { priceScaleId: 'zone', lastValueVisible: false, priceLineVisible: false, base: 0 });
+zoneSeries.priceScale().applyOptions({ scaleMargins: { top: 0, bottom: 0 } });
+const candles = chart.addSeries(LC.CandlestickSeries, { borderVisible: false, priceLineVisible: false, upColor: C.up, downColor: C.down, wickUpColor: C.up, wickDownColor: C.down });
+const area = chart.addSeries(LC.AreaSeries, { lineColor: C.ink, lineWidth: 2.5, topColor: C.areaTop, bottomColor: 'rgba(0,0,0,0)', priceLineVisible: false,
+  lastValueVisible: true, crosshairMarkerRadius: 5, crosshairMarkerBorderColor: C.bg, crosshairMarkerBackgroundColor: C.ink });
+const mkCandles = LC.createSeriesMarkers(candles, []), mkArea = LC.createSeriesMarkers(area, []);
+const lineOpts = { lineWidth: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false };
+const sma20 = chart.addSeries(LC.LineSeries, { ...lineOpts, color: C.sma20, visible: false });
+const sma50 = chart.addSeries(LC.LineSeries, { ...lineOpts, color: C.sma50, visible: false });
+const pctFmt = { type: 'custom', formatter: v => v.toFixed(0) + '%', minMove: 1 };
+const deliv = chart.addSeries(LC.HistogramSeries, { priceFormat: pctFmt, lastValueVisible: false, priceLineVisible: false }, 1);
+const smooth = chart.addSeries(LC.LineSeries, { ...lineOpts, priceFormat: pctFmt, color: C.smooth }, 1);
+const normal = chart.addSeries(LC.LineSeries, { ...lineOpts, priceFormat: pctFmt, color: C.normal, lineStyle: LC.LineStyle.Dashed, lineWidth: 2 }, 1);
+const preview = chart.addSeries(LC.LineSeries, { lineWidth: 2, lineStyle: LC.LineStyle.Dashed, priceLineVisible: false, lastValueVisible: false,
+  crosshairMarkerVisible: false, pointMarkersVisible: true, pointMarkersRadius: 3, color: C.gold });
+let WM = null;
+try { WM = LC.createTextWatermark(chart.panes()[0], { horzAlign: 'center', vertAlign: 'center', lines: [] }); } catch (e) {}
+
+function applyMode() {
+  const s = isSimple();
+  candles.applyOptions({ visible: !s }); area.applyOptions({ visible: s });
+  smooth.applyOptions({ visible: !s });
+  sma20.applyOptions({ visible: !s && SHOW.sma20 }); sma50.applyOptions({ visible: !s && SHOW.sma50 });
+  if (s && INTERVAL === 'W') { INTERVAL = 'D'; $('ivl')._set('D', false); if (RAW) render(); }
+  if (s) setTool('cursor');
+  if (VIEW) { paintData(); legend(null); }
+  renderWL(false);
+}
+Lens.onMode(applyMode);
+function applyTheme() {
+  readC();
+  chart.applyOptions({ layout: { background: { type: 'solid', color: C.bg }, textColor: C.text, panes: { separatorColor: C.line } }, grid: { horzLines: { color: C.grid } },
+    crosshair: { vertLine: { color: C.cross, labelBackgroundColor: C.ink }, horzLine: { color: C.cross, labelBackgroundColor: C.ink } } });
+  candles.applyOptions({ upColor: C.up, downColor: C.down, wickUpColor: C.up, wickDownColor: C.down });
+  area.applyOptions({ lineColor: C.ink, topColor: C.areaTop, crosshairMarkerBorderColor: C.bg, crosshairMarkerBackgroundColor: C.ink });
+  smooth.applyOptions({ color: C.smooth }); normal.applyOptions({ color: C.normal }); preview.applyOptions({ color: C.gold });
+  if (RAW) { render(); renderVerdict(RAW.method); renderZone(RAW); }
+  if (META) renderEvidence();
+  renderWL(false);
+}
+Lens.onTheme(applyTheme);
+
+let paneSized = false;
+function layoutPanes() {
+  const panes = chart.panes(), h = $('chart').clientHeight;
+  if (panes.length > 1 && !paneSized && h > 200) { panes[1].setHeight(Math.round(h * 0.3)); paneSized = true; }
+}
+function applyRange() {
+  if (!VIEW || !VIEW.bars.length) return;
+  const n = VIEW.bars.length, last = VIEW.bars[n - 1].time;
+  let from = 0;
+  if (RANGE) { const cut = new Date(last + 'T00:00:00'); cut.setMonth(cut.getMonth() - RANGE); const c = cut.toISOString().slice(0, 10); from = Math.max(0, VIEW.bars.findIndex(b => b.time >= c)); }
+  chart.timeScale().setVisibleLogicalRange({ from: from - 0.5, to: n - 1 + 4 });
+  chart.priceScale('right', 0).applyOptions({ autoScale: true });
+}
+let rsTimer;
+new ResizeObserver(() => { layoutPanes(); clearTimeout(rsTimer); rsTimer = setTimeout(() => { applyRange(); placeLabels(); }, 60); }).observe($('chart'));
+function setRange(m) { RANGE = +m; $('ranges')._set(String(RANGE), false); applyRange(); saveHash(); }
+function setInterval_(i) { if (i === INTERVAL || (isSimple() && i === 'W')) return; INTERVAL = i; $('ivl')._set(i, false); swapAnim(render); saveHash(); }
+Lens.seg($('ranges'), v => setRange(v), 'r');
+Lens.seg($('ivl'), v => setInterval_(v), 'i');
+$('inds').onclick = e => {
+  const b = e.target.closest('.tog'); if (!b) return; const k = b.dataset.k;
+  SHOW[k] = !SHOW[k]; b.classList.toggle('on', SHOW[k]);
+  zoneSeries.applyOptions({ visible: SHOW.zones });
+  sma20.applyOptions({ visible: !isSimple() && SHOW.sma20 }); sma50.applyOptions({ visible: !isSimple() && SHOW.sma50 });
+  if ((k === 'impi' || k === 'v4') && VIEW) paintData();
+};
+function swapAnim(fn) {
+  if (reduceMotion) return fn();
+  $('chart').classList.add('swap');
+  setTimeout(() => { fn(); requestAnimationFrame(() => requestAnimationFrame(() => $('chart').classList.remove('swap'))); }, 170);
+}
+
+// ---------------- data views
+function weekKey(t) { const d = new Date(t + 'T00:00:00'); d.setDate(d.getDate() - (d.getDay() + 6) % 7); return d.toISOString().slice(0, 10); }
+function buildView() {
+  const dl = Object.fromEntries(RAW.delivery.map(x => [x.time, x])), bl = Object.fromEntries(RAW.baseline.map(x => [x.time, x.value]));
+  const sm = Object.fromEntries(RAW.smooth.map(x => [x.time, x]));
+  const daily = RAW.bars.map(b => ({ ...b, deliv: dl[b.time]?.value ?? null, normal: bl[b.time] ?? null, smooth: sm[b.time]?.value ?? null, state: sm[b.time]?.state ?? 0 }));
+  if (INTERVAL === 'D') return { bars: daily, map: d => d };
+  const out = [], idx = {};
+  for (const b of daily) {
+    const k = weekKey(b.time); let w = idx[k];
+    if (!w) { w = idx[k] = { time: b.time, open: b.open, high: b.high, low: b.low, close: b.close, v: 0, q: 0, normal: null, smooth: null, state: 0 }; out.push(w); }
+    w.high = Math.max(w.high, b.high); w.low = Math.min(w.low, b.low); w.close = b.close;
+    if (b.dq != null && b.vol > 0) { w.v += b.vol; w.q += b.dq; }
+    w.normal = b.normal ?? w.normal; w.smooth = b.smooth ?? w.smooth; w.state = b.state;
+  }
+  out.forEach(w => { w.deliv = w.v > 0 ? +(w.q / w.v * 100).toFixed(1) : null; });
+  const firstOf = Object.fromEntries(out.map(w => [weekKey(w.time), w.time]));
+  return { bars: out, map: t => firstOf[weekKey(t)] };
+}
+function sma(bars, n) { const r = []; let s = 0; bars.forEach((b, i) => { s += b.close; if (i >= n) s -= bars[i - n].close; if (i >= n - 1) r.push({ time: b.time, value: +(s / n).toFixed(2) }); }); return r; }
+function paintData() {
+  const B = VIEW.bars, simple = isSimple();
+  deliv.setData(B.filter(b => b.deliv != null).map(b => ({ time: b.time, value: b.deliv, color: b.normal != null && b.deliv >= b.normal ? C.above : C.below })));
+  zoneSeries.setData(B.map(b => ({ time: b.time, value: b.state ? 1 : 0, color: b.state > 0 ? C.zAcc : b.state < 0 ? C.zLow : 'rgba(0,0,0,0)' })));
+  const seen = new Set(), seenI = new Set();
+  const dl = RAW.events.map(e => ({ time: VIEW.map(e.date), position: 'belowBar', shape: 'arrowUp', size: 1.3,
+    color: e.group === 'High' ? C.gold : e.group === 'Low' ? C.weak : C.mid, text: simple ? `+${Math.round(e.move)}%` : '' })).filter(m => m.time && !seen.has(m.time) && seen.add(m.time));
+  const ok = !simple && IMPI && IMPI.covered && IMPI.symbol === CUR;
+  const im = ok && SHOW.impi ? IMPI.events.filter(e => e.family !== 'all').map(e => ({
+    time: VIEW.map(e.date), position: 'aboveBar', shape: e.family === 'strict' ? 'square' : 'circle', size: 0.9,
+    color: e.family === 'strict' ? C.up : C.ink, text: e.family === 'strict' ? 'VCP' : '' })).filter(m => m.time && !seenI.has(m.time) && seenI.add(m.time)) : [];
+  const V4S = { acc: ['belowBar', 'arrowUp', C.up, 'Acc'], dist: ['aboveBar', 'arrowDown', C.down, 'Dist'],
+    move: ['aboveBar', 'circle', C.goldInk, 'Move?'], lvcp: ['aboveBar', 'square', C.sma20, 'LVCP'], div: ['aboveBar', 'circle', C.mid, 'Div'] };
+  const v4 = ok && SHOW.v4 ? (IMPI.v4_markers || []).map(e => {
+    const [position, shape, color, text] = V4S[e.kind] || [];
+    return shape ? { time: VIEW.map(e.date), position, shape, color, text, size: 0.8 } : null; }).filter(m => m && m.time) : [];
+  const all = dl.concat(im, v4).sort((a, b) => a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+  (simple ? mkArea : mkCandles).setMarkers(all); (simple ? mkCandles : mkArea).setMarkers([]);
+}
+function render() {
+  clearDrawings();
+  VIEW = buildView();
+  const B = VIEW.bars;
+  candles.setData(B.map(b => ({ time: b.time, open: b.open, high: b.high, low: b.low, close: b.close })));
+  area.setData(B.map(b => ({ time: b.time, value: b.close })));
+  smooth.setData(B.filter(b => b.smooth != null).map(b => ({ time: b.time, value: b.smooth })));
+  normal.setData(B.filter(b => b.normal != null).map(b => ({ time: b.time, value: b.normal })));
+  sma20.setData(sma(B, 20)); sma50.setData(sma(B, 50));
+  if (WM) WM.applyOptions({ lines: [{ text: RAW.symbol, color: C.wm, fontSize: 84, fontStyle: '800', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Segoe UI", sans-serif' }] });
+  paintData(); layoutPanes(); applyRange(); legend(null);
+}
+
+// ---------------- legend
+function legend(t) {
+  if (!VIEW) return;
+  const B = VIEW.bars, i = t ? B.findIndex(b => b.time === t) : B.length - 1, b = B[i]; if (!b) return;
+  const ch = i > 0 ? (b.close / B[i - 1].close - 1) * 100 : null;
+  const z = b.state > 0 ? `<span class="k" style="color:${C.goldInk}"><i class="sw" style="background:${C.gold}"></i>Buyer zone</span>` : b.state < 0 ? `<span class="k" style="color:${C.weak}"><i class="sw" style="background:${C.weak}"></i>Weak-delivery zone</span>` : '';
+  const dv = b.deliv == null ? '–' : b.deliv.toFixed(1) + '%', nv = b.normal == null ? '–' : b.normal.toFixed(1) + '%';
+  $('legend').innerHTML = isSimple()
+    ? `<span>${dstr(b.time)}</span><span>Close <b>${fmt(b.close)}</b> ${arrow(ch)}</span><span>Delivered <b>${dv}</b></span><span>Usual <b>${nv}</b></span>${z}`
+    : `<span>${dstr(b.time)}${INTERVAL === 'W' ? ' · week' : ''}</span><span>O <b>${fmt(b.open)}</b></span><span>H <b>${fmt(b.high)}</b></span><span>L <b>${fmt(b.low)}</b></span>
+       <span>C <b>${fmt(b.close)}</b> ${arrow(ch)}</span><span class="k"><i class="sw" style="background:${C.above}"></i>Delivery <b>${dv}</b></span>
+       <span class="k"><i class="ln" style="background:${C.normal}"></i>Usual <b>${nv}</b></span>${z}`;
+}
+
+// ================================================================ drawing tools (Pro)
+let TOOL = 'cursor', pending = null, previewKey = null, previewRaf = 0;
+const later = f => setTimeout(f, 0);           // never add/remove series inside a chart event
+const drawn = { series: [], lines: [], labels: [] };
+function setTool(t) {
+  TOOL = t; pending = null; previewKey = null; cancelAnimationFrame(previewRaf); later(() => preview.setData([]));
+  document.querySelectorAll('#tools [data-tool]').forEach(b => b.classList.toggle('on', b.dataset.tool === t));
+  $('chart').classList.toggle('draw', t !== 'cursor');
+  const hints = { trend: 'Click the first point', hline: 'Click a price level', measure: 'Click the start point' };
+  $('hint').style.display = hints[t] ? 'block' : 'none'; $('hint').textContent = hints[t] || '';
+}
+function clearDrawings() {
+  drawn.series.forEach(s => chart.removeSeries(s)); drawn.lines.forEach(l => candles.removePriceLine(l)); drawn.labels.forEach(l => l.el.remove());
+  drawn.series = []; drawn.lines = []; drawn.labels = []; setTool('cursor');
+}
+function segment(p1, p2, dashed) {
+  const a = p1.time <= p2.time ? [p1, p2] : [p2, p1];
+  const s = chart.addSeries(LC.LineSeries, { color: C.goldInk, lineWidth: 2, lineStyle: dashed ? LC.LineStyle.Dashed : LC.LineStyle.Solid,
+    priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false, pointMarkersVisible: true, pointMarkersRadius: 3 });
+  s.setData(a.map(p => ({ time: p.time, value: p.price })));
+  return s;
+}
+const barIndex = t => VIEW.bars.findIndex(b => b.time === t);
+function placeLabels() {
+  for (const l of drawn.labels) {
+    const x = chart.timeScale().timeToCoordinate(l.p.time), y = candles.priceToCoordinate(l.p.price);
+    if (x == null || y == null) { l.el.style.display = 'none'; continue; }
+    l.el.style.display = 'block'; l.el.style.left = (x + 8) + 'px'; l.el.style.top = (y - 28) + 'px';
+  }
+}
+chart.timeScale().subscribeVisibleLogicalRangeChange(() => requestAnimationFrame(placeLabels));
+chart.subscribeClick(p => {
+  if (TOOL === 'cursor' || !p.point || p.time == null || (p.paneIndex != null && p.paneIndex !== 0)) return;
+  const price = candles.coordinateToPrice(p.point.y); if (price == null) return;
+  const pt = { time: p.time, price: +price.toFixed(2) };
+  if (TOOL === 'hline') { setTool('cursor'); return later(() => drawn.lines.push(candles.createPriceLine({ price: pt.price, color: C.goldInk, lineWidth: 1, lineStyle: LC.LineStyle.Dashed, axisLabelVisible: true }))); }
+  if (!pending) { pending = pt; $('hint').textContent = TOOL === 'trend' ? 'Click the second point' : 'Click the end point'; return; }
+  if (pt.time === pending.time) return;
+  const p1 = pending, tool = TOOL; setTool('cursor');
+  later(() => {
+    drawn.series.push(segment(p1, pt, tool === 'measure'));
+    if (tool === 'measure') {
+      const [a, b] = p1.time <= pt.time ? [p1, pt] : [pt, p1];
+      const ch = (b.price / a.price - 1) * 100, nb = Math.abs(barIndex(b.time) - barIndex(a.time));
+      const el = document.createElement('div'); el.className = 'mlabel'; el.style.background = ch >= 0 ? C.up : C.down;
+      el.textContent = `${ch >= 0 ? '▲' : '▼'} ${Math.abs(ch).toFixed(2)}% · ${nb} ${INTERVAL === 'W' ? 'weeks' : 'days'}`;
+      $('chart').appendChild(el); drawn.labels.push({ el, p: b }); placeLabels();
+    }
+  });
+});
+chart.subscribeCrosshairMove(p => {
+  legend(p && p.time ? p.time : null);
+  if (!pending || !p.point || p.time == null || p.time === pending.time) return;
+  const price = candles.coordinateToPrice(p.point.y); if (price == null) return;
+  const key = p.time + ':' + price.toFixed(2); if (key === previewKey) return; previewKey = key;
+  const a = pending.time <= p.time ? [pending, { time: p.time, price }] : [{ time: p.time, price }, pending];
+  cancelAnimationFrame(previewRaf);
+  previewRaf = requestAnimationFrame(() => { if (pending) preview.setData(a.map(q => ({ time: q.time, value: q.price }))); });
+});
+$('tools').onclick = e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.tool) return setTool(b.dataset.tool);
+  const a = b.dataset.act;
+  if (a === 'fit') { applyRange(); placeLabels(); }
+  if (a === 'clear') clearDrawings();
+  if (a === 'fs') document.fullscreenElement ? document.exitFullscreen() : $('center').requestFullscreen?.();
+  if (a === 'help') $('help').classList.add('open');
+  if (a === 'shot') chart.takeScreenshot().toBlob(blob => {
+    const l = document.createElement('a'); l.href = URL.createObjectURL(blob); l.download = `${CUR}_${VIEW.bars[VIEW.bars.length - 1].time}.png`; l.click(); URL.revokeObjectURL(l.href);
+  });
+};
+
+// ================================================================ watchlist
+const bandCls = b => Lens.verdict(b).cls;
+function spark(arr) {
+  if (!arr || arr.length < 2) return '<svg width="46" height="20"></svg>';
+  const mn = Math.min(...arr), mx = Math.max(...arr), r = mx - mn || 1;
+  const pts = arr.map((v, i) => `${(i / (arr.length - 1) * 44 + 1).toFixed(1)},${(18 - (v - mn) / r * 16 + 1).toFixed(1)}`).join(' ');
+  const col = arr[arr.length - 1] >= arr[0] ? C.up : C.down;
+  return `<svg width="46" height="20" viewBox="0 0 46 20" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="${col}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+}
+// first visit: today's freshest signal - the High stock whose score rose most (a newly entered High stock first)
+function freshestSignal() {
+  const hi = ROWS.filter(x => x.band === 'High' && x.score != null);
+  if (!hi.length) return ROWS[0].symbol;
+  const rise = x => x.score - (x.score_prev ?? x.score);
+  const fresh = hi.filter(x => x.score_prev != null && x.score_prev < 70);
+  const pick = (fresh.length ? fresh : hi).slice().sort((a, b) => rise(b) - rise(a) || b.score - a.score)[0];
+  FRESH = pick.symbol;
+  return pick.symbol;
+}
+function rowsFor(tab) {
+  let r = ROWS.slice();
+  if (tab === 'High') r = r.filter(x => x.band === 'High').sort((a, b) => b.score - a.score);
+  else if (tab === 'Low') r = r.filter(x => x.band === 'Low').sort((a, b) => a.score - b.score);
+  else if (tab === 'Watch') r = r.filter(x => x.band === 'Low' && x.ret_20 > 10).sort((a, b) => b.ret_20 - a.ret_20);
+  else r.sort((a, b) => a.symbol.localeCompare(b.symbol));
+  return r;
+}
+const NOTES = { High: 'Buyers holding well above their usual level (score 70+).', Low: 'Mostly same-day trading (score under 30).',
+  Watch: 'Up 10%+ in 20 days, but on weak delivery — rallies worth questioning.', All: 'Every tracked stock, A–Z.' };
+function renderWL(anim = true) {
+  const r = rowsFor(TAB), pro = !isSimple();
+  $('wl').innerHTML = r.map(x => `<div class="wl-row ${x.symbol === CUR ? 'on' : ''}" data-s="${esc(x.symbol)}" data-key="${esc(x.symbol)}" title="${esc(x.name)}">
+    <span class="id"><b>${esc(x.symbol)}${x.zone === 'accumulation' ? '<i class="zd" title="In a buyer zone"></i>' : ''}</b><small>${esc(x.name)}</small></span>
+    ${pro ? `<span>${spark(x.spark)}</span>` : ''}
+    <span class="px num">${fmt(x.close)}<small>${arrow(x.chg_1d)}</small></span>
+    ${pro ? `<span class="score-dot ${bandCls(x.band)}">${capScore(x.score)}</span>` : Lens.pill(x.band, x.score, true)}</div>`).join('')
+    || '<p class="empty" style="padding:18px">No stocks in this list today.</p>';
+  $('wlnote').textContent = `${NOTES[TAB]} ${r.length} stocks.`;
+  if (anim) Lens.stagger($('wl'), '.wl-row', 22, 16);
+}
+Lens.seg($('tabs'), t => { TAB = t; renderWL(); $('wl').scrollTop = 0; }, 't');
+$('wl').onclick = e => { const row = e.target.closest('.wl-row'); if (row) { load(row.dataset.s); closeDrawer(); } };
+const closeDrawer = () => { $('wlPane').classList.remove('open'); $('scrim').classList.remove('open'); };
+$('stocksBtn').onclick = () => { $('wlPane').classList.add('open'); $('scrim').classList.add('open'); };
+$('scrim').onclick = closeDrawer;
+Lens.palette.onPick(sym => load(sym));
+
+// ================================================================ inspector
+const ring = Lens.ring($('ring'), 112, 10);
+function context(m, band) {
+  const r = m.ret_20; if (r == null) return null;
+  const up = r >= 10, dn = r <= -10, amt = `${Math.abs(r).toFixed(1)}%`;
+  if (up && band === 'High') return ['ok', '✓', `<b>Up ${amt} in 20 days — and buyers are holding.</b> This rise looks backed by real buying.`];
+  if (up && band === 'Low') return ['warn', '!', `<b>Up ${amt} in 20 days, but mostly on same-day trading.</b> Treat this rise with caution.`];
+  if (up) return ['n', '–', `<b>Up ${amt} in 20 days</b> with about usual delivery. No strong signal either way.`];
+  if (dn && band === 'High') return ['warn', '!', `<b>Down ${amt} in 20 days with high delivery.</b> Shares are really changing hands — holders may be letting go.`];
+  if (dn) return ['n', '–', `<b>Down ${amt} in 20 days.</b> ${band === 'Low' ? 'Mostly same-day trading.' : 'Delivery about usual.'}`];
+  return ['n', '–', `Price is moving sideways: <b>${sgn(r, 1)}</b> over 20 days.`];
+}
+function renderVerdict(m) {
+  const band = m?.band, v = Lens.verdict(band);
+  ring.set(m?.score == null ? null : capScore(m.score), band === 'High' ? C.gold : band === 'Low' ? C.weak : C.ink);
+  $('vPill').innerHTML = Lens.pill(band, null) + (FRESH && CUR === FRESH ? ' <span class="chip gold" style="margin-left:4px">Today’s freshest signal</span>' : '');
+  $('vHead').textContent = v.head;
+  $('vLine').innerHTML = m && m.deliv != null
+    ? `Today <b class="num">${m.deliv.toFixed(1)}%</b> of traded shares were delivered. ${esc(CUR)} usually sees <b class="num">${m.normal.toFixed(1)}%</b>. ${v.line}`
+    : v.line;
+  const c = m ? context(m, band) : null;
+  if (c) {
+    const col = c[0] === 'ok' ? ['var(--gold-soft)', 'var(--gold-ink)'] : c[0] === 'warn' ? ['var(--down-soft)', 'var(--down)'] : ['var(--tint-2)', 'var(--ink-3)'];
+    $('vCtx').style.display = ''; $('vCtx').innerHTML = `<span class="ic" style="background:${col[0]};color:${col[1]}">${c[1]}</span><span>${c[2]}</span>`;
+  } else $('vCtx').style.display = 'none';
+  Lens.tween($('fD'), m?.deliv, x => x.toFixed(1) + '%', 700);
+  Lens.tween($('fN'), m?.normal, x => x.toFixed(1) + '%', 700);
+  Lens.tween($('fG'), m?.rel_5, x => sgn(x, 1, ''), 700);
+  $('fG').className = 'num ' + cls(m?.rel_5);
+}
+function renderMethod(m) {
+  if (!m) { $('method').innerHTML = '<p class="empty">Not enough history to score this stock yet.</p>'; return; }
+  const bm = META.method;
+  $('method').innerHTML = [
+    ['Delivery today', 'Shares actually taken home by buyers', m.deliv.toFixed(1) + '%'],
+    ['Its usual level', `Median of the previous ${bm.baseline_days} days`, m.normal.toFixed(1) + '%'],
+    ['Above / below usual', '5-day average of the difference', sgn(m.rel_5, 1, ' pts')],
+    ['Rank vs its own history', `Against its last ${bm.history_days} trading days`, `${capScore(m.score)} / 100`],
+  ].map((s, i) => `<div class="step"><span class="k">${i + 1}</span><span>${s[0]}<small>${s[1]}</small></span><span class="v">${s[2]}</span></div>`).join('');
+}
+function renderZone(d) {
+  const rg = d.regime, cur = d.current_zone, lastS = d.smooth.length ? d.smooth[d.smooth.length - 1] : null;
+  const head = cur ? (cur.kind === 'accumulation'
+      ? `<span class="pill strong">In a buyer zone</span><p style="margin-top:10px">Since <b>${dstr(cur.start)}</b> — ${cur.days} trading days of delivery clearly above usual.</p>`
+      : `<span class="pill weak">In a weak-delivery zone</span><p style="margin-top:10px">Since <b>${dstr(cur.start)}</b> — ${cur.days} trading days of mostly same-day trading.</p>`)
+    : `<span class="pill plain">No active zone</span><p style="margin-top:10px">Smoothed delivery is <b class="num">${sgn(lastS?.rel, 1, ' pts')}</b> vs usual — not far enough to call a zone.</p>`;
+  const recent = d.zones.slice(-4).reverse().map(z => `<div class="zrow num"><i style="background:${z.kind === 'accumulation' ? C.gold : C.weak}"></i>
+      <span>${dstr(z.start, '2-digit')} – ${dstr(z.end, '2-digit')}</span><span class="muted">${z.days} days</span></div>`).join('');
+  $('zone').innerHTML = `${head}${recent ? `<div class="pro-only" style="margin-top:10px">${recent}</div>` : ''}
+    <p class="note pro-only" style="margin-top:10px">Shaded on the chart. Gold: 10-day smoothed delivery rose ${rg.enter_pts}+ pts above usual and stays until it falls under ${rg.exit_pts}. Grey: the mirror image. Past data only; descriptive, not a trading signal.</p>`;
+}
+function renderEvents(ev) {
+  $('events').innerHTML = !ev.length ? '<p class="empty">No sharp rise (20%+ in 20 days) in the last year.</p>' :
+    `<p class="note" style="margin-bottom:6px">Each rise, the delivery at that moment, and how it did against the Nifty 500 over the next 60 days.</p>` +
+    ev.slice().reverse().map(e => {
+      const out = e.status === 'complete' ? `60 days vs Nifty: <b class="num">${arrow(e.exc_60, 1)}</b>` : '<span class="muted">still playing out</span>';
+      return `<div class="evr"><span class="num">${dstr(e.date, '2-digit')}</span><b class="num up">▲ ${Math.round(e.move)}%</b><span>${Lens.pill(e.group === 'Mid' ? 'Neutral' : e.group, null, true)} <span class="small">${out}</span></span></div>`;
+    }).join('');
+}
+function renderEvidence() {
+  const ev = META.evidence, mx = Math.max(...Object.values(ev.exc20).map(Math.abs), 0.1);
+  $('evh').innerHTML = `What history says <span class="muted" style="font-weight:400;font-size:13px">· ${ev.n_events} past rises</span>`;
+  $('evidence').innerHTML = `<p class="note">Extra return vs Nifty 500 in the 20 days after a sharp rise, by delivery at the time:</p>
+    <div class="xb">${[['High', 'Strong', C.gold], ['Mid', 'Normal', C.mid], ['Low', 'Weak', C.weak]].map(([k, n, c]) =>
+      `<div class="r"><span>${n}</span><span class="t"><i data-w="${Math.max(2, Math.abs(ev.exc20[k]) / mx * 100)}" style="background:${c}"></i></span><b class="${cls(ev.exc20[k])}">${sgn(ev.exc20[k])}</b></div>`).join('')}</div>
+    <div class="duo2"><div><b>${ev.rt_high}% vs ${ev.rt_low}%</b>gave back half the rise (Strong vs Weak). Lower is better.</div><div><b>${ev.beat_high}% vs ${ev.beat_low}%</b>beat the Nifty 500 within 60 days.</div></div>
+    <p class="note" style="margin-top:12px">Strong − Weak at 20 days: <b>${sgn(ev.diff_20, 1, ' pts')}</b> (p = ${ev.p_20.toFixed(2)}, ${ev.p_20 < .05 ? 'significant' : 'suggestive, not proven'}). At 60 days: ${sgn(ev.diff_60, 1, ' pts')} (p = ${ev.p_60.toFixed(2)}). One year of data is a pilot.</p>`;
+  $('evidence').closest('details').addEventListener('toggle', function f(e) { if (e.target.open) { this.querySelectorAll('.xb i').forEach(i => i.style.width = i.dataset.w + '%'); } });
+}
+
+// ================================================================ load a stock
+function saveHash() { if (CUR) history.replaceState(null, '', `#${encodeURIComponent(CUR)}?i=${INTERVAL}&r=${RANGE}`); }
+async function load(sym) {
+  if (!sym) return;
+  const prevSym = CUR;
+  CUR = sym; saveHash();
+  document.querySelectorAll('#wl .wl-row').forEach(r => r.classList.toggle('on', r.dataset.s === sym));
+  try { localStorage.setItem('dl-last-symbol', sym); } catch (e) {}
+  document.querySelector('.wl-row.on')?.scrollIntoView({ block: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' });
+  let d;
+  try { d = await getJSON('/api/stock/' + encodeURIComponent(sym)); } catch (e) { Lens.toast(`${sym}: ${e.message}`); return; }
+  if (d.symbol !== CUR) return;
+  RAW = d;
+  swapAnim(render);
+  const m = d.method || {};
+  const symEl = $('sym');
+  if (prevSym && prevSym !== sym && !reduceMotion) symEl.animate([{ opacity: 0, transform: 'translateY(10px)', filter: 'blur(4px)' }, { opacity: 1, transform: 'none', filter: 'none' }], { duration: 520, easing: 'cubic-bezier(.16,1,.3,1)' });
+  symEl.textContent = sym; $('name').textContent = d.name;
+  Lens.tween($('last'), m.close, v => fmt(v), prevSym && prevSym !== sym ? 600 : 0);
+  $('chg').innerHTML = `${arrow(m.chg_1d)} today · ${arrow(m.ret_20, 1)} 20 days`;
+  $('last').classList.remove('flash-up', 'flash-down'); void $('last').offsetWidth;
+  if (!reduceMotion && prevSym !== sym && m.chg_1d != null) $('last').classList.add(m.chg_1d >= 0 ? 'flash-up' : 'flash-down');
+  $('bandBadge').innerHTML = m.band ? Lens.pill(m.band, m.score) : '';
+  renderVerdict(d.method); renderMethod(d.method); renderZone(d); renderEvents(d.events);
+  document.title = `${sym} · Holdfast`;
+  loadImpi(sym);
+}
+
+// ================================================================ IMPI panel (Pro)
+const FEAT = { deliv_z20: 'Delivery vs its year (20d)', deliv_z5: 'Delivery vs its year (5d)', deliv_pct: 'Delivery % today', deliv_accum: 'Delivery while price flat',
+  deliv_accum_flag: 'Price flat (accumulation window)', deliv_trend_5_20: 'Delivery trend 5d vs 20d', deliv_pct_rank252: 'Delivery rank in its year',
+  vol_z: 'Volume vs its year', updown_vol_log: 'Up vs down volume', vol_ratio20: 'Volume vs 20d average', log_amihud20: 'Illiquidity (Amihud)',
+  log_turnover60: 'Size (turnover)', turnover_z20: 'Turnover shock', bbw_pct252: 'Bollinger width percentile', atr_ratio: 'ATR 14 / 50',
+  nr7_count10: 'Narrow-range days', range_contraction: 'Range contraction', vcp_valid: 'VCP pattern present', vcp_n: 'VCP contractions',
+  vcp_depth_first: 'VCP first depth', vcp_depth_last: 'VCP last depth', vcp_base_len: 'VCP base length', vcp_vol_trend: 'VCP volume trend',
+  oi_chg5: 'Futures OI 5d change', oi_chg20: 'Futures OI 20d change', oi_cot: 'Futures OI in its year', oi_cot_d5: 'OI position 5d change',
+  oi_cot_dd: 'OI acceleration', oi_persist: 'OI run length', oi_div_mag: 'Price-OI divergence', price_oi_align: 'Price-OI alignment',
+  long_buildup: 'Long build-up', short_covering: 'Short covering', short_buildup: 'Short build-up', long_unwinding: 'Long unwinding',
+  basis_ann: 'Futures basis (annual)', log_pcr_oi: 'Put/call OI', ret_1: 'Return 1d', ret_5: 'Return 5d', ret_20: 'Return 20d', ret_60: 'Return 60d',
+  ret_120: 'Return 120d', dist_52w_high: 'Distance from 52w high', dist_52w_low: 'Distance from 52w low', rv20: 'Volatility (20d)',
+  rv_5_20: 'Vol 5d / 20d', rv_20_60: 'Vol 20d / 60d', rv20_pct252: 'Volatility percentile', clv5: 'Close in daily range', gap_1: 'Opening gap',
+  up_days_20: 'Up days (20d)', vix_pct252: 'India VIX percentile', nifty_trend_50_200: 'Nifty trend', nifty_above_200: 'Nifty above 200d',
+  breadth10: 'Market breadth', fii_flow20: 'FII futures flow', dii_flow20: 'DII futures flow',
+  iv30: 'Implied volatility (30d)', iv_rv: 'Implied / realised vol', iv_rv_spread: 'Implied − realised vol', iv_term: 'IV term structure',
+  iv_skew: 'Put − call skew', iv_smile: 'IV smile', iv_chg5: 'IV change 5d', iv_chg20: 'IV change 20d', iv_pct252: 'IV percentile (1y)',
+  iv_z60: 'IV vs its 60d', dte_near: 'Days to expiry', log_pcr_vol: 'Put/call volume', log_opt_fut_vol: 'Options vs futures volume',
+  opt_vol_z60: 'Options volume shock' };
+const TGT = { label_10: ['Breakout success', '+2 ATR before −1 ATR in 10 days', 'breakout'], label_xs10: ['Beats the median F&O stock', 'next 10 days', 'rank'],
+  vol_exp: ['Big move (volatility expansion)', '10-day volatility rises 1.5×', 'vol'], label_xs20: ['Beats the median F&O stock', 'next 20 days', 'rank'],
+  label_20: ['Breakout success', '+2 ATR before −1 ATR in 20 days', 'breakout'] };
+const TGT_ROW = { label_10: ['p_breakout', 'breakout_pct'], label_xs10: ['p_outperform', 'xs_pct'], vol_exp: ['p_vol_expansion', 'vol_pct'],
+  label_xs20: ['p_outperform20', 'xs20_pct'], label_20: ['p_breakout20', 'breakout20_pct'] };
+const TGT_BTN = { vol_exp: 'Volatility', label_xs10: 'Rank 10d', label_xs20: 'Rank 20d', label_10: 'Breakout', label_20: 'Breakout 20d' };
+function featName(f) {
+  if (FEAT[f]) return FEAT[f];
+  const m = f.match(/^(fii|dii|pro|client)_(fut_idx|fut_stk)_(.+)$/);
+  if (m) return `${m[1].toUpperCase()} ${m[2] === 'fut_idx' ? 'index' : 'stock'} futures ${m[3].replace(/_/g, ' ')}`;
+  return f.replace(/_/g, ' ');
+}
+async function loadImpi(sym) {
+  try {
+    const r = await fetch('/api/impi/stock/' + encodeURIComponent(sym));
+    if (!r.ok) { const b = await r.json().catch(() => ({})); IMPI = null; renderImpi(null, b.detail); if (VIEW) paintData(); return; }
+    const d = await r.json(); if (d.symbol !== CUR) return;
+    IMPI = d; renderImpi(d); if (VIEW) paintData();
+  } catch (e) { IMPI = null; renderImpi(null, 'IMPI data could not be loaded.'); }
+}
+function renderImpi(d, why) {
+  const el = $('impi');
+  if (!d) { el.innerHTML = `<p class="empty">${esc(why || 'IMPI live data is not available.')}</p>`; return; }
+  if (!d.covered) { el.innerHTML = `<p class="empty">${esc(d.symbol)} is not in the F&amp;O segment. IMPI covers F&amp;O stocks only, because its positioning features need futures data.</p>`; return; }
+  const r = d.row, M = d.models || {};
+  const TK = Object.keys(TGT_BTN).filter(k => r[TGT_ROW[k][0]] != null || M[k]);
+  if (!TK.includes(IMPI_TGT)) IMPI_TGT = TK[0];
+  const rows = TK.map(k => [k, r[TGT_ROW[k][0]], r[TGT_ROW[k][1]]]).map(([k, p, pc]) => {
+    const b = M[k]?.posthoc_base_rate ?? null, scale = Math.max(0.6, (b || 0.3) * 2), weak = M[k]?.posthoc_test_auc != null && M[k].posthoc_test_auc < 0.52;
+    return `<div class="ip-row"><span class="t">${TGT[k][0]}${Lens.qm(TGT[k][2])}<small>${TGT[k][1]}${b != null ? ` · base rate ${(b * 100).toFixed(0)}%` : ''}${pc != null ? ` · percentile ${Math.round(pc)}` : ''}${M[k]?.version ? ` · ${M[k].version}` : ''}${weak ? ' · <b style="color:var(--down)">no edge in 2023+ test</b>' : ''}</small></span>
+      <span class="v">${p == null ? '–' : (p * 100).toFixed(0) + '%'}</span>
+      <span class="ip-track"><i data-w="${p == null ? 0 : Math.min(100, p / scale * 100).toFixed(1)}" ${weak ? 'style="background:var(--ink-4)"' : ''}></i>${b != null ? `<b style="left:${Math.min(100, b / scale * 100).toFixed(1)}%" title="Base rate"></b>` : ''}</span></div>`;
+  }).join('');
+  const q = TK.map(k => M[k] ? `${TGT_BTN[k].toLowerCase()} ${fmt(M[k].cv_auc, 2)} / ${fmt(M[k].posthoc_test_auc, 2)}` : '').filter(Boolean).join(' · ');
+  const ivp = v => v == null ? '–' : (v * 100).toFixed(1) + '%';
+  const bu = r.long_buildup === 1 ? 'Long build-up' : r.short_covering === 1 ? 'Short covering' : r.short_buildup === 1 ? 'Short build-up' : r.long_unwinding === 1 ? 'Long unwinding' : '–';
+  const ev = r.events || [];
+  const chips = ev.filter(e => e !== 'all').map(e => `<span class="chip gold">${e === 'strict' ? 'VCP breakout today' : 'Compression breakout today'}</span>`).join(' ')
+    + (ev.includes('all') ? ' <span class="chip">20-day high today</span>' : '');
+  const pctTxt = v => v == null ? '–' : sgn(v * 100, 1);
+  el.innerHTML = `<p class="note">F&amp;O model · data as of ${dstr(d.as_of)} · gold tick = base rate</p>${rows}
+    ${chips ? `<div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">${chips}</div>` : ''}
+    <div class="ip-grid">
+      <div>Rank vs F&amp;O today<b>${r.xs_pct == null ? '–' : Math.round(r.xs_pct)} / 100</b></div>
+      <div>Delivery vs its year<b>${r.deliv_z20 == null ? '–' : (r.deliv_z20 > 0 ? '+' : '') + r.deliv_z20.toFixed(2) + ' σ'}</b></div>
+      <div>Squeeze (BBW pct)<b>${r.bbw_pct252 == null ? '–' : Math.round(r.bbw_pct252)}</b></div>
+      <div>VCP pattern<b>${r.vcp_valid ? `${r.vcp_n} contractions` : 'none'}</b></div>
+      <div>Futures OI · 20d<b class="${cls(r.oi_chg20)}">${pctTxt(r.oi_chg20)}</b></div>
+      <div>OI build-up<b>${bu}</b></div>
+      <div>Futures basis (ann.)<b>${pctTxt(r.basis_ann)}</b></div>
+      <div>Put / call OI<b>${r.log_pcr_oi == null ? '–' : Math.exp(r.log_pcr_oi).toFixed(2)}</b></div>
+      ${r.iv30 === undefined ? '' : `<div>Implied vol (30d)<b>${ivp(r.iv30)}</b></div>
+      <div>Implied / realised<b>${r.iv_rv == null ? '–' : r.iv_rv.toFixed(2) + '×'}</b></div>
+      <div>IV percentile (1y)<b>${r.iv_pct252 == null ? '–' : Math.round(r.iv_pct252)}</b></div>
+      <div>Put − call skew<b>${r.iv_skew == null ? '–' : (r.iv_skew > 0 ? '+' : '') + (r.iv_skew * 100).toFixed(1) + ' pts'}</b></div>`}
+    </div>
+    ${v4Block(r.v4, d.v4_check || {})}
+    <div style="margin-top:16px"><div class="seg sm" id="ipSeg" style="flex-wrap:wrap">${TK.map(k => `<button data-t="${k}" class="${k === IMPI_TGT ? 'on' : ''}">${TGT_BTN[k]}</button>`).join('')}</div>
+      <div id="ipWhy" style="margin-top:8px"></div></div>
+    <div class="ip-q">Model quality, CV AUC / post-hoc test AUC: ${q || '–'}. 0.50 = coin flip. Volatility is predictable; direction barely is.
+      <a class="link" href="/research">Research</a> · chart: ● compression breakout, ■ VCP breakout. Not investment advice.</div>`;
+  requestAnimationFrame(() => el.querySelectorAll('.ip-track i').forEach(i => { i.style.width = i.dataset.w + '%'; }));
+  renderWhy();
+  Lens.seg($('ipSeg'), t => { IMPI_TGT = t; renderWhy(); }, 't');
+}
+// v4 delivery signals (pre_registered_v4.md). D1 = delivery -> move size (either direction); D2 = signed delivery.
+function v4Block(v, chk) {
+  if (!v) return '';
+  const verdict = k => { const c = chk[k]; if (!c) return 'not yet tested';
+    return c.supported ? `supported in the 2023–26 check (q ${fmt(c.bh_q, 3)})` : c.direction_ok === false && c.bh_q != null && c.bh_q <= 0.1
+      ? 'significant in the opposite direction in the 2023–26 check' : 'not supported in the 2023–26 check'; };
+  const flowCls = v.flow === 'accumulation' ? 'up' : v.flow === 'distribution' ? 'down' : '';
+  const chips = (v.move_watch ? '<span class="chip gold">Big move watch</span> ' : '')
+    + (v.loose_vcp_today ? '<span class="chip">Loose VCP breakout today</span> ' : '')
+    + (v.divergent_breakout ? '<span class="chip">Breakout with falling OI</span>' : '');
+  return `<p class="note" style="margin-top:16px">Delivery signals (v4) · delivery shows conviction, not direction ${Lens.qm('acc')}</p>
+    <div class="ip-grid">
+      <div title="Delivery vs its own history, ranked among today's F&amp;O stocks. High delivery preceded bigger moves in either direction (D1).">Expected move size<b>${v.move_pct == null ? '–' : Math.round(v.move_pct) + ' / 100'}</b></div>
+      <div title="Delivery above normal on up days = accumulation, on down days = distribution (D2).">Delivery flow<b class="${flowCls}">${v.flow ? v.flow[0].toUpperCase() + v.flow.slice(1) : '–'}</b></div>
+    </div>${chips ? `<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">${chips}</div>` : ''}
+    <div class="ip-q">Move size (D1): ${verdict('D1')}. Delivery flow (D2): ${verdict('D2')}. Loose VCP + high delivery (V1): ${verdict('V1')}.
+      Live forward test: logged nightly from the first trading day after 9 Oct 2026. Chart: toggle “Signals”.</div>`;
+}
+function renderWhy() {
+  const ex = (IMPI && IMPI.row && IMPI.row.explain ? IMPI.row.explain : {})[IMPI_TGT] || [];
+  $('ipWhy').innerHTML = ex.length ? `<p class="note" style="margin-bottom:4px">What moved this stock's score most (XGBoost part, log-odds)</p>` +
+    ex.map(x => `<div class="why-row"><span>${esc(featName(x.feature))}</span><span class="num ${x.contrib > 0 ? 'up' : 'down'}">${x.contrib > 0 ? '▲' : '▼'} ${Math.abs(x.contrib).toFixed(2)}</span></div>`).join('')
+    : '<p class="empty">No per-feature breakdown for this model.</p>';
+}
+
+// ================================================================ assistant
+const chat = $('chat'), msgs = $('msgs');
+function md(text) {
+  const lines = text.split('\n'); let html = '', inList = false;
+  const inline = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  for (const raw of lines) {
+    const l = raw.trimEnd();
+    if (l.startsWith('• ')) { if (!inList) { html += '<ul>'; inList = true; } html += `<li>${inline(l.slice(2))}</li>`; continue; }
+    if (inList) { html += '</ul>'; inList = false; }
+    if (!l) continue;
+    html += /^_.*_$/.test(l) ? `<p class="note">${inline(l.slice(1, -1))}</p>` : `<p>${inline(l)}</p>`;
+  }
+  return html + (inList ? '</ul>' : '');
+}
+function addMsg(who, html) {
+  const el = document.createElement('div'); el.className = 'msg ' + who;
+  if (who === 'bot') el.innerHTML = `<span class="av"><svg width="14" height="14" viewBox="0 0 28 28"><rect x="3" y="3" width="22" height="22" rx="7" fill="none" stroke="currentColor" stroke-width="3"/><rect x="8" y="13" width="12" height="7.5" rx="2.4" fill="#0071E3"/></svg></span><div class="bubble">${html}</div>`;
+  else el.textContent = html;
+  msgs.appendChild(el); msgs.scrollTop = msgs.scrollHeight; return el;
+}
+function setChips(list) { $('chips').innerHTML = (list || []).map(s => `<button type="button">${esc(s)}</button>`).join(''); }
+$('chips').onclick = e => { if (e.target.tagName === 'BUTTON') ask(e.target.textContent); };
+async function ask(q) {
+  if (q) addMsg('me', q);
+  setChips([]);
+  const typing = document.createElement('div'); typing.className = 'msg bot';
+  typing.innerHTML = '<span class="av"></span><div class="bubble typing"><i></i><i></i><i></i></div>'; msgs.appendChild(typing); msgs.scrollTop = msgs.scrollHeight;
+  try {
+    const [res] = await Promise.all([getJSON('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ q, symbol: CUR }) }),
+                                     new Promise(r => setTimeout(r, reduceMotion ? 0 : 550))]);
+    typing.remove();
+    addMsg('bot', md(res.answer));
+    if (res.load && res.load !== CUR) load(res.load);
+    setChips(res.suggest);
+  } catch (e) { typing.remove(); addMsg('bot', `<p>Sorry — I couldn’t reach the data (${esc(e.message)}).</p>`); }
+}
+let greeted = false;
+function openChat(open = true) {
+  chat.classList.toggle('open', open); $('askBtn').classList.toggle('hide', open);
+  if (open) { setTimeout(() => $('chatIn').focus(), 250); if (!greeted) { greeted = true; ask(''); } }
+}
+$('askBtn').onclick = () => openChat(true);
+$('chatClose').onclick = () => openChat(false);
+$('chatForm').onsubmit = e => { e.preventDefault(); const q = $('chatIn').value.trim(); if (!q) return; $('chatIn').value = ''; ask(q); };
+
+// ================================================================ keyboard
+$('help').onclick = e => { if (e.target === $('help')) $('help').classList.remove('open'); };
+document.addEventListener('keydown', e => {
+  const typing = ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName);
+  if (e.key === 'Escape') { $('help').classList.remove('open'); closeDrawer(); if (chat.classList.contains('open') && document.activeElement === $('chatIn')) openChat(false); setTool('cursor'); if (typing) document.activeElement.blur(); return; }
+  if (typing || e.ctrlKey || e.metaKey || e.altKey || Lens.palette.isOpen()) return;
+  const k = e.key.toLowerCase();
+  if (k === '?') $('help').classList.toggle('open');
+  else if (k === 'p') Lens.setMode(isSimple() ? 'pro' : 'simple');
+  else if (k === 'a') { e.preventDefault(); openChat(!chat.classList.contains('open')); }
+  else if (k === 'f') document.fullscreenElement ? document.exitFullscreen() : $('center').requestFullscreen?.();
+  else if (k === 'd' || k === 'w') setInterval_(k.toUpperCase());
+  else if ('12345'.includes(k)) setRange([1, 3, 6, 12, 0][+k - 1]);
+  else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    const r = rowsFor(TAB), i = r.findIndex(x => x.symbol === CUR), nx = r[Math.max(0, Math.min(r.length - 1, i + (e.key === 'ArrowDown' ? 1 : -1)))];
+    if (nx) { e.preventDefault(); load(nx.symbol); }
+  }
+});
+
+// ================================================================ init
+(async function init() {
+  applyMode();
+  $('wl').innerHTML = Array.from({ length: 12 }, () => '<div class="wl-row" style="cursor:default"><span class="sk" style="height:14px;width:80px"></span><span class="sk" style="height:14px"></span><span class="sk" style="height:22px;width:60px"></span></div>').join('');
+  try {
+    [META, { rows: ROWS }] = await Promise.all([getJSON('/api/meta'), getJSON('/api/watchlist')]);
+  } catch (e) { $('wlnote').textContent = 'Data could not be loaded: ' + e.message; return; }
+  Lens.palette.setRows(ROWS);
+  $('asof') && ($('asof').textContent = META.as_of); $('disc').textContent = META.disclaimer;
+  renderEvidence();
+  const [h, qs] = decodeURIComponent(location.hash.slice(1)).split('?'), params = new URLSearchParams(qs || '');
+  if (params.get('i') === 'W' && !isSimple()) { INTERVAL = 'W'; $('ivl')._set('W', false); }
+  if (params.get('r') != null && [0, 1, 3, 6, 12].includes(+params.get('r'))) { RANGE = +params.get('r'); $('ranges')._set(String(RANGE), false); }
+  let last = null;
+  try { last = localStorage.getItem('dl-last-symbol'); } catch (e) {}
+  const start = (h || '').toUpperCase();
+  const known = s => s && ROWS.some(r => r.symbol === s);
+  freshestSignal();
+  renderWL();
+  load(known(start) ? start : known(last) ? last : FRESH);
+  if (window.watchData) {
+    watchData({ url: '/api/meta', read: j => j.as_of });
+    watchData({ url: '/api/impi/meta', read: j => j.available ? j.as_of : null, show: false });
+  }
+  window.addEventListener('hashchange', () => {
+    const sym = decodeURIComponent(location.hash.slice(1)).split('?')[0].toUpperCase();
+    if (sym && sym !== CUR && ROWS.some(r => r.symbol === sym)) load(sym);
+  });
+})();
+</script>
+</body>
+</html>

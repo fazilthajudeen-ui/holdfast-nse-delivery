@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IMPI Scanner · Delivery Lens</title>
+<link rel="stylesheet" href="/static/impi.css">
+<script src="/static/impi.js"></script>
+<script src="/static/freshness.js"></script>
+</head>
+<body>
+<div id="topbar"></div>
+<main class="wrap">
+  <h1>Scanner</h1>
+  <p class="sub">Every F&amp;O stock on the latest trading day with IMPI's model outputs, delivery, compression and futures positioning.
+    Probabilities come from post-hoc models trained on 2015–2022; read the <a href="/research">research page</a> for how well they actually work.
+    Research tool — not investment advice.</p>
+  <div class="warn" id="warn" style="display:none"></div>
+  <div class="toolbar">
+    <input id="q" placeholder="Search symbol" autocomplete="off" style="width:180px" aria-label="Search symbol">
+    <select id="sector" aria-label="Sector"><option value="">All sectors</option></select>
+    <div class="seg" id="evseg"><button data-e="" class="on">All stocks</button><button data-e="broad">Compression breakouts</button><button data-e="strict">VCP breakouts</button><button data-e="all">20-day breakouts</button></div>
+    <span class="muted" id="count" style="margin-left:auto"></span>
+  </div>
+  <div class="card tablecard">
+    <table class="t" id="tbl">
+      <thead><tr>
+        <th data-k="symbol" class="l">Symbol</th><th data-k="sector" class="l">Sector</th><th data-k="close">Close</th>
+        <th data-k="ret_1">1D</th><th data-k="ret_20">20D</th>
+        <th data-k="breakout_pct" title="Calibrated probability the price reaches +2 ATR before −1 ATR within 10 days; the bar is the model's percentile among today's F&amp;O stocks. Weak model (test AUC 0.51): many stocks share a probability.">P(breakout)</th>
+        <th data-k="xs_pct" title="Model rank among today's F&O stocks for beating the median stock over 10 days">Rank vs F&amp;O</th>
+        <th data-k="vol_pct" title="Calibrated probability that 10-day volatility rises 1.5x or more; the bar is the model's percentile among today's F&amp;O stocks.">P(vol ↑)</th>
+        <th data-k="deliv_z20" title="20-day delivery % vs its own past year (z-score)">Delivery z</th>
+        <th data-k="bbw_pct252" title="Bollinger bandwidth percentile over a year (low = compressed)">BBW pct</th>
+        <th data-k="oi_chg20" title="Change in futures open interest over 20 days">OI 20D</th>
+        <th data-k="buildup" class="l">OI build-up</th><th data-k="events" class="l">Today</th>
+      </tr></thead>
+      <tbody id="rows"><tr><td colspan="13" class="empty">Loading…</td></tr></tbody>
+    </table>
+  </div>
+  <p class="foot">Data: NSE bhavcopy, delivery and F&amp;O files · IMPI live update every weekday evening · <span id="disc"></span></p>
+</main>
+<script>
+document.getElementById('topbar').innerHTML = topBar('Scanner');
+initTheme();
+let ROWS = [], SORT = { k: 'xs_pct', dir: -1 }, EV = '';
+const buildup = r => r.long_buildup === 1 ? 'Long build-up' : r.short_covering === 1 ? 'Short covering' :
+  r.short_buildup === 1 ? 'Short build-up' : r.long_unwinding === 1 ? 'Long unwinding' : '–';
+function val(r, k) { if (k === 'buildup') return buildup(r); if (k === 'events') return (r.events || []).join(','); return r[k]; }
+function render() {
+  const q = $('q').value.trim().toUpperCase(), sec = $('sector').value;
+  let r = ROWS.filter(x => (!q || x.symbol.startsWith(q)) && (!sec || x.sector === sec) && (!EV || (x.events || []).includes(EV)));
+  r.sort((a, b) => {
+    const va = val(a, SORT.k), vb = val(b, SORT.k);
+    if (va == null && vb == null) return 0; if (va == null) return 1; if (vb == null) return -1;
+    return (typeof va === 'string' ? va.localeCompare(vb) : va - vb) * SORT.dir;
+  });
+  document.querySelectorAll('#tbl th').forEach(th => { const on = th.dataset.k === SORT.k; th.classList.toggle('sorted', on); th.dataset.dir = on ? (SORT.dir > 0 ? '↑' : '↓') : ''; });
+  $('count').textContent = `${r.length} of ${ROWS.length} stocks`;
+  // probability (calibrated) + bar = within-day percentile of the model score
+  const bar = (p, pc) => p == null ? '–' : `<span class="num">${(p * 100).toFixed(1)}%</span><span class="bar" title="Percentile among today's F&O stocks: ${pc == null ? '–' : Math.round(pc)}"><i style="width:${pc == null ? 0 : Math.max(2, pc).toFixed(0)}%"></i></span>`;
+  $('rows').innerHTML = r.map(x => `<tr data-s="${esc(x.symbol)}">
+    <td><b>${esc(x.symbol)}</b></td><td class="l muted">${esc(x.sector)}</td><td class="num">${fmt(x.close)}</td>
+    <td class="num ${cls(x.ret_1)}">${sgnPct(x.ret_1, 2)}</td><td class="num ${cls(x.ret_20)}">${sgnPct(x.ret_20)}</td>
+    <td>${bar(x.p_breakout, x.breakout_pct)}</td><td class="num">${x.xs_pct == null ? '–' : Math.round(x.xs_pct)}</td><td>${bar(x.p_vol_expansion, x.vol_pct)}</td>
+    <td class="num ${cls(x.deliv_z20)}">${fmt(x.deliv_z20)}</td><td class="num">${x.bbw_pct252 == null ? '–' : Math.round(x.bbw_pct252)}</td>
+    <td class="num ${cls(x.oi_chg20)}">${sgnPct(x.oi_chg20)}</td><td class="l">${buildup(x)}</td>
+    <td class="l ev">${['broad', 'strict', 'all'].filter(e => (x.events || []).includes(e)).map(e => `<span class="chip ${e}">${e === 'broad' ? 'Compression' : e === 'strict' ? 'VCP' : '20d high'}</span>`).join('')}</td></tr>`).join('')
+    || '<tr><td colspan="13" class="empty">No stocks match these filters today.</td></tr>';
+}
+$('tbl').querySelector('thead').onclick = e => {
+  const k = e.target.closest('th')?.dataset.k; if (!k) return;
+  SORT = { k, dir: SORT.k === k ? -SORT.dir : (['symbol', 'sector', 'buildup', 'events'].includes(k) ? 1 : -1) }; render();
+};
+$('rows').onclick = e => { const tr = e.target.closest('tr[data-s]'); if (tr) location.href = '/terminal#' + encodeURIComponent(tr.dataset.s); };
+$('q').oninput = render; $('sector').onchange = render;
+$('evseg').onclick = e => { if (e.target.dataset.e == null) return; EV = e.target.dataset.e;
+  document.querySelectorAll('#evseg button').forEach(b => b.classList.toggle('on', b === e.target)); render(); };
+(async () => {
+  try {
+    const [meta, sc] = await Promise.all([getJSON('/api/impi/meta'), getJSON('/api/impi/scanner')]);
+    $('asof').textContent = dateStr(sc.as_of); $('disc').textContent = meta.disclaimer || '';
+    ROWS = sc.rows;
+    [...new Set(ROWS.map(r => r.sector))].sort().forEach(s => { const o = document.createElement('option'); o.value = o.textContent = s; $('sector').appendChild(o); });
+    const ev = meta.events_today || {};
+    $('evseg').querySelectorAll('button').forEach(b => { if (b.dataset.e) b.textContent += ` (${ev[b.dataset.e] ?? 0})`; });
+    render();
+  } catch (err) {
+    $('warn').style.display = 'block'; $('warn').textContent = err.message;
+    $('rows').innerHTML = '<tr><td colspan="13" class="empty">IMPI data unavailable.</td></tr>';
+  }
+})();
+</script>
+</body>
+</html>
