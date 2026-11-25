@@ -1,0 +1,12 @@
+% Loaded BEFORE \documentclass. XeTeX (e.g. Tectonic): IEEEtran probes the Type-1 Times family 'ptm' while
+% loading; map those probes silently. preamble.tex then sets TeX Gyre Termes / Cursor with fontspec.
+\RequirePackage{iftex}
+\ifXeTeX
+  \DeclareFontFamily{TU}{ptm}{}
+  \DeclareFontShape{TU}{ptm}{m}{n}{<->ssub * lmr/m/n}{}
+  \DeclareFontShape{TU}{ptm}{m}{it}{<->ssub * lmr/m/it}{}
+  \DeclareFontShape{TU}{ptm}{bx}{n}{<->ssub * lmr/bx/n}{}
+  \DeclareFontShape{TU}{ptm}{bx}{it}{<->ssub * lmr/bx/it}{}
+  \DeclareFontShape{TU}{ptm}{b}{n}{<->ssub * lmr/bx/n}{}
+  \DeclareFontShape{TU}{ptm}{b}{it}{<->ssub * lmr/bx/it}{}
+\fi

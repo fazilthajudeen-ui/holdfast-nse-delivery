@@ -1,0 +1,27 @@
+% Preamble for main.tex (loaded after \documentclass). No package changes margins, spacing or font sizes.
+% Fonts: Times (IEEEtran default) - under XeTeX via TeX Gyre Termes, the Times clone, since XeTeX cannot load
+% the Type-1 Times; under pdfLaTeX via newtxtext. Math: newtxmath (Times-compatible).
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{url}
+% let long DOIs in the references break between characters (avoids underfull reference lines)
+\Urlmuskip=0mu plus 1mu
+\expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks\do0\do1\do2\do3\do4\do5\do6\do7\do8\do9}
+\usepackage{placeins}
+\ifXeTeX
+  \usepackage{newtxmath}
+  \usepackage{fontspec}
+  \setmainfont{texgyretermes}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold,
+    ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+  \setmonofont{texgyrecursor}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold,
+    ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage{newtxtext,newtxmath}
+\fi
+\usepackage{textcomp}
+\input{numbers}

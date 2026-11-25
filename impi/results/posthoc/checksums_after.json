@@ -1,0 +1,15 @@
+{
+  "label": "POST-HOC (designed after the test set was opened on 10 Oct 2026 09:23:35 IST)",
+  "when": "after",
+  "time": "2026-11-11T22:52:29",
+  "sha256": {
+    "results/results_log.csv": "f41fa207769183066e5211c3434158ee7cdb5cf677cd198d11ac2d1cd82377f5",
+    "results/test_lock.json": "815dc2578d2e49fc702e720b1733504e3837ff3740b7f406552ad4c43308cae7",
+    "results/metrics/p6_test.json": "0a859f843e4c7f694e7854581795efefc191e775608147fcf5e3d29f482ea199",
+    "results/metrics/p6_confirmatory_table.csv": "ef1de8710800e0c81d0e02a9a4eb336185846344063ed2b1bb34770d43d0583e",
+    "results/metrics/feature_freeze.json": "4937b3d29d7eef2b2bc647d6aae96182cab26518093491734387d9943ee20b2e",
+    "results/metrics/model_freeze.json": "fad839ac7d325a306089d4f4a0b0663310bead82615d152c35e0bfe008f87f65",
+    "data/processed/models/ml_frozen.pkl": "8eef6a6815a58f12d09476c3d97c2d7d739022d1b9d66c00b6685fb301bd2669",
+    "data/processed/models/composite.pkl": "0671c665cf535ca95b8ade54e74d9c88065ba355849bdca52ded568d63933bdf"
+  }
+}

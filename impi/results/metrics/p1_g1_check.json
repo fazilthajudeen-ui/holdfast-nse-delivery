@@ -1,0 +1,418 @@
+{
+  "available_at": {
+    "equity_raw": 0,
+    "fo_stock": 0,
+    "participant_oi": 0,
+    "index": 0,
+    "breadth": 0,
+    "ban_published_before_trade_date": 1
+  },
+  "truncation": [
+    {
+      "symbol": "INTELLECT",
+      "cut": 1198,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "INTELLECT",
+      "cut": 963,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "INTELLECT",
+      "cut": 1944,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "HDFCAMC",
+      "cut": 1730,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "HDFCAMC",
+      "cut": 1726,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "HDFCAMC",
+      "cut": 1249,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "JPASSOCIAT",
+      "cut": 2423,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "JPASSOCIAT",
+      "cut": 2469,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "JPASSOCIAT",
+      "cut": 577,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "RAYMOND",
+      "cut": 2673,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "RAYMOND",
+      "cut": 2666,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "RAYMOND",
+      "cut": 1874,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "PNBHOUSING",
+      "cut": 2139,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "PNBHOUSING",
+      "cut": 2178,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "PNBHOUSING",
+      "cut": 540,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "IRFC",
+      "cut": 1042,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "IRFC",
+      "cut": 1169,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "IRFC",
+      "cut": 959,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "ANANDRATHI",
+      "cut": 1063,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "ANANDRATHI",
+      "cut": 1079,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "ANANDRATHI",
+      "cut": 399,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "NAUKRI",
+      "cut": 2354,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "NAUKRI",
+      "cut": 1287,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "NAUKRI",
+      "cut": 1481,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "SAIL",
+      "cut": 2212,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "SAIL",
+      "cut": 2537,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "SAIL",
+      "cut": 1998,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "SONACOMS",
+      "cut": 1003,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "SONACOMS",
+      "cut": 1185,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "SONACOMS",
+      "cut": 1150,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "IFCI",
+      "cut": 2212,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "IFCI",
+      "cut": 2537,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "IFCI",
+      "cut": 1998,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "APLAPOLLO",
+      "cut": 1278,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "APLAPOLLO",
+      "cut": 1022,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "APLAPOLLO",
+      "cut": 2091,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "MPHASIS",
+      "cut": 2673,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "MPHASIS",
+      "cut": 2666,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "MPHASIS",
+      "cut": 1874,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "ADANIENT",
+      "cut": 2285,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "ADANIENT",
+      "cut": 2801,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "ADANIENT",
+      "cut": 2701,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "GSKCONS",
+      "cut": 1335,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "GSKCONS",
+      "cut": 1332,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "GSKCONS",
+      "cut": 987,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "DHFL",
+      "cut": 1328,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "DHFL",
+      "cut": 1503,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "DHFL",
+      "cut": 1213,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "JSWENERGY",
+      "cut": 1278,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "JSWENERGY",
+      "cut": 1022,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "JSWENERGY",
+      "cut": 2090,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "TITAN",
+      "cut": 2583,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "TITAN",
+      "cut": 1103,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "TITAN",
+      "cut": 1440,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "BAJAJ-AUTO",
+      "cut": 2735,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "BAJAJ-AUTO",
+      "cut": 2787,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    },
+    {
+      "symbol": "BAJAJ-AUTO",
+      "cut": 618,
+      "nan_pattern_equal": true,
+      "max_abs_diff": 0.0,
+      "vcp_equal": true
+    }
+  ],
+  "market_truncation": {
+    "cut": "2020-05-26",
+    "max_abs_diff": 0.0,
+    "nan_pattern_equal": true
+  },
+  "G1_PASS": true,
+  "n_checks": 57
+}

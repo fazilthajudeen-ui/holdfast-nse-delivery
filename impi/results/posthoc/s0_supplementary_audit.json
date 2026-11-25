@@ -1,0 +1,2027 @@
+{
+  "generated": "2026-11-11T21:25:21",
+  "note": "Supplementary audit. PRE-REGISTERED = re-report of a pre-registered quantity; POST-HOC = designed after the test set was opened (10 Oct 2026 09:23).",
+  "checksums_before": {
+    "results_log.csv": "f41fa20776918306",
+    "test_lock.json": "815dc2578d2e49fc",
+    "p6_test.json": "0a859f843e4c7f69",
+    "p6_confirmatory_table.csv": "ef1de8710800e0c8",
+    "ml_frozen.pkl": "8eef6a6815a58f12",
+    "composite.pkl": "0671c665cf535ca9"
+  },
+  "1_bh_family": {
+    "status": "PRE-REGISTERED",
+    "rows": [
+      {
+        "set": "full",
+        "test": "H1_STRICT",
+        "n": 29,
+        "diff": 0.12987012987012986,
+        "p": NaN,
+        "p_unguarded": 0.48431954854174664,
+        "bh_rank": null,
+        "m": 5,
+        "bh_q_recomputed": NaN,
+        "bh_q_locked": NaN,
+        "reject_q10": false,
+        "direction_ok": null,
+        "label": "insufficient data (n<30)"
+      },
+      {
+        "set": "full",
+        "test": "H2_STRICT",
+        "n": 28,
+        "diff": 0.11282051282051281,
+        "p": NaN,
+        "p_unguarded": 0.4680838662448845,
+        "bh_rank": null,
+        "m": 5,
+        "bh_q_recomputed": NaN,
+        "bh_q_locked": NaN,
+        "reject_q10": false,
+        "direction_ok": null,
+        "label": "insufficient data (n<30)"
+      },
+      {
+        "set": "full",
+        "test": "H3_STRICT",
+        "n": 29,
+        "diff": -0.076913867020721,
+        "p": NaN,
+        "p_unguarded": 0.9418837675350702,
+        "bh_rank": null,
+        "m": 5,
+        "bh_q_recomputed": NaN,
+        "bh_q_locked": NaN,
+        "reject_q10": false,
+        "direction_ok": null,
+        "label": "insufficient data (n<30)"
+      },
+      {
+        "set": "full",
+        "test": "H1_BROAD",
+        "n": 1796,
+        "diff": -0.00036622674795114274,
+        "p": 0.9869207739269847,
+        "p_unguarded": null,
+        "bh_rank": 5,
+        "m": 5,
+        "bh_q_recomputed": 0.9869207739269846,
+        "bh_q_locked": 0.9869207739269846,
+        "reject_q10": false,
+        "direction_ok": false,
+        "label": "ok"
+      },
+      {
+        "set": "full",
+        "test": "H2_BROAD",
+        "n": 1776,
+        "diff": -0.028062313273580886,
+        "p": 0.1714553523975123,
+        "p_unguarded": null,
+        "bh_rank": 3,
+        "m": 5,
+        "bh_q_recomputed": 0.2857589206625205,
+        "bh_q_locked": 0.2857589206625205,
+        "reject_q10": false,
+        "direction_ok": true,
+        "label": "ok"
+      },
+      {
+        "set": "full",
+        "test": "H3_BROAD",
+        "n": 1769,
+        "diff": 0.12403790874811771,
+        "p": 0.3836163836163836,
+        "p_unguarded": null,
+        "bh_rank": 4,
+        "m": 5,
+        "bh_q_recomputed": 0.4795204795204795,
+        "bh_q_locked": 0.4795204795204795,
+        "reject_q10": false,
+        "direction_ok": true,
+        "label": "ok"
+      },
+      {
+        "set": "full",
+        "test": "H4_auc_BROAD",
+        "n": 1796,
+        "diff": -0.06582710513203782,
+        "p": 0.004864086314887554,
+        "p_unguarded": null,
+        "bh_rank": 1,
+        "m": 5,
+        "bh_q_recomputed": 0.024320431574437768,
+        "bh_q_locked": 0.024320431574437768,
+        "reject_q10": true,
+        "direction_ok": false,
+        "label": "ok"
+      },
+      {
+        "set": "full",
+        "test": "H4_top_decile_BROAD",
+        "n": 1796,
+        "diff": -0.08549208903191202,
+        "p": 0.10789210789210789,
+        "p_unguarded": null,
+        "bh_rank": 2,
+        "m": 5,
+        "bh_q_recomputed": 0.2697302697302697,
+        "bh_q_locked": 0.2697302697302697,
+        "reject_q10": false,
+        "direction_ok": false,
+        "label": "ok"
+      },
+      {
+        "set": "without_pilot",
+        "test": "H1_STRICT",
+        "n": 23,
+        "diff": 0.1333333333333333,
+        "p": NaN,
+        "p_unguarded": 0.566501495947662,
+        "bh_rank": null,
+        "m": 5,
+        "bh_q_recomputed": NaN,
+        "bh_q_locked": NaN,
+        "reject_q10": false,
+        "direction_ok": null,
+        "label": "insufficient data (n<30)"
+      },
+      {
+        "set": "without_pilot",
+        "test": "H2_STRICT",
+        "n": 22,
+        "diff": 0.1333333333333333,
+        "p": NaN,
+        "p_unguarded": 0.48442336471277603,
+        "bh_rank": null,
+        "m": 5,
+        "bh_q_recomputed": NaN,
+        "bh_q_locked": NaN,
+        "reject_q10": false,
+        "direction_ok": null,
+        "label": "insufficient data (n<30)"
+      },
+      {
+        "set": "without_pilot",
+        "test": "H3_STRICT",
+        "n": 23,
+        "diff": 0.6215168122082186,
+        "p": NaN,
+        "p_unguarded": 0.4779116465863454,
+        "bh_rank": null,
+        "m": 5,
+        "bh_q_recomputed": NaN,
+        "bh_q_locked": NaN,
+        "reject_q10": false,
+        "direction_ok": null,
+        "label": "insufficient data (n<30)"
+      },
+      {
+        "set": "without_pilot",
+        "test": "H1_BROAD",
+        "n": 1236,
+        "diff": 0.026234226621732692,
+        "p": 0.352249672709984,
+        "p_unguarded": null,
+        "bh_rank": 4,
+        "m": 5,
+        "bh_q_recomputed": 0.44031209088747997,
+        "bh_q_locked": 0.44031209088747997,
+        "reject_q10": false,
+        "direction_ok": true,
+        "label": "ok"
+      },
+      {
+        "set": "without_pilot",
+        "test": "H2_BROAD",
+        "n": 1221,
+        "diff": -0.056452391941352625,
+        "p": 0.025645085170608553,
+        "p_unguarded": null,
+        "bh_rank": 1,
+        "m": 5,
+        "bh_q_recomputed": 0.12822542585304275,
+        "bh_q_locked": 0.12822542585304275,
+        "reject_q10": false,
+        "direction_ok": true,
+        "label": "ok"
+      },
+      {
+        "set": "without_pilot",
+        "test": "H3_BROAD",
+        "n": 1213,
+        "diff": -0.08288348104910037,
+        "p": 0.7592407592407593,
+        "p_unguarded": null,
+        "bh_rank": 5,
+        "m": 5,
+        "bh_q_recomputed": 0.7592407592407593,
+        "bh_q_locked": 0.7592407592407593,
+        "reject_q10": false,
+        "direction_ok": false,
+        "label": "ok"
+      },
+      {
+        "set": "without_pilot",
+        "test": "H4_auc_BROAD",
+        "n": 1236,
+        "diff": -0.039234581497797405,
+        "p": 0.14056161652297117,
+        "p_unguarded": null,
+        "bh_rank": 2,
+        "m": 5,
+        "bh_q_recomputed": 0.3514040413074279,
+        "bh_q_locked": 0.3514040413074279,
+        "reject_q10": false,
+        "direction_ok": false,
+        "label": "ok"
+      },
+      {
+        "set": "without_pilot",
+        "test": "H4_top_decile_BROAD",
+        "n": 1236,
+        "diff": -0.0937355791416705,
+        "p": 0.25774225774225773,
+        "p_unguarded": null,
+        "bh_rank": 3,
+        "m": 5,
+        "bh_q_recomputed": 0.4295704295704295,
+        "bh_q_locked": 0.4295704295704295,
+        "reject_q10": false,
+        "direction_ok": false,
+        "label": "ok"
+      }
+    ],
+    "note": "STRICT H1-H3 have n<30 per arm -> p withheld by the pre-registered guard, so BH runs over m=5 finite p-values (p_unguarded shown for information only)."
+  },
+  "2_tost": {
+    "status": "POST-HOC",
+    "margin_pp": 2.0,
+    "rows": [
+      {
+        "set": "full",
+        "family": "STRICT",
+        "hypothesis": "H1",
+        "n1": 22,
+        "n2": 7,
+        "diff": 0.12987012987012986,
+        "se": 0.16281427757135222,
+        "p_lower": 0.17865642840911655,
+        "p_upper": 0.750104541897232,
+        "p_tost": 0.750104541897232,
+        "ci90_wald": [
+          -0.1379355207245081,
+          0.3976757804647678
+        ],
+        "equivalent_at_alpha_0.05": false,
+        "small_sample_flag": true,
+        "ci90_month_block": [
+          -0.07608695652173914,
+          0.360181818181818
+        ]
+      },
+      {
+        "set": "full",
+        "family": "STRICT",
+        "hypothesis": "H2",
+        "n1": 15,
+        "n2": 13,
+        "diff": 0.11282051282051281,
+        "se": 0.15182454353992383,
+        "p_lower": 0.1908334791354126,
+        "p_upper": 0.7295216715213467,
+        "p_tost": 0.7295216715213467,
+        "ci90_wald": [
+          -0.13690863418948765,
+          0.36254965983051324
+        ],
+        "equivalent_at_alpha_0.05": false,
+        "small_sample_flag": true,
+        "ci90_month_block": [
+          -0.16492673992673995,
+          0.3592053167420814
+        ]
+      },
+      {
+        "set": "full",
+        "family": "BROAD",
+        "hypothesis": "H1",
+        "n1": 1265,
+        "n2": 531,
+        "diff": -0.00036622674795114274,
+        "se": 0.0223447853724068,
+        "p_lower": 0.18978913539760134,
+        "p_upper": 0.18102830954956634,
+        "p_tost": 0.18978913539760134,
+        "ci90_wald": [
+          -0.03712012740898181,
+          0.036387673913079524
+        ],
+        "equivalent_at_alpha_0.05": false,
+        "small_sample_flag": false,
+        "ci90_month_block": [
+          -0.043472561097902256,
+          0.04138563047353097
+        ]
+      },
+      {
+        "set": "full",
+        "family": "BROAD",
+        "hypothesis": "H2",
+        "n1": 924,
+        "n2": 852,
+        "diff": -0.028062313273580886,
+        "se": 0.020540844515210113,
+        "p_lower": 0.6526561661779964,
+        "p_upper": 0.009645971644051536,
+        "p_tost": 0.6526561661779964,
+        "ci90_wald": [
+          -0.0618489953214645,
+          0.005724368774302727
+        ],
+        "equivalent_at_alpha_0.05": false,
+        "small_sample_flag": false,
+        "ci90_month_block": [
+          -0.07238098538685918,
+          0.01372364009580421
+        ]
+      },
+      {
+        "set": "without_pilot",
+        "family": "STRICT",
+        "hypothesis": "H1",
+        "n1": 18,
+        "n2": 5,
+        "diff": 0.1333333333333333,
+        "se": 0.21058413760857128,
+        "p_lower": 0.23326598059704695,
+        "p_upper": 0.7047755116996419,
+        "p_tost": 0.7047755116996419,
+        "ci90_wald": [
+          -0.21304674351502056,
+          0.47971341018168717
+        ],
+        "equivalent_at_alpha_0.05": false,
+        "small_sample_flag": true,
+        "ci90_month_block": [
+          -0.10665584415584416,
+          0.4375
+        ]
+      },
+      {
+        "set": "without_pilot",
+        "family": "STRICT",
+        "hypothesis": "H2",
+        "n1": 12,
+        "n2": 10,
+        "diff": 0.1333333333333333,
+        "se": 0.1857915996984754,
+        "p_lower": 0.20460136979886911,
+        "p_upper": 0.7290699118422459,
+        "p_tost": 0.7290699118422459,
+        "ci90_wald": [
+          -0.17226664828046284,
+          0.43893331494712945
+        ],
+        "equivalent_at_alpha_0.05": false,
+        "small_sample_flag": true,
+        "ci90_month_block": [
+          -0.25,
+          0.4546251993620414
+        ]
+      },
+      {
+        "set": "without_pilot",
+        "family": "BROAD",
+        "hypothesis": "H1",
+        "n1": 899,
+        "n2": 337,
+        "diff": 0.026234226621732692,
+        "se": 0.027773445078117895,
+        "p_lower": 0.04798712866359289,
+        "p_upper": 0.5888030952040553,
+        "p_tost": 0.5888030952040553,
+        "ci90_wald": [
+          -0.019449024499411806,
+          0.07191747774287718
+        ],
+        "equivalent_at_alpha_0.05": false,
+        "small_sample_flag": false,
+        "ci90_month_block": [
+          -0.017230006122371577,
+          0.0677836515222519
+        ]
+      },
+      {
+        "set": "without_pilot",
+        "family": "BROAD",
+        "hypothesis": "H2",
+        "n1": 617,
+        "n2": 604,
+        "diff": -0.056452391941352625,
+        "se": 0.025264022456290898,
+        "p_lower": 0.9254697339761394,
+        "p_upper": 0.00123850040760144,
+        "p_tost": 0.9254697339761394,
+        "ci90_wald": [
+          -0.09800801022906355,
+          -0.014896773653641698
+        ],
+        "equivalent_at_alpha_0.05": false,
+        "small_sample_flag": false,
+        "ci90_month_block": [
+          -0.10779524232843841,
+          -0.0037762488412548525
+        ]
+      }
+    ],
+    "cost_link": {
+      "notional_per_trade_rs": 50000.0,
+      "round_trip_pct_by_bucket": {
+        "large": 0.4487052,
+        "mid": 0.5487052,
+        "small": 0.7487052
+      },
+      "round_trip_pct_weighted_B2b_test_mix": 0.5813506033771108,
+      "bucket_mix_B2b_test": {
+        "large": 546,
+        "mid": 519,
+        "small": 534
+      },
+      "mean_tb_return_success_pct": 4.735246956923691,
+      "mean_tb_return_failure_pct": -1.8529881630961456,
+      "success_minus_failure_return_pp": 6.588235120019837,
+      "cost_implied_success_rate_margin_pp": 8.82407189158362,
+      "explanation": "A change of d in success rate changes expected gross return per trade by d x (mean return of successes - mean return of failures). The success-rate change whose return gain just pays one round trip is cost / spread."
+    }
+  },
+  "3_mde": {
+    "status": "PRE-REGISTERED (formula and test-set n fixed in pre_registered_hypotheses.md)",
+    "alpha": 0.05,
+    "power": 0.8,
+    "rows": [
+      {
+        "family": "STRICT",
+        "hypothesis": "H1",
+        "n": 29,
+        "base_rate": 0.2413793103448276,
+        "n_exposed": 22,
+        "n_rest": 7,
+        "mde_pp_prereg_method": 52.02413145093172,
+        "mde_pp_analysed_arms": 52.02413145093172
+      },
+      {
+        "family": "STRICT",
+        "hypothesis": "H2",
+        "n": 29,
+        "base_rate": 0.2413793103448276,
+        "n_exposed": 15,
+        "n_rest": 14,
+        "mde_pp_prereg_method": 44.550804546017694,
+        "mde_pp_analysed_arms": 43.560663038435614
+      },
+      {
+        "family": "BROAD",
+        "hypothesis": "H1",
+        "n": 1796,
+        "base_rate": 0.24832962138084633,
+        "n_exposed": 1265,
+        "n_rest": 531,
+        "mde_pp_prereg_method": 6.258819996528017,
+        "mde_pp_analysed_arms": 6.258819996528017
+      },
+      {
+        "family": "BROAD",
+        "hypothesis": "H2",
+        "n": 1796,
+        "base_rate": 0.24832962138084633,
+        "n_exposed": 924,
+        "n_rest": 872,
+        "mde_pp_prereg_method": 5.714664736880872,
+        "mde_pp_analysed_arms": 5.7489231236277165
+      }
+    ],
+    "prereg_table_pp": {
+      "BROAD_H1": 6.26,
+      "BROAD_H2": 5.71,
+      "STRICT_H1": 52.02,
+      "STRICT_H2": 44.55
+    }
+  },
+  "4_h1_ex_expiry": {
+    "status": "POST-HOC",
+    "n_monthly_expiries_in_test": 47,
+    "expiry_weekday_counts": {
+      "Thursday": 30,
+      "Tuesday": 13,
+      "Wednesday": 3,
+      "Monday": 1
+    },
+    "expiry_source": "distinct near-month stock-futures expiry dates in the F&O bhavcopy (fo_stock.near_expiry)",
+    "rows": [
+      {
+        "window": "5_sessions_before_expiry_day",
+        "family": "STRICT",
+        "n_removed": 4,
+        "n": 25,
+        "p_exposed": 0.2857142857142857,
+        "p_rest": 0.25,
+        "diff": 0.0357142857142857,
+        "p": NaN,
+        "p_unguarded": 0.8840769384411276,
+        "boot_ci": [
+          -0.5442401960784314,
+          0.4041176470588238
+        ],
+        "label": "insufficient data (n<30)"
+      },
+      {
+        "window": "5_sessions_before_expiry_day",
+        "family": "BROAD",
+        "n_removed": 331,
+        "n": 1465,
+        "p_exposed": 0.23084291187739464,
+        "p_rest": 0.24465558194774348,
+        "diff": -0.013812670070348837,
+        "p": 0.5724653897749492,
+        "p_unguarded": null,
+        "boot_ci": [
+          -0.07778039107425186,
+          0.041062477098465444
+        ],
+        "label": "ok"
+      },
+      {
+        "window": "expiry_day_plus_4_before",
+        "family": "STRICT",
+        "n_removed": 6,
+        "n": 23,
+        "p_exposed": 0.2222222222222222,
+        "p_rest": 0.2,
+        "diff": 0.0222222222222222,
+        "p": NaN,
+        "p_unguarded": 0.9151269192221928,
+        "boot_ci": [
+          -0.4883053221288515,
+          0.33478260869565246
+        ],
+        "label": "insufficient data (n<30)"
+      },
+      {
+        "window": "expiry_day_plus_4_before",
+        "family": "BROAD",
+        "n_removed": 347,
+        "n": 1449,
+        "p_exposed": 0.23076923076923078,
+        "p_rest": 0.24407582938388625,
+        "diff": -0.013306598614655468,
+        "p": 0.5870974025834059,
+        "p_unguarded": null,
+        "boot_ci": [
+          -0.07709306316488271,
+          0.044250165063781405
+        ],
+        "label": "ok"
+      },
+      {
+        "window": "5_sessions_before_plus_expiry_day",
+        "family": "STRICT",
+        "n_removed": 7,
+        "n": 22,
+        "p_exposed": 0.2222222222222222,
+        "p_rest": 0.25,
+        "diff": -0.02777777777777779,
+        "p": NaN,
+        "p_unguarded": 0.9045522069929632,
+        "boot_ci": [
+          -0.6583333333333333,
+          0.35
+        ],
+        "label": "insufficient data (n<30)"
+      },
+      {
+        "window": "5_sessions_before_plus_expiry_day",
+        "family": "BROAD",
+        "n_removed": 413,
+        "n": 1383,
+        "p_exposed": 0.22810590631364563,
+        "p_rest": 0.24438902743142144,
+        "diff": -0.0162831211177758,
+        "p": 0.5156171100360352,
+        "p_unguarded": null,
+        "boot_ci": [
+          -0.08522473962815802,
+          0.0428090473324913
+        ],
+        "label": "ok"
+      }
+    ]
+  },
+  "5_auc_psi": {
+    "status": "POST-HOC (AUC itself is the locked P6 number)",
+    "xgb_test_auc": 0.46026656701544594,
+    "xgb_test_auc_locked": 0.46026656701544594,
+    "one_minus_auc": 0.539733432984554,
+    "auc_of_flipped_score": 0.539733432984554,
+    "psi_reference": "train BROAD Tier-1 events (n=2102) vs test (n=1796); 10 train-decile bins + missing bin; rule of thumb <0.10 stable, 0.10-0.25 moderate, >0.25 large",
+    "psi_top10_shap": [
+      {
+        "feature": "client_fut_idx_cot_d5",
+        "mean_abs_shap": 0.030431997,
+        "psi": 0.21706950992681923,
+        "n_bins_used": 10,
+        "missing_train": 0.0004757373929590866,
+        "missing_test": 0.012806236080178173
+      },
+      {
+        "feature": "client_fut_idx_div_mag",
+        "mean_abs_shap": 0.02826204,
+        "psi": 0.10008492631012224,
+        "n_bins_used": 6,
+        "missing_train": 0.004757373929590866,
+        "missing_test": 0.01893095768374165
+      },
+      {
+        "feature": "dii_fut_stk_cot",
+        "mean_abs_shap": 0.02066578,
+        "psi": 0.15318283406132033,
+        "n_bins_used": 10,
+        "missing_train": 0.0004757373929590866,
+        "missing_test": 0.012806236080178173
+      },
+      {
+        "feature": "client_fut_idx_cot",
+        "mean_abs_shap": 0.012341973,
+        "psi": 0.31260177620827195,
+        "n_bins_used": 10,
+        "missing_train": 0.0004757373929590866,
+        "missing_test": 0.012806236080178173
+      },
+      {
+        "feature": "log_pcr_oi",
+        "mean_abs_shap": 0.012046001,
+        "psi": 0.5493660129884034,
+        "n_bins_used": 10,
+        "missing_train": 0.0,
+        "missing_test": 0.0
+      },
+      {
+        "feature": "dii_fut_idx_cot_d5",
+        "mean_abs_shap": 0.011260169,
+        "psi": 0.24037797919716308,
+        "n_bins_used": 10,
+        "missing_train": 0.0004757373929590866,
+        "missing_test": 0.012806236080178173
+      },
+      {
+        "feature": "pro_fut_idx_cot_d5",
+        "mean_abs_shap": 0.010650307,
+        "psi": 0.11707480144669635,
+        "n_bins_used": 10,
+        "missing_train": 0.0004757373929590866,
+        "missing_test": 0.012806236080178173
+      },
+      {
+        "feature": "client_fut_stk_div_mag",
+        "mean_abs_shap": 0.0062454264,
+        "psi": 0.08832927648123966,
+        "n_bins_used": 6,
+        "missing_train": 0.004757373929590866,
+        "missing_test": 0.01893095768374165
+      },
+      {
+        "feature": "client_fut_stk_cot_dd",
+        "mean_abs_shap": 0.0058019357,
+        "psi": 0.1320780346787015,
+        "n_bins_used": 10,
+        "missing_train": 0.0004757373929590866,
+        "missing_test": 0.012806236080178173
+      },
+      {
+        "feature": "fii_fut_stk_cot_d5",
+        "mean_abs_shap": 0.0044407304,
+        "psi": 0.1073297716590532,
+        "n_bins_used": 10,
+        "missing_train": 0.002378686964795433,
+        "missing_test": 0.012806236080178173
+      }
+    ]
+  },
+  "6_brier": {
+    "status": "POST-HOC",
+    "test_base_rate": 0.24832962138084633,
+    "brier_constant_at_test_base_rate": 0.18666202052569184,
+    "brier_constant_at_validation_base_rate": 0.18788013260779926,
+    "validation_base_rate": 0.2832310838445808,
+    "brier_xgb_calibrated": 0.195297509431839,
+    "brier_xgb_calibrated_locked": 0.195297509431839,
+    "brier_xgb_raw": 0.24971546232700348,
+    "note": "The test-base-rate constant uses the test outcome rate (an oracle no model could know in advance); the validation-base-rate constant is the fair no-skill comparator."
+  },
+  "7_placebo": {
+    "status": "POST-HOC - SKIPPED",
+    "reason": "estimated 56.0 min for 1000 draws (> 10 min budget); 3 timing draws taken, not reported as a result",
+    "seconds_per_draw": 3.3616092999776206,
+    "actual_diff": {
+      "STRICT": 0.12987012987012986,
+      "BROAD": -0.00036622674795114274
+    }
+  },
+  "8_incomplete_labels": {
+    "status": "PRE-REGISTERED rule (labels.yaml / triple_barrier.py, frozen 08:53 10 Oct)",
+    "data_end": "2026-10-09",
+    "last10_sessions": [
+      "2026-09-25",
+      "2026-09-28",
+      "2026-09-29",
+      "2026-09-30",
+      "2026-10-01",
+      "2026-10-05",
+      "2026-10-06",
+      "2026-10-07",
+      "2026-10-08",
+      "2026-10-09"
+    ],
+    "test_end": "2026-10-09",
+    "rows": [
+      {
+        "family": "all",
+        "events_last10": 12,
+        "label_10_missing": 4,
+        "label_10_present": 8,
+        "label_end_after_test_end": 0,
+        "in_test_split": 8
+      },
+      {
+        "family": "broad",
+        "events_last10": 8,
+        "label_10_missing": 4,
+        "label_10_present": 4,
+        "label_end_after_test_end": 0,
+        "in_test_split": 4
+      }
+    ],
+    "all_tier1_eligible_with_missing_label_10": {
+      "all": 5,
+      "broad": 4
+    },
+    "handling": "triple_barrier(): if the data simply ends before T+10 the label is NaN (stocks that stop trading get 0 instead, D-017). assign_split() puts an event in a split only if label_end is known and <= split end, and tier1() keeps only label_10.notna(); so these events are excluded from every hypothesis test, model and backtest - not imputed, not counted as failures."
+  },
+  "9a_composite": {
+    "status": "PRE-REGISTERED",
+    "weights": {
+      "compression_quality": 0.3,
+      "delivery_z": 0.25,
+      "positioning_alignment": 0.25,
+      "volume_anomaly": 0.2
+    },
+    "tier2_weights": {
+      "compression_quality": 0.4,
+      "delivery_z": 0.333333,
+      "volume_anomaly": 0.266667
+    },
+    "threshold": 1.0,
+    "clip": 3.0,
+    "standardise_on": "train",
+    "train_mean_sd": {
+      "cq_bbw_pct252": [
+        25.857648800084576,
+        16.66034340428907
+      ],
+      "cq_atr_ratio": [
+        0.9488856968638756,
+        0.09781625253181643
+      ],
+      "cq_nr7_count10": [
+        1.4747859181731684,
+        0.9579854650234427
+      ],
+      "cq_range_contraction": [
+        0.5103813377030494,
+        0.16929943333938677
+      ],
+      "cq": [
+        0.000271645923058589,
+        0.6245557352382116
+      ],
+      "dz": [
+        -0.04757295898074391,
+        1.1757538056732568
+      ],
+      "pa_stock": [
+        0.027161944331282144,
+        0.23279959717511559
+      ],
+      "pa": [
+        0.2138286288694848,
+        0.6625148878796282
+      ],
+      "va": [
+        0.9826754942811462,
+        1.0281014828271733
+      ]
+    },
+    "formula": "Score = 0.30*CQ + 0.25*DZ + 0.25*PA + 0.20*VA, each component a train-split z clipped to [-3,3], missing -> 0; CQ = z(mean(-z bbw_pct252, -z atr_ratio, +z nr7_count10, -z range_contraction)); DZ = z(deliv_z20); PA = z(mean(z price_oi_align, (fii_fut_stk_cot-50)/28.87)); VA = z(vol_z). Tradeable if Score >= 1.0.",
+    "composite_top_decile_threshold_H4": 0.5396631963803035
+  },
+  "9b_h3_formula": {
+    "status": "PRE-REGISTERED",
+    "formula": "asymmetry(G) = mean(MFE_10 over G) / mean(|MAE_10| over G); statistic = asymmetry(regime) - asymmetry(rest); regime = fii_flow20 < 0 AND dii_flow20 > 0 (20-day change in cumulative FII / DII cash flow); p from a calendar-month block bootstrap (1,000 draws); expected sign +.",
+    "MFE_MAE": "MFE_10 = max high(T+1..T+10)/entry - 1; MAE_10 = min low(T+1..T+10)/entry - 1; entry = open(T+1)"
+  },
+  "9c_165_vs_157": {
+    "status": "PRE-REGISTERED backtest rules (executor.py); explanation is a post-hoc trace",
+    "ml_top_decile_events": 165,
+    "trades": 157,
+    "not_traded": 8,
+    "reasons": {
+      "all 20 slots full": 8
+    },
+    "detail": [
+      {
+        "symbol": "AMBUJACEM",
+        "event_date": "2026-01-02",
+        "entry_date": "2026-01-05",
+        "reason": "all 20 slots full"
+      },
+      {
+        "symbol": "BOSCHLTD",
+        "event_date": "2026-01-02",
+        "entry_date": "2026-01-05",
+        "reason": "all 20 slots full"
+      },
+      {
+        "symbol": "EICHERMOT",
+        "event_date": "2026-01-05",
+        "entry_date": "2026-01-06",
+        "reason": "all 20 slots full"
+      },
+      {
+        "symbol": "INDHOTEL",
+        "event_date": "2026-01-02",
+        "entry_date": "2026-01-05",
+        "reason": "all 20 slots full"
+      },
+      {
+        "symbol": "IREDA",
+        "event_date": "2026-01-02",
+        "entry_date": "2026-01-05",
+        "reason": "all 20 slots full"
+      },
+      {
+        "symbol": "OBEROIRLTY",
+        "event_date": "2026-01-02",
+        "entry_date": "2026-01-05",
+        "reason": "all 20 slots full"
+      },
+      {
+        "symbol": "TRENT",
+        "event_date": "2026-01-02",
+        "entry_date": "2026-01-05",
+        "reason": "all 20 slots full"
+      },
+      {
+        "symbol": "UNOMINDA",
+        "event_date": "2026-01-02",
+        "entry_date": "2026-01-05",
+        "reason": "all 20 slots full"
+      }
+    ],
+    "rule": "executor.run_backtest: max 20 concurrent equal-weight positions, one position per stock at a time, entry at T+1 open, exit at the triple-barrier exit; signals with no free slot are dropped (not queued)."
+  },
+  "10_timeline": {
+    "status": "FACT (git / file timestamps, IST +05:30)",
+    "v1_commits_in_order": [
+      {
+        "hash": "355cbe0",
+        "committed": "2026-10-10T02:16:16+05:30",
+        "subject": "IMPI P0-P2 scaffolding: config, NSE ingest, PIT store, adjustment, features, labels, tests"
+      },
+      {
+        "hash": "8e066e0",
+        "committed": "2026-10-10T02:16:23+05:30",
+        "subject": "Ignore egg-info"
+      },
+      {
+        "hash": "b59be4e",
+        "committed": "2026-10-10T02:22:07+05:30",
+        "subject": "Statistics, models, backtest engine and tests"
+      },
+      {
+        "hash": "45e1e1c",
+        "committed": "2026-10-10T02:59:12+05:30",
+        "subject": "Phase runners P0-P7, synthetic end-to-end rehearsal, small-sample guards, atomic JSON, cash yield"
+      },
+      {
+        "hash": "68d71d4",
+        "committed": "2026-10-10T03:03:39+05:30",
+        "subject": "P8 report/figures, decisions log, P6 returns export"
+      },
+      {
+        "hash": "b939c1d",
+        "committed": "2026-10-10T03:06:11+05:30",
+        "subject": "README, requirements, run_all, paper draft (methods)"
+      },
+      {
+        "hash": "76054f7",
+        "committed": "2026-10-10T03:07:55+05:30",
+        "subject": "Memory-light adjustment, demerger threshold 0.97"
+      },
+      {
+        "hash": "fd3f33e",
+        "committed": "2026-10-10T03:09:34+05:30",
+        "subject": "D-040: blank internally inconsistent delivery records"
+      },
+      {
+        "hash": "60b3060",
+        "committed": "2026-10-10T03:22:55+05:30",
+        "subject": "D-041: VCP rarity documented; definition kept; grid adds k=5"
+      },
+      {
+        "hash": "da399df",
+        "committed": "2026-10-10T03:24:50+05:30",
+        "subject": "Power-rule widened H1 (Tier 1 or 2) in P2/P3/P6; pre-registration template + filler"
+      },
+      {
+        "hash": "93017aa",
+        "committed": "2026-10-10T03:25:02+05:30",
+        "subject": "Pre-registration template: STRICT power statement"
+      },
+      {
+        "hash": "2b0842d",
+        "committed": "2026-10-10T03:25:34+05:30",
+        "subject": "Test: headerless participant OI file"
+      },
+      {
+        "hash": "7c1c358",
+        "committed": "2026-10-10T04:16:25+05:30",
+        "subject": "Downloader: rebuild HTTP session after connection-level failures"
+      },
+      {
+        "hash": "2bcfc83",
+        "committed": "2026-10-10T06:21:55+05:30",
+        "subject": "Cache per-day F&O aggregates"
+      },
+      {
+        "hash": "86ddfd7",
+        "committed": "2026-10-10T08:21:35+05:30",
+        "subject": "Adjustment fixes on full data: downward-only gap snaps, stale ex-date opens for demergers, FV/Splt subjects"
+      },
+      {
+        "hash": "4df7259",
+        "committed": "2026-10-10T08:36:04+05:30",
+        "subject": "Add 2014-03-22 and 2015-02-28 special sessions (found by QC missed-session detector)"
+      },
+      {
+        "hash": "b5829b2",
+        "committed": "2026-10-10T08:40:10+05:30",
+        "subject": "Ban list: first-day publication time = previous evening (G1 check strict)"
+      },
+      {
+        "hash": "15103f1",
+        "committed": "2026-10-10T08:54:08+05:30",
+        "subject": "PRE-REGISTRATION: hypotheses H1-H4, decision rules, P2 counts/power; feature library v1.0 frozen"
+      },
+      {
+        "hash": "ea49def",
+        "committed": "2026-10-10T09:23:29+05:30",
+        "subject": "P3-P5 results (train/validation): hypotheses, composite ladder/backtests, ML search+freeze"
+      },
+      {
+        "hash": "359bcc7",
+        "committed": "2026-10-10T09:30:43+05:30",
+        "subject": "P6: one-time test-set evaluation (lock ea49def)"
+      }
+    ],
+    "files_first_committed": {
+      "pre_registered_hypotheses.md": "15103f1 2026-10-10T08:54:08+05:30",
+      "results/metrics/feature_freeze.json": "15103f1 2026-10-10T08:54:08+05:30",
+      "results/metrics/model_freeze.json": "ea49def 2026-10-10T09:23:29+05:30",
+      "results/test_lock.json": "359bcc7 2026-10-10T09:30:43+05:30",
+      "results/metrics/p6_test.json": "359bcc7 2026-10-10T09:30:43+05:30"
+    },
+    "test_lock": {
+      "attempts": [
+        {
+          "started": "2026-10-10T09:23:35",
+          "git_commit": "ea49def",
+          "config_hash": "75840d92ac96",
+          "forced_rerun": false,
+          "status": "finished",
+          "finished": "2026-10-10T09:29:57"
+        }
+      ]
+    },
+    "who_created_test_lock": "p6_test.main() writes results/test_lock.json at the START of the one-time run (09:23:35), recording git_commit = HEAD at that moment (ea49def = code + train/val results). The lock file itself was first committed in 359bcc7 (09:30:43) together with the P6 results.",
+    "results_log_rows_through_P6": 89,
+    "results_log_rows_before_test_run_started": 67,
+    "deflated_sharpe_n_trials_used": 89,
+    "trial_groups": [
+      {
+        "phase": "P3",
+        "experiment": "hypothesis",
+        "split": "train+validation",
+        "n": 6,
+        "first": "2026-10-10T08:54:54",
+        "last": "2026-10-10T08:54:55"
+      },
+      {
+        "phase": "P4",
+        "experiment": "backtest",
+        "split": "train",
+        "n": 5,
+        "first": "2026-10-10T09:00:43",
+        "last": "2026-10-10T09:00:46"
+      },
+      {
+        "phase": "P4",
+        "experiment": "backtest",
+        "split": "validation",
+        "n": 4,
+        "first": "2026-10-10T09:02:58",
+        "last": "2026-10-10T09:02:59"
+      },
+      {
+        "phase": "P5",
+        "experiment": "ml_final",
+        "split": "validation",
+        "n": 3,
+        "first": "2026-10-10T09:22:41",
+        "last": "2026-10-10T09:22:51"
+      },
+      {
+        "phase": "P5",
+        "experiment": "ml_search_logit",
+        "split": "train+validation(cv)",
+        "n": 4,
+        "first": "2026-10-10T09:22:38",
+        "last": "2026-10-10T09:22:40"
+      },
+      {
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "split": "train+validation(cv)",
+        "n": 15,
+        "first": "2026-10-10T09:12:52",
+        "last": "2026-10-10T09:22:37"
+      },
+      {
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "split": "train+validation(cv)",
+        "n": 30,
+        "first": "2026-10-10T09:03:43",
+        "last": "2026-10-10T09:11:56"
+      },
+      {
+        "phase": "P6",
+        "experiment": "backtest",
+        "split": "test",
+        "n": 6,
+        "first": "2026-10-10T09:29:08",
+        "last": "2026-10-10T09:29:10"
+      },
+      {
+        "phase": "P6",
+        "experiment": "confirmatory_full",
+        "split": "test",
+        "n": 8,
+        "first": "2026-10-10T09:24:09",
+        "last": "2026-10-10T09:24:10"
+      },
+      {
+        "phase": "P6",
+        "experiment": "confirmatory_no_pilot",
+        "split": "test",
+        "n": 8,
+        "first": "2026-10-10T09:24:40",
+        "last": "2026-10-10T09:24:41"
+      }
+    ],
+    "trials": [
+      {
+        "timestamp": "2026-10-10T08:54:54",
+        "phase": "P3",
+        "experiment": "hypothesis",
+        "variant": "H1_STRICT",
+        "split": "train+validation",
+        "metric": "p",
+        "value": NaN,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T08:54:54",
+        "phase": "P3",
+        "experiment": "hypothesis",
+        "variant": "H2_STRICT",
+        "split": "train+validation",
+        "metric": "p",
+        "value": NaN,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T08:54:55",
+        "phase": "P3",
+        "experiment": "hypothesis",
+        "variant": "H3_STRICT",
+        "split": "train+validation",
+        "metric": "p",
+        "value": NaN,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T08:54:55",
+        "phase": "P3",
+        "experiment": "hypothesis",
+        "variant": "H1_BROAD",
+        "split": "train+validation",
+        "metric": "p",
+        "value": 0.5127031903638668,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T08:54:55",
+        "phase": "P3",
+        "experiment": "hypothesis",
+        "variant": "H2_BROAD",
+        "split": "train+validation",
+        "metric": "p",
+        "value": 0.935846567855206,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T08:54:55",
+        "phase": "P3",
+        "experiment": "hypothesis",
+        "variant": "H3_BROAD",
+        "split": "train+validation",
+        "metric": "p",
+        "value": 0.8011988011988012,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:00:43",
+        "phase": "P4",
+        "experiment": "backtest",
+        "variant": "B1_all_breakouts",
+        "split": "train",
+        "metric": "sharpe",
+        "value": -3.360603238047889,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:00:44",
+        "phase": "P4",
+        "experiment": "backtest",
+        "variant": "B2_strict",
+        "split": "train",
+        "metric": "sharpe",
+        "value": -0.5921368531352994,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:00:44",
+        "phase": "P4",
+        "experiment": "backtest",
+        "variant": "B3_strict_composite",
+        "split": "train",
+        "metric": "sharpe",
+        "value": 2.2613035583958285,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:00:45",
+        "phase": "P4",
+        "experiment": "backtest",
+        "variant": "B2b_broad",
+        "split": "train",
+        "metric": "sharpe",
+        "value": -2.2788212324760453,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:00:46",
+        "phase": "P4",
+        "experiment": "backtest",
+        "variant": "B3b_broad_composite",
+        "split": "train",
+        "metric": "sharpe",
+        "value": -0.2999784540705353,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:02:58",
+        "phase": "P4",
+        "experiment": "backtest",
+        "variant": "B1_all_breakouts",
+        "split": "validation",
+        "metric": "sharpe",
+        "value": -2.3633045521434566,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:02:58",
+        "phase": "P4",
+        "experiment": "backtest",
+        "variant": "B2_strict",
+        "split": "validation",
+        "metric": "sharpe",
+        "value": -0.6462723488893743,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:02:59",
+        "phase": "P4",
+        "experiment": "backtest",
+        "variant": "B2b_broad",
+        "split": "validation",
+        "metric": "sharpe",
+        "value": -1.933967132248265,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:02:59",
+        "phase": "P4",
+        "experiment": "backtest",
+        "variant": "B3b_broad_composite",
+        "split": "validation",
+        "metric": "sharpe",
+        "value": -0.791348783653183,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:03:43",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_0",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3001961711051205,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:03:49",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_1",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3004935151628086,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:04:26",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_2",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2958359131987116,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:04:45",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_3",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2996588815646657,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:05:02",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_4",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2976826201542837,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:05:10",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_5",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2949477727114203,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:05:28",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_6",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3012765950854558,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:05:37",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_7",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.29392779444315,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:06:00",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_8",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2934394841379459,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:06:28",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_9",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3007952706256559,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:06:57",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_10",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3037794512460732,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:07:14",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_11",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.301993038454568,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:07:28",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_12",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3042665228069368,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:07:57",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_13",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2964964749288293,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:08:07",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_14",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.299812693711892,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:08:13",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_15",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.297882796007253,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:08:35",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_16",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2984181850229741,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:08:40",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_17",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2930350257092514,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:08:46",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_18",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2907075976756614,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:08:52",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_19",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3053674092896615,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:09:07",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_20",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3038345975103215,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:09:41",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_21",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3024046743794698,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:09:52",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_22",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3013733196731234,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:10:19",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_23",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.300378172596393,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:10:34",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_24",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.293167263089498,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:10:46",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_25",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3010009999213325,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:10:59",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_26",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2999529202855927,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:11:15",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_27",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3102442579578249,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:11:35",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_28",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3023676197056535,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:11:56",
+        "phase": "P5",
+        "experiment": "ml_search_xgb",
+        "variant": "xgb_29",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2999746847100297,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:12:52",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_0",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3024310244040556,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:14:25",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_1",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2990203068134994,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:14:46",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_2",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2919641530841353,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:15:48",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_3",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2990849901356119,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:16:07",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_4",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2950353207353422,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:16:49",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_5",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2952442593670739,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:17:19",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_6",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2950583151753277,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:17:42",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_7",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2978991686014133,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:18:01",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_8",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3008131820394993,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:18:17",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_9",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2913353990800985,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:19:14",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_10",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3009266665981168,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:20:08",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_11",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.298438874311758,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:20:47",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_12",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2982532594204336,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:21:25",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_13",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.298576448887161,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:22:37",
+        "phase": "P5",
+        "experiment": "ml_search_rf",
+        "variant": "rf_14",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2997324265699898,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:22:38",
+        "phase": "P5",
+        "experiment": "ml_search_logit",
+        "variant": "logit_0",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3092295131228154,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:22:38",
+        "phase": "P5",
+        "experiment": "ml_search_logit",
+        "variant": "logit_1",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.3021214244841505,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:22:39",
+        "phase": "P5",
+        "experiment": "ml_search_logit",
+        "variant": "logit_2",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2980229082720981,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:22:40",
+        "phase": "P5",
+        "experiment": "ml_search_logit",
+        "variant": "logit_3",
+        "split": "train+validation(cv)",
+        "metric": "cv_pr_auc",
+        "value": 0.2961116962393341,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:22:41",
+        "phase": "P5",
+        "experiment": "ml_final",
+        "variant": "xgb",
+        "split": "validation",
+        "metric": "auc",
+        "value": 0.4918630939812645,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:22:50",
+        "phase": "P5",
+        "experiment": "ml_final",
+        "variant": "rf",
+        "split": "validation",
+        "metric": "auc",
+        "value": 0.4868290271247367,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:22:51",
+        "phase": "P5",
+        "experiment": "ml_final",
+        "variant": "logit",
+        "split": "validation",
+        "metric": "auc",
+        "value": 0.5275702065641141,
+        "git_commit": "15103f1"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:09",
+        "phase": "P6",
+        "experiment": "confirmatory_full",
+        "variant": "H1_STRICT",
+        "split": "test",
+        "metric": "p",
+        "value": NaN,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:09",
+        "phase": "P6",
+        "experiment": "confirmatory_full",
+        "variant": "H2_STRICT",
+        "split": "test",
+        "metric": "p",
+        "value": NaN,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:10",
+        "phase": "P6",
+        "experiment": "confirmatory_full",
+        "variant": "H3_STRICT",
+        "split": "test",
+        "metric": "p",
+        "value": NaN,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:10",
+        "phase": "P6",
+        "experiment": "confirmatory_full",
+        "variant": "H1_BROAD",
+        "split": "test",
+        "metric": "p",
+        "value": 0.9869207739269849,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:10",
+        "phase": "P6",
+        "experiment": "confirmatory_full",
+        "variant": "H2_BROAD",
+        "split": "test",
+        "metric": "p",
+        "value": 0.1714553523975123,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:10",
+        "phase": "P6",
+        "experiment": "confirmatory_full",
+        "variant": "H3_BROAD",
+        "split": "test",
+        "metric": "p",
+        "value": 0.3836163836163836,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:10",
+        "phase": "P6",
+        "experiment": "confirmatory_full",
+        "variant": "H4_auc_BROAD",
+        "split": "test",
+        "metric": "p",
+        "value": 0.0048640863148875,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:10",
+        "phase": "P6",
+        "experiment": "confirmatory_full",
+        "variant": "H4_top_decile_BROAD",
+        "split": "test",
+        "metric": "p",
+        "value": 0.1078921078921078,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:40",
+        "phase": "P6",
+        "experiment": "confirmatory_no_pilot",
+        "variant": "H1_STRICT",
+        "split": "test",
+        "metric": "p",
+        "value": NaN,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:40",
+        "phase": "P6",
+        "experiment": "confirmatory_no_pilot",
+        "variant": "H2_STRICT",
+        "split": "test",
+        "metric": "p",
+        "value": NaN,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:40",
+        "phase": "P6",
+        "experiment": "confirmatory_no_pilot",
+        "variant": "H3_STRICT",
+        "split": "test",
+        "metric": "p",
+        "value": NaN,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:40",
+        "phase": "P6",
+        "experiment": "confirmatory_no_pilot",
+        "variant": "H1_BROAD",
+        "split": "test",
+        "metric": "p",
+        "value": 0.352249672709984,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:40",
+        "phase": "P6",
+        "experiment": "confirmatory_no_pilot",
+        "variant": "H2_BROAD",
+        "split": "test",
+        "metric": "p",
+        "value": 0.0256450851706085,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:40",
+        "phase": "P6",
+        "experiment": "confirmatory_no_pilot",
+        "variant": "H3_BROAD",
+        "split": "test",
+        "metric": "p",
+        "value": 0.7592407592407593,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:40",
+        "phase": "P6",
+        "experiment": "confirmatory_no_pilot",
+        "variant": "H4_auc_BROAD",
+        "split": "test",
+        "metric": "p",
+        "value": 0.1405616165229711,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:24:41",
+        "phase": "P6",
+        "experiment": "confirmatory_no_pilot",
+        "variant": "H4_top_decile_BROAD",
+        "split": "test",
+        "metric": "p",
+        "value": 0.2577422577422577,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:29:08",
+        "phase": "P6",
+        "experiment": "backtest",
+        "variant": "B1_all_breakouts",
+        "split": "test",
+        "metric": "sharpe",
+        "value": -4.01582345178543,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:29:08",
+        "phase": "P6",
+        "experiment": "backtest",
+        "variant": "B2_strict",
+        "split": "test",
+        "metric": "sharpe",
+        "value": -0.4731560518014723,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:29:08",
+        "phase": "P6",
+        "experiment": "backtest",
+        "variant": "B4_strict_ml_top_decile",
+        "split": "test",
+        "metric": "sharpe",
+        "value": NaN,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:29:09",
+        "phase": "P6",
+        "experiment": "backtest",
+        "variant": "B2b_broad",
+        "split": "test",
+        "metric": "sharpe",
+        "value": -3.2518348858654167,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:29:09",
+        "phase": "P6",
+        "experiment": "backtest",
+        "variant": "B3b_broad_composite",
+        "split": "test",
+        "metric": "sharpe",
+        "value": -0.0129618346283585,
+        "git_commit": "ea49def"
+      },
+      {
+        "timestamp": "2026-10-10T09:29:10",
+        "phase": "P6",
+        "experiment": "backtest",
+        "variant": "B4b_broad_ml_top_decile",
+        "split": "test",
+        "metric": "sharpe",
+        "value": -0.8542249284865203,
+        "git_commit": "ea49def"
+      }
+    ],
+    "phase_logs": {
+      "p2.log": {
+        "first": "[08:47:16] market features: (3161, 81)",
+        "last": "[08:53:14] P2 summary: {\"all\": {\"test\": 4273, \"train\": 5075, \"validation\": 1979, \"nan\": 282}, \"broad\": {\"test\": 1796, \"train\": 2102, \"validation\": 978, \"nan\": 1"
+      },
+      "p5.log": {
+        "first": "[09:11:57]   xgb: best cv PR-AUC 0.3102 params {'max_depth': 2, 'learning_rate': np.float64(0.029315847475657218), 'n_estimators': 831, 'subsample': np.float64(",
+        "last": "[09:22:56] P5: val AUC xgb 0.4919 rf 0.4868 logit 0.5276 composite 0.5059; novelty {'deliv_z20|fii_fut_stk_cot': {'present': True, 'rank': 118, 'of': 3160, 'per"
+      },
+      "p6.log": {
+        "first": "[09:29:57] P6 confirmatory:",
+        "last": "7  H4_top_decile   BROAD  1796 -0.085492  0.107892  0.269730             +        False      False"
+      },
+      "p7.log": {
+        "first": "[09:32:30] P7: placebo ...",
+        "last": "[09:39:50] P7 done"
+      },
+      "full_pit.log": {
+        "first": "[08:23:43] reference: {'symbol_changes': 1056, 'corp_actions': 1073, 'corp_action_kinds': {'bonus': 458, 'split': 438, 'demerger': 159, 'bonus+split': 16, 'cons",
+        "last": "[08:35:46] QC written: trading days 3161, unresolved weekdays 0, sanity {'deliv_pct_outside_0_100': 0, 'high_lt_low': 0, 'close_outside_high_low': 0, 'nonpositi"
+      }
+    }
+  },
+  "checksums_after": {
+    "results_log.csv": "f41fa20776918306",
+    "test_lock.json": "815dc2578d2e49fc",
+    "p6_test.json": "0a859f843e4c7f69",
+    "p6_confirmatory_table.csv": "ef1de8710800e0c8",
+    "ml_frozen.pkl": "8eef6a6815a58f12",
+    "composite.pkl": "0671c665cf535ca9"
+  },
+  "locked_files_unchanged": true,
+  "runtime_s": 130.3
+}

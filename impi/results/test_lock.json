@@ -1,0 +1,12 @@
+{
+  "attempts": [
+    {
+      "started": "2026-10-10T09:23:35",
+      "git_commit": "ea49def",
+      "config_hash": "75840d92ac96",
+      "forced_rerun": false,
+      "status": "finished",
+      "finished": "2026-10-10T09:29:57"
+    }
+  ]
+}

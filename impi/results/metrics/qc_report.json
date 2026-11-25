@@ -1,0 +1,308 @@
+{
+  "generated": "2026-10-10T08:35:27",
+  "calendar": {
+    "candidate_dates": 3345,
+    "trading_days": 3161,
+    "holidays": 186,
+    "unresolved_weekdays": [],
+    "n_unresolved": 0,
+    "first": "2014-01-01",
+    "last": "2026-10-09",
+    "trading_days_per_year": {
+      "2014": 244,
+      "2015": 248,
+      "2016": 247,
+      "2017": 248,
+      "2018": 246,
+      "2019": 245,
+      "2020": 252,
+      "2021": 248,
+      "2022": 248,
+      "2023": 246,
+      "2024": 249,
+      "2025": 249,
+      "2026": 191
+    }
+  },
+  "missing_by_dataset": {
+    "ban": 13,
+    "cm_legacy": 186,
+    "fo_legacy": 1,
+    "fo_udiff": 1,
+    "index_close": 14,
+    "participant_oi": 20,
+    "sec_bhav": 105
+  },
+  "stale_files_rejected": 92,
+  "rows": {
+    "equity_rows": 5836673,
+    "eq_rows_per_day_median": 1526.0,
+    "days_with_<70pct_rows": {},
+    "duplicates_symbol_date": 0
+  },
+  "sanity": {
+    "deliv_pct_outside_0_100": 0,
+    "high_lt_low": 0,
+    "close_outside_high_low": 0,
+    "nonpositive_close": 0,
+    "negative_volume": 0,
+    "deliv_qty_gt_volume": 0,
+    "deliv_pct_vs_qty_mismatch_gt_0.05pt": 150,
+    "deliv_pct_checked": 5269956
+  },
+  "delivery_coverage_by_year": {
+    "2014": 1.0,
+    "2015": 1.0,
+    "2016": 1.0,
+    "2017": 1.0,
+    "2018": 1.0,
+    "2019": 0.9933,
+    "2020": 0.996,
+    "2021": 1.0,
+    "2022": 1.0,
+    "2023": 1.0,
+    "2024": 1.0,
+    "2025": 0.9999,
+    "2026": 0.9944
+  },
+  "source_by_year": {
+    "2014": {
+      "cm_legacy+mto": 325090
+    },
+    "2015": {
+      "cm_legacy+mto": 356689
+    },
+    "2016": {
+      "cm_legacy+mto": 370662
+    },
+    "2017": {
+      "cm_legacy+mto": 368537
+    },
+    "2018": {
+      "cm_legacy+mto": 367880
+    },
+    "2019": {
+      "cm_legacy+mto": 277797,
+      "sec_bhav": 90248
+    },
+    "2020": {
+      "sec_bhav": 376483
+    },
+    "2021": {
+      "sec_bhav": 386278,
+      "cm_legacy+mto": 1668
+    },
+    "2022": {
+      "sec_bhav": 436375,
+      "cm_legacy+mto": 1817
+    },
+    "2023": {
+      "sec_bhav": 446200
+    },
+    "2024": {
+      "sec_bhav": 467396
+    },
+    "2025": {
+      "sec_bhav": 531765
+    },
+    "2026": {
+      "sec_bhav": 471744
+    }
+  },
+  "missed_session_suspects": {},
+  "legacy_vs_sec_overlap": [
+    {
+      "date": "2019-10-01",
+      "matched": 1942,
+      "sec_rows": 1942,
+      "legacy_rows": 1950,
+      "close_mismatch": 0,
+      "volume_mismatch": 0,
+      "deliv_qty_mismatch": 0
+    },
+    {
+      "date": "2020-03-16",
+      "matched": 2026,
+      "sec_rows": 2026,
+      "legacy_rows": 2043,
+      "close_mismatch": 0,
+      "volume_mismatch": 0,
+      "deliv_qty_mismatch": 0
+    },
+    {
+      "date": "2020-06-01",
+      "matched": 1952,
+      "sec_rows": 1952,
+      "legacy_rows": 1981,
+      "close_mismatch": 0,
+      "volume_mismatch": 0,
+      "deliv_qty_mismatch": 0
+    },
+    {
+      "date": "2020-12-01",
+      "matched": 2034,
+      "sec_rows": 2034,
+      "legacy_rows": 2051,
+      "close_mismatch": 0,
+      "volume_mismatch": 0,
+      "deliv_qty_mismatch": 0
+    },
+    {
+      "date": "2021-06-01",
+      "matched": 2031,
+      "sec_rows": 2031,
+      "legacy_rows": 2043,
+      "close_mismatch": 0,
+      "volume_mismatch": 0,
+      "deliv_qty_mismatch": 0
+    },
+    {
+      "date": "2021-12-01",
+      "matched": 2125,
+      "sec_rows": 2125,
+      "legacy_rows": 2136,
+      "close_mismatch": 0,
+      "volume_mismatch": 0,
+      "deliv_qty_mismatch": 0
+    },
+    {
+      "date": "2022-06-01",
+      "matched": 2200,
+      "sec_rows": 2200,
+      "legacy_rows": 2209,
+      "close_mismatch": 0,
+      "volume_mismatch": 0,
+      "deliv_qty_mismatch": 0
+    },
+    {
+      "date": "2022-12-01",
+      "matched": 2316,
+      "sec_rows": 2316,
+      "legacy_rows": 2339,
+      "close_mismatch": 0,
+      "volume_mismatch": 0,
+      "deliv_qty_mismatch": 0
+    },
+    {
+      "date": "2023-06-01",
+      "matched": 2399,
+      "sec_rows": 2399,
+      "legacy_rows": 2435,
+      "close_mismatch": 0,
+      "volume_mismatch": 0,
+      "deliv_qty_mismatch": 0
+    },
+    {
+      "date": "2023-12-01",
+      "matched": 2566,
+      "sec_rows": 2566,
+      "legacy_rows": 2622,
+      "close_mismatch": 0,
+      "volume_mismatch": 0,
+      "deliv_qty_mismatch": 0
+    },
+    {
+      "date": "2024-03-01",
+      "matched": 2627,
+      "sec_rows": 2627,
+      "legacy_rows": 2694,
+      "close_mismatch": 0,
+      "volume_mismatch": 0,
+      "deliv_qty_mismatch": 0
+    },
+    {
+      "date": "2024-07-01",
+      "matched": 2638,
+      "sec_rows": 2638,
+      "legacy_rows": 2837,
+      "close_mismatch": 0,
+      "volume_mismatch": 0,
+      "deliv_qty_mismatch": 0
+    }
+  ],
+  "fo_legacy_vs_udiff": [
+    {
+      "date": "2024-07-01",
+      "underlyings": 181,
+      "fut_oi_mismatch": 0,
+      "call_oi_mismatch": 0
+    },
+    {
+      "date": "2024-07-02",
+      "underlyings": 181,
+      "fut_oi_mismatch": 0,
+      "call_oi_mismatch": 0
+    },
+    {
+      "date": "2024-07-03",
+      "underlyings": 181,
+      "fut_oi_mismatch": 0,
+      "call_oi_mismatch": 0
+    },
+    {
+      "date": "2024-07-04",
+      "underlyings": 181,
+      "fut_oi_mismatch": 0,
+      "call_oi_mismatch": 0
+    },
+    {
+      "date": "2024-07-05",
+      "underlyings": 181,
+      "fut_oi_mismatch": 0,
+      "call_oi_mismatch": 0
+    }
+  ],
+  "fo": {
+    "rows": 567680,
+    "underlyings_per_day_by_year": {
+      "2014": 136.0,
+      "2015": 158.0,
+      "2016": 173.0,
+      "2017": 211.0,
+      "2018": 206.0,
+      "2019": 162.0,
+      "2020": 140.0,
+      "2021": 160.0,
+      "2022": 196.0,
+      "2023": 186.0,
+      "2024": 182.0,
+      "2025": 216.0,
+      "2026": 209.0
+    },
+    "negative_oi": 0,
+    "zero_fut_oi_rows": 0,
+    "trading_days_without_fo": 1
+  },
+  "participant_oi": {
+    "days": 3141,
+    "total_long_ne_short": 4,
+    "sum_of_participants_ne_total": 5
+  },
+  "ban": {
+    "days_with_file": 3148,
+    "rows": 9800,
+    "max_per_day": 19
+  },
+  "index": {
+    "india_vix": 3161,
+    "nifty200": 3147,
+    "nifty50": 3147,
+    "nifty500": 3147,
+    "vix_first": "2014-01-01"
+  },
+  "pit_build": {
+    "reference": {
+      "symbol_changes": 1056,
+      "corp_actions": 1073,
+      "corp_action_kinds": {
+        "bonus": 458,
+        "split": 438,
+        "demerger": 159,
+        "bonus+split": 16,
+        "consolidation": 2
+      },
+      "results_dates": 94211,
+      "sector_labels": 755
+    }
+  }
+}

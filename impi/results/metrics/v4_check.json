@@ -1,0 +1,111 @@
+{
+  "label": "rules fixed in advance (pre_registered_v4.md); previously used period - not a clean test",
+  "window": [
+    "2023-01-01",
+    "2026-10-09"
+  ],
+  "results": [
+    {
+      "hypothesis": "D1",
+      "test": "mean daily Spearman IC, circular block bootstrap (20 days)",
+      "signal": "deliv_z20",
+      "outcome": "move20",
+      "estimate": 0.0459208009573802,
+      "n_dates": 915,
+      "n_obs": 156584,
+      "ic_t": 14.54868629463,
+      "ci_low": 0.02806799584411483,
+      "ci_high": 0.06261630944613272,
+      "share_dates_positive": 0.692896174863388,
+      "p": 0.0009995002498750624,
+      "label": "ok",
+      "expected_sign": "+",
+      "bh_q": 0.004997501249375312,
+      "direction_ok": true,
+      "supported": true
+    },
+    {
+      "hypothesis": "D2",
+      "test": "mean daily Spearman IC, circular block bootstrap (20 days)",
+      "signal": "sds",
+      "outcome": "fwd_20",
+      "estimate": -0.007976792191879776,
+      "n_dates": 915,
+      "n_obs": 156584,
+      "ic_t": -2.779227680554512,
+      "ci_low": -0.022812623589922913,
+      "ci_high": 0.007354196185389983,
+      "share_dates_positive": 0.44371584699453553,
+      "p": 0.2868565717141429,
+      "label": "ok",
+      "expected_sign": "+",
+      "bh_q": 0.35857071464267865,
+      "direction_ok": false,
+      "supported": false
+    },
+    {
+      "hypothesis": "H2p",
+      "test": "two-proportion z (two-sided); supporting month-block bootstrap",
+      "outcome": "label_20",
+      "estimate": -0.02221166660069407,
+      "rate_exposed": 0.291005291005291,
+      "rate_rest": 0.31321695760598506,
+      "n1": 2268,
+      "n2": 2005,
+      "p": 0.1143243180637881,
+      "label": "ok",
+      "bootstrap": {
+        "estimate": -0.02221166660069407,
+        "ci_low": -0.06049628130958922,
+        "ci_high": 0.01505215298765639,
+        "p": 0.25787106446776614,
+        "n_boot": 2000
+      },
+      "expected_sign": "-",
+      "bh_q": 0.19054053010631347,
+      "direction_ok": true,
+      "supported": false
+    },
+    {
+      "hypothesis": "C1",
+      "test": "mean(signal days) - mean(all days), circular block bootstrap (60 days)",
+      "n_days": 858,
+      "n_signal_days": 108,
+      "estimate": -0.007013616524459788,
+      "mean_signal_days": 0.025192153306803043,
+      "mean_all_days": 0.03220576983126283,
+      "ci_low": -0.04491033401322487,
+      "ci_high": 0.03199612703873777,
+      "p": 0.6747109100050277,
+      "label": "ok",
+      "expected_sign": "+",
+      "bh_q": 0.6747109100050277,
+      "direction_ok": false,
+      "supported": false
+    },
+    {
+      "hypothesis": "V1",
+      "test": "two-proportion z (two-sided); supporting month-block bootstrap",
+      "outcome": "label_10",
+      "estimate": -0.18129808640757547,
+      "rate_exposed": 0.19708029197080293,
+      "rate_rest": 0.3783783783783784,
+      "n1": 137,
+      "n2": 74,
+      "p": 0.004201257579162214,
+      "label": "ok",
+      "bootstrap": {
+        "estimate": -0.18129808640757547,
+        "ci_low": -0.3079697790006925,
+        "ci_high": -0.04607675437736638,
+        "p": 0.009995002498750625,
+        "n_boot": 2000
+      },
+      "expected_sign": "+",
+      "bh_q": 0.010503143947905535,
+      "direction_ok": false,
+      "supported": false
+    }
+  ],
+  "finished": "2026-10-12T20:55:56"
+}

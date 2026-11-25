@@ -1,0 +1,94 @@
+{
+  "actions_applied": 1442,
+  "methods": {
+    "nse_confirmed_gap": 840,
+    "gap_snap": 468,
+    "demerger_gap": 132,
+    "demerger_gap_close": 1,
+    "nse_confirmed_gap_close": 1
+  },
+  "not_applied": {
+    "unexplained_gap_not_adjusted": 557,
+    "unconfirmed": 55,
+    "no_trading_near_ex": 6,
+    "no_trading_after_ex": 3
+  },
+  "remaining_abs_moves_gt_30pct": 2900,
+  "examples_remaining": [
+    {
+      "date": "2021-02-17",
+      "symbol": "HDFCGOLD",
+      "ret": "-0.9901461574728901"
+    },
+    {
+      "date": "2022-01-06",
+      "symbol": "SETFGOLD",
+      "ret": "-0.9900585687625442"
+    },
+    {
+      "date": "2026-03-06",
+      "symbol": "LICMFGOLD",
+      "ret": "-0.9900567984557486"
+    },
+    {
+      "date": "2019-12-19",
+      "symbol": "GOLDBEES",
+      "ret": "-0.9900136921062032"
+    },
+    {
+      "date": "2021-03-25",
+      "symbol": "GOLDBETA",
+      "ret": "-0.989992082735415"
+    },
+    {
+      "date": "2021-11-25",
+      "symbol": "BSLGOLDETF",
+      "ret": "-0.9899624021247974"
+    },
+    {
+      "date": "2026-04-30",
+      "symbol": "IVZINGOLD",
+      "ret": "-0.9898106462123375"
+    },
+    {
+      "date": "2020-07-23",
+      "symbol": "GOLDAXIS",
+      "ret": "-0.9880126399670262"
+    },
+    {
+      "date": "2020-12-23",
+      "symbol": "AURUM",
+      "ret": "-0.9876223811697864"
+    },
+    {
+      "date": "2021-12-16",
+      "symbol": "QGOLDHALF",
+      "ret": "-0.979757085020243"
+    },
+    {
+      "date": "2023-09-15",
+      "symbol": "SARVESHWAR",
+      "ret": "-0.9662418188081295"
+    },
+    {
+      "date": "2023-02-24",
+      "symbol": "VINNY",
+      "ret": "-0.9543822913550704"
+    },
+    {
+      "date": "2024-04-04",
+      "symbol": "CUPID",
+      "ret": "-0.9475099219050058"
+    },
+    {
+      "date": "2024-07-05",
+      "symbol": "VERTOZ",
+      "ret": "-0.9474872541879097"
+    },
+    {
+      "date": "2022-02-22",
+      "symbol": "SBC",
+      "ret": "-0.9474576271186441"
+    }
+  ]
+}

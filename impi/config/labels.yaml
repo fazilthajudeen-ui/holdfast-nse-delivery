@@ -1,0 +1,24 @@
+# Events and labels (spec section 6).
+events:
+  strict:                         # headline: VCP pattern + pivot breakout (params in features.yaml: vcp)
+    cooldown_days: 10             # D-015: no new event for the same stock within 10 trading days
+  broad:                          # ML training set: 20-day-high breakout after compression
+    high_window: 20               # close > highest high of the previous 20 days
+    bbw_pct_max: 30               # compression regime: BBW percentile < 30 ...
+    min_days: 5                   # ... on >= 5 ...
+    lookback_days: 10             # ... of the 10 days before T (T-10..T-1)
+    cooldown_days: 10
+  all_breakouts:                  # ladder rung B1: every 20-day-high breakout (no compression filter)
+    cooldown_days: 10
+triple_barrier:
+  atr_window: 14                  # Wilder ATR at T
+  upper_atr: 2.0
+  lower_atr: 1.0
+  horizons: [10, 20, 60]
+  primary_horizon: 10
+  same_day_both: loss             # D-016: if both barriers are touched on the same day -> label 0
+vol_expansion:
+  rv_window: 10
+  horizon: 10
+  threshold: 1.5
+forward_returns: [5, 10, 20, 60]

@@ -1,0 +1,22 @@
+# Transaction costs for delivery (CNC) trades on NSE. Verified 10 Oct 2026 (D-020):
+#   STT delivery 0.1% buy and sell - unchanged by Budget 2026 (the April 2026 STT hike applied to F&O only)
+#   NSE transaction charge 0.00297% each side (rate since Oct 2024), SEBI fee Rs10/crore,
+#   stamp duty 0.015% buy only, GST 18% on brokerage + exchange + SEBI fees, DP charge on sells.
+# Sources: broker charge sheets (Zerodha/Upstox/Rupeezy pages, 2026) - rates are parameters, not facts
+# baked into code; change here and re-run P4/P6.
+initial_capital: 1000000        # Rs 10 lakh; needed to turn flat per-order fees into %
+max_positions: 20               # equal-weight slots (spec: cap 20 concurrent positions)
+stt_buy: 0.001
+stt_sell: 0.001
+exchange_txn: 0.0000297         # each side
+sebi_fee: 0.000001              # Rs 10 per crore, each side
+ipft: 0.000001                  # NSE investor protection fund Rs 10 per crore, each side
+stamp_duty_buy: 0.00015
+gst: 0.18                       # on brokerage + exchange txn + SEBI fee
+brokerage_per_order: 20         # Rs, flat (spec default; conservative vs Rs0 delivery brokers)
+dp_charge_per_sell: 15.93       # Rs per scrip per sell day incl. GST (CDSL + DP; typical discount broker)
+slippage_bps:                   # per side, by point-in-time liquidity bucket (D-007)
+  large: 5
+  mid: 10
+  small: 20
+risk_free_annual: 0.06          # ASSUMPTION: approx. average 91-day T-bill yield 2015-2026, for Sharpe/Sortino

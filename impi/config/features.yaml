@@ -1,0 +1,49 @@
+# Feature library v1.0 (spec section 5). FROZEN at P2 - the frozen copy and its hash are written to
+# results/metrics/feature_freeze.json; P3+ refuse to run if this file changes afterwards.
+version: "1.0"
+min_history_days: 252             # features need a full year of history
+delivery:
+  mean_window: 20                 # 20-day average delivery %
+  z_window: 252                   # z-score of that average vs its own trailing 252-day history (D-013)
+  z_min_periods: 126
+  accumulation_abs_ret: 0.05      # accumulation signature: |20d return| < 5%
+volume:
+  z_window: 252                   # z of log(adjusted volume) vs trailing 252 days (shifted 1)
+  z_min_periods: 126
+  updown_window: 20
+price_impact:
+  amihud_window: 20
+compression:
+  bb_window: 20
+  bb_k: 2.0
+  bbw_pct_window: 252
+  atr_short: 14
+  atr_long: 50
+  nr_window: 7                    # NR7
+  nr_count_window: 10
+  rc_short: 10                    # range-contraction ratio = 10-day range / 50-day range
+  rc_long: 50
+vcp:
+  fractal_k: 2                    # pivot = higher/lower than k bars each side (confirmed k bars later)
+  base_min_days: 25               # 5 weeks
+  base_max_days: 75               # 15 weeks
+  min_contractions: 2
+  max_contractions: 4
+  max_depth: 0.50                 # each contraction depth (H-L)/H < 50% (D-014)
+  pivot_buffer: 1.001             # trigger: close > pivot * 1.001
+  volume_mult: 1.5                # ... with volume >= 1.5 x 20-day average (previous 20 days)
+  volume_avg_window: 20
+positioning:
+  cot_window: 252                 # 52-week COT index
+  cot_window_long: 504            # 104-week variant (sensitivity only, not in the v1.0 model)
+  accel_window: 5
+  divergence_window: 20
+  participants: [FII, DII, Pro, Client]
+  segments: [fut_idx, fut_stk]
+  basis_min_dte: 5                # use next-month future when near month has < 5 days to expiry
+regime:
+  sma_fast: 50
+  sma_slow: 200
+  vix_pct_window: 252
+  flow_window: 20
+  breadth_window: 10

@@ -1,0 +1,14 @@
+# When each dataset becomes public, relative to its trade date T (IST). The pipeline refuses to use a
+# dataset in a feature for day T unless release <= decision point (G1). Times are conservative upper
+# bounds of NSE's usual publication times.
+decision_point: "T 23:59"         # features for day T are computed after all T releases; entry at T+1 open
+datasets:
+  equity_bhav:    {release: "T 18:30", note: "sec_bhavdata_full / legacy cm bhavcopy"}
+  delivery_mto:   {release: "T 19:30", note: "security-wise delivery position"}
+  fo_bhav:        {release: "T 19:30", note: "F&O bhavcopy (OI, settle prices)"}
+  participant_oi: {release: "T 20:00", note: "participant-wise OI, market-wide"}
+  index_close:    {release: "T 18:00", note: "ind_close_all incl. India VIX"}
+  vix_history:    {release: "T 18:00"}
+  ban_list:       {release: "T-1 20:00", note: "file dated D lists bans for trade date D; published previous trading day"}
+  board_meetings: {release: "bm_timestamp", note: "intimation time per record; used only if <= decision point"}
+  corp_actions:   {release: "before ex-date", note: "used only to back-adjust history (ratio-preserving)"}

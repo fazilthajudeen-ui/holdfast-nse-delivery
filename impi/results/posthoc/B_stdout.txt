@@ -1,0 +1,20 @@
+break-even d* = 8.82 pp (RT 0.581% / spread 6.59 pp)
+                             test  family            set    n1    n2      diff                                           ci95                                    ci95_block below_break_even_ci95
+0           H1 delivery expansion   BROAD           full  1265   531 -0.000366    [-0.04416120166559506, 0.04342874816969278]   [-0.05252462922465337, 0.04719210463491459]                  True
+1            H2 price up, OI down   BROAD           full   924   852 -0.028062   [-0.06832162905299016, 0.012197002505828392]   [-0.0828508442654834, 0.020886699452273883]                  True
+2   Composite rule (score >= 1.0)   BROAD           full    29  1767  0.168179   [-0.012193924414950819, 0.34855206113606396]      [-0.09973712083693793, 0.46250571830444]                 False
+3   Composite top decile (H4 cut)   BROAD           full   226  1570  0.070244   [0.0063714032564176765, 0.13411673157250964]   [0.008256820371933246, 0.15000845753189904]                 False
+4         ML top decile (XGBoost)   BROAD           full   165  1631 -0.026524    [-0.09355028063167704, 0.04050232715453907]   [-0.13755029328380391, 0.07332146719196227]                  True
+5           H1 delivery expansion  STRICT           full    22     7  0.129870    [-0.18923999285572796, 0.44898025259598767]   [-0.11527009222661397, 0.38525641025640966]                 False
+6            H2 price up, OI down  STRICT           full    15    13  0.112821     [-0.18475012683417047, 0.4103911524751961]     [-0.23217261904761904, 0.403921568627451]                 False
+7   Composite rule (score >= 1.0)  STRICT           full     0    29       NaN                                            NaN                                           NaN                   NaN
+8   Composite top decile (H4 cut)  STRICT           full     3    26  0.102564     [-0.45491238988996785, 0.6600405950181729]     [-0.3448275862068966, 0.8181818181818181]                 False
+9           H1 delivery expansion   BROAD  without_pilot   899   337  0.026234   [-0.028200725887355567, 0.08066917913082094]  [-0.028033962747828673, 0.07883391717146399]                  True
+10           H2 price up, OI down   BROAD  without_pilot   617   604 -0.056452  [-0.10596896645087436, -0.006935817431830887]  [-0.12273956347950325, 0.006909274783839266]                 False
+11  Composite rule (score >= 1.0)   BROAD  without_pilot    26  1210  0.082517    [-0.10202634362437854, 0.26706130865934363]    [-0.20473972109898353, 0.3980201163007442]                 False
+12  Composite top decile (H4 cut)   BROAD  without_pilot   197  1039  0.052667   [-0.017149571701220695, 0.12248318514249326]  [-0.014148351575350805, 0.13546328593991894]                 False
+13        ML top decile (XGBoost)   BROAD  without_pilot    88  1148 -0.053255    [-0.14296732170610726, 0.03645797739188489]   [-0.19693103420006902, 0.09381581454938792]                 False
+14          H1 delivery expansion  STRICT  without_pilot    18     5  0.133333      [-0.2794039953505125, 0.5460706620171791]                   [-0.16461380724538618, 0.5]                 False
+15           H2 price up, OI down  STRICT  without_pilot    12    10  0.133333    [-0.23081151357808932, 0.49747818024475593]                   [-0.35480519480519473, 0.5]                 False
+16  Composite rule (score >= 1.0)  STRICT  without_pilot     0    23       NaN                                            NaN                                           NaN                   NaN
+17  Composite top decile (H4 cut)  STRICT  without_pilot     3    20  0.033333      [-0.5366559893554672, 0.6033226560221339]    [-0.43478260869565216, 0.7391304347826086]                 False

@@ -1,0 +1,133 @@
+{
+  "label": "POST-HOC: rule chosen on 2015-2022 before this run (pre_registered_v5.md); 2023-2026 was already used by v1-v4, so this is not a clean test",
+  "pre_registration": "c530563 2026-10-14T15:06:21+05:30",
+  "git_commit": "e540c6f",
+  "chosen": "BROAD|M0|S2|T60",
+  "window_events": [
+    "2023-01-02",
+    "2026-07-15"
+  ],
+  "results": {
+    "BROAD|M0|S2|T60": {
+      "variant": "BROAD|M0|S2|T60",
+      "split": "test",
+      "n_events": 603,
+      "event_success_rate": 0.5472636815920398,
+      "cagr": 0.10545252948488648,
+      "ann_vol": 0.15367552482676802,
+      "sharpe": 0.35087342887019474,
+      "sortino": 0.4591924987503152,
+      "max_dd": -0.19708836778185312,
+      "calmar": 0.5350520209371585,
+      "total_return": 0.44944596187644237,
+      "days": 933,
+      "sharpe_daily": 0.02210294843931062,
+      "skew": -1.5925947855955884,
+      "kurtosis": 18.014882965948654,
+      "n_trades": 269,
+      "hit_rate": 0.5613382899628253,
+      "avg_win": 0.13725657050692644,
+      "avg_loss": -0.1113995304497395,
+      "win_loss_ratio": 1.2321108531858036,
+      "profit_factor": 1.4722934325626174,
+      "avg_net_ret": 0.02818066005009899,
+      "avg_hold_days": 60.0
+    },
+    "B1|M0|S0|TB10": {
+      "variant": "B1|M0|S0|TB10",
+      "split": "test",
+      "n_events": 4103,
+      "event_success_rate": 0.25396051669510117,
+      "cagr": -0.2467147986114464,
+      "ann_vol": 0.09285172956839265,
+      "sharpe": -3.6305113631394916,
+      "sortino": -4.070472587855115,
+      "max_dd": -0.6297579458932403,
+      "calmar": -0.3917613111836317,
+      "total_return": -0.6294304172995246,
+      "days": 883,
+      "sharpe_daily": -0.22870071902050484,
+      "skew": -1.0367255657684766,
+      "kurtosis": 7.344089295899811,
+      "n_trades": 2564,
+      "hit_rate": 0.3252730109204368,
+      "avg_win": 0.03782881775421123,
+      "avg_loss": -0.030658778885212793,
+      "win_loss_ratio": 1.2338657679695344,
+      "profit_factor": 0.6029182193654903,
+      "avg_net_ret": -0.008381612115602951,
+      "avg_hold_days": 4.593213728549142
+    },
+    "BROAD|M0|S0|TB10": {
+      "variant": "BROAD|M0|S0|TB10",
+      "split": "test",
+      "n_events": 1710,
+      "event_success_rate": 0.256140350877193,
+      "cagr": -0.10749173945116242,
+      "ann_vol": 0.06011556522751097,
+      "sharpe": -2.8305377156862574,
+      "sortino": -3.2890294652811662,
+      "max_dd": -0.32821071360198695,
+      "calmar": -0.3275083201016863,
+      "total_return": -0.32865327881354667,
+      "days": 883,
+      "sharpe_daily": -0.17830711600701635,
+      "skew": -0.9523059035519268,
+      "kurtosis": 7.2999015986969,
+      "n_trades": 1509,
+      "hit_rate": 0.3366467859509609,
+      "avg_win": 0.03616266643273415,
+      "avg_loss": -0.028980859218032434,
+      "win_loss_ratio": 1.2478120873046117,
+      "profit_factor": 0.633106242326422,
+      "avg_net_ret": -0.007050500682187881,
+      "avg_hold_days": 4.576540755467197
+    }
+  },
+  "nifty500_same_days": {
+    "cagr": 0.09385803698676543,
+    "ann_vol": 0.13560954370355244,
+    "sharpe": 0.2999145882532909,
+    "sortino": 0.4048313202771609,
+    "max_dd": -0.18843200568235063,
+    "calmar": 0.49810029165101954,
+    "total_return": 0.3924656894480374,
+    "days": 930,
+    "sharpe_daily": 0.018892843216155746,
+    "skew": -0.6811877514253878,
+    "kurtosis": 9.10542769779201
+  },
+  "spa_vs_nifty500": {
+    "spa_p_consistent": 0.351,
+    "spa_p_lower": 0.351,
+    "spa_p_upper": 0.351,
+    "white_rc_p": 0.351,
+    "n_variants": 1,
+    "n_days": 933
+  },
+  "deflated_sharpe": {
+    "sr0": 0.15826006017846808,
+    "dsr": 2.2390493957853137e-05,
+    "z": -4.081318251171025,
+    "n_trials": 384,
+    "var_trial_sr_daily": 0.002835087049137728
+  },
+  "yearly_return": {
+    "strategy": {
+      "2023": 0.2229821445894995,
+      "2024": 0.10004325806948233,
+      "2025": 0.08619727994193793,
+      "2026": -0.00811016939947351
+    },
+    "nifty500": {
+      "2023": 0.25158387363796564,
+      "2024": 0.1516407048172448,
+      "2025": 0.06686584373910609,
+      "2026": -0.09448066841072256
+    }
+  },
+  "pass_rule": "Sharpe above Nifty 500 AND SPA p <= 0.1 AND deflated Sharpe >= 0.95",
+  "beats_nifty500_sharpe": true,
+  "supported": false,
+  "finished": "2026-10-14T15:11:48"
+}

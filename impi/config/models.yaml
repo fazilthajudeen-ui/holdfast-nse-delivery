@@ -1,0 +1,36 @@
+# Models and statistics (spec sections 7-11). Weights are fixed a priori and never tuned.
+seed: 20261010
+composite:
+  weights: {compression_quality: 0.30, delivery_z: 0.25, positioning_alignment: 0.25, volume_anomaly: 0.20}
+  clip: 3.0
+  threshold: 1.0                  # tradeable rule: Score >= 1.0 at trigger
+  standardise_on: train           # component z-scores use TRAIN-period mean/std only
+  tier2_weights: {compression_quality: 0.40, delivery_z: 0.333333, volume_anomaly: 0.266667}  # no positioning
+xgboost:
+  n_iter: 30                      # random-search configurations (all logged, G5)
+  max_depth: [2, 6]
+  learning_rate: [0.01, 0.2]
+  n_estimators_max: 1000
+  early_stopping_rounds: 50
+  subsample: [0.6, 1.0]
+  colsample_bytree: [0.5, 1.0]
+  min_child_weight: [5, 50]
+  reg_alpha: [0.0, 5.0]
+  reg_lambda: [0.5, 10.0]
+random_forest:
+  n_iter: 15
+  n_estimators: [300, 1000]
+  max_depth: [4, 12]
+  max_features: [0.3, 0.8]
+logistic:
+  C: [0.01, 0.1, 1.0, 10.0]
+class_weight_cap: 10
+bootstrap:
+  n: 1000                         # spec: 1,000 resamples for CIs
+  block: month                    # block (cluster) bootstrap by calendar month of the event date
+fdr_q: 0.10
+shap:
+  sample: 3000                    # events used for interaction values
+spa:
+  reps: 1000
+  block_size: 10
