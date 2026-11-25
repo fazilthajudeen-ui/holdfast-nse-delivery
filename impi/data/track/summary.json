@@ -1,17 +1,24 @@
 {
   "first_logged": "2026-10-09",
-  "days_logged": 1,
-  "predictions": 213,
+  "days_logged": 16,
+  "predictions": 3455,
   "label_10": {
-    "matured": 0,
-    "days": 0
+    "matured": 2629,
+    "days": 15,
+    "auc": 0.528241907346385,
+    "base_rate": 0.4393305480480194
   },
   "label_xs10": {
-    "matured": 0,
-    "days": 0
+    "matured": 1936,
+    "days": 9,
+    "auc": 0.5692597642152539,
+    "base_rate": 0.4777892529964447
   },
   "vol_exp": {
-    "matured": 0,
-    "days": 0
-  }
+    "matured": 1933,
+    "days": 9,
+    "auc": 0.8116932189110123,
+    "base_rate": 0.14847387373447418
+  },
+  "top_decile_minus_all_fwd10": 0.01968369632959366
 }

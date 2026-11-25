@@ -1,0 +1,61 @@
+{
+  "first_logged": "2026-10-09",
+  "days_logged": 16,
+  "predictions": 3455,
+  "matured": {
+    "vol_exp": 1933,
+    "label_xs10": 1936,
+    "label_10": 2629,
+    "label_xs20": 848,
+    "label_20": 2545
+  },
+  "matured_dates_20d": 4,
+  "status": "interim (4/60 dates matured; descriptive only)",
+  "tests": {
+    "F1": {
+      "claim": "v3 vol model AUC > v2",
+      "n": 1933,
+      "dates": 9,
+      "stat": 0.0146908776846838,
+      "p": 0.0004997501249375312,
+      "bh_q": 0.001249375312343828,
+      "supported": true
+    },
+    "F2": {
+      "claim": "v3 vol_exp AUC > 0.5",
+      "n": 1933,
+      "dates": 9,
+      "auc": 0.8256103911499105,
+      "p": 0.0004997501249375312,
+      "bh_q": 0.001249375312343828,
+      "supported": true
+    },
+    "F3": {
+      "claim": "v3 label_xs20 AUC > 0.5",
+      "n": 848,
+      "dates": 4,
+      "auc": 0.5298397863818425,
+      "p": 0.021989005497251374,
+      "bh_q": 0.036648342495418956,
+      "supported": true
+    },
+    "F4": {
+      "claim": "v3 label_20 AUC > 0.5",
+      "n": 2545,
+      "dates": 15,
+      "auc": 0.601465913214272,
+      "p": 0.111944027986007,
+      "bh_q": 0.111944027986007,
+      "supported": false
+    },
+    "F5": {
+      "claim": "v3 label_xs10 AUC > 0.5",
+      "n": 1936,
+      "dates": 9,
+      "auc": 0.5186751142834229,
+      "p": 0.050974512743628186,
+      "bh_q": 0.06371814092953523,
+      "supported": true
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "starts_after": "2026-10-09",
+  "first_logged": "2026-10-12",
+  "days_logged": 15,
+  "predictions": 3242,
+  "tests": {
+    "D1": {
+      "progress": 3,
+      "needed": 60,
+      "unit": "dates",
+      "status": "waiting (3/60 dates matured)"
+    },
+    "D2": {
+      "progress": 3,
+      "needed": 60,
+      "unit": "dates",
+      "status": "waiting (3/60 dates matured)"
+    },
+    "H2p": {
+      "progress": 85,
+      "needed": 1000,
+      "unit": "events",
+      "status": "waiting (85/1000 events matured)"
+    },
+    "V1": {
+      "progress": 2,
+      "needed": 30,
+      "unit": "groups",
+      "status": "waiting (2/30 groups matured)"
+    },
+    "C1": {
+      "progress": 0,
+      "needed": 750,
+      "unit": "days",
+      "status": "waiting (0/750 days matured)"
+    }
+  }
+}

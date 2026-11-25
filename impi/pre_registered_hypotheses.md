@@ -3,7 +3,7 @@
 **Registered:** 2026-10-10 (git commit recorded by P3+). Written after P2 (event counts, class rates and
 power known) and BEFORE any hypothesis test, model comparison or test-set access. The test-set lock
 `results/test_lock.json` did not exist at registration.
-**Authors:** Team 23 — Fazil T, Faizur Rahman S, Suhail Ahmed S. Supervisor: Dr. Jeyavim Sherin RC.
+**Authors:** the IMPI authors.
 **Frozen inputs:** feature library v1.0 (`results/metrics/feature_freeze.json`), configs in `config/`.
 
 ## 1. Setting

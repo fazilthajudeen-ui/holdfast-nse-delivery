@@ -7,7 +7,6 @@ and **volatility expansion** in Indian equities (NSE, 2015-06 → 2026-10).
 It extends the team's *Delivery Lens* project (one folder up), which keeps running unchanged.
 Research tool only — **not investment advice**.
 
-Team 23 · Hindustan Institute of Technology & Science · B.Tech CSE (AIML) · Supervisor Dr. Jeyavim Sherin RC
 
 ## Results at a glance (data 2014-01-01 → 2026-10-09; test set 2023+, evaluated once)
 

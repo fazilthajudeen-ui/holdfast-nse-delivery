@@ -1,8 +1,6 @@
 # Delivery, Positioning and Compression: Do Their Interactions Predict Breakout Success on the National Stock Exchange of India?
 
-*Draft for a conference submission — Team 23 (Fazil T, Faizur Rahman S, Suhail Ahmed S), Department of
-Computer Science and Engineering (AIML), Hindustan Institute of Technology & Science. Supervisor:
-Dr. Jeyavim Sherin RC.*
+*Draft for a conference submission.*
 
 > Status: complete first draft (10 Oct 2026). All numbers come from `results/metrics/*.json` and
 > `results/summary.md`; figures are in `results/figures/`. Items marked **[TEAM]** need the team's input

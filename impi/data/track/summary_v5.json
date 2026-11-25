@@ -1,0 +1,9 @@
+{
+  "rule": "BROAD|M0|S2|T60",
+  "starts": "2026-10-14",
+  "signals_logged": 6,
+  "days_since_start": 20,
+  "closed": 0,
+  "mean_ret_closed_before_costs": null,
+  "status": "waiting (0/100 closed trades, 20/250 days)"
+}
